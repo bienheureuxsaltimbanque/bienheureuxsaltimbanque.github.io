@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes cours d'hypokhâgne et de khâgne</title>
+<style>
+  :root {
+    --bg: #eef1f4;
+    --panel: #fbfcfd;
+    --ink: #14213d;
+    --muted: #55627a;
+    --line: #cfd6e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1624;
+      --panel: #172033;
+      --ink: #e8ecf3;
+      --muted: #9aa7bd;
+      --line: #2a3650;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    line-height: 1.65;
+  }
+  main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  h1 {
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+  }
+  .intro { color: var(--muted); margin: 0 0 2.5rem; max-width: 34rem; }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--muted);
+    margin: 2.5rem 0 0.75rem;
+  }
+  details {
+    --c: #888;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 8px solid var(--c);
+    border-radius: 3px;
+    margin-bottom: 0.6rem;
+  }
+  summary {
+    cursor: pointer;
+    padding: 0.85rem 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible, a:focus-visible { outline: 3px solid var(--c, var(--ink)); outline-offset: 2px; }
+  .count { font-size: 0.9rem; color: var(--muted); white-space: nowrap; }
+  details[open] summary { border-bottom: 1px solid var(--line); }
+  ul { list-style: none; margin: 0; padding: 0.6rem 1rem 0.9rem; }
+  li { padding: 0.2rem 0; }
+  li.vide { color: var(--muted); font-style: italic; }
+  a { color: var(--ink); text-decoration-color: var(--c); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 4px; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.9rem; }
+
+  .lettres  { --c: #9b2d3a; }
+  .philo    { --c: #5b3fa0; }
+  .histoire { --c: #a8741a; }
+  .geo      { --c: #1f7a63; }
+  .anglais  { --c: #2a5fb0; }
+  .allemand { --c: #6b7280; }
+  .italien  { --c: #b8472a; }
+  .latin    { --c: #7a4b2a; }
+  .spe      { --c: #0e7490; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mes cours d'hypokhâgne et de khâgne</h1>
+  <p class="intro">Tous mes cours en ligne, classés par matière. Clique sur une matière pour voir ses chapitres.</p>
+
+  <h2>Enseignements communs</h2>
+
+  <details class="lettres">
+    <summary>Lettres <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="philo">
+    <summary>Philosophie <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="histoire" open>
+    <summary>Histoire <span class="count">1 cours</span></summary>
+    <ul>
+      <li><a href="histoire-chapitres-1-2.html">Histoire, chapitres 1 et 2</a></li>
+    </ul>
+  </details>
+
+  <details class="geo">
+    <summary>Géographie <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="anglais">
+    <summary>Anglais <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="allemand">
+    <summary>Allemand <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <h2>Options et spécialité</h2>
+
+  <details class="latin">
+    <summary>Option latin <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="geo">
+    <summary>Option géographie <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <details class="spe">
+    <summary>Spécialité histoire-géographie <span class="count">0 cours</span></summary>
+    <ul>
+      <li class="vide">Aucun cours pour l'instant.</li>
+    </ul>
+  </details>
+
+  <footer>Dernière mise à jour : octobre 2026</footer>
+</main>
+</body>
+</html>

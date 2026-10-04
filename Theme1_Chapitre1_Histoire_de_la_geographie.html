@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cahier Épistémologie de la géographie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#1d2431; --muted:#5d6676; --rule:#d9dde6;
+  --title:#17315c; --band:#17315c; --band-ink:#f3f6fb; --h3:#0b6b73; --h4:#3a4a68;
+  --quote:#9e2230; --quote-bg:#fbeef0; --quote-rule:#c9414f;
+  --date-bg:#ffe28a; --date-ink:#463300;
+  --note-bg:#eef1f7;
+  --t-add:#0b6b73; --t-fix:#6a3fa0; --t-check:#b2470f; --t-ok:#2b7a3d;
+  --f-head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+    --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+    --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+    --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+    --t-add:#74d0d7; --t-fix:#c3a4f0; --t-check:#ff9d6b; --t-ok:#7fd194;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+  --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+  --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+  --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+  --t-add:#74d0d7; --t-fix:#c3a4f0; --t-check:#ff9d6b; --t-ok:#7fd194;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;padding:0;overflow:hidden}
+.app{height:100%;display:flex;flex-direction:column}
+*{box-sizing:border-box}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--h3);outline-offset:2px}
+img{max-width:100%}
+.shell{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+@media (min-width:1000px){.shell{grid-template-columns:20rem minmax(0,1fr)}}
+.side{display:none}
+@media (min-width:1000px){
+  .side{display:block;height:100%;overflow-y:auto;padding:1.5rem .75rem 1.5rem 24px;border-right:1px solid var(--rule);font-family:var(--f-head);font-size:1.02rem;scrollbar-width:thin}
+}
+.side .brand{font-family:var(--f-head);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--title);font-size:.95rem;margin-bottom:.6rem}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc ul ul{padding-left:.9rem;border-left:1px solid var(--rule);margin-left:.45rem;display:none}
+.toc li.open>ul{display:block}
+.toc .row{display:flex;align-items:flex-start;gap:.15rem}
+.toc a{text-decoration:none;color:var(--ink);padding:.18rem .4rem;border-radius:4px;line-height:1.3;display:block;flex:1;min-width:0}
+.toc a:hover{background:var(--note-bg)}
+.toc a.active{background:var(--band);color:var(--band-ink)}
+.toc li.l1>.row>a{font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--title);margin-top:.5rem}
+.toc li.l1>.row>a.active{color:var(--band-ink)}
+.toc li.l2>.row>a{font-weight:600}
+.toc li.l4>.row>a{font-size:.95em;color:var(--muted)}
+.tog{all:unset;cursor:pointer;width:1.3rem;height:1.5rem;flex:none;display:grid;place-items:center;color:var(--muted)}
+.tog::before{content:"";width:.42rem;height:.42rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.toc li.open>.row>.tog::before{transform:rotate(45deg)}
+.toc li:not(.hk)>.row{padding-left:1.3rem}
+.bar{flex:none;z-index:20;display:flex;gap:.7rem;align-items:center;background:var(--bg);border-bottom:1px solid var(--rule);padding:.55rem 16px;font-family:var(--f-head)}
+.bar button{all:unset;cursor:pointer;background:var(--band);color:var(--band-ink);padding:.3rem .8rem;border-radius:5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.bar .cur{color:var(--muted);font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+@media (min-width:1000px){.bar{display:none}}
+.drawer{position:fixed;inset:0;z-index:30;display:none;background:rgba(10,14,22,.55)}
+.drawer.on{display:block}
+.drawer .panel{position:absolute;inset:0 auto 0 0;width:min(88vw,24rem);background:var(--surface);overflow-y:auto;padding:1rem;font-family:var(--f-head);font-size:1.08rem}
+.drawer .close{all:unset;cursor:pointer;float:right;font-family:var(--f-head);font-weight:600;color:var(--muted);padding:.2rem .5rem}
+main{min-width:0;height:100%;overflow-y:auto;overscroll-behavior:contain;padding-block:1.5rem 5rem;padding-inline:16px}
+.doc{max-width:52rem;margin-inline:auto}
+@media (min-width:1000px){main{padding-inline:40px}}
+.cover{background:var(--band);color:var(--band-ink);padding:clamp(1.6rem,5vw,3.2rem);border-radius:6px;margin-bottom:2.2rem}
+.cover .kick{font-family:var(--f-head);letter-spacing:.14em;text-transform:uppercase;font-size:.95rem;opacity:.8}
+.cover h1{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:clamp(2.6rem,9vw,5rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin:.6rem 0 .8rem;text-wrap:balance}
+.cover .sub{font-family:var(--f-head);font-size:clamp(1.3rem,3.4vw,1.9rem);font-weight:500;line-height:1.2;text-wrap:balance}
+.cover .span{display:inline-block;margin-top:1.2rem;font-family:var(--f-head);font-weight:700;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:.04em;background:var(--date-bg);color:var(--date-ink);padding:.05em .45em;border-radius:3px}
+.cover .meta{margin-top:1.4rem;font-size:.95rem;line-height:1.5;opacity:.9;display:grid;gap:.15rem}
+.sommaire{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1.2rem 1.4rem 1.4rem;margin-bottom:2.2rem}
+.sommaire h2.stitle{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:1.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--title);margin-bottom:.2rem}
+.sommaire .hint{color:var(--muted);font-size:.9rem;margin:0 0 .8rem}
+.sommaire ul{list-style:none;margin:0;padding:0}
+.sommaire ul ul{padding-left:1.1rem}
+.sommaire li{margin:0}
+.sommaire a{display:block;text-decoration:none;padding:.12rem 0;line-height:1.35;font-size:.98rem;text-wrap:pretty}
+.sommaire a:hover{color:var(--quote);text-decoration:underline}
+.sommaire li.l1>.row>a{font-family:var(--f-head);font-weight:700;font-size:1.25rem;letter-spacing:.04em;text-transform:uppercase;color:var(--title);margin-top:.9rem;border-top:1px solid var(--rule);padding-top:.5rem}
+.sommaire>ul>li:first-child>.row>a{border-top:0;margin-top:.2rem}
+.sommaire li.l2>.row>a{font-family:var(--f-head);font-weight:600;font-size:1.1rem;margin-top:.15rem}
+.sommaire li.l3>.row>a{color:var(--h3);font-size:.95rem}
+h1.h1,h2.h2,h3.h3,h4.h4{scroll-margin-top:4.2rem;font-family:var(--f-head);text-wrap:balance;line-height:1.12}
+@media (min-width:1000px){h1.h1,h2.h2,h3.h3,h4.h4{scroll-margin-top:1.5rem}}
+h1.h1{background:var(--band);color:var(--band-ink);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(1.7rem,4.6vw,2.5rem);padding:.55em .7em;border-radius:5px;margin:3.4rem 0 1.2rem}
+h2.h2{color:var(--title);font-weight:700;font-size:clamp(1.55rem,3.6vw,2.05rem);margin:2.8rem 0 .9rem;padding-bottom:.25em;border-bottom:3px solid var(--title)}
+h3.h3{color:var(--h3);font-weight:700;font-size:clamp(1.3rem,3vw,1.6rem);margin:2.1rem 0 .6rem}
+h4.h4{color:var(--h4);font-weight:600;font-size:1.2rem;letter-spacing:.03em;text-transform:uppercase;margin:1.6rem 0 .3rem}
+h4.h4::before{content:"";display:inline-block;width:.55em;height:.55em;background:var(--quote-rule);margin-right:.55em;border-radius:1px;vertical-align:.05em}
+main p,main li{max-width:68ch;text-wrap:pretty}
+main p{margin:.75rem 0}
+main ul{margin:.6rem 0 1rem;padding-left:1.25rem}
+main li{margin:.4rem 0}
+main li::marker{color:var(--quote-rule)}
+main li.grp{list-style:none;margin-left:-1.25rem;margin-top:1.1rem;font-family:var(--f-head);font-size:1.15rem}
+strong{font-weight:600}
+.date{background:var(--date-bg);color:var(--date-ink);padding:0 .28em;border-radius:3px;font-weight:600;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.iq{color:var(--quote)}
+figure.cite{margin:1.5rem 0;max-width:62ch;background:var(--quote-bg);border-left:4px solid var(--quote-rule);border-radius:0 6px 6px 0;padding:.9rem 1.2rem}
+figure.cite blockquote{margin:0;color:var(--quote);font-style:italic;font-size:1.06rem}
+figure.cite blockquote p{margin:.4rem 0;max-width:none}
+figure.cite figcaption{margin-top:.55rem;font-family:var(--f-head);font-size:.98rem;letter-spacing:.04em;color:var(--muted);text-transform:none;line-height:1.35}
+figure.cite figcaption::before{content:"— ";color:var(--quote-rule)}
+aside.note{max-width:68ch;margin:1rem 0;background:var(--note-bg);border-radius:6px;padding:.7rem 1rem;color:var(--muted);font-style:italic;font-size:.98rem}
+.tag{display:inline-grid;place-items:center;min-width:1.35em;height:1.35em;padding:0 .2em;border-radius:50%;font-size:.78em;font-style:normal;font-weight:700;border:1.5px solid currentColor;vertical-align:.08em;line-height:1;cursor:help}
+.tag.add{color:var(--t-add)}.tag.fix{color:var(--t-fix)}.tag.check{color:var(--t-check)}.tag.ok{color:var(--t-ok)}
+.tbl{overflow-x:auto;margin:1.2rem 0;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+th{font-family:var(--f-head);text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;text-align:left;background:var(--band);color:var(--band-ink);padding:.55rem .8rem;white-space:nowrap}
+td{padding:.5rem .8rem;border-top:1px solid var(--rule);vertical-align:top;min-width:9rem}
+tbody tr:nth-child(even){background:var(--note-bg)}
+.totop{all:unset;cursor:pointer;position:fixed;right:16px;bottom:16px;z-index:15;background:var(--band);color:var(--band-ink);font-family:var(--f-head);font-weight:700;padding:.45rem .8rem;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25);font-size:.95rem;letter-spacing:.04em}
+.totop[hidden]{display:none!important}
+</style></head><body>
+<div class="app">
+<div class="bar"><button type="button" id="openToc" aria-haspopup="dialog">☰ Sommaire</button><span class="cur" id="curSec"></span></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Sommaire"><div class="panel"><button class="close" type="button" id="closeToc">Fermer ✕</button><div style="font-family:var(--f-head);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--title);margin-bottom:.6rem">Sommaire</div><nav class="toc" id="tocDrawer"></nav></div></div>
+<div class="shell">
+<aside class="side" aria-label="Sommaire"><div class="brand">Sommaire</div><nav class="toc" id="tocSide"></nav></aside>
+<main id="top"><div class="doc">
+
+<header class="cover">
+<div class="kick">Cahier de cours · édition complète</div>
+<h1>Épistémologie de la géographie</h1>
+<div class="sub">Histoire des savoirs, paradigmes et débats : des premiers géographes grecs aux géographies postmodernes</div>
+<div class="span">Antiquité – XXIe s.</div>
+<div class="meta"><span>CM · TD · Cahier de géographie TC (Thème 1, chapitre 1) · Claval, Histoire de la géographie</span></div>
+</header>
+
+<nav class="sommaire" aria-label="Sommaire détaillé"><h2 class="stitle">Sommaire détaillé</h2><p class="hint">Touche un titre pour aller directement à la section.</p><div id="tocMain"></div></nav>
+
+<h1 class="h1">Repères de lecture</h1>
+<ul>
+<li><strong>Sigles.</strong> <strong>HG</strong> : Paul CLAVAL, <em>Histoire de la géographie</em>, Paris, Presses universitaires de France, coll. « Que sais-je ? », impression d'octobre 1995 (pagination imprimée de l'ouvrage). <strong>CM</strong> et <strong>TD</strong> : tes notes de cours, sans pagination. <strong>Cahier TC</strong> : « Géo TC, Thème 1, chapitre 1 ».</li>
+<li>Repères : <span class="tag add" title="Ajout tiré de Claval (HG)">✚</span> ajout tiré de HG ; <span class="tag fix" title="Correction ou précision d'un élément de tes notes">✎</span> correction ou précision d'un élément de tes notes ; <span class="tag check" title="À vérifier">⚠</span> point à vérifier ; <span class="tag ok" title="Confirmé par HG">✔</span> confirmé par HG.</li>
+<li><strong>Règle de citation.</strong> Les citations sont toutes en français. Les citations textuelles de Claval sont reprises du livre fourni, avec la page imprimée. Les citations d'auteurs rapportées par tes CM (Testart, Pratt, Descartes, Dardel, Braudel…) viennent de tes notes : elles sont marquées <span class="tag check">⚠</span> tant que l'édition et la page n'ont pas été vérifiées. <strong>Aucun numéro de page n'est inventé.</strong></li>
+<li>Les corrections <span class="tag fix">✎</span> qui ne s'appuient pas sur HG reposent sur des connaissances générales, hors corpus : elles sont signalées comme telles et récapitulées dans l'annexe « Points à vérifier ».</li>
+<li>HG s'arrête en 1995 : ce qui concerne la période récente (géographies postcoloniales, émotionnelles, humanités environnementales) vient uniquement de tes CM.</li>
+</ul>
+
+<h1 class="h1">Chapitre 1 · Définir l'épistémologie et situer la géographie</h1>
+<h2 class="h2">I. Définir l'épistémologie</h2>
+<h3 class="h3">A. L'approche française : l'histoire d'une science, de ses objets et de ses concepts</h3>
+<ul>
+<li>Les savoirs produits <strong>dépendent du lieu</strong>. En France, l'épistémologie est fortement liée à la <strong>philosophie des sciences</strong> et consiste surtout à faire l'histoire d'une science, de ses objets et de ses concepts.</li>
+<li>Ici, on cherche à comprendre comment la géographie s'est constituée en savoir scientifique dans un cadre culturel et institutionnel précis (CM).</li>
+</ul>
+<figure class="cite"><blockquote><p>« Je propose d'appeler champ épistémologique d'une science la façon dont le monde est mis en perspective par cette science relativement à un sujet (c'est le sujet propre de cette science) et dont il est découpé en objets, le tout au moyen d'un système articulé de concepts, qui permet de poser certaines questions. »</p></blockquote><figcaption>Alain TESTART, <em>Essai d'épistémologie</em>, 1991 (cité dans le CM ; éditeur et page à vérifier <span class="tag check">⚠</span>)</figcaption></figure>
+<ul><li>Lecture : le « champ épistémologique » est une <strong>constellation</strong> (sujet, objets, concepts, questions). Commenter un document, c'est situer ce qu'il dit dans cette constellation.</li></ul>
+<h3 class="h3">B. L'approche anglophone : une pensée réflexive et critique</h3>
+<ul>
+<li>Toute la pensée réflexive autour d'une science, avec une <strong>forte dimension critique</strong> ; moins d'histoire intellectuelle d'une discipline nationale, davantage de questions sur la validité des méthodes et des modèles.</li>
+<li>Depuis les années 1980, intégration de la théorie critique, du postmodernisme, du féminisme, des études postcoloniales : l'épistémologie devient un terrain de débat sur la <strong>production sociale du savoir</strong> et sur la <strong>position du chercheur</strong>.</li>
+</ul>
+<figure class="cite"><blockquote><p>« une sorte de thérapie critique déterminée à renverser des convictions qu'elle a mis des siècles à établir »</p></blockquote><figcaption>Scott L. PRATT, « Knowledge and Action: American Epistemology », 2004 (traduction donnée dans le CM <span class="tag check">⚠</span> ; l'original est en anglais)</figcaption></figure>
+<h3 class="h3">C. Deux sens du mot « géographie » et six démarches du géographe</h3>
+<ul>
+<li><span class="tag add">✚</span> Au sens large, toute société dispose de savoir-faire, de pratiques et de connaissances géographiques : on s'oriente, on exploite et on aménage un milieu, on se sent chez soi là où l'espace est marqué de signes partagés. La géographie « scientifique » n'est que la forme savante de ce capital (HG, introduction, p. 3).</li>
+<li><span class="tag add">✚</span> Se pencher sur l'histoire de la géographie, c'est appliquer à la civilisation occidentale les démarches qu'on réserve aux sociétés étrangères : un <strong>effort de décentrement</strong> qui relativise les certitudes (HG, p. 3).</li>
+<li><span class="tag add">✚</span> Le propos de la géographie scientifique est de remplacer par une image d'ensemble les « millions de géographies autocentrées et de cartes mentales souffrant de myopie » (HG, p. 7).</li>
+</ul>
+<div class="tbl"><table><thead><tr><th>Démarche (HG, p. 5-7)</th><th>Ce que fait le géographe</th><th>Composante</th></tr></thead><tbody>
+<tr><td>1. Situer</td><td>Localiser les observations et repérer leurs positions relatives ; lien intime avec la cartographie</td><td>Localisation</td></tr>
+<tr><td>2. Observer et décrire</td><td>Relief, végétation, routes, champs, habitations ; relier les formes entre elles</td><td>Verticale (partagée avec l'écologie)</td></tr>
+<tr><td>3. Cartographier</td><td>Reporter, lire les configurations, comparer les distributions, mesurer le rôle de la distance, analyser la mobilité</td><td>Horizontale</td></tr>
+<tr><td>4. Deux niveaux de lecture</td><td>Description (contraintes rhétoriques d'un genre littéraire) et recherche des causalités ou enchaînements systémiques</td><td>Description / explication</td></tr>
+<tr><td>5. Remplacer les perceptions</td><td>Substituer une image scientifique aux représentations individuelles et collectives</td><td>Représentations</td></tr>
+<tr><td>6. Dire le sens de la vie dans d'autres cadres</td><td>Institutions, mœurs, façons d'être au monde : « ethnogéographies »</td><td>Géographicité des sociétés</td></tr>
+</tbody></table></div>
+<figure class="cite"><blockquote><p>« La géographie doit être appréhendée comme une discipline scientifique, mais certains de ses aspects s'inscrivent plutôt dans la logique des genres littéraires. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, Paris, PUF, « Que sais-je ? », 1995, introduction, démarche 4, p. 6</figcaption></figure>
+<figure class="cite"><blockquote><p>« la réflexion sur la géographicité des sociétés n'était pas absente, mais elle faisait souvent figure de passager clandestin. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, introduction, démarche 6, p. 7</figcaption></figure>
+<h2 class="h2">II. La géographie française est-elle une science ?</h2>
+<h3 class="h3">A. De la discipline scolaire à la science, puis à la réflexion sur la science</h3>
+<figure class="cite"><blockquote><p>« Pendant longtemps, le statut de science a été refusé à la géographie parce qu'elle offrait le visage d'une discipline scolaire, à finalité d'énumération de connaissances. »</p></blockquote><figcaption>Maryse CLARY et alii, « Le postulat épistémologique », in <em>Pour une approche didactique de la géographie</em>, Marseille, CRDP, 1994 (cité dans le CM ; page à vérifier <span class="tag check">⚠</span>)</figcaption></figure>
+<div class="tbl"><table><thead><tr><th>Date</th><th>Jalon (CM)</th></tr></thead><tbody>
+<tr><td>1818</td><td>Intégration de la géographie dans l'enseignement historique</td></tr>
+<tr><td>1831</td><td>Création d'une agrégation masculine d'histoire et de géographie</td></tr>
+<tr><td>1852</td><td>Programme autonome de géographie, de la classe de 8e à la Rhétorique</td></tr>
+<tr><td>1871</td><td>Après la défaite face à la Prusse : rapport Himly-Levasseur ; la géographie est jugée indispensable à la formation du citoyen (nation, frontières, ressources, voisins) ; passer des listes de villes et de fleuves à une géographie « raisonnée » avec cartes et explications ; viser le statut de discipline universitaire</td></tr>
+<tr><td>1890</td><td>Quatre chaires de province, tenues par des disciples de Vidal : Auerbach (Nancy), Gallois (Lyon), Camena d'Almeida (Caen), Foncin (Bordeaux) (Broc, 1974)</td></tr>
+<tr><td>1891</td><td>Premier périodique de géographie en France : <em>Annales de géographie</em> (Vidal)</td></tr>
+<tr><td>1898</td><td>Vidal titulaire de la chaire d'« histoire et de géographie modernes » à la Sorbonne, succédant à Himly</td></tr>
+</tbody></table></div>
+<ul>
+<li><span class="tag fix">✎</span> Rapport Levasseur : HG p. 61 place l'étude confiée à Levasseur au lendemain de la défaite de 1870, le <strong>rapport en 1872</strong> et les décisions en 1873 ; ton CM et le cahier TC donnent 1871. Le CM parle de « rapport Himly-Levasseur » : à harmoniser avec ton enseignant.</li>
+<li><span class="tag fix">✎</span> <em>Annales de géographie</em> : HG p. 82 date leur lancement de <strong>1892</strong>, ton CM de <strong>1891</strong>. À ma connaissance (hors corpus), le premier fascicule est d'octobre 1891 et le volume I couvre 1891-1892, ce qui explique les deux dates.</li>
+<li>Enseignement géographique = surtout enseignement cartographique ; association histoire-géographie = spécificité française.</li>
+<li>Les premiers à avoir des chaires : les Allemands (Humboldt, Ratzel), avec des chaires d'anthropogéographie ; mais rayonnement international plus visible des vidaliens.</li>
+<li>Années 1960 : essor de l'épistémologie de la géographie française, par Paul Claval en particulier (<em>La pensée géographique</em>, 1972 ; la date de 1977 donnée dans le CM est à vérifier <span class="tag check">⚠</span> : HG la cite en 1972, sa bibliographie p. 127). Sortir du paradigme vidalien, y réfléchir pour s'en démarquer : moment de crise disciplinaire.</li>
+</ul>
+<figure class="cite"><blockquote><p>« Le grand changement de la seconde moitié du XXe siècle réside dans la volonté profonde d'un nombre de plus en plus grand de chercheurs de donner à la géographie un statut de science. »</p></blockquote><figcaption>Maryse CLARY et alii, « Le postulat épistémologique » (CRDP de Marseille, 1994), cité dans le CM <span class="tag check">⚠</span></figcaption></figure>
+<h3 class="h3">B. Une science ou des sciences ?</h3>
+<ul>
+<li>Avant-guerre : l'école vidalienne revendique l'<strong>unité</strong> de la géographie, science de synthèse articulant physique et humaine par le genre de vie et la relation homme/milieu.</li>
+<li>Après 1945 : rejet de l'héritage vidalien, diversification en courants ; physique et humaine de plus en plus étanches ; quasi-scission de la géographie physique dans les années 1940-1950, qui se rapproche des sciences naturelles.</li>
+<li><strong>Henri Baulig</strong>, « La géographie est-elle une science ? », <em>Annales de géographie</em>, 305, 1948, p. 1-11 : élève de Vidal, géomorphologue (thèse de 1928 sur le Plateau central), il défend la rigueur de la géographie physique mais l'unité de la discipline. Idée centrale : ce qui restera de la géographie est « une certaine manière d'envisager les choses, un mode de pensée » (cité dans ton CM <span class="tag check">⚠</span>).</li>
+</ul>
+<h3 class="h3">C. Une image disciplinaire qui reste brouillée</h3>
+<figure class="cite"><blockquote><p>« faire de la géographie un kaléidoscope où l'on se retrouve mal, ce que les chercheurs d'autres disciplines ne manquent pas de critiquer »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. IV, § II (géographie physique), p. 73</figcaption></figure>
+<ul>
+<li>Dans les années 1970, l'essor de la géographie sociale et culturelle, elle-même éclatée, rend la cohérence disciplinaire plus difficile à affirmer (CM). Guy Baudelle, compte rendu de J. Scheibling, <em>Qu'est-ce que la géographie ?</em> (1994) : « Les dernières décennies ont laissé perplexe » (cité dans ton CM <span class="tag check">⚠</span>).</li>
+<li>D'où l'insertion d'épreuves à contenu épistémologique aux concours de l'enseignement d'histoire-géographie dans les années 1990.</li>
+</ul>
+
+<h1 class="h1">Chapitre 2 · Méthode : Kuhn et Foucault</h1>
+<h2 class="h2">I. Deux grandes approches de l'épistémologie</h2>
+<h3 class="h3">A. Thomas Kuhn : l'approche diachronique</h3>
+<p>Thomas KUHN, <em>La Structure des révolutions scientifiques</em> (1962) ; édition française à vérifier <span class="tag check">⚠</span> (traduction par Laure Meyer, Flammarion, selon mes souvenirs, hors corpus). La science progresse de manière <strong>discontinue</strong>, par rupture et non par accumulation.</p>
+<div class="tbl"><table><thead><tr><th>Notion (TD)</th><th>Définition</th></tr></thead><tbody>
+<tr><td>Paradigme</td><td>Modification profonde de la façon de penser et d'agir ; cadre accepté par une communauté scientifique</td></tr>
+<tr><td>Science normale</td><td>Activité empirique, prédictive et productive qui s'appuie sur un paradigme accepté</td></tr>
+<tr><td>Énigme</td><td>Problème que le scientifique résout avec le paradigme en place (l'essentiel du travail en science normale)</td></tr>
+<tr><td>Anomalie</td><td>Phénomène que le paradigme en vigueur ne peut expliquer correctement</td></tr>
+<tr><td>Crise</td><td>Accumulation d'anomalies : situation instable ouvrant une période de science extraordinaire</td></tr>
+<tr><td>Science extraordinaire</td><td>Période de crise où le paradigme est remis en cause ; multiplication de paradigmes concurrents</td></tr>
+<tr><td>Révolution scientifique</td><td>Discontinuité réorganisant un champ autour de principes nouveaux (ex. : révolution copernicienne, fin du paradigme ptolémaïque)</td></tr>
+<tr><td>Incommensurabilité</td><td>Les paradigmes d'avant et d'après sont incommensurables : on ne peut que constater deux visions du monde</td></tr>
+</tbody></table></div>
+<ul>
+<li>Ce qui fait science selon Kuhn : <strong>ce qui fait consensus</strong> au sein d'une communauté scientifique. Une crise apparaît quand ce consensus est mis en cause.</li>
+<li><span class="tag fix">✎</span> Ton CM nomme les phases « systémogenèse » (installation du paradigme) et « systémolyse » (paradigme contesté). Ces mots ne sont pas dans le vocabulaire de Kuhn, qui parle de période pré-paradigmatique, science normale, crise, science extraordinaire, révolution : c'est un vocabulaire propre à ton enseignant ou à un auteur qu'il suit <span class="tag check">⚠</span>. À utiliser avec prudence, en le définissant.</li>
+</ul>
+<h4 class="h4">Application à la géographie (CM)</h4>
+<ul>
+<li>Période pré-paradigmatique : explorations, nominations, inventaires, cartographie.</li>
+<li>Installation : institutionnalisation, création de revues, congrès.</li>
+<li>« Science normale » : géographie vidalienne. Anomalies, puis crise : contestations, controverses.</li>
+<li>Nouvelle installation (revues, associations, techniques) : « science normale » des nouvelles géographies.</li>
+<li>Les géographes anglo-saxons ont adopté Kuhn avec enthousiasme : Bunge présente la « révolution quantitative » comme une révolution scientifique (HG, p. 93-94, 100).</li>
+</ul>
+<h4 class="h4">Limites du modèle kuhnien</h4>
+<figure class="cite"><blockquote><p>« L'évolution de la géographie n'est pas marquée par des paradigmes qui se succèdent et s'éliminent, mais par une série de thèmes dont les combinaisons se multiplient au fur et à mesure que leur liste s'allonge. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, introduction, p. 8</figcaption></figure>
+<ul>
+<li>Claval récuse donc l'idée d'une succession de paradigmes qui s'éliminent : en géographie les démarches se cumulent (la cartographie, par exemple, reste la base des autres).</li>
+<li>Les années 1970 brouillent le tableau : « les crises et les révolutions se multiplient au point de perdre leur sens » (HG, chap. V, p. 94). Et deux « révolutions » simultanées (radicale, humaniste) contredisent l'alternance science normale / révolution (HG, p. 107).</li>
+<li>Pas de paradigme unique, donc pas de « science normale » stable : cela nourrit l'image de kaléidoscope (chap. 1, II.C).</li>
+</ul>
+<h3 class="h3">B. Michel Foucault : l'approche contextualisante</h3>
+<p>Michel FOUCAULT, <em>Les Mots et les choses</em>, Paris, Gallimard, 1966. Une science est le produit d'un <strong>contexte</strong> et d'un point de vue : pour la comprendre, il faut savoir ce qui se passe autour au même moment. Faire l'épistémologie d'une science, c'est faire son « archéologie ».</p>
+<ul>
+<li>TD : la production des savoirs est indissociable du contexte historique et socio-politique ; les sciences ne sont pas neutres et reflètent et structurent des rapports de pouvoir (<strong>pouvoir-savoir</strong>) : le savoir légitime les institutions, le pouvoir détermine quels savoirs sont produits et valorisés.</li>
+<li>Le CM cite : « L'histoire des savoirs ne peut être faite qu'à partir de ce qui lui a été contemporain. » <span class="tag check">⚠</span> je n'ai pas pu rattacher cette phrase à un passage précis des <em>Mots et les choses</em> : la présenter comme une paraphrase du cours, non comme citation de Foucault.</li>
+<li>Application : géographie vidalienne = France rurale + questions coloniales ; « crises » des années 1960-1980 = mutations sociales, économiques, politiques (féminisme, décolonisation, mouvements urbains).</li>
+<li>HG illustre cette lecture : la géographie « prospère là où se développent des bureaucraties, lorsqu'un Empire s'étend, ou lorsque la découverte du monde franchit une étape » (HG, introduction, p. 8, paraphrase).</li>
+</ul>
+<h2 class="h2">II. Études de cas (TD)</h2>
+<h3 class="h3">1. « Quels liens entre l'aménagement et la géographie ? »</h3>
+<ul>
+<li><strong>Introduction</strong> : aménagement = ensemble de savoirs et de savoir-faire servant à transformer volontairement des espaces, à des échelles variées, au bénéfice des sociétés qui les occupent. Problématique donnée : quels liens entre aménagement et géographie ? Problématique personnelle : l'aménagement est-il une science ?</li>
+<li><strong>I. L'aménagement dans la géographie</strong> : A) un objet d'étude du géographe qui mobilise des savoirs géographiques (mêmes objets, même vocabulaire, mêmes raisonnements : réticulaire, chorographique, multiscalaire) ; B) un courant de la géographie (Michel Phlipponneau, <em>Géographie et action</em>, 1960 : courant prescriptif et prospectif ; la géographie « mère » de l'aménagement).</li>
+<li><strong>II. L'aménagement au-delà de la géographie</strong> : A) une pratique et non une science, multi-acteurs (urbanistes, paysagistes, architectes, géographes), d'où le passage d'« aménagement <em>du</em> territoire » à « aménagement <em>des</em> territoires » ; B) des enjeux socio-politiques forts (projet de société, idéologies, concurrence entre équité et compétitivité).</li>
+<li><strong>Conclusion</strong> : grande proximité mais deux identités ; l'aménagement n'est pas une science contrairement à l'urbanisme (Institut d'urbanisme de Paris, <span class="tag fix">✎</span> <strong>1924</strong> et non 1824 comme écrit dans tes notes, hors corpus, <span class="tag check">⚠</span> à confirmer ; l'Institut de géographie date de 1926 d'après ton CM). Ouverture : l'engagement du géographe, avec Max Weber, <em>Le Savant et le politique</em> (trad. Julien Freund, Plon, 1959, <span class="tag check">⚠</span>) : le savant ne parle que de ce qu'il connaît. Ta note est une paraphrase, non une citation.</li>
+</ul>
+<aside class="note">Repères du corpus (TD) : paradigmes du <em>milieu</em>, puis de l'<em>espace</em>, puis du <em>territoire</em> ; années 1960-70 : métropoles d'équilibre (Lille, Strasbourg, Lyon, Marseille, Toulouse, Nantes, Rennes, Bordeaux, Grenoble, Nice) et DATAR (créée en 1963) ; années 1980 : lois Defferre (1982), logique ascendante ; années 2000 : inflexion néolibérale, compétitivité, appels à projets ; aujourd'hui : performance régionale. Chorographie vidalienne (1890-1920) ; multiscalaire : Lacoste (1970s, géopolitique, <em>diatopie</em>) ; géographie appliquée (Phlipponneau, 1960) ; géographie active (Pierre George et al., 1964).</aside>
+<h3 class="h3">2. « Quelle place pour la géographie physique aujourd'hui ? »</h3>
+<ul>
+<li><strong>I. Une science au raisonnement géographique</strong> : A) science de la nature ou de l'interface nature-société (milieux terrestres, paysages, géosystèmes) ; particularité : elle aborde l'espace <em>verticalement</em> (atmosphère → lithosphère) ; B) raisonnement systémique (le « paradigme systémique ») ; C) plus ou moins touchée par l'essor du concept d'environnement (elle a du mal à l'accepter).</li>
+<li><strong>II. Un courant de la géographie ?</strong> A) Une ou des géographies physiques ? France : famille englobante (climatologie, géomorphologie) ; Allemagne : englobante (biogéographie, botanique) ; URSS : science indépendante à côté de la climatologie (Kalesnik, 1958 <span class="tag check">⚠</span> ton CM écrit « Kaneslik ») ; géographie divisée dès Cortambert en géographie de la nature et des sociétés ; B) d'une science marginalisée (crise des années 1950, elle a failli quitter la géographie) à la réaffirmation de sa place.</li>
+<li><strong>III. Au-devant des enjeux sociaux de l'environnement</strong> : A) prise de conscience environnementaliste (protocole de Kyoto) ; B) utilité reconsidérée (risques, développement durable, « demande sociale forte »).</li>
+<li><strong>Conclusion</strong> : enjeux socio-politiques forts, mais le rôle du géographe s'arrête à la science.</li>
+<li>Repère : <strong>V. B. Sotchava</strong> forge le terme de <em>géosystème</em> (1960 dans tes notes ; à vérifier <span class="tag check">⚠</span>), diffusé en France par Georges Bertrand : relier géome (non vivant), biome (vivant) et homme (composantes abiotiques, biotiques, anthropiques) : nouveauté dans la géographie physique.</li>
+</ul>
+<h3 class="h3">3. La peur : « Les géographies de la peur sont-elles un courant institué ? »</h3>
+<ul>
+<li><strong>Problématiques</strong> : en quoi la peur, sentiment immatériel, a-t-elle une spatialité qui en fait un objet de la géographie ? En quoi renouvelle-t-elle la géographie dans un contexte postmoderne ?</li>
+<li><strong>I. Un objet géographique en construction</strong> : A) non-objet ou objet de la géographie ? B) au cœur du raisonnement géographique (spatialités de la peur : de l'individuel au collectif, espaces de peur / rassurants, production d'espace par réaction).</li>
+<li><strong>II. Un vecteur de renouvellement</strong> : A) outil méthodologique, approche plus subjective (<strong>positionnalité</strong> : les émotions du chercheur ont leur place) ; B) on revisite l'ensemble des courants (approche représentationnelle) ; <em>emotional turn</em>.</li>
+<li><strong>III. Reflet d'un contexte de mutations</strong> : A) mutations démographiques et urbaines dans la seconde moitié du XXe siècle ; B) sentiment d'insécurité diffus, droit à la sécurité, instrumentalisation par médias et politique.</li>
+<li>Vocabulaire : <em>réflexivité</em> = esprit critique, réflexion sur sa partialité, déconstruction ; <em>positionnalité</em> = à l'intérieur de la réflexivité, mettre sa position au centre, écrire à la première personne, s'appuyer sur ses émotions.</li>
+</ul>
+<h3 class="h3">4. « Dans quelle mesure la justice spatiale peut-elle servir la géographie ? »</h3>
+<ul>
+<li><strong>I. La justice spatiale innerve le raisonnement géographique</strong> : A) clé de lecture de l'espace et de l'aménagement (lecture normative, matériel et immatériel, multiscalaire, notion opératoire, performative) ; B) renouvelle le raisonnement parce qu'elle est appliquée, engagée (notion scientifique militante ; passe d'une pensée de l'unité à une pensée de la diversité).</li>
+<li><strong>II. Une nouvelle approche par la justice spatiale</strong> : A) rupture épistémologique (années 1960 : géographie radicale et urbaine) ; B) renouveau et élargissement dans les années 1990-2000 (redéfinir une nouvelle géographie radicale ; marxisme, <em>postcolonial studies</em>).</li>
+<li><strong>III. Un enjeu de société</strong> : collectivités locales (TER, justice, hôpital, RSA) ; géographie appliquée, urbaine, environnementale.</li>
+<li>Auteurs : David Harvey distingue des formes d'injustice (marginalisation socio-spatiale, exploitation, absence de pouvoir, violence, impérialisme culturel, dégradation de l'environnement) ; <span class="tag check">⚠</span> ton TD attribue cette liste à « <em>Social Justice, Postmodernism and the City</em> » ; à ma connaissance (hors corpus), l'article de ce titre date de 1992 et la liste à six formes est surtout développée dans <em>Justice, Nature and the Geography of Difference</em> (1996), à partir d'Iris Marion Young. Edward Soja : « justice spatiale » plutôt que « justice sociale » (<em>Postmetropolis</em>, 2000 ; la notion est surtout développée dans <em>Seeking Spatial Justice</em>, 2010 <span class="tag check">⚠</span>).</li>
+</ul>
+<h3 class="h3">5. « Quelle est la place des acteurs dans le raisonnement géographique et en géographie ? »</h3>
+<ul>
+<li><strong>I. Les acteurs agissent toujours dans un espace précis qu'ils influencent</strong> : A) spatialité des acteurs (notion d'acteur spatial) ; B) influence sur l'espace ; C) diversité d'acteurs et d'espaces : jeux d'acteurs.</li>
+<li><strong>II. D'une science des lieux à une science des hommes</strong> : A) une géographie vidalienne qui néglige les acteurs ; B) révolution épistémologique : intérêt croissant pour l'individu ; de la pensée du monde à l'<em>agentivité</em> en son sein.</li>
+<li><strong>III. Une société qui met l'individu au centre</strong> : engagement des acteurs pour l'intérêt général ; regard critique sur l'homme, nuancé ; l'individu central dans la représentation de la société.</li>
+</ul>
+<h3 class="h3">6. « Le concept d'environnement a-t-il révolutionné la géographie ? »</h3>
+<p>Plan détaillé : voir chapitre 5, section IV.</p>
+
+<h1 class="h1">Chapitre 3 · Histoire des savoirs géographiques</h1>
+<p>Synthèse de HG (Claval), enrichie par les notes de cours et le cahier TC. Chaque grande section indique les pages de HG.</p>
+<div class="tbl"><table><thead><tr><th>Période</th><th>Dominante</th><th>Contexte (lecture « foucaldienne »)</th></tr></thead><tbody>
+<tr><td>VIe s. av. J.-C. – IIe s. apr. J.-C.</td><td>Naissance de la géographie scientifique (cosmographie, mesure, carte)</td><td>Cités d'Ionie, Alexandrie, Empire romain</td></tr>
+<tr><td>Ve – XIIIe s.</td><td>Déclin latin, héritage conservé et enrichi par le monde arabe, portulans</td><td>Pouvoirs fondés sur des rapports personnels ; califat abbasside</td></tr>
+<tr><td>XVe – XVIe s.</td><td>Redécouverte de Ptolémée, Grandes Découvertes, cosmographie</td><td>Rationalisation de l'État, imprimerie, Réforme</td></tr>
+<tr><td>XVIIe – XVIIIe s.</td><td>Cartographie scientifique, statistique, sciences naturelles, réflexion philosophique</td><td>État moderne, Lumières</td></tr>
+<tr><td>1800 – 1860</td><td>Pionniers allemands (Humboldt, Ritter), sociétés de géographie</td><td>Romantisme, révolution industrielle, universités</td></tr>
+<tr><td>1860 – 1890</td><td>Géographie scolaire, naissance de la géographie humaine (Ratzel)</td><td>Colonialisme, nationalismes, positivisme, darwinisme</td></tr>
+<tr><td>1890 – 1950</td><td>Écoles nationales (allemande, française, américaine)</td><td>Disciplines des sciences sociales qui se délimitent</td></tr>
+<tr><td>1950 – 1970</td><td>Nouvelle géographie</td><td>Planification, cybernétique, néo-positivisme</td></tr>
+<tr><td>1970 – 1980</td><td>Géographies radicale et humaniste</td><td>Contestation, mouvements sociaux, phénoménologie</td></tr>
+<tr><td>Depuis 1980</td><td>Géographies postmodernes, environnement, régional, culturel</td><td>Mondialisation, chute des murs, crise des philosophies du progrès</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">I. L'Antiquité : une géographie qui naît d'une aventure intellectuelle (HG p. 9-17)</h2>
+<ul>
+<li><span class="tag add">✚</span> Racines culturelles et religieuses : les mythes grecs sont liés à des lieux, donc il faut un enseignement de la géographie sacrée ; aucune bureaucratie ne l'exige avant Alexandre. « La géographie naît en Grèce d'une aventure intellectuelle » (HG, p. 9-10).</li>
+<li>Ionie (VIe s.) : géométrie de l'univers, Thalès, Anaximandre (première carte), Hécatée ; <strong>hypothèse géocentrique</strong> inséparable de la géographie grecque (HG, p. 10).</li>
+<li>Hérodote (v. 484-v. 420) : récits non-itinéraires, ensembles territoriaux, changement d'échelle ; mais il s'intéresse plus aux mœurs qu'aux milieux (HG, p. 10-11). Hippocrate et Aristote, <em>Les Météorologiques</em> (HG, p. 11).</li>
+<li>Alexandrie : Ératosthène mesure la circonférence terrestre, construit sa carte (latitude, longitude) et emploie le mot « géographie » ; Hipparque (projections) ; Posidonius (cercles polaires) (HG, p. 12-13). <span class="tag fix">✎</span> Siècle : Ératosthène est du <strong>IIIe</strong> siècle av. J.-C. (v. 275-194) selon HG p. 12 ; le « tournant du IIe siècle » du cahier TC se comprend avec Hipparque. Mesure : HG donne 5 000 stades et 252 000 stades « un peu plus de 36 000 km » ; ton cahier : 787 km et 39 375 km ; l'écart tient à la valeur du stade.</li>
+<li>Trois savoirs distingués par les Grecs : <em>topographie</em> (conditions locales de relief), <em>chorographie</em> (portrait des contrées sans les situer dans le globe), <em>géographie</em> (appréhension globale) (HG, p. 13-14). Strabon (63 av. J.-C.-v. 21-25) : orientation régionale, pour informer les responsables de l'Empire (HG, p. 14).</li>
+<li>Ptolémée (v. 100-v. 180) : <em>Géographie</em> = inventaire de 8 000 lieux, sans description régionale ; Denys d'Alexandrie, <em>Périégèse</em> : transmission jusqu'au début du XIXe s. (HG, p. 15-16).</li>
+</ul>
+<figure class="cite"><blockquote><p>« L'évolution de la géographie grecque ne s'inscrit pas dans la logique d'accumulation des savoirs qui nous est familière »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. I, § I, encadré sur la géographie grecque, p. 17</figcaption></figure>
+<ul><li>Chine : coordonnées depuis Chang-Hen (78-139) et première carte d'ensemble de la Chine en 267, mais sans le cadre théorique grec (HG, p. 17).</li></ul>
+
+<h2 class="h2">II. Moyen Âge et monde arabe (HG p. 17-25)</h2>
+<ul>
+<li>Déclin latin commencé avant la chute de Rome : fin de l'appui stoïcien à l'hypothèse géocentrique, dislocation de l'administration, pouvoir par notables interposés (HG, p. 17-18).</li>
+<li>Conflit sphéricité/Terre plate biblique (Lactance, saint Augustin, Cosmas Indicopleustès, Isidore de Séville) ; mappemondes T et O centrées sur Jérusalem, faites pour exhiber la puissance (HG, p. 18-20). <span class="tag fix">✎</span> <em>Topographie chrétienne</em> de Cosmas : VIe s., non IXe (HG p. 18) : correction déjà portée dans le cahier TC.</li>
+<li>Géographie arabe (800-1050 pour son épanouissement) : traductions à Bagdad, <em>Almageste</em>, instruments, grands voyageurs : al-Muqaddasi, al-Idrissi (68 cartes pour Roger II de Sicile), Ibn Battuta (1304-v. 1368), Ibn Khaldoun (1332-1406) qui initie la réflexion géopolitique (HG, p. 20-22).</li>
+<li>Boussole transmise par les Arabes ; <strong>portulans</strong> (XIIIe s., Méditerranée occidentale chrétienne) : cartes fondées sur la mesure d'angles ; leçon : bâtir des représentations fidèles à partir de mesures de terrain (HG, p. 22-24). Missions de Rubrouck, Plan Carpin, voyage de Marco Polo (HG, p. 24).</li>
+</ul>
+
+<h2 class="h2">III. Renaissance et Grandes Découvertes (HG p. 25-31)</h2>
+<ul>
+<li>Ptolémée traduit en latin par Jacobo d'Angelo en 1406 ; tables publiées en 1475 ; cinq éditions dès 1486 (HG, p. 25). Henri le Navigateur, Vasco de Gama (1498), Colomb (1492) (HG, p. 25).</li>
+<li>Waldseemüller publie à Saint-Dié en 1507 la <em>Cosmographiae Introductio</em> et propose « Amérique » ; globe de Martin Behaim (1492) (HG, p. 27-28). <span class="tag fix">✎</span> Le cahier TC cite p. 28 pour Behaim ; la pagination du livre suggère plutôt les p. 27-28.</li>
+<li>Les <strong>cosmographes</strong> (Münster, Belleforest, Thévet) remplissent par des descriptions régionales le cadre astronomique ; Bodin donne sa forme moderne à la théorie des climats ; la forme cosmographique s'épuise dès la fin du XVIe s. (HG, p. 28-29).</li>
+<li>Rôle de la religion (Luthériens, Catholiques, Calvinistes) et de la rationalisation de l'État ; Botero (statistique), Hakluyt, Varenius (géographie générale / particulière) (HG, p. 25-31).</li>
+</ul>
+
+<h2 class="h2">IV. Les Lumières : État, cartes, nature, philosophie (HG p. 32-47)</h2>
+<ul>
+<li>État moderne : statistique (Petty, caméralisme), mais seconde main et circonscriptions arbitraires ; Buache et les bassins fluviaux, noms de départements (HG, p. 32-34).</li>
+<li>Cartographie scientifique : triangulation, Cassini (1680-1793), ingénieur-géographe, chronomètre de Harrison, expéditions de Cook, Bougainville, Lapérouse ; après 1800, divorce entre lever cartographique et géographie (HG, p. 34-38).</li>
+<li>Nouvelle conception de la nature : Linné, Buffon, Hutton et Playfair (la géographie physique rompt avec la Bible) (HG, p. 38-41).</li>
+<li>Philosophes : Rousseau (expérience de terrain) et Pestalozzi ; Turgot (géographie politique prospective) ; <strong>Kant</strong> : plus de 50 cours de géographie, temps et espace comme structures de l'entendement, distinction idiographique / nomothétique qui n'est pas chez Kant mais chez les néo-kantiens ; Herder lie histoire des peuples et milieu (HG, p. 41-47).</li>
+</ul>
+
+<h2 class="h2">V. Les pionniers : Humboldt et Ritter (HG p. 48-59)</h2>
+<ul>
+<li>Contexte : bateau à vapeur, chemin de fer, universités (réforme de Guillaume de Humboldt, 1810), Sociétés de géographie (Paris, 1820 selon HG p. 50 ; 15 décembre 1821 selon la date généralement admise, d'après le cahier TC).</li>
+<li><strong>Alexandre de Humboldt</strong> (1769-1859) : voyageur naturaliste, il part du terrain, <strong>introduit la notion de milieu</strong> (géographie botanique, 1805), explique le courant froid du Pérou, rédige <em>Cosmos</em> (1845-1862) (HG, p. 51-55).</li>
+<li><strong>Carl Ritter</strong> (1779-1859) : <em>Géographie générale comparée</em> (1817-1859), vue téléologique proche de Herder (p. 57), initiateur de la géographie économique moderne (p. 58).</li>
+</ul>
+<figure class="cite"><blockquote><p>« Ritter importe en définitive plus par l'ambition qu'il confère à la géographie que par les résultats qu'il apporte »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. III, § II, p. 58</figcaption></figure>
+<ul><li>Apport commun : ambition explicative, <strong>dialectique des échelles</strong>, science naturelle des rapports hommes/environnement. Angle mort : l'économie spatiale de von Thünen (<em>Der isolierte Staat</em>, 1826 et 1851), Kohl, Launhardt, que les géographes ignorent plus d'un siècle (HG, p. 59).</li></ul>
+
+<h2 class="h2">VI. Après 1860 : Ratzel et la naissance de la géographie humaine (HG p. 59-67)</h2>
+<ul>
+<li>Contexte : canal de Suez (1869), transcontinental américain (1866), expansion coloniale, nationalisme ; rapport Levasseur (1872) ; positivisme, scientisme, Darwin (1859), Haeckel et l'écologie (1872) (HG, p. 59-63).</li>
+<li><strong>Friedrich Ratzel</strong> (1844-1904) : zoologue converti au darwinisme, <em>Anthropogeographie</em> (1882, 1891), <em>Völkerkunde</em>, <em>Politische Geographie</em> (1897). Relations « verticales » (milieu) et « horizontales » (circulation) ; <em>Naturvölker</em> / <em>Kulturvölker</em> (HG, p. 64-66).</li>
+</ul>
+<figure class="cite"><blockquote><p>« Il la conçoit comme une histoire naturelle des sociétés dans leurs rapports à l'environnement. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. III, § IV, p. 66</figcaption></figure>
+<ul><li>Difficulté : le darwinisme appelle des lois déterministes, alors que l'histoire montre la variabilité des liens ; Ratzel mêle déclarations environnementalistes et pratique nuancée, et abandonne vers la fin de sa vie la vision darwinienne (HG, p. 66). En France, la géographie humaine se répand à partir de 1895 dans une optique <strong>lamarckienne</strong> (HG, p. 66-67).</li></ul>
+
+<h2 class="h2">VII. Le temps des écoles nationales, 1890-1950 (HG p. 68-92)</h2>
+<ul>
+<li>Trois conceptions concurrentes (HG, p. 69) : (1) la différenciation régionale ; (2) les rapports groupes/environnement (géographie humaine) ; (3) la géographie comme étude des paysages. Chaque école en combine deux : <strong>allemande</strong> (paysages et régions), <strong>française</strong> (rapports groupes/environnement et structures régionales), <strong>américaine de Berkeley</strong> (paysages et relations hommes/milieu).</li>
+<li>Géographie physique : point de vue écologique (Schlüter, Dokouchaev, Marsh, Clements, Sorre) et recherches thématiques (Davis, Penck, de Martonne, Köppen, Bjerknes) (HG, p. 70-73).</li>
+<li><strong>École allemande</strong> : Heimatskunde (Riehl), paysage (Meitzen, Schlüter, <em>Landschaft</em>), Hettner ; liens avec la révolution conservatrice et la géopolitique de Haushofer, retour à la <em>Landschaftskunde</em> après 1945 (HG, p. 74-76).</li>
+<li><strong>École française</strong> : avant Vidal (Drapeyron, Levasseur, Reclus) ; Vidal de La Blache : densités, <strong>genres de vie</strong>, possibilisme (Febvre, 1922), <em>Tableau de la géographie de la France</em> (1903), dialectique des échelles ; thèses régionales (Demangeon, Sion, Blanchard) ; Gallois (1908), Brunhes (1909) plus conservateurs (HG, p. 76-85).</li>
+</ul>
+<figure class="cite"><blockquote><p>« Face au déterminisme qu'affichait parfois Ratzel, Vidal de La Blache se veut possibiliste »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. IV, § IV, p. 81</figcaption></figure>
+<ul>
+<li><strong>École américaine</strong> : Davis, école du Middle West, <strong>Carl Sauer</strong> (1890-1975) et le paysage culturel ; « écologie culturelle » sans déterminisme mécanique (HG, p. 85-88).</li>
+<li>Domaines spécialisés : géographie économique, politique (Maull, Ancel, Mahan, Mackinder, Haushofer, Bowman), rurale, urbaine (Blanchard, 1911), tropicale (Gourou) ; Christaller et les lieux centraux (1933) (HG, p. 88-91).</li>
+<li>Bilan du milieu du XXe siècle : « un malaise existe », la géographie réussit surtout sur les paysages et les sociétés traditionnelles (HG, p. 92).</li>
+</ul>
+
+<h2 class="h2">VIII. La Nouvelle géographie, années 1950-1970 (HG p. 93-103)</h2>
+<ul>
+<li>Contexte : demande de planification (Grande Crise, TVA 1933), recherche opérationnelle, cybernétique, analyse des systèmes, néo-positivisme logique (cercle de Vienne ; Popper) (HG, p. 94-97).</li>
+<li>Foyer de Seattle ; Ullman (circulation) ; science régionale d'Isard ; modèles de localisation (Thünen, Weber, Lösch, Christaller) qui <strong>autorisent la prévision</strong> ; Berry, Nystuen, Morrill, Dacey, Garrison ; Burton : « La révolution quantitative est terminée » (1963) (HG, p. 97-98).</li>
+<li>Débat épistémologique : Schaefer (1953) dénonce l'<strong>exceptionnalisme</strong> de Hartshorne ; Bunge, <em>Theoretical Geography</em> (1962) ; Gould (1968) ; Harvey, <em>Explanation in Geography</em> (1969) ; Hägerstrand et la diffusion des innovations (HG, p. 99-100).</li>
+<li>En France, orientations minoritaires jusqu'en 1968 ; apport original : l'organisation de l'espace (Claval, 1963, 1968) (HG, p. 100-101).</li>
+</ul>
+<figure class="cite"><blockquote><p>« La géographie cesse d'être considérée comme une science naturelle même lorsqu'elle traite de réalités sociales, culturelles ou économiques. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. V, § II (premier bilan), p. 102</figcaption></figure>
+<ul><li>Limites : la ville réduite à ses fonctions, régional et culturel laissés de côté, géographie physique tournée vers le laboratoire (HG, p. 102-103).</li></ul>
+
+<h2 class="h2">IX. Remises en cause des années 1970 : radicale et humaniste (HG p. 103-107)</h2>
+<ul>
+<li><strong>Radicale</strong> : demande sociale qui change (société de consommation, misère) ; Bunge, expédition de Fitzgerald (Detroit) ; Harvey passe des modèles classiques aux modèles marxistes ; Lefebvre, Castells (HG, p. 103-104). <span class="tag check">⚠</span> HG date <em>Social Justice and the City</em> de 1972 (p. 104) ; ton CM la date de 1973, date retenue par l'usage (hors corpus).</li>
+<li><strong>Humaniste</strong> : Boulding, Lynch, Kirk, Wright ; <strong>Éric Dardel</strong>, <em>L'Homme et la Terre</em> (1952), inventeur de la <em>géographicité</em> ; Yi-fu Tuan (phénoménologie, « géographie humaniste », 1976) ; Frémont, espace vécu (1972-1975) (HG, p. 105-107).</li>
+</ul>
+<figure class="cite"><blockquote><p>« Pour Dardel, la géographie n'a pas pour but de décrire la Terre, mais de montrer comment l'homme y inscrit son existence »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. V, § III, p. 106</figcaption></figure>
+
+<h2 class="h2">X. La géographie dans le monde postmoderne (HG p. 108-126)</h2>
+<ul>
+<li>Redécouverte de l'environnement : géomorphologie dynamique, écologie énergétique, risques, télédétection et SIG (HG, p. 110-112).</li>
+<li>Crise de la géographie radicale : le marxisme ne dit rien de l'espace (Lefebvre : HG p. 113) ; Harvey, <em>The Limits to Capital</em> (1982) ; il faut associer à la méta-théorie marxiste des « méso-théories » non marxistes (HG, p. 113-114).</li>
+<li>Renouveau des études régionales (Gregory, Pred, Berque, Bonnemaison, Hägerstrand et la <em>Time Geography</em>, Giddens) ; culture et communication ; géographie « au temps de la chute des murs » (Lacoste, Taylor, Gottmann) ; fin des philosophies de l'histoire (HG, p. 114-122).</li>
+</ul>
+<figure class="cite"><blockquote><p>« L'univers postmoderne a rompu avec le fétichisme du temps. Il accorde à l'espace une attention qui aurait dû lui revenir depuis longtemps. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, chap. VI, § VI, p. 124</figcaption></figure>
+<figure class="cite"><blockquote><p>« La géographie est une invitation à comprendre et à respecter la diversité des milieux naturels et des civilisations. »</p></blockquote><figcaption>Paul CLAVAL, <em>Histoire de la géographie</em>, PUF, 1995, conclusion, p. 126</figcaption></figure>
+
+<h1 class="h1">Chapitre 4 · La géographie, science de la nature ou des sociétés ?</h1>
+<h2 class="h2">I. Une mutation de paradigme au XXe siècle</h2>
+<figure class="cite"><blockquote><p>« en un demi-siècle, la géographie est passée du champ des sciences de la nature à celui des sciences sociales en une migration unique dans l'histoire des sciences. »</p></blockquote><figcaption>Rémi KNAFOU (dir.), <em>L'État de la géographie. Autopsie d'une science</em>, Paris, Belin, 1997 (cité dans le CM ; page à vérifier <span class="tag check">⚠</span>)</figcaption></figure>
+<ul>
+<li>Passage de la géographie vidalienne classique aux <strong>Nouvelles géographies</strong> (années 1950) et du primat de la géographie physique à celui de la géographie humaine.</li>
+<li>Thèses soutenues en France en 2018 (CM, 55 thèses) : géographie physique 15 %, environnementale 18 %, humaine 67 %.</li>
+<li>Question centrale : comment la géographie joint-elle les deux bouts nature et société ?</li>
+</ul>
+<h2 class="h2">II. Définir la « nature »</h2>
+<h3 class="h3">A. Un paradigme naturaliste en Occident</h3>
+<ul>
+<li><strong>Bruno Latour</strong>, <em>Nous n'avons jamais été modernes</em>, Paris, La Découverte, 1991 : la « constitution moderne » sépare strictement faits naturels (science) et faits sociaux (culture) alors qu'on produit en permanence des <strong>hybrides</strong> ; penser en réseaux d'acteurs humains et non humains (<em>Actor-Network Theory</em>, <em>agency</em> = agentivité).</li>
+<li><strong>Descartes</strong>, <em>Discours de la méthode</em>, VIe partie (1637) : une philosophie pratique pour se rendre « comme maîtres et possesseurs de la nature » (édition de 1840, p. 64, d'après le CM <span class="tag check">⚠</span>) : symbole de l'anthropocentrisme moderne.</li>
+<li><strong>Philippe Descola</strong>, <em>Par-delà nature et culture</em>, Paris, Gallimard, 2005 : le « naturalisme » est propre à l'Occident ; quatre ontologies : naturalisme (même physicalité, intériorité distincte), animisme (intériorité commune, corps différents), totémisme (continuité physique et morale), analogisme (réseau de correspondances). Exemple des Achuar (Amazonie équatorienne, terrain 1976-1979) : pas de terme pour « la nature ».</li>
+<li>« Physique » vient de <em>phusis</em>, nature : la géographie physique est tributaire de ce concept.</li>
+</ul>
+<h3 class="h3">B. Évolution actuelle du concept</h3>
+<ul><li>Expressions comme « naturel urbain » (oxymore) : la « nature » ne désigne-t-elle plus que des espaces qui ont ses qualités mais sont déjà aménagés ?</li></ul>
+<h2 class="h2">III. Une science hybride ou clivée ?</h2>
+<h3 class="h3">A. Classer la géographie parmi les sciences (XIXe)</h3>
+<div class="tbl"><table><thead><tr><th>Auteur</th><th>Classification</th><th>Place de la géographie</th></tr></thead><tbody>
+<tr><td>Ampère, <em>Essai sur la philosophie des sciences</em> (1834)</td><td>Sciences cosmologiques (nature) / noologiques (sociétés)</td><td>Pas encore reconnue comme science</td></tr>
+<tr><td>Comte, <em>Cours de philosophie positive</em> (1830, vol. 1)</td><td>Sciences des corps bruts / des corps organisés (sociologie = « physique sociale »)</td><td>Absente</td></tr>
+<tr><td>Cortambert (1852)</td><td>Sciences physiques / physico-morales / morales</td><td>En tête des sciences physico-morales : <strong>science hybride</strong></td></tr>
+</tbody></table></div>
+<ul><li>Cahier TC : Ampère « la classe dans les deux », ce qui ne recoupe pas ton CM (qui la dit absente). <span class="tag check">⚠</span> à clarifier : la place de la géographie chez Ampère.</li></ul>
+<h3 class="h3">B. Fin XIXe – mi-XXe : unité ou clivage</h3>
+<ul>
+<li>Reclus : unité de la géographie physique et humaine. Levasseur : physique = « théâtre », humaine = « acteurs ». Marcel Dubois : géographie humaine (coloniale) alliée aux sciences naturelles. Vidal : distingue sciences de la nature et sciences sociales, mais fait de la géographie la relation entre les deux. La vision unitaire de Cortambert domine un demi-siècle.</li>
+<li><strong>Institut de géographie</strong> (achevé en 1926, rue Saint-Jacques) : projet de réunir les services de la Faculté des lettres et de la Faculté des sciences ; échec du rapprochement ; conflits de chaires (Dubois, Vélain, puis de Martonne jusqu'en 1945) : <strong>clivage institutionnalisé</strong>.</li>
+<li>Années 1940-1950 : <em>Géographie universelle</em> (Vidal, Gallois, de Martonne, Demangeon) ; séparation physique/humaine actée, « crise » ; réactions : Max Sorre (trois complexes), André Cholley (« combinaison »), Pierre George (la géographie est science de l'homme, la physique doit sortir).</li>
+</ul>
+<h2 class="h2">IV. Redonner une unité systémique</h2>
+<ul>
+<li><strong>Georges Bertrand</strong> : géographie physique = science d'interface entre nature et société ; méthode <strong>GTP</strong>. <span class="tag fix">✎</span> GTP = <strong>Géosystème – Territoire – Paysage</strong> : ton CM l'écrit d'abord ainsi, puis « Géographie, Territoire, Processus » dans le résumé de <em>L'Espace géographique</em> (1989) : c'est une erreur. Le résumé de ce texte dans tes notes ne correspond pas non plus à la méthode GTP : à reprendre sur le texte source <span class="tag check">⚠</span> (aussi : le titre « Chassez le naturel » et la fonction de président de l'université de Toulouse sont à vérifier).</li>
+<li>Nécessité d'une rupture épistémologique ; un paradigme <strong>socio-naturaliste</strong> ; mais toujours dans une perspective naturaliste, d'où le glissement vers la géographie de l'environnement, pleinement science sociale.</li>
+<li>Conclusion du CM : renversement en un siècle (primat de la physique au début du XXe ; paradigme social à la fin).</li>
+</ul>
+
+<h1 class="h1">Chapitre 5 · La révolution environnementale en géographie</h1>
+<p>Problématique : en quoi le concept d'environnement a-t-il révolutionné la géographie ?</p>
+<figure class="cite"><blockquote><p>« L'environnement oblige à une nouvelle intelligence de l'espace, à le définir non plus morphologiquement, mais dynamiquement, en termes de flux, de communications et d'arrêts »</p></blockquote><figcaption>François DAGOGNET, <em>Une épistémologie de l'espace concret. Néo-géographie</em>, Paris, Vrin, 1977 (cité dans le CM ; page à vérifier <span class="tag check">⚠</span>)</figcaption></figure>
+<h2 class="h2">I. Un concept tardif au fort impact social et scientifique</h2>
+<ul>
+<li><strong>Un concept à géométrie variable</strong> : « environnement » = abréviation de « environnement des sociétés humaines ». <span class="tag fix">✎</span> Ton CM écrit « du latin <em>virgo</em>, tourner autour » : <em>virgo</em> signifie « jeune fille ». Le mot vient d'« environner », de l'ancien français <em>viron</em> (cercle) et de <em>virer</em> (du latin populaire <em>virare</em>, « tourner ») : connaissance générale, hors corpus.</li>
+<li>Sens étroit : environnement naturel (composants abiotiques et biotiques) ; sens large : agents physiques, chimiques et biologiques et facteurs sociaux susceptibles d'avoir un effet sur les êtres vivants et les activités humaines (CILF, 1971) ; « effets d'environnement » (F. Charvolin), « interconséquentialité » (J. Dewey) ; sens politique et écologiste dans les années 1970 (1970, <em>Cent mesures pour l'environnement</em> ; 1971, ministère de l'Environnement, Robert Poujade).</li>
+<li><strong>Histoire du mot</strong> : XIIIe s. « contour » ; au XVIIIe s., « site », « situation », « voisinage » ; « milieu » (Diderot et d'Alembert, Comte et la mésologie, Vidal, Durkheim) jusqu'aux années 1970 ; 1912, Vidal emploie « environnement » ; 1942, Demangeon ; 1946, Cassan ; 1971, Pierre George, <em>L'Environnement</em> (Que sais-je ?) ; tournant 1970-1980 (Blanc-Pamard, 1979).</li>
+</ul>
+<h2 class="h2">II. Épistémologie de l'environnement en géographie</h2>
+<ul>
+<li>Objet ancien (Aristote, <em>Les Météorologiques</em>, Varenius 1650), déterminisme (Ratzel, 1891) et possibilisme (Vidal ; terme forgé par Febvre en 1922). Aujourd'hui, le déterminisme est jugé réducteur et potentiellement raciste, le possibilisme critiqué pour séparer l'homme de la nature.</li>
+<li>Années 1960-1970 : géographie quantitative et géographie physique fragmentée → éloignement des enjeux environnementaux, crise. Années 1970-1980 : géographie radicale, des risques, <em>political ecology</em> (Watts, 2000 ; Fairhead et Leach, 1996).</li>
+<li>Années 2000 : <strong>humanités environnementales</strong> (métadiscipline qui abolit les frontières) ; Dipesh Chakrabarty, « The Climate of History », 2009 : le changement climatique oblige à penser ensemble histoire humaine et temps géologique (Anthropocène).</li>
+</ul>
+<h2 class="h2">III. Un enjeu socialement vif</h2>
+<ul>
+<li>Perception de la crise, mouvement écologiste (années 1970) ; inflation des usages et limites : concept « nomade » (Isabelle Stengers, <em>D'une science à l'autre. Des concepts nomades</em>, Paris, Seuil, 1987).</li>
+<li>HG complète : redécouverte des problèmes d'environnement, géographie physique des situations extrêmes, SIG (HG, p. 110-112).</li>
+</ul>
+<h2 class="h2">IV. Plan détaillé : le concept d'environnement</h2>
+<ul>
+<li><strong>I. Un concept qui redéfinit le raisonnement géographique</strong> (partie thématique) : A) un concept d'<em>interface</em> qui reconnecte nature et société ; B) il diffuse le raisonnement <em>systémique</em> ; C) il est pénétré par le raisonnement <em>multiscalaire</em> (du global au local : Yves Lacoste).</li>
+<li><strong>II. Le « tournant environnemental »</strong> (partie chronologique) : A) de l'environnement, objet ancien, à la géographie environnementale (risques, <em>political ecology</em>, années 1980) ; B) vers les humanités environnementales (Chakrabarty).</li>
+<li><strong>III. Une question socialement vive</strong> : A) perception d'une crise ; B) inflation des usages et limites (concept « nomade »).</li>
+<li><strong>Conclusion</strong> : décollage des années 1970 ; au contact de ce concept, la géographie a été repensée, sa définition a évolué.</li>
+</ul>
+
+<h1 class="h1">Chapitre 6 · La géohistoire</h1>
+<ul>
+<li><strong>Élisée Reclus</strong>, <em>L'Homme et la Terre</em>, 1905 : l'histoire comme processus d'émancipation. Citation du CM : « Vue de haut, dans ses rapports avec l'Homme, la Géographie n'est autre chose que l'Histoire dans l'espace, de même que l'Histoire est la Géographie dans le temps » (p. 2, <span class="tag check">⚠</span> à confronter à l'édition).</li>
+<li><strong>Fernand Braudel</strong>, <em>La Méditerranée et le monde méditerranéen à l'époque de Philippe II</em>, 1949 : contexte de double crise (récit pour l'histoire, description pour la géographie) ; refondation <strong>géohistorique</strong> ; la Méditerranée devient « un véritable personnage ».</li>
+<li>Méthode : trois temps (longue durée, conjoncture, temps court) ; analyse <strong>multiscalaire</strong> (local, régional, global) ; <strong>économie-monde</strong> (centre et périphéries : Venise, Séville) ; possibilisme (« les hommes peuvent tout, mais dans les limites que leur fixe la géographie » : <span class="tag check">⚠</span> formule du CM, non retrouvée telle quelle ; les autres citations de Braudel dans tes notes, dont « Tout cloisonnement des sciences sociales est une régression », sont à rapporter à leur passage exact avant usage).</li>
+<li><strong>Béatrice von Hirschhausen</strong>, <em>Les Provinces du temps</em>, 2023 <span class="tag check">⚠</span> éditeur et sous-titre à vérifier : penser les différences géoculturelles contemporaines en Europe médiane ; concept de <strong>frontières fantômes</strong> (palimpseste). Exemples : élections présidentielles polonaises de 2015 (Duda à l'est, Komorowski à l'ouest, selon les anciennes frontières d'avant 1918) ; Roumanie (Transylvanie et Banat à l'ouest, Valachie à l'est, carte de 2011 des logements sans eau courante).</li>
+<li>Conclusion : une science de la relation entre les mémoires du lieu et les possibles du présent.</li>
+</ul>
+
+<h1 class="h1">Chapitre 7 · La géographie coloniale en France</h1>
+<p>Problématique : en quoi la géographie française, notamment scolaire, a-t-elle été imprégnée de représentations coloniales et racistes ? Comment ces représentations ont-elles façonné la discipline ?</p>
+<h2 class="h2">I. Une géographie née dans le contexte impérial</h2>
+<ul>
+<li>Périodes : fin XIXe-1945, naturalisation de la domination ; 1945-1980, silence ; depuis les années 1980 (Berdoulay, Soubeyran), mise en évidence des savoirs géographiques au service de la colonisation : un fait <em>structurel</em>, pas limité à une revue, un homme ou une période.</li>
+<li>La géographie classe et hiérarchise : citation du CM attribuée à Levasseur (1872) et à « Duvam (1863) » : « La géographie montre… quels emplacements sur le globe les colonies sont les plus profitables aux métropoles et celles qui sont les plus propices à la race blanche. » <span class="tag check">⚠</span> je ne peux pas identifier « Duvam » ni la source exacte : à ne citer qu'après vérification.</li>
+<li>Marie-Claire Robic (1992) : la géographie vidalienne est indissociable d'une « pensée territoriale de l'État-nation ».</li>
+<li>Déterminisme climatique et racial (Gobineau, Ratzel) : zones tropicales et paresse, climats tempérés et civilisation ; <em>Le Tour de la France par deux enfants</em> (1877) ; justification de la « mission civilisatrice ». <span class="tag check">⚠</span> les expressions « Le Noir africain, robuste mais paresseux » et « L'Indochinois, industrieux mais docile » sont données sans source dans tes notes (manuels du début du XXe) : ne pas les citer sans référence.</li>
+<li>Acteurs : Marcel Dubois (chaire de géographie coloniale à la Sorbonne, Union coloniale française), Pierre Foncin (inspecteur général, fondateur de l'Alliance française), <em>Annales de géographie</em> comme vitrine ; Maurice Zimmermann (Lyon) ; Pierre Gourou (Collège de France, <em>Les Pays tropicaux</em>, 1947).</li>
+</ul>
+<h2 class="h2">II. La géographie scolaire, fabrique de l'imaginaire colonial</h2>
+<ul>
+<li>L'école républicaine forme le bon élève français persuadé de son droit ; Vidal, <em>Tableaux géographiques de la France</em> (la citation sur les colonies, matières premières et « mission morale », est à confronter au texte <span class="tag check">⚠</span>) ; structure des leçons : physique, économie, colonies = matières premières ; cartes murales ; Benoît Falaize (2006) : « regard de domination ».</li>
+</ul>
+<h2 class="h2">III. Ruptures et décolonisation partielle</h2>
+<ul>
+<li>Après 1945 : effacement du mot « colonial » mais pas des structures de pensée (développés / sous-développés).</li>
+<li>Années 1970 : Frémont, Lacoste, Di Méo ; Yves Lacoste, <em>La géographie, ça sert d'abord à faire la guerre</em> (Maspero, 1976) : la géographie n'est jamais neutre ; fonde la géopolitique critique.</li>
+<li>Approches postcoloniales et décoloniales : Robic, Grataloup, Soubeyran, Lemaire, Renault ; objets : cartographie coloniale, migrations, racialisation des espaces urbains, mémoire coloniale (Nantes, Bordeaux, <em>Guide du Bordeaux colonial</em>).</li>
+<li>Conclusion : passer d'une géographie de la domination à une géographie de la relation.</li>
+</ul>
+
+<h1 class="h1">Chapitre 8 · Le matérialisme historique, de Marx à David Harvey</h1>
+<ul>
+<li><strong>Matérialisme historique</strong> : grille d'analyse globale fondée sur les conditions matérielles de production et de reproduction de la vie (Marx, <em>Le Capital</em>, 1867 ; Harvey, <em>Les Limites du capital</em>, 1982). Réappropriation de la pensée marxiste depuis les années 2010.</li>
+<li>Forces productives / rapports de production : quand elles évoluent plus vite que les rapports, contradiction, crise (exemple des canuts de Lyon en 1831 et 1834 et du métier Jacquard).</li>
+<li>Capital = rapport social d'accumulation (Harvey) ; valeur d'usage / valeur d'échange ; plus-value ; grève des Lip (1973).</li>
+<li>Contradictions : suraccumulation, baisse tendancielle du taux de profit, dévalorisation. Capital fixe et crédit (« système nerveux central » du capital) ; cycles (1929, 1973, bulle Internet de 2000) ; rôle de l'État (« quoi qu'il en coûte », 2020).</li>
+<li><strong>Spatial fix</strong> (« solution spatiale ») : le capital déplace ses contradictions dans l'espace (délocalisation vers l'Asie dès les années 1980) ; développement géographique inégal ; <strong>accumulation par dépossession</strong> (enclosures, privatisations).</li>
+<li><span class="tag fix">✎</span> Ton CM attribue à <em>Les Limites du capital</em> (1982) la notion de « compression espace-temps » (<em>time-space compression</em>) : à ma connaissance (hors corpus), elle vient de <em>The Condition of Postmodernity</em> (1989). Les <em>Limites</em> développent le <em>spatial fix</em>.</li>
+<li>Lien avec le cours : HG observe que Marx évacue l'espace (Lefebvre, 1972 : p. 113) et que Harvey introduit une dimension spatiale sans que la grande théorie en rende compte (p. 113).</li>
+</ul>
+
+<h1 class="h1">Chapitre 9 · Géographie et culture</h1>
+<h2 class="h2">I. Formalisation de la « géographie culturelle »</h2>
+<ul>
+<li>Trois sens de « culture » (Raymond Williams) : anthropologique, civilisationnel, sociologique.</li>
+<li><strong>École allemande</strong> : Ratzel emploie « géographie culturelle » dès 1876 ; <em>Kulturvölker</em> / <em>Naturvölker</em>. <strong>École française</strong> : le genre de vie de Vidal ; possibilisme. <strong>Berkeley</strong> : Carl Sauer, « The Morphology of Landscape » (1925), le paysage lit la culture.</li>
+<li>Jusqu'aux années 1960 la culture est surtout matérielle ; la Nouvelle géographie l'écarte comme un biais ; années 1970 : Dardel (1952), Frémont, <em>La Région, espace vécu</em> (1976) ; géographie radicale (Bunge, <em>Fitzgerald</em>, 1971 ; Harvey).</li>
+<li>Années 1980 : <em>New Cultural Geography</em> (Cosgrove, <em>Social Formation and Symbolic Landscape</em>, 1984 ; <span class="tag fix">✎</span> publié à Londres chez Croom Helm en 1984, réédité à Madison par l'Université du Wisconsin en 1998, hors corpus <span class="tag check">⚠</span>) ; en France, Bonnemaison (<span class="tag fix">✎</span> 1940-<strong>1997</strong>, et non 1947) et Claval (revue <em>Géographie et cultures</em>, 1992) ; <em>cultural turn</em>.</li>
+</ul>
+<h2 class="h2">II. Des géographies culturelles</h2>
+<ul>
+<li>Boris Grésillon (2008) : « géographie du fait culturel » (géographie de la culture) / « géographie intrinsèquement culturelle » (géographie par la culture). Exemples : la friche de la Belle de Mai à Marseille (Grésillon, 2011) ; le Mont-Blanc comme « haut lieu » (Debarbieux, 1993) ; Gauguin et Tahiti (Staszak, 2003).</li>
+<li>Géographie de la culture par la culture : peinture (Staszak), art contemporain (Volvey), littérature (Tissier), cinéma (Pleven), musique (Guillard).</li>
+</ul>
+<h2 class="h2">III. Un vecteur de renouveau : le tournant émotionnel</h2>
+<ul>
+<li>Émotions dans l'espace : peur, nostalgie, plaisir ; Yi-Fu Tuan, <em>Landscapes of Fear</em> (1979 ; <span class="tag check">⚠</span> à ma connaissance publié par Pantheon et Blackwell, non par University of Minnesota Press comme dans tes notes) : forêt = peur en Occident (<em>Le Petit Chaperon rouge</em>), sacré au Japon.</li>
+<li>Méthodes alternatives : pratiques corporelles, parcours augmentés (yeux bandés), restitutions graphiques, collaborations avec des artistes.</li>
+</ul>
+
+<h1 class="h1">Chapitre 10 · La géographie, une science politique ?</h1>
+<h2 class="h2">I. Une discipline politique dès l'origine</h2>
+<ul>
+<li><strong>La « bataille des Annales » de 1895</strong> : Marcel Dubois est évincé de la direction ; raison politique (Dubois antidreyfusard, Vidal dreyfusard) et scientifique (géographie coloniale militante contre géographie « désintéressée »). Question : une science engagée est-elle libre ou militante ?</li>
+</ul>
+<h2 class="h2">II. De la géographie coloniale à la géopolitique</h2>
+<ul>
+<li>Soutien général à la colonisation sous la IIIe République ; Reclus dénonce la violence mais pas la colonisation ; Dubois (<em>Systèmes coloniaux et peuples colonisateurs</em>, 1895 ; <em>Les colonies françaises</em>, 1902) ; Zimmermann ; Livingstone, <em>The Geographical Tradition</em> (1992) : la géographie comme « science de l'impérialisme par excellence » (formule du CM <span class="tag check">⚠</span>).</li>
+<li>Complexité : Augustin Bernard (Alger) critique le « rouleau compresseur » colonial ; Vidal compare sur un pied d'égalité modes de vie européens et non européens.</li>
+<li>Géographes anticolonialistes : Reclus ; Jean Dresch (Maroc, années 1930).</li>
+<li><strong>Yves Lacoste</strong> (né en 1929) : articles du <em>Monde</em> de 1972 (digues du fleuve Rouge), <em>La géographie, ça sert d'abord à faire la guerre</em> (1976), revue <em>Hérodote</em> : raisonnement géopolitique et multiscalaire ; origines du terme : Ratzel, <em>Politische Geographie</em> (1897) ; « espace vital » (1901), discrédité après 1945.</li>
+</ul>
+<h2 class="h2">III. Experts, appliquée, active, radicale</h2>
+<ul>
+<li>Experts : Reclus (1882-1883), Vidal (frontière franco-brésilienne en Guyane 1898-1900 ; 17 régions de 1910), comités sur les frontières européennes (1917-1918). Question : peut-on être expert et neutre ?</li>
+<li>Géographie appliquée (Dubois ; Phlipponneau, <em>Géographie et action</em>, 1960 ; Monbeig, 1961) ; géographie active (George, Guglielmo, Kayser, Lacoste, <em>La géographie active</em>, 1964).</li>
+<li>Géographie radicale : années 1970 (États-Unis, marxisme, droits civiques, Vietnam) ; Bunge, Harvey, Peet ; revue <em>Antipode</em> (1969). En France : Henri Lefebvre, <em>Le Droit à la ville</em> (1968) ; Bernard Bret (injustices spatiales, géoéthique).</li>
+</ul>
+<h2 class="h2">IV. La géographie scolaire est-elle neutre ?</h2>
+<ul><li>Manuels porteurs de valeurs (<em>Le Tour de la France par deux enfants</em>, 1877) ; Cortambert (1854) : la géographie comme guide des relations entre peuples et des stratégies nationales.</li></ul>
+
+<h1 class="h1">Chapitre 11 · Décrire ou construire le monde ?</h1>
+<p>Comment s'effectue la relation entre le géographe et son objet : accès direct à la réalité ou construction mentale ?</p>
+<div class="tbl"><table><thead><tr><th>Posture</th><th>Époque (CM)</th><th>Idée</th><th>Exemple</th></tr></thead><tbody>
+<tr><td>Réaliste</td><td>XIVe – XVIe s.</td><td>Le monde existe en dehors de nous ; le discours scientifique l'enregistre</td><td>Je vois le soleil tourner autour de moi</td></tr>
+<tr><td>Constructiviste</td><td>XVIe – XXe s.</td><td>Le scientifique construit le réel ; on distingue réalité et discours sur la réalité</td><td>Historiographie de la Révolution (voir note)</td></tr>
+<tr><td>Relativiste (postmoderne)</td><td>Depuis les années 1970</td><td>La science est un discours relatif, situé, discutable ; ce qui vaut est ce qui fait consensus</td><td>Récits à la première personne</td></tr>
+</tbody></table></div>
+<aside class="note"><span class="tag fix">✎</span> Ton exemple historiographique (Soboul = révolution bourgeoise ; Furet = révolution « populaire ») est à corriger. Soboul défend une lecture marxiste (révolution bourgeoise, avec un mouvement populaire). Furet défend une lecture politique et critique de la « vulgate » marxiste, et non l'idée d'une révolution populaire (hors corpus : à confirmer avec ton enseignant).</aside>
+<ul>
+<li><strong>Posture réaliste en géographie française</strong> : Raoul Blanchard (thèse sur la Flandre, 1906 ; Alpes) : inventaires, découpages, <strong>épuiser le réel</strong> ; mais valeurs implicites (« la vraie montagne »). Olivier Orain : « réalisme absolu », absence de notes, effacement du point de vue ; <em>De plain-pied dans le monde. Écriture et réalisme dans la géographie française au XXe siècle</em>, Paris, L'Harmattan, 2009 <span class="tag fix">✎</span> (ton CM écrit « Du plain-pied »).</li>
+<li>Limites : le réel est inépuisable (Georges Perec, <em>Tentative d'épuisement d'un lieu parisien</em>, 1975 ; Ivan Jablonka, <em>Histoire des grands-parents que je n'ai pas eus</em> : <span class="tag fix">✎</span> à ma connaissance 2012, non 2013, <span class="tag check">⚠</span>).</li>
+<li><strong>Constructivisme</strong> : Éric Dardel, <em>L'Homme et la Terre</em> (1952), complicité dans l'être (citation du CM <span class="tag check">⚠</span>) ; lecture subjective du monde ; redécouvert par Jean-Marc Besse. À rapprocher de HG, p. 106.</li>
+<li><strong>Relativisme et positionnalité</strong> : Claire Brisson, « Observer sur les plages de Rio de Janeiro », <em>Espaces et sociétés</em> ; thèse de 2019, <em>La couleur de la plage</em> : le savoir dépend du statut du chercheur, de sa situation, de son rapport au terrain.</li>
+</ul>
+
+<h1 class="h1">Chapitre 12 · La géographie postmoderne</h1>
+<p>Question : la postmodernité est-elle une rupture avec la science moderne, ou seulement l'inadéquation de ses concepts ? Faut-il une épistémologie postmoderne ?</p>
+<h2 class="h2">I. Qu'est-ce que la postmodernité ?</h2>
+<ul>
+<li>Concept philosophique de la fin du XXe siècle, né du désenchantement après la décolonisation, de la désagrégation des repères et de l'échec des idéologies révolutionnaires. Caractères : place de l'« ici et maintenant », fragmentation des identités, gestion qui remplace le politique, relativisation généralisée.</li>
+<li>Jean-François Lyotard, <em>La Condition postmoderne</em> (Minuit, 1979) : plutôt une « anamnèse » qu'une époque après la modernité (formule du CM <span class="tag check">⚠</span>).</li>
+<li>HG : la postmodernité est la situation qui résulte de la remise en cause des philosophies du progrès apparues au XVIIe-XVIIIe s., donc de la fin du « privilège conféré au temps » (HG, p. 122).</li>
+</ul>
+<h2 class="h2">II. Pourquoi plus de postmodernisme aux États-Unis qu'en France ?</h2>
+<ul>
+<li>Volonté de dépassement de l'Europe ; société moins hiérarchisée ; campus interdisciplinaires. Guerre du Vietnam, ouverture de l'université, discrimination positive : entrée de groupes minoritaires critiques ; contestation des savoirs ; <em>political correctness</em>.</li>
+<li>En France : méfiance et possible effet de retard, avec un développement plus visible depuis les années 2010.</li>
+</ul>
+<h2 class="h2">III. Ce que le postmodernisme apporte à la géographie</h2>
+<ul>
+<li>Sujets longtemps tabous (minorités, genre, homosexualité, handicap) ; critique de la modernité ; relativisme, <strong>positionnalité</strong>, égo-géographie.</li>
+<li>Apports : critique généralisée (domination coloniale et masculine du savoir) ; nouveaux régimes de visibilité ; lien renforcé au terrain et à la société ; <strong>réflexivité</strong> (« devoir de réflexivité », Béatrice Collignon <span class="tag check">⚠</span>) ; écriture renouvelée ; pluridisciplinarité et références anglophones. Auteurs : Edward Soja, Sophie Louargant.</li>
+<li>HG : la géographie devient « plus modeste » (HG, p. 123), attentive aux monographies, à l'enfance, aux femmes, à la vieillesse ; la démarche humaniste précède l'explication (p. 124).</li>
+<li>Hypermodernité : Gilles Lipovetsky, <em>Les Temps hypermodernes</em> (Grasset, 2004, avec Sébastien Charles) <span class="tag check">⚠</span>.</li>
+</ul>
+
+<h1 class="h1">Annexe · Portraits des acteurs</h1>
+<p><em>Dates et rôles d'après HG (sauf mention).</em></p>
+<ul>
+<li><strong>Ératosthène</strong> (v. 275-194 av. J.-C.) : directeur de la bibliothèque d'Alexandrie, mesure de la circonférence, emploi du mot « géographie » (HG, p. 12-13).</li>
+<li><strong>Strabon</strong> (63 av. J.-C.-v. 21-25 apr.) : orientation régionale (HG, p. 14). <strong>Ptolémée</strong> (v. 100-v. 180) : inventaire de 8 000 lieux (p. 15-16).</li>
+<li><strong>Varenius</strong> (1621 ou 1622-1650) : géographie générale / particulière (HG, p. 31).</li>
+<li><strong>Kant</strong> (1724-1804) : cours de géographie, espace et temps (HG, p. 44-46). <strong>Herder</strong> (1744-1803) : peuple et milieu (p. 46-47).</li>
+<li><strong>Alexandre de Humboldt</strong> (1769-1859) : milieu, <em>Cosmos</em>. <strong>Carl Ritter</strong> (1779-1859) : géographie comparée, ambition explicative (HG, p. 51-58).</li>
+<li><strong>Friedrich Ratzel</strong> (1844-1904) : <em>Anthropogeographie</em>, géopolitique (HG, p. 63-66).</li>
+<li><strong>Élisée Reclus</strong> (1830-1905), <strong>Paul Vidal de La Blache</strong> (1845-1918), <strong>Lucien Febvre</strong> (1876-1956) : école française (HG, p. 76-85).</li>
+<li><strong>Carl Sauer</strong> (1890-1975) : paysage culturel (HG, p. 86-87). <strong>Richard Hartshorne</strong> (1899-1992), <strong>W. M. Davis</strong> (1850-1934).</li>
+<li><strong>Walter Christaller</strong> (1893-1969) : lieux centraux, 1933 (HG, p. 89).</li>
+<li><strong>Fred Schaefer</strong> (1904-1953), <strong>William Bunge</strong> (né en 1928), <strong>David Harvey</strong> (né en 1935), <strong>Torsten Hägerstrand</strong> (né en 1916) : Nouvelle géographie et suites (HG, p. 99-100, 104, 113).</li>
+<li><strong>Éric Dardel</strong> (1900-1968), <strong>Yi-Fu Tuan</strong> (né en 1930), <strong>Armand Frémont</strong> (né en 1933) : géographie humaniste (HG, p. 106-107).</li>
+<li><strong>Yves Lacoste</strong> (né en 1929), <strong>Jean Gottmann</strong> (1915-1994) : géopolitique (HG, p. 121).</li>
+<li>Hors HG : Doreen Massey (1944-2016, géographe britannique, espace et inégalités ; cahier TC), Yvette Veyret (risques, développement durable ; cahier TC), Braudel, Latour, Descola (chap. 6 et 4).</li>
+</ul>
+
+<h1 class="h1">Annexe · Lexique</h1>
+<ul>
+<li><strong>Œkoumène</strong> : terre habitée (HG, p. 11). <strong>Chorographie</strong> : portrait des contrées. <strong>Topographie</strong> : conditions locales de relief.</li>
+<li><strong>Genre de vie</strong> : notion vidalienne synthétique (objets et pratiques d'un groupe vis-à-vis d'un milieu). <strong>Possibilisme</strong> / <strong>déterminisme</strong>.</li>
+<li><strong>Idiographique / nomothétique</strong> : décrire l'unique / dégager des régularités (HG, p. 45-46).</li>
+<li><strong>Exceptionnalisme</strong> : thèse selon laquelle la géographie, étude de l'unique, échappe aux règles de la démarche scientifique (Schaefer, 1953).</li>
+<li><strong>Réflexivité / positionnalité</strong> : voir chap. 2. <strong>Spatial fix</strong> : voir chap. 8.</li>
+<li><strong>Géographicité</strong> : manière dont l'homme inscrit son existence sur la Terre (Dardel, HG, p. 106).</li>
+</ul>
+
+<h1 class="h1">Annexe · Points à vérifier</h1>
+<p>Récapitulatif des corrections et des doutes (voir repères <span class="tag fix">✎</span> et <span class="tag check">⚠</span> dans le texte).</p>
+<div class="tbl"><table><thead><tr><th>Où</th><th>Point</th><th>Remarque</th></tr></thead><tbody>
+<tr><td>Ch. 1</td><td>Rapport Levasseur : 1871 / 1872-73</td><td>HG p. 61 : rapport 1872, décisions 1873</td></tr>
+<tr><td>Ch. 1</td><td><em>Annales de géographie</em> 1891 / 1892</td><td>HG p. 82 : 1892</td></tr>
+<tr><td>Ch. 1</td><td><em>La pensée géographique</em> : 1977 / 1972</td><td>HG, bibliographie p. 127 : 1972</td></tr>
+<tr><td>Ch. 2</td><td>« Systémogenèse », « systémolyse »</td><td>Pas dans le vocabulaire de Kuhn</td></tr>
+<tr><td>Ch. 2</td><td>Citation attribuée à Foucault</td><td>Source non identifiée</td></tr>
+<tr><td>Ch. 2</td><td>Institut d'urbanisme 1824</td><td>1924 (connaissance générale)</td></tr>
+<tr><td>Ch. 2</td><td>Sotchava 1960, « Kaneslik »</td><td>Kalesnik ? Date du terme géosystème à confirmer</td></tr>
+<tr><td>Ch. 2</td><td>Six formes d'injustice (Harvey), Soja</td><td>Références à retrouver</td></tr>
+<tr><td>Ch. 3</td><td>Ératosthène : siècle, mesure</td><td>IIIe s. ; écart lié au stade</td></tr>
+<tr><td>Ch. 3</td><td>Behaim p. 28</td><td>p. 27-28 d'après la pagination</td></tr>
+<tr><td>Ch. 3</td><td>Harvey, <em>Social Justice and the City</em> 1972 / 1973</td><td>HG p. 104 : 1972</td></tr>
+<tr><td>Ch. 4</td><td>Ampère et la géographie</td><td>CM : absente ; cahier TC : classée dans les deux</td></tr>
+<tr><td>Ch. 4</td><td>Bertrand, GTP</td><td>Géosystème – Territoire – Paysage</td></tr>
+<tr><td>Ch. 5</td><td>Étymologie d'« environnement »</td><td>Ancien français <em>viron</em>, <em>virer</em> (et non <em>virgo</em>)</td></tr>
+<tr><td>Ch. 7</td><td>Citations « Duvam », manuels</td><td>Sources non identifiées</td></tr>
+<tr><td>Ch. 8</td><td>Compression espace-temps</td><td>Harvey 1989, <em>The Condition of Postmodernity</em></td></tr>
+<tr><td>Ch. 9</td><td>Bonnemaison, Cosgrove, Tuan</td><td>1997 ; Croom Helm 1984 ; Pantheon / Blackwell 1979</td></tr>
+<tr><td>Ch. 11</td><td>Soboul / Furet</td><td>Lecture à corriger</td></tr>
+<tr><td>Ch. 11</td><td>Orain (titre), Jablonka (date)</td><td><em>De plain-pied…</em> ; 2012 ?</td></tr>
+</tbody></table></div>
+
+<h1 class="h1">Annexe · Bibliographie</h1>
+<ul>
+<li>Paul CLAVAL, <em>Histoire de la géographie</em>, Paris, Presses universitaires de France, coll. « Que sais-je ? », 1995.</li>
+<li>Paul CLAVAL, <em>Épistémologie de la géographie</em>, 2007 ; <em>Histoire de la géographie française</em>, PUF, « Que sais-je ? », 2011 (références de tes notes).</li>
+<li>Pascal CLERC (dir.), <em>Géographies. Épistémologie et histoire des savoirs sur l'espace</em>, 2019.</li>
+<li>Thomas KUHN, <em>La Structure des révolutions scientifiques</em> (1962) ; Michel FOUCAULT, <em>Les Mots et les choses</em>, Gallimard, 1966.</li>
+<li>Bruno LATOUR, <em>Nous n'avons jamais été modernes</em>, La Découverte, 1991 ; Philippe DESCOLA, <em>Par-delà nature et culture</em>, Gallimard, 2005.</li>
+<li>Rémi KNAFOU (dir.), <em>L'État de la géographie. Autopsie d'une science</em>, Belin, 1997.</li>
+<li>Yves LACOSTE, <em>La géographie, ça sert d'abord à faire la guerre</em>, Maspero, 1976.</li>
+<li>Olivier ORAIN, <em>De plain-pied dans le monde</em>, L'Harmattan, 2009.</li>
+<li>David LIVINGSTONE, <em>The Geographical Tradition</em>, Oxford, Blackwell, 1992.</li>
+</ul>
+
+</div></main></div></div>
+<button class="totop" id="totop" type="button" hidden>↑ Haut</button>
+
+<script>
+(function(){
+  var drawer=document.getElementById('drawer');
+  var main=document.getElementById('top');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* surligne automatiquement les dates dans le texte courant */
+  var months='janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre';
+  var re=new RegExp('((?:\\d{1,2}(?:er)?\\s)?(?:'+months+')\\s)?(\\b(?:1[0-9]{3}|20[0-3][0-9])\\b(?:\\s?[–-]\\s?(?:1[0-9]{3}|20[0-3][0-9]|\\d{2})\\b)?)','g');
+  var walker=document.createTreeWalker(document.querySelector('.doc'),NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+    var p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
+    if(p.closest('h1,h2,h3,h4,.tag,.date,th,script,style,.cover,.sommaire')) return NodeFilter.FILTER_REJECT;
+    return /\d{4}/.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+  var nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(n){
+    var t=n.nodeValue, last=0, m, frag=document.createDocumentFragment(), hit=false;
+    re.lastIndex=0;
+    while((m=re.exec(t))){
+      hit=true;
+      if(m.index>last) frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+      var s=document.createElement('span'); s.className='date'; s.textContent=m[0]; frag.appendChild(s);
+      last=m.index+m[0].length;
+    }
+    if(hit){ if(last<t.length) frag.appendChild(document.createTextNode(t.slice(last))); n.parentNode.replaceChild(frag,n); }
+  });
+
+  /* sommaire */
+  var heads=[].slice.call(document.querySelectorAll('h1.h1,h2.h2,h3.h3,h4.h4'));
+  var used={};
+  function slug(t){
+    var s=t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'s';
+    var b=s,i=2; while(used[s]){s=b+'-'+i++;} used[s]=1; return s;
+  }
+  heads.forEach(function(h){ h.id=slug(h.textContent.replace(/\s+/g,' ').trim()); });
+  function build(maxLvl,withTog){
+    var root=document.createElement('ul'); var stack=[{lvl:0,li:null,ul:root}];
+    heads.forEach(function(h){
+      var lvl=+h.tagName.charAt(1); if(lvl>maxLvl) return;
+      while(stack.length>1&&stack[stack.length-1].lvl>=lvl) stack.pop();
+      var p=stack[stack.length-1];
+      if(!p.ul){
+        p.ul=document.createElement('ul'); p.li.appendChild(p.ul); p.li.classList.add('hk');
+        if(withTog){var b=document.createElement('button'); b.className='tog'; b.type='button'; b.setAttribute('aria-label','Déplier'); b.setAttribute('aria-expanded','false'); var r=p.li.firstChild; r.insertBefore(b,r.firstChild);}
+      }
+      var li=document.createElement('li'); li.className='l'+lvl;
+      var row=document.createElement('div'); row.className='row';
+      var a=document.createElement('a'); a.href='#'+h.id; a.setAttribute('data-id',h.id); a.textContent=h.textContent.replace(/\s+/g,' ').trim();
+      row.appendChild(a); li.appendChild(row); p.ul.appendChild(li); stack.push({lvl:lvl,li:li,ul:null});
+    });
+    return root;
+  }
+  document.getElementById('tocSide').appendChild(build(4,true));
+  document.getElementById('tocDrawer').appendChild(build(4,true));
+  document.getElementById('tocMain').appendChild(build(3,false));
+
+  function go(id){
+    var el=document.getElementById(id); if(!el) return;
+    var y=el.getBoundingClientRect().top-main.getBoundingClientRect().top+main.scrollTop-12;
+    main.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a){ e.preventDefault(); drawer.classList.remove('on'); go(a.getAttribute('href').slice(1)); return; }
+    var t=e.target.closest&&e.target.closest('.tog');
+    if(t){ var li=t.closest('li'); var o=li.classList.toggle('open'); t.setAttribute('aria-expanded',o?'true':'false'); }
+  });
+  document.getElementById('openToc').addEventListener('click',function(){drawer.classList.add('on')});
+  document.getElementById('closeToc').addEventListener('click',function(){drawer.classList.remove('on')});
+  drawer.addEventListener('click',function(e){if(e.target===drawer) drawer.classList.remove('on')});
+
+  var links={};
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){ var id=a.getAttribute('data-id'); (links[id]=links[id]||[]).push(a); });
+  var cur=document.getElementById('curSec'), totop=document.getElementById('totop'), lastId=null;
+  function clearActive(){[].forEach.call(document.querySelectorAll('.toc a.active'),function(a){a.classList.remove('active')})}
+  function setActive(id){
+    if(id===lastId) return; lastId=id; clearActive();
+    (links[id]||[]).forEach(function(a){
+      a.classList.add('active');
+      var li=a.closest('li');
+      while(li){
+        if(li.classList.contains('hk')){li.classList.add('open'); var b=li.querySelector(':scope>.row>.tog'); if(b) b.setAttribute('aria-expanded','true');}
+        li=li.parentElement&&li.parentElement.closest('li');
+      }
+    });
+    var h=document.getElementById(id); cur.textContent=h?h.textContent.replace(/\s+/g,' ').trim():'';
+    var box=document.querySelector('.side'), act=box&&box.querySelector('a.active');
+    if(act&&box.offsetParent!==null){
+      var r=act.getBoundingClientRect(), br=box.getBoundingClientRect();
+      if(r.top<br.top+40||r.bottom>br.bottom-40) box.scrollTop+=r.top-br.top-br.height/3;
+    }
+  }
+  function onScroll(){
+    totop.hidden=main.scrollTop<600;
+    var mt=main.getBoundingClientRect().top, best=null;
+    for(var i=0;i<heads.length;i++){ if(heads[i].getBoundingClientRect().top-mt<=90) best=heads[i]; else break; }
+    if(best) setActive(best.id); else { lastId=null; cur.textContent=''; clearActive(); }
+  }
+  var tick=false;
+  main.addEventListener('scroll',function(){ if(!tick){tick=true;requestAnimationFrame(function(){tick=false;onScroll()})} },{passive:true});
+  totop.addEventListener('click',function(){main.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  onScroll();
+})();
+</script>
+</body></html>

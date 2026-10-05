@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cours Ludwig Tieck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<style>
+:root{
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#1d2431; --muted:#5d6676; --rule:#d9dde6;
+  --title:#17315c; --band:#17315c; --band-ink:#f3f6fb; --h3:#0b6b73; --h4:#3a4a68;
+  --quote:#9e2230; --quote-bg:#fbeef0; --quote-rule:#c9414f;
+  --date-bg:#ffe28a; --date-ink:#463300;
+  --note-bg:#eef1f7;
+  --f-head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+    --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+    --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+    --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+  --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+  --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+  --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;overflow:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--h3);outline-offset:2px}
+.app{height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.shell{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr)}
+@media (min-width:1000px){.shell{grid-template-columns:20rem minmax(0,1fr)}}
+
+.side{display:none}
+@media (min-width:1000px){
+  .side{display:block;height:100%;overflow-y:auto;padding:1.5rem .75rem 1.5rem 24px;border-right:1px solid var(--rule);font-family:var(--f-head);font-size:1.02rem;scrollbar-width:thin}
+}
+.brand{font-family:var(--f-head);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--title);font-size:.95rem;margin-bottom:.6rem}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc ul ul{padding-left:.9rem;border-left:1px solid var(--rule);margin-left:.45rem;display:none}
+.toc li.open>ul{display:block}
+.toc .row{display:flex;align-items:flex-start;gap:.15rem}
+.toc a{text-decoration:none;color:var(--ink);padding:.18rem .4rem;border-radius:4px;line-height:1.3;display:block;flex:1;min-width:0}
+.toc a:hover{background:var(--note-bg)}
+.toc a.active{background:var(--band);color:var(--band-ink)}
+.toc li.l1>.row>a{font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--title);margin-top:.5rem}
+.toc li.l1>.row>a.active{color:var(--band-ink)}
+.toc li.l2>.row>a{font-weight:600}
+.tog{all:unset;cursor:pointer;width:1.3rem;height:1.5rem;flex:none;display:grid;place-items:center;color:var(--muted)}
+.tog::before{content:"";width:.42rem;height:.42rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.toc li.open>.row>.tog::before{transform:rotate(45deg)}
+.toc li:not(.hk)>.row{padding-left:1.3rem}
+
+.bar{flex:none;z-index:20;display:flex;gap:.7rem;align-items:center;background:var(--bg);border-bottom:1px solid var(--rule);padding:.55rem 16px;font-family:var(--f-head)}
+.bar button{all:unset;cursor:pointer;background:var(--band);color:var(--band-ink);padding:.3rem .8rem;border-radius:5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.bar .cur{color:var(--muted);font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+@media (min-width:1000px){.bar{display:none}}
+.drawer{position:fixed;inset:0;z-index:30;display:none;background:rgba(10,14,22,.55)}
+.drawer.on{display:block}
+.drawer .panel{position:absolute;inset:0 auto 0 0;width:min(88vw,24rem);background:var(--surface);overflow-y:auto;padding:1rem 1rem calc(1rem + env(safe-area-inset-bottom,0px));padding-top:calc(1rem + env(safe-area-inset-top,0px));font-family:var(--f-head);font-size:1.08rem}
+.drawer .close{all:unset;cursor:pointer;float:right;font-family:var(--f-head);font-weight:600;color:var(--muted);padding:.2rem .5rem}
+
+main{min-width:0;height:100%;overflow-y:auto;overscroll-behavior:contain;padding-block:1.5rem 5rem;padding-inline:16px}
+.doc{max-width:60rem;margin-inline:auto}
+@media (min-width:1000px){main{padding-inline:40px}}
+.cover{background:var(--band);color:var(--band-ink);padding:clamp(1.6rem,5vw,3.2rem);border-radius:6px;margin-bottom:2.2rem}
+.cover .kick{font-family:var(--f-head);letter-spacing:.14em;text-transform:uppercase;font-size:.95rem;opacity:.8}
+.cover h1{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:clamp(2.6rem,9vw,5rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin:.6rem 0 .8rem;text-wrap:balance}
+.cover .sub{font-family:var(--f-head);font-size:clamp(1.3rem,3.4vw,1.9rem);font-weight:500;line-height:1.2;text-wrap:balance}
+.cover .span{display:inline-block;margin-top:1.2rem;font-family:var(--f-head);font-weight:700;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:.04em;background:var(--date-bg);color:var(--date-ink);padding:.05em .45em;border-radius:3px}
+
+.sommaire{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1.2rem 1.4rem 1.4rem;margin-bottom:2.2rem}
+.sommaire h2.stitle{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:1.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--title);margin-bottom:.2rem}
+.sommaire .hint{color:var(--muted);font-size:.9rem;margin:0 0 .8rem}
+.sommaire ul{list-style:none;margin:0;padding:0}
+.sommaire ul ul{padding-left:1.1rem}
+.sommaire li{margin:0}
+.sommaire a{display:block;text-decoration:none;padding:.12rem 0;line-height:1.35;font-size:.98rem;text-wrap:pretty}
+.sommaire a:hover{color:var(--quote);text-decoration:underline}
+.sommaire li.l1>.row>a{font-family:var(--f-head);font-weight:700;font-size:1.25rem;letter-spacing:.04em;text-transform:uppercase;color:var(--title);margin-top:.9rem;border-top:1px solid var(--rule);padding-top:.5rem}
+.sommaire>ul>li:first-child>.row>a{border-top:0;margin-top:.2rem}
+.sommaire li.l2>.row>a{font-family:var(--f-head);font-weight:600;font-size:1.1rem;margin-top:.15rem}
+.sommaire li.l3>.row>a{color:var(--h3);font-size:.95rem}
+
+h1.h1,h2.h2,h3.h3{scroll-margin-top:4.2rem;font-family:var(--f-head);text-wrap:balance;line-height:1.12}
+@media (min-width:1000px){h1.h1,h2.h2,h3.h3{scroll-margin-top:1.5rem}}
+h1.h1{background:var(--band);color:var(--band-ink);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(1.7rem,4.6vw,2.5rem);padding:.55em .7em;border-radius:5px;margin:3.4rem 0 1.2rem}
+h2.h2{color:var(--title);font-weight:700;font-size:clamp(1.55rem,3.6vw,2.05rem);margin:2.8rem 0 .9rem;padding-bottom:.25em;border-bottom:3px solid var(--title)}
+h3.h3{color:var(--h3);font-weight:700;font-size:clamp(1.3rem,3vw,1.6rem);margin:2.1rem 0 .6rem}
+h3.h3::before{content:"";display:inline-block;width:.5em;height:.5em;background:var(--quote-rule);margin-right:.55em;border-radius:1px;vertical-align:.05em}
+main p,main li{max-width:68ch;text-wrap:pretty}
+main p{margin:.75rem 0}
+main ul{margin:.6rem 0 1rem;padding-left:1.25rem}
+main li{margin:.4rem 0}
+main li::marker{color:var(--quote-rule)}
+strong{font-weight:600}
+.date{background:var(--date-bg);color:var(--date-ink);padding:0 .28em;border-radius:3px;font-weight:600;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.iq{color:var(--quote)}
+aside.note{max-width:68ch;margin:1rem 0;background:var(--note-bg);border-radius:6px;padding:.7rem 1rem;color:var(--muted);font-style:italic;font-size:.98rem}
+
+.tbl{overflow-x:auto;margin:1.2rem 0;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+th{font-family:var(--f-head);text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;text-align:left;background:var(--band);color:var(--band-ink);padding:.55rem .8rem;white-space:nowrap}
+td{padding:.5rem .8rem;border-top:1px solid var(--rule);vertical-align:top;min-width:7rem}
+td:first-child{font-weight:600;color:var(--title);white-space:nowrap}
+tbody tr:nth-child(even){background:var(--note-bg)}
+
+.totop{all:unset;cursor:pointer;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;background:var(--band);color:var(--band-ink);font-family:var(--f-head);font-weight:700;padding:.45rem .8rem;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25);font-size:.95rem;letter-spacing:.04em}
+.totop[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="bar">
+  <button type="button" id="openToc" aria-haspopup="dialog">☰ Sommaire</button>
+  <span class="cur" id="curSec"></span>
+</div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Sommaire">
+  <div class="panel"><button class="close" type="button" id="closeToc">Fermer ✕</button><div class="brand">Sommaire</div><nav class="toc" id="tocDrawer"></nav></div>
+</div>
+
+<div class="shell">
+  <aside class="side" aria-label="Sommaire">
+    <div class="brand">Sommaire</div>
+    <nav class="toc" id="tocSide"></nav>
+  </aside>
+  <main id="top"><div class="doc">
+    <header class="cover">
+      <div class="kick">Kurs auf Deutsch · Cours en français · Lexique français-allemand</div>
+      <h1>Ludwig Tieck</h1>
+      <div class="sub">Der blonde Eckbert</div>
+      <div class="span">1773 – 1853</div>
+    </header>
+
+    <nav class="sommaire" aria-label="Sommaire détaillé">
+      <h2 class="stitle">Sommaire détaillé</h2>
+      <p class="hint">Touche un titre pour aller directement à la section.</p>
+      <div id="tocMain"></div>
+    </nav>
+<!--COURSE-->
+<h1 class="h1">Section 1 · Kurs auf Deutsch</h1>
+
+<h2 class="h2">1. Einleitung</h2>
+<p>Der vorliegende Kurs zeichnet ein Porträt des deutschen Dichters, Schriftstellers und Übersetzers Ludwig Tieck (<span class="date">1773–1853</span>) und situiert sein Werk – exemplarisch vertreten durch das Märchen Der blonde Eckbert (<span class="date">1797</span>) – im literarhistorischen Gefüge seiner Zeit: von der Frühromantik des Jenaer Kreises über die Weimarer Klassik bis zur Hoch- und Spätromantik sowie zur Tradition des Märchens.</p>
+
+<h2 class="h2">2. Ludwig Tieck: Leben und Werk (1773–1853)</h2>
+<p>Ludwig Tieck wird <span class="date">1773</span> in Berlin geboren, das damals zum Königreich Preußen gehört, und stirbt <span class="date">1853</span> ebendort. Er gilt als deutscher Dichter, Schriftsteller und Übersetzer der Romantik; insbesondere seine Übersetzungen von Shakespeare und Cervantes tragen zur Rezeption dieser Autoren im deutschen Sprachraum bei.</p>
+<p>Tieck studiert Theologie, Geschichte und Philologie an den Universitäten Halle (damals Preußen), Göttingen (damals ein norddeutsches Kurfürstentum) und Erlangen (damals Fürstentum Bayreuth). Seit <span class="date">1794</span> lebt er als freier Schriftsteller. <span class="date">1797</span> veröffentlicht er Der blonde Eckbert.</p>
+<p>Sein Roman Franz Sternbalds Wanderungen (<span class="date">1798</span>) zählt zu den Künstlerromanen und behandelt die Figur eines (fiktiven) Dürer-Schülers. <span class="date">1802</span> erscheint das Märchen Der Runenberg. Im weiteren Verlauf seines Schaffens wendet sich Tieck zunehmend der Novelle und dem historischen Roman zu.</p>
+
+<h2 class="h2">3. Der Jenaer Kreis und die Frühromantik (1799–1800)</h2>
+<h3 class="h3">3.1 Die Freundschaft mit Wackenroder</h3>
+<p>Tiecks Freund Wilhelm Heinrich Wackenroder (<span class="date">1773–1798</span>, Berlin) verfasst <span class="date">1796</span> die Herzensergießungen eines kunstliebenden Klosterbruders, die als Manifest der Frühromantik gegen die Aufklärung gelesen werden und sich insbesondere der Malerei widmen.</p>
+<p>Zentral ist die Verbindung von Kunst und Religion, formuliert in dem programmatischen Satz: <span class="iq">„Ich vergleiche den Genuss der edleren Kunstwerke dem Gebet.“</span> Wackenroders Vorliebe gilt dem Mittelalter, exemplarisch verkörpert durch die Stadt Nürnberg.</p>
+<h3 class="h3">3.2 Albrecht Dürers „Melancholie“ (1514)</h3>
+<p>Albrecht Dürer (<span class="date">1471–1528</span>) wirkt in der damals freien Reichsstadt Nürnberg. Sein Kupferstich Melencolia I (<span class="date">1514</span>), im Kontext der Nürnberger Kunstsammlung überliefert, wird von der Frühromantik als Sinnbild einer melancholisch-kontemplativen Kunstauffassung rezipiert.</p>
+<h3 class="h3">3.3 Der Jenaer Kreis: Autorinnen, Autoren und Denker</h3>
+<p>Der Jenaer Kreis (<span class="date">1799–1800</span>) markiert das Zentrum der sogenannten (Früh-)Romantik und ist eng mit den Themen Roman und Liebe verknüpft.</p>
+<p>Zu ihm gehört Novalis (Friedrich von Hardenberg, <span class="date">1771–1801</span>, Sachsen-Anhalt, damals Herzogtum Sachsen-Weißenfels), Freund Tiecks, Verfasser der Hymnen an die Nacht (<span class="date">1800</span>, Prosalyrik und Mystik) sowie des Bildungsromans Heinrich von Ofterdingen (<span class="date">1802</span>), der als Gegenentwurf zu Goethes Wilhelm Meister und als Fragment der Epik überliefert ist.</p>
+<p>Dorothea Veit-Schlegel verfasst den ebenfalls fragmentarischen Künstlerroman Florentin (<span class="date">1801</span>); Friedrich Schlegels Lucinde (<span class="date">1799</span>) gilt als Arabeske. Sophie Méreau schreibt den Briefroman Amanda und Eduard (<span class="date">1803</span>).</p>
+<p>Zum Kreis zählen ferner die Philologen und Brüder August Wilhelm und Friedrich Schlegel sowie die Übersetzerin Caroline Schlegel (später Schelling), außerdem die Philosophen Fichte, Schelling und Schleiermacher.</p>
+<h3 class="h3">3.4 Frühromantische Topoi</h3>
+<p>Die Frühromantik entfaltet wiederkehrende Themen: die Spannung zwischen Verstand und Gefühl, zwischen Alltag und Ideal, die Bedeutung von Liebe und Freundschaft, die kontemplative Bewunderung der Natur sowie die Begeisterung für Nacht und Dämmerung.</p>
+<p>Ihre Heldinnen und Helden sind vorwiegend Einzelgänger(innen) in Einsamkeit, Reisende und von Sehnsucht erfüllte Suchende – ein Sehnen, das sich im Symbol der blauen Blume verdichtet.</p>
+
+<h2 class="h2">4. Die Weimarer Klassik als Gegenpol (1786–1832 / 1794–1805)</h2>
+<h3 class="h3">4.1 Goethe und Schiller</h3>
+<p>Die Weimarer Klassik begreift Kunst als Ausdruck von Wahrheit und Schönheit und sucht die Rückbesinnung auf die Antike im Zeichen der Harmonie; sie verbindet Kunst und Wissenschaft, entwickelt einen historischen Sinn (Historismus) und misst der Dramatik – dem Theater – sowie dem Thema der Freiheit besondere Bedeutung zu.</p>
+<p>Johann Wolfgang von Goethe (<span class="date">1749</span> Frankfurt, damals freie Reichsstadt – <span class="date">1832</span> Weimar, damals Fürstentum Sachsen-Weimar-Eisenach) verfasst u. a. Egmont (entstanden <span class="date">1775</span>, erschienen <span class="date">1788</span>; Schauplatz: die Niederlande des 17. Jahrhunderts), das Versdrama Iphigenie auf Tauris (<span class="date">1787</span>, nach Euripides) sowie den Bildungsroman Wilhelm Meisters Lehrjahre (<span class="date">1795/96</span>).</p>
+<p>Friedrich Schiller (<span class="date">1759</span> bei Stuttgart, Herzogtum Württemberg – <span class="date">1805</span> Weimar) schreibt die Versdramen Don Karlos (<span class="date">1787</span>), Maria Stuart (<span class="date">1800</span>), Die Jungfrau von Orléans (<span class="date">1801</span>) und Wilhelm Tell (<span class="date">1804</span>).</p>
+<h3 class="h3">4.2 Tischbeins „Goethe in der Campagna“ (1787)</h3>
+<p>Johann Heinrich Wilhelm Tischbein (<span class="date">1751–1829</span>) malt <span class="date">1787</span> das berühmte Bildnis Goethe in der Campagna, das heute im Städel-Museum in Frankfurt am Main aufbewahrt wird.</p>
+
+<h2 class="h2">5. Hoch- und Spätromantik: Lyrik, Malerei und Musik</h2>
+<h3 class="h3">5.1 Die Heidelberger Romantik (1805–1807)</h3>
+<p>Die Heidelberger Romantik versammelt Clemens Brentano (<span class="date">1778</span> Koblenz, damals Sachsen – <span class="date">1842</span> Bayern), seine Schwester Bettine (<span class="date">1785–1859</span>, Berlin) und seine Frau Sophie Méreau-Brentano (<span class="date">1770</span> Leipzig – <span class="date">1806</span> Heidelberg).</p>
+<p>Zusammen mit Achim von Arnim (<span class="date">1781–1831</span>, Berlin) gibt Brentano die Liedersammlung Des Knaben Wunderhorn (<span class="date">1805–1808</span>) heraus. Karoline von Günderrode (<span class="date">1780</span> Karlsruhe – <span class="date">1806</span> am Rhein) tritt als Dichterin hervor.</p>
+<p>Ab den 1820er Jahren verteilen sich die Zentren der Romantik auf mehrere Städte: Berlin (Salon der Rahel Varnhagen), Wien (die Komponisten Beethoven, Schubert, Brahms), Dresden (Tieck sowie die Maler Caspar David Friedrich und Runge) und Leipzig (Clara und Robert Schumann).</p>
+<h3 class="h3">5.2 Malerei der Hochromantik: Caspar David Friedrich</h3>
+<p>In der Malerei der Hochromantik steht Caspar David Friedrich (<span class="date">1774</span> Greifswald, damals Schweden – <span class="date">1840</span> Dresden, damals Königreich Sachsen) für die Verbindung von Landschaftsmalerei und existenzieller Einsamkeit, wie sein Gemälde Der Mönch am Meer (<span class="date">1810</span>) veranschaulicht.</p>
+<h3 class="h3">5.3 Musik der Spätromantik: Schubert und Wagner</h3>
+<p>In der Musik der Spätromantik (schwäbische Schule) vertont Franz Schubert (Wien, <span class="date">1797–1828</span>) in seinem Liederzyklus Die Winterreise (<span class="date">1827</span>) vierundzwanzig Gedichte von Wilhelm Müller (Dessau, <span class="date">1794–1827</span>).</p>
+<p>Später, ab den 1870er Jahren, entfaltet Richard Wagner in Bayreuth sein Werk.</p>
+
+<h2 class="h2">6. Das Märchen: Volksmärchen und Kunstmärchen</h2>
+<h3 class="h3">6.1 Das Volksmärchen: die Brüder Grimm</h3>
+<p>Das Volksmärchen entstammt der mündlichen Erzähltradition. In Frankreich sammelt Charles Perrault seine Contes de ma mère l'Oye (<span class="date">1697</span>); in Deutschland veröffentlichen die Brüder Jacob und Wilhelm Grimm die Kinder- und Hausmärchen (<span class="date">1812–1858</span>, entstanden in Kassel, damals Königreich Westphalen; heute UNESCO-Weltdokumentenerbe), parallel zu ihren Arbeiten zur Sprachwissenschaft, zur deutschen Grammatik und zur Volkskunde – vergleichbar in ihrer kulturprägenden Wirkung mit der Lutherbibel (Mainz).</p>
+<p>Zu den bekanntesten Grimm-Märchen zählen Der Froschkönig, Der Wolf und die sieben jungen Geißlein, Hänsel und Gretel, Das tapfere Schneiderlein, Aschenputtel, Rotkäppchen, Die Bremer Stadtmusikanten, Dornröschen und Schneewittchen. In diese Tradition gehört auch Hans Christian Andersens Die kleine Meerjungfrau (<span class="date">1837</span>).</p>
+<h3 class="h3">6.2 Das Kunstmärchen: Tieck, Brentano, E. T. A. Hoffmann</h3>
+<p>Im Unterschied zum Volksmärchen ist das Kunstmärchen freie schriftliche Erfindung eines individuellen Autors. Zu dieser Gattung zählen Tiecks Märchen (u. a. Der blonde Eckbert, Der Runenberg), Werke Brentanos sowie E. T. A. Hoffmanns (<span class="date">1776–1822</span>) Nussknacker und Mausekönig (<span class="date">1816</span>), das <span class="date">1892</span> die Grundlage für Tschaikowskys Ballett Der Nussknacker bildet.</p>
+
+<h2 class="h2">7. Rezeption: der Film „Undine“ von Christian Petzold (2020)</h2>
+<p>Die anhaltende Wirkung dieser Motivik zeigt sich u. a. in Christian Petzolds Film Undine (2020) mit Paula Beer in der Titelrolle, der den romantischen Mythos der Wasserfrau in die Gegenwart überträgt.</p>
+
+<h1 class="h1">Section 2 · Cours en français (traduction)</h1>
+
+<h2 class="h2">1. Introduction</h2>
+<p>Le présent cours propose un portrait du poète, écrivain et traducteur allemand Ludwig Tieck (<span class="date">1773-1853</span>) et situe son œuvre – illustrée ici par le conte Der blonde Eckbert (<span class="date">1797</span>) – dans l'histoire littéraire de son temps : du préromantisme du cercle d'Iéna au classicisme de Weimar, jusqu'au haut romantisme et au romantisme tardif, ainsi qu'à la tradition du conte.</p>
+
+<h2 class="h2">2. Ludwig Tieck : vie et œuvre (1773-1853)</h2>
+<p>Ludwig Tieck naît en <span class="date">1773</span> à Berlin, alors rattachée au royaume de Prusse, et y meurt en <span class="date">1853</span>. Il est considéré comme un poète, écrivain et traducteur allemand du romantisme ; ses traductions de Shakespeare et de Cervantès contribuent notamment à la réception de ces auteurs dans l'aire germanophone.</p>
+<p>Tieck étudie la théologie, l'histoire et la philologie aux universités de Halle (alors en Prusse), de Göttingen (alors électorat d'Allemagne du Nord) et d'Erlangen (alors principauté de Bayreuth). Depuis <span class="date">1794</span>, il vit en écrivain indépendant. En <span class="date">1797</span>, il publie Der blonde Eckbert.</p>
+<p>Son roman Franz Sternbalds Wanderungen (<span class="date">1798</span>) relève du roman d'artiste (Künstlerroman) et met en scène un élève (fictif) de Dürer. En <span class="date">1802</span> paraît le conte Der Runenberg. Dans la suite de son œuvre, Tieck se tourne davantage vers la nouvelle et le roman historique.</p>
+
+<h2 class="h2">3. Le cercle d'Iéna et le préromantisme (1799-1800)</h2>
+<h3 class="h3">3.1 L'amitié avec Wackenroder</h3>
+<p>L'ami de Tieck, Wilhelm Heinrich Wackenroder (<span class="date">1773-1798</span>, Berlin), rédige en <span class="date">1796</span> les Herzensergießungen eines kunstliebenden Klosterbruders (Effusions cordiales d'un moine ami des arts), lues comme un manifeste du préromantisme dirigé contre les Lumières et consacré en particulier à la peinture.</p>
+<p>Il y met en avant le lien entre l'art et la religion, dans la formule programmatique : <span class="iq">« Je compare la jouissance des œuvres d'art les plus nobles à la prière. »</span> Wackenroder manifeste une prédilection pour le Moyen Âge, incarné notamment par la ville de Nuremberg.</p>
+<h3 class="h3">3.2 La Mélancolie d'Albrecht Dürer (1514)</h3>
+<p>Albrecht Dürer (<span class="date">1471-1528</span>) exerce son art dans la ville libre d'Empire de Nuremberg. Sa gravure Melencolia I (<span class="date">1514</span>), conservée dans le cadre de la collection d'art de Nuremberg, est reçue par les préromantiques comme l'emblème d'une conception mélancolique et contemplative de l'art.</p>
+<h3 class="h3">3.3 Le cercle d'Iéna : auteurs et penseurs</h3>
+<p>Le cercle d'Iéna (<span class="date">1799-1800</span>) constitue le centre de ce que l'on appelle le préromantisme (Frühromantik) et se trouve étroitement lié aux thèmes du roman et de l'amour.</p>
+<p>En font partie Novalis (Friedrich von Hardenberg, <span class="date">1771-1801</span>, Saxe-Anhalt, alors duché de Saxe-Weißenfels), ami de Tieck, auteur des Hymnes à la nuit (<span class="date">1800</span>, prose lyrique et mystique) et du roman de formation (Bildungsroman) Heinrich von Ofterdingen (<span class="date">1802</span>), conçu comme un contrepoint au Wilhelm Meister de Goethe et transmis à l'état de fragment épique.</p>
+<p>Dorothea Veit-Schlegel écrit le roman d'artiste également fragmentaire Florentin (<span class="date">1801</span>) ; la Lucinde (<span class="date">1799</span>) de Friedrich Schlegel est considérée comme une arabesque. Sophie Méreau compose le roman épistolaire Amanda und Eduard (<span class="date">1803</span>).</p>
+<p>Le cercle réunit en outre les philologues et frères August Wilhelm et Friedrich Schlegel, ainsi que la traductrice Caroline Schlegel (plus tard Schelling), de même que les philosophes Fichte, Schelling et Schleiermacher.</p>
+<h3 class="h3">3.4 Topoï préromantiques</h3>
+<p>Le préromantisme développe des thèmes récurrents : la tension entre raison et sentiment, entre quotidien et idéal, l'importance de l'amour et de l'amitié, l'admiration contemplative de la nature, ainsi que l'engouement pour la nuit et le crépuscule.</p>
+<p>Ses héroïnes et héros sont avant tout des solitaires, des voyageurs et des êtres en quête, animés d'une nostalgie ardente (Sehnsucht) que condense le symbole de la fleur bleue.</p>
+
+<h2 class="h2">4. Le classicisme de Weimar comme pôle antagoniste (1786-1832 / 1794-1805)</h2>
+<h3 class="h3">4.1 Goethe et Schiller</h3>
+<p>Le classicisme de Weimar conçoit l'art comme expression de la vérité et de la beauté et recherche un retour à l'Antiquité placé sous le signe de l'harmonie ; il associe art et science, développe un sens historique (historisme) et accorde une importance particulière à l'art dramatique – au théâtre – ainsi qu'au thème de la liberté.</p>
+<p>Johann Wolfgang von Goethe (<span class="date">1749</span>, Francfort, alors ville libre d'Empire – <span class="date">1832</span>, Weimar, alors principauté de Saxe-Weimar-Eisenach) écrit notamment Egmont (composé en <span class="date">1775</span>, publié en <span class="date">1788</span> ; l'action se situe aux Pays-Bas du XVIIe siècle), le drame en vers Iphigénie en Tauride (<span class="date">1787</span>, d'après Euripide) ainsi que le roman de formation Les Années d'apprentissage de Wilhelm Meister (<span class="date">1795-96</span>).</p>
+<p>Friedrich Schiller (<span class="date">1759</span>, près de Stuttgart, duché de Wurtemberg – <span class="date">1805</span>, Weimar) écrit les drames en vers Don Carlos (<span class="date">1787</span>), Marie Stuart (<span class="date">1800</span>), La Pucelle d'Orléans (<span class="date">1801</span>) et Guillaume Tell (<span class="date">1804</span>).</p>
+<h3 class="h3">4.2 « Goethe dans la campagne romaine » de Tischbein (1787)</h3>
+<p>Johann Heinrich Wilhelm Tischbein (<span class="date">1751-1829</span>) peint en <span class="date">1787</span> le célèbre portrait Goethe dans la campagne romaine, aujourd'hui conservé au musée Städel de Francfort-sur-le-Main.</p>
+
+<h2 class="h2">5. Haut romantisme et romantisme tardif : poésie lyrique, peinture et musique</h2>
+<h3 class="h3">5.1 Le romantisme d'Heidelberg (1805-1807)</h3>
+<p>Le romantisme d'Heidelberg réunit Clemens Brentano (<span class="date">1778</span>, Coblence, alors en Saxe – <span class="date">1842</span>, Bavière), sa sœur Bettine (<span class="date">1785-1859</span>, Berlin) et son épouse Sophie Méreau-Brentano (<span class="date">1770</span>, Leipzig – <span class="date">1806</span>, Heidelberg).</p>
+<p>Avec Achim von Arnim (<span class="date">1781-1831</span>, Berlin), Brentano publie le recueil de chants Des Knaben Wunderhorn (Le Cor merveilleux de l'enfant, <span class="date">1805-1808</span>). Karoline von Günderrode (<span class="date">1780</span>, Karlsruhe – <span class="date">1806</span>, sur les rives du Rhin) s'affirme comme poétesse.</p>
+<p>À partir des années <span class="date">1820</span>, les foyers du romantisme se répartissent entre plusieurs villes : Berlin (le salon de Rahel Varnhagen), Vienne (les compositeurs Beethoven, Schubert, Brahms), Dresde (Tieck, ainsi que les peintres Caspar David Friedrich et Runge) et Leipzig (Clara et Robert Schumann).</p>
+<h3 class="h3">5.2 La peinture du haut romantisme : Caspar David Friedrich</h3>
+<p>Dans la peinture du haut romantisme, Caspar David Friedrich (<span class="date">1774</span>, Greifswald, alors en Suède – <span class="date">1840</span>, Dresde, alors royaume de Saxe) incarne l'union du paysage et de la solitude existentielle, comme l'illustre son tableau Le Moine au bord de la mer (<span class="date">1810</span>).</p>
+<h3 class="h3">5.3 La musique du romantisme tardif : Schubert et Wagner</h3>
+<p>Dans la musique du romantisme tardif (école souabe), Franz Schubert (Vienne, <span class="date">1797-1828</span>) met en musique, dans son cycle de lieder Voyage d'hiver (Die Winterreise, <span class="date">1827</span>), vingt-quatre poèmes de Wilhelm Müller (Dessau, <span class="date">1794-1827</span>).</p>
+<p>Plus tard, à partir des années <span class="date">1870</span>, Richard Wagner déploie son œuvre à Bayreuth.</p>
+
+<h2 class="h2">6. Le conte : conte populaire et conte littéraire</h2>
+<h3 class="h3">6.1 Le conte populaire : les frères Grimm</h3>
+<p>Le conte populaire (Volksmärchen) relève de la tradition narrative orale. En France, Charles Perrault réunit ses Contes de ma mère l'Oye (<span class="date">1697</span>) ; en Allemagne, les frères Jacob et Wilhelm Grimm publient les Kinder- und Hausmärchen (Contes de l'enfance et du foyer, <span class="date">1812-1858</span>, composés à Kassel, alors royaume de Westphalie ; aujourd'hui inscrits au patrimoine documentaire de l'UNESCO), parallèlement à leurs travaux de linguistique, de grammaire allemande et de folklore (Volkskunde) – dont le rayonnement culturel est comparable à celui de la Bible de Luther (Mayence).</p>
+<p>Parmi les contes les plus connus des Grimm figurent Le Roi-Grenouille, Le Loup et les sept chevreaux, Hansel et Gretel, Le Vaillant Petit Tailleur, Cendrillon, Le Petit Chaperon rouge, Les Musiciens de Brême, La Belle au bois dormant et Blanche-Neige. Relève également de cette tradition La Petite Sirène (<span class="date">1837</span>) d'Andersen.</p>
+<h3 class="h3">6.2 Le conte littéraire : Tieck, Brentano, E. T. A. Hoffmann</h3>
+<p>À la différence du conte populaire, le conte littéraire (Kunstmärchen) est une invention écrite libre, propre à un auteur individuel. Relèvent de ce genre les contes de Tieck (dont Der blonde Eckbert et Der Runenberg), des œuvres de Brentano, ainsi que Casse-Noisette et le Roi des souris (<span class="date">1816</span>) d'E. T. A. Hoffmann (<span class="date">1776-1822</span>), qui sert en <span class="date">1892</span> de base au ballet Casse-Noisette de Tchaïkovski.</p>
+
+<h2 class="h2">7. Réception : le film « Undine » de Christian Petzold (2020)</h2>
+<p>La rémanence de cette thématique se manifeste notamment dans le film Undine (2020) de Christian Petzold, avec Paula Beer dans le rôle-titre, qui transpose à l'époque contemporaine le mythe romantique de l'ondine.</p>
+<!--LEX-->
+<h1 class="h1">Section 3 · Lexique français-allemand</h1>
+<p>Le lexique reprend l'ensemble du vocabulaire figurant dans le support d'origine, organisé par champ thématique, ainsi qu'une liste de vocabulaire complémentaire utile pour approfondir le sujet (§ 3.7).</p>
+<p>Pour chaque substantif, le tableau indique désormais le génitif singulier, le pluriel et la règle morphologique (ou la remarque lexicale) qui permet de déduire ou de justifier le genre grammatical. Les formes marquées « à vérifier » correspondent à des emplois rares ou à des emprunts dont l'usage lexicographique est flottant ; elles doivent être confirmées dans un dictionnaire de référence (Duden) avant d'être mémorisées comme certaines.</p>
+
+<h2 class="h2">3.1 Personnes et fonctions littéraires</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>der Dichter</td><td>des Dichters</td><td>die Dichter</td><td>le poète</td><td>Nom d'agent masculin en -er, dérivé du verbe dichten ; invariable au pluriel.</td></tr>
+<tr><td>die Dichterin</td><td>der Dichterin</td><td>die Dichterinnen</td><td>la poétesse</td><td>Suffixe féminisant -in ; pluriel régulier en -nen.</td></tr>
+<tr><td>der Schriftsteller</td><td>des Schriftstellers</td><td>die Schriftsteller</td><td>l'écrivain</td><td>Nom d'agent masculin en -er (composé schreiben + Steller) ; invariable au pluriel.</td></tr>
+<tr><td>die Schriftstellerin</td><td>der Schriftstellerin</td><td>die Schriftstellerinnen</td><td>l'écrivaine</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der freie Schriftsteller</td><td>des freien Schriftstellers</td><td>die freien Schriftsteller</td><td>l'écrivain indépendant</td><td>Genre porté par Schriftsteller (agent en -er) ; l'adjectif épithète frei prend la déclinaison faible après l'article défini.</td></tr>
+<tr><td>der Übersetzer</td><td>des Übersetzers</td><td>die Übersetzer</td><td>le traducteur</td><td>Nom d'agent masculin en -er, dérivé de übersetzen ; invariable au pluriel.</td></tr>
+<tr><td>die Übersetzerin</td><td>der Übersetzerin</td><td>die Übersetzerinnen</td><td>la traductrice</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Schüler</td><td>des Schülers</td><td>die Schüler</td><td>l'élève, le disciple</td><td>Nom d'agent masculin en -er ; invariable au pluriel.</td></tr>
+<tr><td>die Schülerin</td><td>der Schülerin</td><td>die Schülerinnen</td><td>l'élève (fém.)</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Held</td><td>des Helden</td><td>die Helden</td><td>le héros</td><td>n-Deklination (déclinaison faible) : substantif masculin animé monosyllabique prenant -en à tous les cas obliques, singulier et pluriel.</td></tr>
+<tr><td>die Heldin</td><td>der Heldin</td><td>die Heldinnen</td><td>l'héroïne</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Einzelgänger</td><td>des Einzelgängers</td><td>die Einzelgänger</td><td>le solitaire</td><td>Nom d'agent masculin en -er ; invariable au pluriel.</td></tr>
+<tr><td>die Einzelgängerin</td><td>der Einzelgängerin</td><td>die Einzelgängerinnen</td><td>la solitaire</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Reisende</td><td>des Reisenden</td><td>die Reisenden</td><td>le voyageur</td><td>Substantif adjectival : participe présent de reisen substantivé, décliné comme un adjectif après l'article (weak declension).</td></tr>
+<tr><td>die Reisende</td><td>der Reisenden</td><td>die Reisenden</td><td>la voyageuse</td><td>Même substantif adjectival ; le genre suit uniquement la personne désignée, la déclinaison reste adjective.</td></tr>
+<tr><td>der Suchende</td><td>des Suchenden</td><td>die Suchenden</td><td>celui qui est en quête</td><td>Substantif adjectival : participe présent de suchen substantivé.</td></tr>
+<tr><td>die Suchende</td><td>der Suchenden</td><td>die Suchenden</td><td>celle qui est en quête</td><td>Idem ; déclinaison adjective, genre selon la personne désignée.</td></tr>
+<tr><td>der Philologe</td><td>des Philologen</td><td>die Philologen</td><td>le philologue</td><td>n-Deklination : substantif masculin en -e d'origine grecque désignant une personne ; décliné faible.</td></tr>
+<tr><td>die Philologin</td><td>der Philologin</td><td>die Philologinnen</td><td>la philologue</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Philosoph</td><td>des Philosophen</td><td>die Philosophen</td><td>le philosophe</td><td>n-Deklination : substantif masculin d'origine grecque en -soph désignant une personne, bien que ne se terminant pas en -e (exception lexicalisée du même groupe que Fotograf, Monarch).</td></tr>
+<tr><td>die Philosophin</td><td>der Philosophin</td><td>die Philosophinnen</td><td>la philosophe</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Komponist</td><td>des Komponisten</td><td>die Komponisten</td><td>le compositeur</td><td>n-Deklination : les substantifs masculins de personne en -ist sont systématiquement déclinés faibles.</td></tr>
+<tr><td>die Komponistin</td><td>der Komponistin</td><td>die Komponistinnen</td><td>la compositrice</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>der Maler</td><td>des Malers</td><td>die Maler</td><td>le peintre</td><td>Nom d'agent masculin en -er, dérivé de malen ; invariable au pluriel.</td></tr>
+<tr><td>die Malerin</td><td>der Malerin</td><td>die Malerinnen</td><td>la peintre</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>die Salonnière</td><td>der Salonnière (à vérifier)</td><td>die Salonnièren (à vérifier)</td><td>la salonnière</td><td>Emprunt au français en -ière : féminin par le genre du mot source ; les féminins allemands ne prennent pas de désinence au génitif singulier. Emploi lexicographique rare en allemand : forme de pluriel à confirmer au dictionnaire (Duden ne l'atteste pas de façon systématique).</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.2 Genres et formes littéraires</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>das Märchen</td><td>des Märchens</td><td>die Märchen</td><td>le conte</td><td>Diminutif en -chen : toujours neutre, invariable au pluriel.</td></tr>
+<tr><td>das Volksmärchen</td><td>des Volksmärchens</td><td>die Volksmärchen</td><td>le conte populaire</td><td>Composé : le genre suit le déterminé final -märchen (neutre, diminutif en -chen).</td></tr>
+<tr><td>das Kunstmärchen</td><td>des Kunstmärchens</td><td>die Kunstmärchen</td><td>le conte littéraire (conte d'art)</td><td>Idem : composé neutre, invariable au pluriel.</td></tr>
+<tr><td>die Novelle</td><td>der Novelle</td><td>die Novellen</td><td>la nouvelle</td><td>Substantif féminin en -e (emprunt à l'italien novella) ; pluriel régulier en -n.</td></tr>
+<tr><td>der historische Roman</td><td>des historischen Romans</td><td>die historischen Romane</td><td>le roman historique</td><td>Roman est masculin par convention lexicale (emprunt sans marque morphologique de genre) ; pluriel en -e ; l'adjectif historisch est décliné faible après l'article défini.</td></tr>
+<tr><td>der Künstlerroman</td><td>des Künstlerromans</td><td>die Künstlerromane</td><td>le roman d'artiste</td><td>Composé : le genre suit le déterminé final -roman (masculin) ; pluriel en -e.</td></tr>
+<tr><td>der Bildungsroman</td><td>des Bildungsromans</td><td>die Bildungsromane</td><td>le roman de formation</td><td>Idem : composé masculin, pluriel en -e.</td></tr>
+<tr><td>der Briefroman</td><td>des Briefromans</td><td>die Briefromane</td><td>le roman épistolaire</td><td>Idem : composé masculin, pluriel en -e.</td></tr>
+<tr><td>das Fragment</td><td>des Fragments</td><td>die Fragmente</td><td>le fragment</td><td>Emprunt latin neutre en -ment/-ent (cf. Element, Argument) ; pluriel en -e.</td></tr>
+<tr><td>die Epik</td><td>der Epik</td><td>(sans pluriel usuel)</td><td>le genre épique, l'épique</td><td>Substantif abstrait en -ik : régulièrement féminin (cf. Musik, Grammatik) ; notion non dénombrable.</td></tr>
+<tr><td>die Arabeske</td><td>der Arabeske</td><td>die Arabesken</td><td>l'arabesque</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>die Hymne</td><td>der Hymne</td><td>die Hymnen</td><td>l'hymne</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>die Prosalyrik</td><td>der Prosalyrik</td><td>(sans pluriel usuel)</td><td>la prose lyrique</td><td>Composé : le déterminé -lyrik est un abstrait en -ik, féminin.</td></tr>
+<tr><td>die Mystik</td><td>der Mystik</td><td>(sans pluriel usuel)</td><td>la mystique</td><td>Substantif abstrait en -ik : féminin.</td></tr>
+<tr><td>das Versdrama</td><td>des Versdramas</td><td>die Versdramen</td><td>le drame en vers</td><td>Drama, neutre d'origine grecque, forme un pluriel savant en -en (Drama/Dramen, comme Thema/Themen) ; le composé conserve ce pluriel irrégulier.</td></tr>
+<tr><td>das Versmaß</td><td>des Versmaßes</td><td>die Versmaße</td><td>le mètre, la métrique</td><td>Composé : Maß est neutre ; pluriel en -e.</td></tr>
+<tr><td>die Lyrik</td><td>der Lyrik</td><td>(sans pluriel usuel)</td><td>la poésie lyrique</td><td>Substantif abstrait en -ik : féminin.</td></tr>
+<tr><td>das Lied</td><td>des Liedes</td><td>die Lieder</td><td>le lied, le chant</td><td>Substantif neutre monosyllabique ; pluriel en -er sans Umlaut possible (la diphtongue ie ne subit pas de mutation vocalique).</td></tr>
+<tr><td>das Ballett</td><td>des Balletts</td><td>die Ballette</td><td>le ballet</td><td>Emprunt au français, neutre en allemand ; pluriel en -e.</td></tr>
+<tr><td>die freie schriftliche Erfindung</td><td>der freien schriftlichen Erfindung</td><td>die freien schriftlichen Erfindungen</td><td>l'invention écrite libre</td><td>Erfindung : suffixe -ung, toujours féminin, pluriel en -en ; les adjectifs épithètes frei et schriftlich sont déclinés faibles après l'article défini.</td></tr>
+<tr><td>die mündliche Erzähltradition</td><td>der mündlichen Erzähltradition</td><td>die mündlichen Erzähltraditionen</td><td>la tradition narrative orale</td><td>Tradition : emprunt latin en -tion, toujours féminin, pluriel en -en.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.3 Courants et périodes</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>die Romantik</td><td>der Romantik</td><td>(sans pluriel usuel)</td><td>le romantisme</td><td>Substantif abstrait en -ik : féminin, désignation d'un courant unique donc non dénombrable.</td></tr>
+<tr><td>die Frühromantik</td><td>der Frühromantik</td><td>(sans pluriel usuel)</td><td>le préromantisme</td><td>Composé : le déterminé -romantik est féminin (abstrait en -ik).</td></tr>
+<tr><td>die Hochromantik</td><td>der Hochromantik</td><td>(sans pluriel usuel)</td><td>le haut romantisme</td><td>Idem.</td></tr>
+<tr><td>die Spätromantik</td><td>der Spätromantik</td><td>(sans pluriel usuel)</td><td>le romantisme tardif</td><td>Idem.</td></tr>
+<tr><td>die Weimarer Klassik</td><td>der Weimarer Klassik</td><td>(sans pluriel usuel)</td><td>le classicisme de Weimar</td><td>Klassik : abstrait en -ik, féminin ; Weimarer est un adjectif dérivé d'un toponyme, invariable, toujours en majuscule et sans marque de déclinaison.</td></tr>
+<tr><td>die Aufklärung</td><td>der Aufklärung</td><td>(sans pluriel usuel)</td><td>les Lumières</td><td>Suffixe -ung : toujours féminin ; en français l'équivalent est traditionnellement pluriel (les Lumières), mais le substantif allemand reste singulier.</td></tr>
+<tr><td>der Historismus</td><td>des Historismus</td><td>(sans pluriel)</td><td>l'historisme</td><td>Substantifs savants en -ismus : toujours masculins ; le génitif singulier est identique au nominatif (le mot se termine déjà en -us) et il n'existe pas de forme de pluriel usuelle.</td></tr>
+<tr><td>das Manifest</td><td>des Manifests</td><td>die Manifeste</td><td>le manifeste</td><td>Emprunt latin neutre ; pluriel en -e.</td></tr>
+<tr><td>der Kreis</td><td>des Kreises</td><td>die Kreise</td><td>le cercle</td><td>Substantif masculin ; pluriel en -e, sans Umlaut.</td></tr>
+<tr><td>der Dichterkreis</td><td>des Dichterkreises</td><td>die Dichterkreise</td><td>le cercle de poètes</td><td>Composé : le genre suit le déterminé final -kreis (masculin) ; même déclinaison que Kreis.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.4 Thèmes et motifs</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>das Thema</td><td>des Themas</td><td>die Themen</td><td>le thème</td><td>Neutre d'origine grecque à pluriel savant en -en (comme Drama/Dramen) ; ne pas confondre avec les neutres réguliers en -a, qui n'existent pas en allemand indigène.</td></tr>
+<tr><td>die Spannung</td><td>der Spannung</td><td>die Spannungen</td><td>la tension</td><td>Suffixe -ung : toujours féminin, pluriel en -en.</td></tr>
+<tr><td>der Verstand</td><td>des Verstandes</td><td>(sans pluriel usuel)</td><td>la raison, l'entendement</td><td>Substantif déverbal masculin (de verstehen) sans suffixe marqueur de genre ; genre à retenir par le lexique, notion non dénombrable.</td></tr>
+<tr><td>das Gefühl</td><td>des Gefühls</td><td>die Gefühle</td><td>le sentiment</td><td>Substantif préfixé en Ge- : la majorité des collectifs/résultats d'action en Ge- + radical sont neutres ; pluriel en -e.</td></tr>
+<tr><td>der Alltag</td><td>des Alltags</td><td>(sans pluriel usuel)</td><td>le quotidien</td><td>Composé : le déterminé -tag (« jour ») est masculin ; notion non dénombrable au sens abstrait retenu ici.</td></tr>
+<tr><td>das Ideal</td><td>des Ideals</td><td>die Ideale</td><td>l'idéal</td><td>Emprunt latin neutre ; pluriel en -e.</td></tr>
+<tr><td>die Bedeutung</td><td>der Bedeutung</td><td>die Bedeutungen</td><td>l'importance, la signification</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Bewunderung</td><td>der Bewunderung</td><td>die Bewunderungen</td><td>l'admiration</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Natur</td><td>der Natur</td><td>(sans pluriel usuel)</td><td>la nature</td><td>Emprunt latin en -ur : régulièrement féminin (cf. Kultur, Struktur) ; sens ici non dénombrable.</td></tr>
+<tr><td>die Begeisterung</td><td>der Begeisterung</td><td>die Begeisterungen</td><td>l'enthousiasme, l'engouement</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Nacht</td><td>der Nacht</td><td>die Nächte</td><td>la nuit</td><td>Substantif féminin fort : pluriel avec Umlaut + -e.</td></tr>
+<tr><td>die Dämmerung</td><td>der Dämmerung</td><td>(sans pluriel usuel)</td><td>le crépuscule</td><td>Suffixe -ung : féminin.</td></tr>
+<tr><td>die Einsamkeit</td><td>der Einsamkeit</td><td>(sans pluriel usuel)</td><td>la solitude</td><td>Suffixe -keit : toujours féminin, comme tous les abstraits en -heit/-keit/-igkeit.</td></tr>
+<tr><td>die Sehnsucht</td><td>der Sehnsucht</td><td>die Sehnsüchte</td><td>la nostalgie ardente, l'aspiration</td><td>Composé : le déterminé -sucht est féminin ; pluriel avec Umlaut + -e.</td></tr>
+<tr><td>die blaue Blume</td><td>der blauen Blume</td><td>die blauen Blumen</td><td>la fleur bleue</td><td>Blume : substantif féminin en -e, pluriel en -n ; l'adjectif épithète blau est décliné faible après l'article défini.</td></tr>
+<tr><td>die Liebe</td><td>der Liebe</td><td>(sans pluriel usuel)</td><td>l'amour</td><td>Substantif féminin en -e, déverbal de lieben ; notion non dénombrable.</td></tr>
+<tr><td>die Freundschaft</td><td>der Freundschaft</td><td>die Freundschaften</td><td>l'amitié</td><td>Suffixe -schaft : toujours féminin, pluriel en -en.</td></tr>
+<tr><td>die Wahrheit</td><td>der Wahrheit</td><td>die Wahrheiten</td><td>la vérité</td><td>Suffixe -heit : féminin, pluriel en -en.</td></tr>
+<tr><td>die Schönheit</td><td>der Schönheit</td><td>die Schönheiten</td><td>la beauté</td><td>Suffixe -heit : féminin, pluriel en -en.</td></tr>
+<tr><td>die Harmonie</td><td>der Harmonie</td><td>die Harmonien</td><td>l'harmonie</td><td>Emprunt grec/latin en -ie : régulièrement féminin ; pluriel en -n.</td></tr>
+<tr><td>die Rückbesinnung</td><td>der Rückbesinnung</td><td>die Rückbesinnungen</td><td>le retour réflexif, la remémoration</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Antike</td><td>der Antike</td><td>(sans pluriel)</td><td>l'Antiquité</td><td>Substantivation au féminin de l'adjectif antik, déclinée comme un adjectif faible ; notion unique, non dénombrable.</td></tr>
+<tr><td>die Freiheit</td><td>der Freiheit</td><td>die Freiheiten</td><td>la liberté</td><td>Suffixe -heit : féminin, pluriel en -en.</td></tr>
+<tr><td>das Vorbild</td><td>des Vorbildes</td><td>die Vorbilder</td><td>le modèle</td><td>Composé : le déterminé -bild est neutre ; pluriel en -er (comme Bild/Bilder).</td></tr>
+<tr><td>die Vorliebe</td><td>der Vorliebe</td><td>(sans pluriel usuel)</td><td>la prédilection</td><td>Composé : le déterminé -liebe est féminin (Liebe).</td></tr>
+<tr><td>das Mittelalter</td><td>des Mittelalters</td><td>(sans pluriel, notion unique)</td><td>le Moyen Âge</td><td>Composé : le déterminé -alter est neutre (cf. Zeitalter) ; désigne une période unique.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.5 Arts, religion et sciences</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>die Kunst</td><td>der Kunst</td><td>die Künste</td><td>l'art</td><td>Substantif féminin fort ; pluriel avec Umlaut + -e.</td></tr>
+<tr><td>das Kunstwerk</td><td>des Kunstwerks</td><td>die Kunstwerke</td><td>l'œuvre d'art</td><td>Composé : le déterminé -werk est neutre ; pluriel en -e.</td></tr>
+<tr><td>edel</td><td>(adjectif, non applicable)</td><td>(adjectif, non applicable)</td><td>noble</td><td>Adjectif épithète variable en genre/nombre selon le substantif qualifié ; remarque orthographique : le -e- du radical s'élide à la déclinaison et au comparatif (ein edler Mann, edler, edelste).</td></tr>
+<tr><td>der Genuss</td><td>des Genusses</td><td>die Genüsse</td><td>la jouissance, le plaisir</td><td>Substantif masculin ; le radical en -ss impose un -es au génitif ; pluriel avec Umlaut + -e.</td></tr>
+<tr><td>das Gebet</td><td>des Gebets</td><td>die Gebete</td><td>la prière</td><td>Substantif préfixé en Ge- : neutre ; pluriel en -e.</td></tr>
+<tr><td>die Religion</td><td>der Religion</td><td>die Religionen</td><td>la religion</td><td>Emprunt latin en -ion : toujours féminin, pluriel en -en.</td></tr>
+<tr><td>die Malerei</td><td>der Malerei</td><td>(sans pluriel usuel)</td><td>la peinture</td><td>Suffixe -ei : toujours féminin (cf. Bäckerei, Übersetzerei).</td></tr>
+<tr><td>die Musik</td><td>der Musik</td><td>(sans pluriel usuel)</td><td>la musique</td><td>Substantif abstrait en -ik : féminin.</td></tr>
+<tr><td>das Theater</td><td>des Theaters</td><td>die Theater</td><td>le théâtre</td><td>Emprunt grec en -er : ici neutre par exception lexicalisée (la règle du -er masculin agentif ne vaut que pour les noms de personnes/instruments) ; invariable au pluriel.</td></tr>
+<tr><td>die Dramatik</td><td>der Dramatik</td><td>(sans pluriel usuel)</td><td>l'art dramatique</td><td>Substantif abstrait en -ik : féminin.</td></tr>
+<tr><td>die Wissenschaft</td><td>der Wissenschaft</td><td>die Wissenschaften</td><td>la science</td><td>Suffixe -schaft : féminin, pluriel en -en.</td></tr>
+<tr><td>die Sprachwissenschaft</td><td>der Sprachwissenschaft</td><td>die Sprachwissenschaften</td><td>la linguistique</td><td>Composé : le déterminé -wissenschaft est féminin (suffixe -schaft).</td></tr>
+<tr><td>die deutsche Grammatik</td><td>der deutschen Grammatik</td><td>(sans pluriel usuel)</td><td>la grammaire allemande</td><td>Grammatik : abstrait en -ik, féminin ; l'adjectif deutsch est décliné faible après l'article défini.</td></tr>
+<tr><td>die Volkskunde</td><td>der Volkskunde</td><td>(sans pluriel usuel)</td><td>le folklore, l'ethnologie populaire</td><td>Suffixe -kunde (désignant une discipline de savoir) : toujours féminin (cf. Erdkunde, Heilkunde).</td></tr>
+<tr><td>die Kunstsammlung</td><td>der Kunstsammlung</td><td>die Kunstsammlungen</td><td>la collection d'art</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.6 Entités politiques historiques</h2>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>das Königreich</td><td>des Königreichs</td><td>die Königreiche</td><td>le royaume</td><td>Composé : le déterminé -reich est neutre ; pluriel en -e.</td></tr>
+<tr><td>das Fürstentum</td><td>des Fürstentums</td><td>die Fürstentümer</td><td>la principauté</td><td>Suffixe -tum : généralement neutre ; pluriel irrégulier en -tümer avec Umlaut (exception au pluriel habituel en -e des neutres).</td></tr>
+<tr><td>das Herzogtum</td><td>des Herzogtums</td><td>die Herzogtümer</td><td>le duché</td><td>Suffixe -tum : neutre, pluriel en -tümer avec Umlaut.</td></tr>
+<tr><td>das Kurfürstentum</td><td>des Kurfürstentums</td><td>die Kurfürstentümer</td><td>l'électorat</td><td>Suffixe -tum : neutre, pluriel en -tümer avec Umlaut.</td></tr>
+<tr><td>die freie Reichsstadt</td><td>der freien Reichsstadt</td><td>die freien Reichsstädte</td><td>la ville libre d'Empire</td><td>Stadt : substantif féminin fort, pluriel avec Umlaut + -e ; l'adjectif frei est décliné faible après l'article défini.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.7 Vocabulaire complémentaire utile</h2>
+<p>Termes n'apparaissant pas nécessairement dans le support d'origine, mais utiles pour commenter le romantisme allemand et ses œuvres.</p>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>die Epoche</td><td>der Epoche</td><td>die Epochen</td><td>l'époque</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>das Zeitalter</td><td>des Zeitalters</td><td>die Zeitalter</td><td>l'ère, l'âge</td><td>Composé : le déterminé -alter est neutre ; invariable au pluriel.</td></tr>
+<tr><td>die Strömung</td><td>der Strömung</td><td>die Strömungen</td><td>le courant</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die literarische Strömung</td><td>der literarischen Strömung</td><td>die literarischen Strömungen</td><td>le courant littéraire</td><td>Strömung : suffixe -ung, féminin ; l'adjectif literarisch est décliné faible après l'article défini.</td></tr>
+<tr><td>die Literaturgeschichte</td><td>der Literaturgeschichte</td><td>(sans pluriel usuel)</td><td>l'histoire littéraire</td><td>Composé : le déterminé -geschichte est féminin (substantif en -e).</td></tr>
+<tr><td>das Jahrhundert</td><td>des Jahrhunderts</td><td>die Jahrhunderte</td><td>le siècle</td><td>Composé : le déterminé -hundert (numéral substantivé) est neutre ; pluriel en -e.</td></tr>
+<tr><td>der Zeitgenosse</td><td>des Zeitgenossen</td><td>die Zeitgenossen</td><td>le contemporain</td><td>n-Deklination : substantif masculin en -e désignant une personne, décliné faible.</td></tr>
+<tr><td>die Zeitgenossin</td><td>der Zeitgenossin</td><td>die Zeitgenossinnen</td><td>la contemporaine</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>die Rezeption</td><td>der Rezeption</td><td>die Rezeptionen</td><td>la réception</td><td>Emprunt latin en -tion : féminin, pluriel en -en.</td></tr>
+<tr><td>die Rezeptionsgeschichte</td><td>der Rezeptionsgeschichte</td><td>(sans pluriel usuel)</td><td>l'histoire de la réception</td><td>Composé féminin (déterminé -geschichte, substantif en -e).</td></tr>
+<tr><td>das Werk</td><td>des Werks</td><td>die Werke</td><td>l'œuvre</td><td>Substantif neutre ; pluriel en -e.</td></tr>
+<tr><td>der Roman</td><td>des Romans</td><td>die Romane</td><td>le roman</td><td>Substantif masculin (emprunt sans marque de genre propre) ; pluriel en -e.</td></tr>
+<tr><td>das Gedicht</td><td>des Gedichts</td><td>die Gedichte</td><td>le poème</td><td>Substantif préfixé en Ge- : neutre ; pluriel en -e.</td></tr>
+<tr><td>die Ballade</td><td>der Ballade</td><td>die Balladen</td><td>la ballade</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>die Übersetzung</td><td>der Übersetzung</td><td>die Übersetzungen</td><td>la traduction</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Ästhetik</td><td>der Ästhetik</td><td>(sans pluriel usuel)</td><td>l'esthétique</td><td>Substantif abstrait en -ik : féminin.</td></tr>
+<tr><td>das Symbol</td><td>des Symbols</td><td>die Symbole</td><td>le symbole</td><td>Emprunt grec neutre ; pluriel en -e.</td></tr>
+<tr><td>die Metapher</td><td>der Metapher</td><td>die Metaphern</td><td>la métaphore</td><td>Emprunt grec en -er : féminin (exception au masculin agentif en -er, qui ne concerne que les noms de personnes/instruments) ; pluriel en -n.</td></tr>
+<tr><td>das Motiv</td><td>des Motivs</td><td>die Motive</td><td>le motif</td><td>Emprunt latin neutre ; pluriel en -e.</td></tr>
+<tr><td>die Handlung</td><td>der Handlung</td><td>die Handlungen</td><td>l'intrigue</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>der Erzähler</td><td>des Erzählers</td><td>die Erzähler</td><td>le narrateur</td><td>Nom d'agent masculin en -er, dérivé de erzählen ; invariable au pluriel.</td></tr>
+<tr><td>die Erzählerin</td><td>der Erzählerin</td><td>die Erzählerinnen</td><td>la narratrice</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>die Erzählperspektive</td><td>der Erzählperspektive</td><td>die Erzählperspektiven</td><td>la perspective narrative</td><td>Composé : le déterminé -perspektive est féminin (substantif en -e).</td></tr>
+<tr><td>die Gattung</td><td>der Gattung</td><td>die Gattungen</td><td>le genre (littéraire)</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>der Zyklus</td><td>des Zyklus</td><td>die Zyklen</td><td>le cycle</td><td>Emprunt grec en -us : masculin ; pluriel savant en -en avec chute de la désinence -us (comme Rhythmus/Rhythmen).</td></tr>
+<tr><td>die Vertonung</td><td>der Vertonung</td><td>die Vertonungen</td><td>la mise en musique</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Uraufführung</td><td>der Uraufführung</td><td>die Uraufführungen</td><td>la création, la première représentation</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>die Verfilmung</td><td>der Verfilmung</td><td>die Verfilmungen</td><td>l'adaptation cinématographique</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+</tbody></table></div>
+
+<h2 class="h2">3.8 Vocabulaire du conte Der blonde Eckbert : personnages, cadre et motifs</h2>
+<p>Section ajoutée : vocabulaire propre à l'intrigue, aux personnages et au décor du conte de Tieck, absent du support d'origine mais nécessaire au commentaire du texte lui-même.</p>
+<div class="tbl"><table><thead><tr><th>Allemand</th><th>Génitif singulier</th><th>Pluriel</th><th>Français</th><th>Règle de genre / remarque</th></tr></thead><tbody>
+<tr><td>die Titelfigur</td><td>der Titelfigur</td><td>die Titelfiguren</td><td>le personnage-titre</td><td>Composé : le déterminé -figur est un emprunt latin féminin ; pluriel en -n.</td></tr>
+<tr><td>der Ritter</td><td>des Ritters</td><td>die Ritter</td><td>le chevalier</td><td>Substantif masculin en -er (désignation de statut, non un agent déverbal) ; invariable au pluriel.</td></tr>
+<tr><td>die Ehefrau</td><td>der Ehefrau</td><td>die Ehefrauen</td><td>l'épouse</td><td>Composé : le déterminé -frau est féminin ; pluriel en -en.</td></tr>
+<tr><td>der Freund</td><td>des Freundes</td><td>die Freunde</td><td>l'ami</td><td>Substantif masculin ; pluriel en -e.</td></tr>
+<tr><td>die Freundin</td><td>der Freundin</td><td>die Freundinnen</td><td>l'amie</td><td>Suffixe -in ; pluriel en -nen.</td></tr>
+<tr><td>die Alte</td><td>der Alten</td><td>die Alten</td><td>la vieille femme</td><td>Substantif adjectival : substantivation de l'adjectif alt, déclinée comme un adjectif faible après l'article défini.</td></tr>
+<tr><td>der Spinnrocken</td><td>des Spinnrockens</td><td>die Spinnrocken</td><td>la quenouille</td><td>Composé : le déterminé -rocken est masculin ; invariable au pluriel.</td></tr>
+<tr><td>der Vogel</td><td>des Vogels</td><td>die Vögel</td><td>l'oiseau</td><td>Substantif masculin fort ; pluriel avec Umlaut, sans désinence.</td></tr>
+<tr><td>das Ei</td><td>des Eies</td><td>die Eier</td><td>l'œuf</td><td>Substantif neutre ; pluriel en -er (la diphtongue ei ne subit pas de mutation vocalique supplémentaire).</td></tr>
+<tr><td>die Perle</td><td>der Perle</td><td>die Perlen</td><td>la perle</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>der Edelstein</td><td>des Edelsteins</td><td>die Edelsteine</td><td>la pierre précieuse</td><td>Composé : le déterminé -stein est masculin ; pluriel en -e.</td></tr>
+<tr><td>der Hund</td><td>des Hundes</td><td>die Hunde</td><td>le chien</td><td>Substantif masculin ; pluriel en -e.</td></tr>
+<tr><td>der Schatz</td><td>des Schatzes</td><td>die Schätze</td><td>le trésor</td><td>Substantif masculin ; pluriel avec Umlaut + -e.</td></tr>
+<tr><td>die Burg</td><td>der Burg</td><td>die Burgen</td><td>la forteresse, le château fort</td><td>Substantif féminin ; pluriel en -en.</td></tr>
+<tr><td>das Schloss</td><td>des Schlosses</td><td>die Schlösser</td><td>le château, le palais</td><td>Substantif neutre ; pluriel en -er avec Umlaut.</td></tr>
+<tr><td>der Wald</td><td>des Waldes</td><td>die Wälder</td><td>la forêt</td><td>Substantif masculin ; pluriel en -er avec Umlaut.</td></tr>
+<tr><td>die Einöde</td><td>der Einöde</td><td>die Einöden</td><td>le désert, la solitude sauvage</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>das Gebirge</td><td>des Gebirges</td><td>die Gebirge</td><td>la chaîne de montagnes</td><td>Substantif collectif préfixé en Ge- : neutre ; invariable au pluriel.</td></tr>
+<tr><td>die Flucht</td><td>der Flucht</td><td>die Fluchten (peu usité)</td><td>la fuite</td><td>Substantif féminin déverbal (fliehen) ; le pluriel Fluchten existe mais reste rare, le singulier étant d'usage quasi général.</td></tr>
+<tr><td>das Geheimnis</td><td>des Geheimnisses</td><td>die Geheimnisse</td><td>le secret</td><td>Suffixe -nis : ici neutre (le genre des noms en -nis n'est pas fixe et doit être retenu au cas par cas) ; redoublement du -s au génitif et au pluriel.</td></tr>
+<tr><td>die Schuld</td><td>der Schuld</td><td>(sans pluriel au sens moral)</td><td>la faute, la culpabilité</td><td>Substantif féminin ; au sens moral, notion non dénombrable (le pluriel die Schulden existe mais désigne les dettes financières, sens distinct).</td></tr>
+<tr><td>der Verrat</td><td>des Verrats</td><td>(sans pluriel usuel)</td><td>la trahison</td><td>Substantif masculin déverbal (verraten) ; notion non dénombrable.</td></tr>
+<tr><td>der Wahnsinn</td><td>des Wahnsinns</td><td>(sans pluriel)</td><td>la folie</td><td>Composé masculin (Wahn + Sinn) ; notion non dénombrable.</td></tr>
+<tr><td>der Doppelgänger</td><td>des Doppelgängers</td><td>die Doppelgänger</td><td>le double</td><td>Nom d'agent masculin en -er ; invariable au pluriel.</td></tr>
+<tr><td>die Verwandlung</td><td>der Verwandlung</td><td>die Verwandlungen</td><td>la métamorphose</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>der Fluch</td><td>des Fluches</td><td>die Flüche</td><td>la malédiction</td><td>Substantif masculin ; pluriel avec Umlaut + -e.</td></tr>
+<tr><td>die Reue</td><td>der Reue</td><td>(sans pluriel)</td><td>le remords</td><td>Substantif féminin en -e, déverbal (reuen) ; notion non dénombrable.</td></tr>
+<tr><td>der Zauber</td><td>des Zaubers</td><td>(sans pluriel au sens de magie)</td><td>le charme, le sortilège</td><td>Substantif masculin ; au sens de « sortilège isolé » un pluriel die Zauber existe, mais le sens générique de « magie » reste non dénombrable.</td></tr>
+<tr><td>die Zauberei</td><td>der Zauberei</td><td>(sans pluriel usuel)</td><td>la sorcellerie, la magie</td><td>Suffixe -ei : toujours féminin.</td></tr>
+<tr><td>das Rätsel</td><td>des Rätsels</td><td>die Rätsel</td><td>l'énigme</td><td>Substantif neutre en -el ; invariable au pluriel.</td></tr>
+<tr><td>die Stimme</td><td>der Stimme</td><td>die Stimmen</td><td>la voix</td><td>Substantif féminin en -e ; pluriel en -n.</td></tr>
+<tr><td>der Name</td><td>des Namens</td><td>die Namen</td><td>le nom</td><td>Déclinaison faible particulière (n-Stämme) : génitif singulier en -ns (et non -en comme Held), pluriel en -n.</td></tr>
+<tr><td>die Erinnerung</td><td>der Erinnerung</td><td>die Erinnerungen</td><td>le souvenir</td><td>Suffixe -ung : féminin, pluriel en -en.</td></tr>
+<tr><td>das Gewissen</td><td>des Gewissens</td><td>(sans pluriel usuel)</td><td>la conscience (morale)</td><td>Substantivation neutre du participe présent de wissen (Ge- + -wissen) ; notion non dénombrable.</td></tr>
+</tbody></table></div>
+<!--END-->
+  </div></main>
+</div>
+</div>
+<button class="totop" id="totop" type="button" hidden>↑ Haut</button>
+
+<script>
+(function(){
+  var drawer=document.getElementById('drawer');
+  var main=document.getElementById('top');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var heads=[].slice.call(document.querySelectorAll('main h1.h1,main h2.h2,main h3.h3'));
+  heads.forEach(function(h,i){h.id='s'+i;});
+  var root={ch:[]},stack=[{lvl:0,node:root}];
+  heads.forEach(function(h){
+    var lvl=parseInt(h.tagName.charAt(1),10);
+    var n={id:h.id,txt:h.textContent.replace(/\s+/g,' ').trim(),lvl:lvl,ch:[]};
+    while(stack[stack.length-1].lvl>=lvl) stack.pop();
+    stack[stack.length-1].node.ch.push(n); stack.push({lvl:lvl,node:n});
+  });
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function render(nodes,tog){
+    var s='<ul>';
+    nodes.forEach(function(n){
+      var hk=n.ch.length>0;
+      s+='<li class="l'+n.lvl+(hk&&tog?' hk':'')+'"><div class="row">'+(hk&&tog?'<button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button>':'')+'<a href="#'+n.id+'" data-id="'+n.id+'">'+esc(n.txt)+'</a></div>'+(hk?render(n.ch,tog):'')+'</li>';
+    });
+    return s+'</ul>';
+  }
+  document.getElementById('tocSide').innerHTML=render(root.ch,true);
+  document.getElementById('tocDrawer').innerHTML=render(root.ch,true);
+  document.getElementById('tocMain').innerHTML=render(root.ch,false);
+
+  function go(id){
+    var el=document.getElementById(id); if(!el) return;
+    var y=el.getBoundingClientRect().top-main.getBoundingClientRect().top+main.scrollTop-12;
+    main.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a){e.preventDefault();drawer.classList.remove('on');go(a.getAttribute('href').slice(1));return;}
+    var t=e.target.closest&&e.target.closest('.tog');
+    if(t){var li=t.closest('li');var o=li.classList.toggle('open');t.setAttribute('aria-expanded',o?'true':'false');}
+  });
+  document.getElementById('openToc').addEventListener('click',function(){drawer.classList.add('on')});
+  document.getElementById('closeToc').addEventListener('click',function(){drawer.classList.remove('on')});
+  drawer.addEventListener('click',function(e){if(e.target===drawer) drawer.classList.remove('on')});
+
+  var links={};
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){var id=a.getAttribute('data-id');(links[id]=links[id]||[]).push(a);});
+  var cur=document.getElementById('curSec'),totop=document.getElementById('totop'),lastId=null;
+  function clearActive(){[].forEach.call(document.querySelectorAll('.toc a.active'),function(a){a.classList.remove('active')})}
+  function setActive(id){
+    if(id===lastId) return; lastId=id; clearActive();
+    (links[id]||[]).forEach(function(a){
+      a.classList.add('active');
+      var li=a.closest('li');
+      while(li){
+        if(li.classList.contains('hk')){li.classList.add('open');var b=li.querySelector(':scope>.row>.tog');if(b) b.setAttribute('aria-expanded','true');}
+        li=li.parentElement&&li.parentElement.closest('li');
+      }
+    });
+    var h=document.getElementById(id); cur.textContent=h?h.textContent.replace(/\s+/g,' ').trim():'';
+    var box=document.querySelector('.side'),act=box&&box.querySelector('a.active');
+    if(act&&box.offsetParent!==null){
+      var r=act.getBoundingClientRect(),br=box.getBoundingClientRect();
+      if(r.top<br.top+40||r.bottom>br.bottom-40) box.scrollTop+=r.top-br.top-br.height/3;
+    }
+  }
+  function onScroll(){
+    totop.hidden=main.scrollTop<600;
+    var mt=main.getBoundingClientRect().top,best=null;
+    for(var i=0;i<heads.length;i++){ if(heads[i].getBoundingClientRect().top-mt<=90) best=heads[i]; else break; }
+    if(best) setActive(best.id); else {lastId=null;cur.textContent='';clearActive();}
+  }
+  var tick=false;
+  main.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;onScroll()})}},{passive:true});
+  totop.addEventListener('click',function(){main.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  onScroll();
+})();
+</script>
+</body></html>

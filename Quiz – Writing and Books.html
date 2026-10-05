@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Quiz – Writing and Books</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1d1d1b;--card:#fff;--ac:#2456c9;--ok:#1f8a4c;--ko:#c93a2a;--bd:#d9d6cc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181b;--fg:#ecebe6;--card:#222428;--ac:#7ea3ff;--ok:#54c98a;--ko:#ff7a6b;--bd:#3a3d44}}
+:root[data-theme="dark"]{--bg:#17181b;--fg:#ecebe6;--card:#222428;--ac:#7ea3ff;--ok:#54c98a;--ko:#ff7a6b;--bd:#3a3d44}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.4 Georgia,'Times New Roman',serif}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:.2em 0 .1em}p.s{margin:0 0 14px;opacity:.7;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+label{display:block;padding:6px 0}
+button{font:inherit;cursor:pointer}
+.opt,.go{display:block;width:100%;text-align:left;background:var(--card);color:var(--fg);border:1.5px solid var(--bd);border-radius:12px;padding:12px;margin:8px 0}
+.go{background:var(--ac);color:#fff;border:0;text-align:center;font-weight:bold}
+.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.ko{border-color:var(--ko);background:color-mix(in srgb,var(--ko) 18%,var(--card))}
+.q{font-size:1.35rem;font-weight:bold;margin:8px 0 12px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+select{font:inherit;padding:6px;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:8px}
+input{font:inherit;width:100%;box-sizing:border-box;padding:12px;background:var(--card);color:var(--fg);border:1.5px solid var(--bd);border-radius:12px;margin-bottom:8px}.m{font-size:.9rem;opacity:.8}
+</style></head><body><main id="app"></main>
+<script>
+const D={
+"Textes & contes":`to write=écrire
+a book=un livre
+a work=un ouvrage, une œuvre
+a volume=un volume, un tome
+an author=un auteur
+a writer=un écrivain
+prose=la prose
+a collection=une collection
+a booklet=un livret
+a journal=un journal, une revue
+a handbook=un manuel
+a glossary=un glossaire
+a bibliography=une bibliographie
+an anthology=une anthologie, un florilège
+an essay=un essai
+an essayist=un(e) essayiste
+a pamphlet=un pamphlet
+a pamphleteer=un(e) pamphlétaire
+a diary=un journal (intime)
+memoirs=les mémoires
+confessions=les confessions
+the comic strips=les bandes dessinées
+lexicography=la lexicographie
+a lexicographer=un(e) lexicographe
+a reference work=un ouvrage de référence
+an encyclopedia=une encyclopédie
+a dictionary=un dictionnaire
+a lexicon=un lexique
+a vocabulary book=un vocabulaire
+a thesaurus=un dictionnaire synonymique
+a biography=une biographie
+a biographer=un(e) biographe
+an autobiography=une autobiographie
+a thesis=une thèse
+a report=un rapport
+a treatise on=un traité de
+a textbook=un manuel scolaire
+a novelist=un(e) romancier(-ère)
+a ghost writer=un nègre
+fiction=la fiction
+fictitious=fictif
+a story=une histoire
+a short story=une nouvelle
+a novel=un roman
+an adventure novel=un roman d'aventures
+an epic novel=un roman épique
+a saga=un roman-fleuve
+a historical novel=un roman historique
+a romance=un roman médiéval
+a historical romance=un roman de cape et d'épée
+a thriller=un roman à suspense
+a spy thriller=un roman d'espionnage
+a detective story=un roman policier
+a whodunnit=un polar
+a blockbuster=un roman à succès
+science fiction=la science-fiction
+a tale=un conte, un récit
+a legend=une légende
+legendary=légendaire
+a fable=une fable
+fantastic=fantastique
+a fairy tale=un conte de fées
+Little Red Riding Hood=le Petit Chaperon rouge
+the big bad wolf=le grand méchant loup
+Cinderella=Cendrillon
+The Sleeping Beauty=la Belle au Bois dormant
+Snow White and the Seven Dwarfs=Blanche Neige et les Sept Nains
+Mother Goose=Ma Mère l'Oye
+a giant=un géant
+an ogre=un ogre
+a goblin=un lutin
+a gnome=un gnome
+an elf=un farfadet
+a mermaid=une sirène
+a demon=un démon
+a vampire=un vampire
+a werewolf=un loup-garou`,
+"Poésie":`a poem=un poème
+to write poetry=écrire des poèmes
+poetic=poétique
+a poet=un poète
+a poetess=une femme poète
+to compose=composer
+poetic licence=la licence poétique
+a line=un vers
+verse=les vers
+in verse=en vers
+to versify=versifier
+versification=la versification
+a verse, a stanza=une strophe
+a rhyme=une rime
+to rhyme with=rimer avec
+to scan=scander
+a caesura=une césure
+the stress=l'accent
+a syllable=une syllabe
+an alexandrine=un alexandrin
+metre=le mètre
+a quatrain=un quatrain
+blank verse=les vers blancs
+to recite=réciter
+a recitation=une récitation
+to declaim=déclamer
+lyric poetry=la poésie lyrique
+narrative poetry=la poésie narrative
+epic=épique
+an epic (poem)=une épopée
+a sonnet=un sonnet
+an ode to=une ode à
+an elegy=une élégie
+a ballad=une ballade
+doggerel=les vers de mirliton
+a nursery rhyme=une comptine
+a limerick=un limerick`,
+"Procédés littéraires":`to relate, to recount=raconter
+the narrative=la narration
+narrative=narratif
+the narrator=le narrateur
+the action=l'action
+the plot=l'intrigue
+the unfolding of the plot=le déroulement de l'intrigue
+the denouement=le dénouement
+an episode=un épisode
+the climax=le point culminant
+an incident, a twist in the plot=une péripétie
+a theme=un thème
+thematic=thématique
+a character=un personnage
+the hero=le héros
+the heroine=l'héroïne
+the protagonists=les protagonistes
+the style=le style
+a figure of speech=une figure de rhétorique
+a simile=une comparaison
+a metaphor=une métaphore
+metonymy=la métonymie
+a euphemism=un euphémisme
+alliteration=l'allitération
+hyperbole=l'hyperbole
+onomatopoeia=l'onomatopée
+a malapropism=un pataquès
+a pun=un jeu de mots
+humour=l'humour
+humorous=humoristique
+irony=l'ironie
+ironic=ironique
+to portray sb=faire le portrait de qqn
+a portrayal, a portrait=un portrait
+to describe=décrire
+descriptive=descriptif
+a description=une description
+realism=le réalisme
+realistic=réaliste
+a symbol=un symbole
+symbolism=le symbolisme
+symbolic=symbolique
+to symbolize=symboliser
+representation=la représentation
+an image=une image
+imagery=les images (d'une œuvre)
+imaginary=imaginaire
+to imagine=imaginer
+imagination=l'imagination
+fantasy=la fantaisie
+to depict sth as=dépeindre qqch. comme
+to evoke sth=évoquer qqch.
+to allude to=faire allusion à
+to impersonate=personnifier
+to characterize=caractériser
+a satire on=une satire de
+satirical=satirique
+to satirize=satiriser
+a caricature=une caricature
+an allegory=une allégorie
+allegorical=allégorique
+a parable=une parabole`,
+"Critique littéraire":`a review=un compte rendu
+to review sth=faire un compte rendu de qqch.
+criticism=la critique (activité)
+a critique=une critique (analyse)
+critical=critique
+a critic=un(e) critique
+to criticize=critiquer
+to analyze=analyser
+an analysis=une analyse
+to assess=évaluer
+an assessment=une évaluation
+a comment on=une remarque
+a commentary on=un commentaire sur
+a synopsis=un synopsis
+an abstract=un extrait
+a summary=un résumé
+to summarize=résumer
+to quote=citer
+to interpret=interpréter
+an interpretation=une interprétation
+to express=exprimer
+expression=l'expression
+a context=un contexte
+contextual=contextuel
+simple=simple
+plain, unadorned=nu, dépouillé
+original=original
+banal=banal
+trite, hackneyed=galvaudé
+inventive=inventif
+imaginative=plein d'imagination
+racy=plein de verve, piquant
+plausible=plausible, vraisemblable
+verisimilitude=la vraisemblance
+gifted=doué
+talented=plein de talent
+interesting=intéressant
+exciting=passionnant
+striking=frappant
+convincing=convaincant
+moving=émouvant
+scathing=cinglant
+fascinating=fascinant
+engrossing=absorbant
+in depth=en profondeur
+matter-of-fact=prosaïque
+far-fetched=poussé, tiré par les cheveux
+stilted=guindé
+high-flown=ampoulé
+pompous=pompeux
+affected=affecté
+grandiloquent=grandiloquent
+sentimental=sentimental
+mawkish=trop sentimental
+pathos=le pathétique
+boring=ennuyeux
+superficial=superficiel
+heavy=lourd
+repetitive=répétitif
+jerky=saccadé
+long-winded=prolixe, interminable
+rambling=décousu
+pedestrian=dépourvu d'imagination
+colourless, drab=fade, terne
+a cliché=un cliché
+to move slowly=manquer d'action
+maudlin=larmoyant
+a potboiler=une œuvre alimentaire
+an airport novel=un roman de gare
+pulp fiction=les romans de gare
+to plagiarize=plagier
+plagiarism=le plagiat
+in my opinion=à mon avis
+as the author points out=comme le souligne l'auteur
+in the final analysis=en dernière analyse
+on the whole=dans l'ensemble
+in a word=en un mot
+in (actual) fact=en fait
+a typical example=un exemple typique
+to exemplify sth=exemplifier qqch.
+for example=par exemple
+in the first place=en premier lieu
+now we come to=passons maintenant à
+by way of introduction=en guise d'introduction
+it should be noted that=il est important de noter que
+what this means is that=cela veut dire que
+it follows from this that=il s'ensuit que
+on the one hand... on the other=d'un côté... de l'autre côté
+to a certain extent=dans une certaine mesure
+to the extent that=à tel point que
+up to a point=jusqu'à un certain point
+concerning=concernant
+as regards=en ce qui concerne
+in relation to=relativement à
+in a similar vein=dans le même esprit
+in spite of, notwithstanding=malgré, en dépit de
+a eulogy=un éloge, un panégyrique
+to praise, to eulogize=faire l'éloge de
+laudatory=dithyrambique
+he captures the reader's interest=il captive l'intérêt du lecteur
+his narrative powers=son talent de narrateur
+the interest flags=l'intérêt faiblit
+to slate a book=éreinter un livre`,
+"Édition":`to print=imprimer
+a printer=un imprimeur
+printing=l'imprimerie (activité)
+a printing works=une imprimerie (entreprise)
+a printing press=une presse typographique
+the typography=la typographie
+a typographer=un(e) typographe
+to bind sth in=relier qqch. en
+the binding=la reliure
+a fine binding=une reliure d'art
+an illustration=une illustration
+the artwork=les illustrations
+an illustrator=un(e) illustrateur(-trice)
+graphics=le graphisme
+the layout=la mise en page
+a typeface=une police de caractère
+italic type=l'italique
+roman type=le romain
+upper case=le haut de casse
+lower case=le bas de casse
+a capital (letter)=une majuscule
+the typesetter, the compositor=le compositeur
+typesetting=la composition
+a font=une fonte
+spacing=l'espacement
+a publishing house=une maison d'édition
+a publisher=un(e) éditeur(-trice)
+to publish=publier
+under the imprint of=publié chez
+to publish sth privately=publier qqch. à compte d'auteur
+to bring out=faire paraître
+in print=disponible
+out of print=épuisé
+a copy=un exemplaire
+an issue=un numéro
+a numbered copy=un exemplaire numéroté
+an edition=une édition
+a limited edition=une édition à tirage limité
+a first edition=une première édition
+the original edition=l'édition originale
+a publication=une publication
+a hardback=un livre relié
+a soft-cover book=un livre broché
+a paperback=un livre de poche
+in paperback=en poche
+an abridged version=une version abrégée
+a manuscript=un manuscrit
+the typescript=le tapuscrit
+to revise=réviser
+a revised and corrected edition=une édition revue et corrigée
+a revision=une révision
+to amend, to correct=corriger
+to edit=éditer (annoter)
+a (publisher's) reader=un(e) lecteur(-trice) de manuscrits
+the proofs=les épreuves
+page proofs=les épreuves en pages
+galley proofs=les placards
+a proofreader=un(e) correcteur(-trice)
+to proofread sth=corriger les épreuves de qqch.
+the cover=la couverture
+the (publisher's) blurb=le texte de couverture
+the (dust)jacket=la jaquette
+a page=une page
+a chapter=un chapitre
+a title=un titre
+the title page=la page de titre
+the frontispiece=le frontispice
+the foreword=l'avant-propos
+the contents=la table des matières
+the preface=la préface
+the introduction=l'introduction
+the text=le texte
+notes=les notes
+an index=un index
+to index=mettre un index à
+entitled=intitulé
+annotated=annoté
+an appendix=un appendice
+royalties=les droits d'auteur
+copyright=le copyright
+a bookseller=un(e) libraire
+a bookshop=une librairie
+a secondhand bookshop=une librairie de livres d'occasion
+antiquarian books=les livres anciens
+a bookstall=un étalage de librairie
+a literary prize=un prix littéraire
+a best-seller=un succès de librairie
+a library=une bibliothèque
+to borrow a book from a library=emprunter un livre à une bibliothèque
+a borrower=un(e) emprunteur(-euse)
+a librarian=un(e) bibliothécaire
+a catalogue=un catalogue
+to catalogue=cataloguer`};
+const S={};for(const k in D)S[k]=D[k].split("\n").map(l=>{const i=l.indexOf("=");return[l.slice(0,i),l.slice(i+1)]});
+const ALL=Object.values(S).flat();
+const $=document.getElementById("app");
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q,i,score,miss,sel=new Set(Object.keys(S)),dir="mix",n="20",md="qcm";
+function home(){
+$.innerHTML=`<h1>📚 Writing and Books</h1><p class="s">${ALL.length} mots et expressions · unité 44</p>
+<div class="card"><b>Thèmes</b>${Object.keys(S).map(k=>`<label><input type="checkbox" data-k="${k}" ${sel.has(k)?"checked":""}> ${k} (${S[k].length})</label>`).join("")}</div>
+<div class="card"><label>Sens : <select id="d"><option value="mix">Mixte</option><option value="ef">Anglais → Français</option><option value="fe">Français → Anglais</option></select></label>
+<label>Mode : <select id="mo"><option value="qcm">Choix multiples</option><option value="type">Saisie (je tape la réponse)</option></select></label>
+<label>Questions : <select id="nn"><option>10</option><option>20</option><option>50</option><option value="all">Toutes</option></select></label></div>
+<button class="go" id="st">Commencer</button>`;
+$.querySelectorAll("[data-k]").forEach(c=>c.onchange=()=>c.checked?sel.add(c.dataset.k):sel.delete(c.dataset.k));
+d.value=dir;nn.value=n;
+mo.value=md;mo.onchange=()=>md=mo.value;d.onchange=()=>dir=d.value;nn.onchange=()=>n=nn.value;
+st.onclick=()=>{const p=[...sel].flatMap(k=>S[k]);if(!p.length)return;start(p)}}
+function start(p){let a=sh(p);if(n!=="all")a=a.slice(0,+n);Q=a;i=0;score=0;miss=[];ask()}
+function ask(){
+if(i>=Q.length)return end();
+const it=Q[i],ef=dir==="ef"||(dir==="mix"&&Math.random()<.5),qi=ef?0:1,ai=1-qi;
+if(md==="type"){
+const nz=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/œ/g,"oe").replace(/’/g,"'").trim();
+const cl=s=>nz(s).replace(/\(.*?\)/g,"").replace(/[^a-z0-9' ]+/g," ").replace(/\s+/g," ").trim();
+const ns=s=>cl(s).replace(/^(?:(?:un|une|le|la|les|des|a|an|the|to)\s+|l')/,"");
+const good=(u,a)=>{const x=ns(u);return x&&(cl(a)===cl(u)||a.split(/,\s*/).some(p=>ns(p)===x))};
+$.innerHTML=`<div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="m">${i+1} / ${Q.length} · score ${score}</p>
+<div class="q">${it[qi]}</div><input id="ip" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${ef?"En français…":"In English…"}"><button class="go" id="vb">Valider</button><div id="nx"></div>`;
+ip.focus();let done=0;
+const next=()=>{i++;ask()};
+const chk=()=>{if(done){next();return}
+done=1;const r=good(ip.value,it[ai]);ip.disabled=true;
+if(r){score++;ip.classList.add("ok");nx.innerHTML="<p><b>✅ Correct !</b> "+it[ai]+"</p>"}
+else{miss.push(it);ip.classList.add("ko");nx.innerHTML=`<p><b>❌ Faux.</b> Réponse : <b>${it[ai]}</b></p><button class="opt" id="ov">J'avais juste (synonyme)</button>`;
+ov.onclick=()=>{score++;miss.pop();ip.className="ok";nx.innerHTML="<p><b>✅ Compté juste.</b> "+it[ai]+"</p>"}}
+vb.textContent=i+1>=Q.length?"Voir le résultat":"Suivant"};
+vb.onclick=chk;ip.onkeydown=e=>{if(e.key==="Enter")chk()};
+return}
+const bad=sh(ALL.filter(x=>x[ai]!==it[ai])).slice(0,3).map(x=>x[ai]);
+const opts=sh([it[ai],...bad]);
+$.innerHTML=`<div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="m">${i+1} / ${Q.length} · score ${score}</p>
+<div class="q">${it[qi]}</div>${opts.map(o=>`<button class="opt">${o}</button>`).join("")}<div id="nx"></div>`;
+let done=0;
+$.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;done=1;
+const right=b.textContent===it[ai];
+if(right)score++;else miss.push(it);
+$.querySelectorAll(".opt").forEach(x=>{if(x.textContent===it[ai])x.classList.add("ok");else if(x===b)x.classList.add("ko")});
+nx.innerHTML=`<button class="go">${i+1>=Q.length?"Voir le résultat":"Suivant"}</button>`;
+nx.firstChild.onclick=()=>{i++;ask()}})}
+function end(){
+$.innerHTML=`<h1>Résultat : ${score} / ${Q.length}</h1>
+${miss.length?`<div class="card"><b>À revoir</b>${miss.map(m=>`<p>${m[0]} → <b>${m[1]}</b></p>`).join("")}</div><button class="go" id="r">Refaire les erreurs</button>`:`<p>Parfait ! 🎉</p>`}
+<button class="opt" id="h">Retour au menu</button>`;
+h.onclick=home;if(window.r)r.onclick=()=>{Q=sh(miss);i=0;score=0;miss=[];ask()}}
+home();
+</script></body></html>

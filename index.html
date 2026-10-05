@@ -29,16 +29,31 @@ body {
   font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
   line-height: 1.65;
 }
+:root {
+  --bg: #0f1624;
+  --panel: #172033;
+  --ink: #e8ecf3;
+  --muted: #9aa7bd;
+  --line: #2a3650;
+  color-scheme: dark;
+}
+
 html { background: var(--bg); }
+
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
   z-index: -1;
   background:
     linear-gradient(rgba(15,22,36,.6), rgba(15,22,36,.6)),
     url("David.webp") center / cover no-repeat;
+  transform: translateZ(0);
 }
+
 
 @media (max-width: 700px) {
   body::before {

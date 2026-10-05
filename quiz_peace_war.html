@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Quiz – Peace and War</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1d1d1b;--card:#fff;--ac:#2456c9;--ok:#1f8a4c;--ko:#c93a2a;--bd:#d9d6cc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181b;--fg:#ecebe6;--card:#222428;--ac:#7ea3ff;--ok:#54c98a;--ko:#ff7a6b;--bd:#3a3d44}}
+:root[data-theme="dark"]{--bg:#17181b;--fg:#ecebe6;--card:#222428;--ac:#7ea3ff;--ok:#54c98a;--ko:#ff7a6b;--bd:#3a3d44}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.4 Georgia,'Times New Roman',serif}
+main{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:.2em 0 .1em}p.s{margin:0 0 14px;opacity:.7;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+label{display:block;padding:6px 0}
+button{font:inherit;cursor:pointer}
+.opt,.go{display:block;width:100%;text-align:left;background:var(--card);color:var(--fg);border:1.5px solid var(--bd);border-radius:12px;padding:12px;margin:8px 0}
+.go{background:var(--ac);color:#fff;border:0;text-align:center;font-weight:bold}
+.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.ko{border-color:var(--ko);background:color-mix(in srgb,var(--ko) 18%,var(--card))}
+.q{font-size:1.35rem;font-weight:bold;margin:8px 0 12px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+select{font:inherit;padding:6px;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:8px}
+input{font:inherit;width:100%;box-sizing:border-box;padding:12px;background:var(--card);color:var(--fg);border:1.5px solid var(--bd);border-radius:12px;margin-bottom:8px}.m{font-size:.9rem;opacity:.8}
+</style></head><body><main id="app"></main>
+<script>
+const D={
+"Paix":`to make peace with sb=faire la paix avec qqn
+peaceful=paisible, pacifique
+peaceful coexistence=la coexistence pacifique
+in peacetime=en temps de paix
+to keep the peace between=maintenir la paix entre
+détente=la détente
+peacekeeping force=les forces de maintien de la paix
+the Blue Helmets=les Casques bleus
+a deterrent force=une force de dissuasion
+a nuclear deterrent=une force de dissuasion nucléaire
+the interwar period=l'entre-deux-guerres
+the postwar period=l'après-guerre
+a peace treaty=un traité de paix
+to sign an armistice=signer un armistice
+to declare a ceasefire=déclarer le cessez-le-feu
+a truce=une trêve
+to end hostilities=mettre fin aux hostilités
+a negotiator=un(e) négociateur(-trice)
+to negotiate an agreement=négocier un accord
+negotiations=les négociations
+to enter into negotiations=engager des négociations
+to negotiate sth with sb=négocier qqch. avec qqn
+a non-aggression pact=un pacte de non-agression
+mediation=la médiation
+a mediator=un médiateur
+to mediate between=servir d'intermédiaire entre
+disarmament=le désarmement
+to disarm=désarmer
+to demobilize=démobiliser
+to make reparations to sb=payer des réparations à qqn
+the peace movement=le mouvement pour la paix
+a pacifist=un(e) pacifiste
+pacifism=le pacifisme
+a conscientious objector=un objecteur de conscience
+nuclear disarmament=le désarmement nucléaire
+CND=le mouvement pour le désarmement nucléaire
+to pacify=pacifier`,
+"Guerre":`the declaration of war=la déclaration de guerre
+to declare war on=déclarer la guerre à
+to go to war=entrer en guerre
+to break out=éclater
+the outbreak of hostilities=le début des hostilités
+to wage war with sb=faire la guerre à qqn
+to be at war with sb=être en guerre avec qqn
+to fight (with) sb=se battre contre qqn
+to struggle against/for=lutter contre/pour
+the struggle against/for=la lutte contre/pour
+a conflict=un conflit
+in wartime=en temps de guerre
+warlike=belliqueux
+hostile=hostile
+hostility=l'hostilité
+to resist sth=résister à qqch.
+resistance to=la résistance à
+a strategy=une stratégie
+strategic=stratégique
+tactics=la tactique
+tactical=tactique
+guerrilla warfare=la guérilla
+a guerrilla=un guérillero
+to mobilize=mobiliser
+mobilization=la mobilisation
+a world war=une guerre mondiale
+the First/Second World War=la Première/Deuxième Guerre mondiale
+all-out war=la guerre à outrance, la guerre totale
+a war of attrition=une guerre d'usure
+nuclear war=la guerre nucléaire
+civil war=la guerre civile
+Star Wars=la guerre des étoiles
+the Strategic Defense Initiative=l'initiative de défense stratégique
+the cold war=la guerre froide
+a war of nerves=une guerre des nerfs
+a striking force=une force de frappe
+the war on terror=la lutte antiterroriste
+a mercenary=un mercenaire
+to win/lose a war=gagner/perdre une guerre
+a victory=une victoire
+victorious=victorieux
+the victor=le vainqueur
+to conquer sth=conquérir qqch.
+a conquest=une conquête
+a conqueror=un(e) conquérant(e)
+to defeat sb=vaincre qqn
+a defeat=une défaite
+fighting men=des combattants
+fighting troops=des troupes de combat
+the enemy=l'ennemi
+enemy troops/lines=les troupes/lignes ennemies
+to engage the enemy=engager le combat contre l'ennemi
+a campaign=une campagne
+operations=les opérations
+an offensive=une offensive
+an expedition against=une expédition contre
+a task force=un corps expéditionnaire
+an invasion=une invasion
+to invade=envahir
+the invader=l'envahisseur
+to besiege=assiéger
+a siege=un siège
+to die for one's country=mourir pour la patrie
+a P.O.W.=un prisonnier de guerre
+a prison camp=un camp de prisonniers
+a concentration camp=un camp de concentration
+a refugee=un(e) réfugié(e)
+to desert=déserter
+a deserter=un déserteur
+desertion=la désertion
+to occupy=occuper
+the occupation=l'occupation
+occupying forces=les forces d'occupation
+a war criminal=un criminel de guerre
+war crimes=des crimes de guerre
+a crime against humanity=un crime contre l'humanité
+a mushroom cloud=un champignon atomique
+nuclear fallout=les retombées radioactives
+genocide=le génocide`,
+"Combats":`in combat=au combat
+to go into action=engager le combat
+to attack=attaquer
+an attack on=une attaque contre
+a counter-attack=une contre-attaque
+a surprise attack=une attaque-surprise
+an assault=un assaut
+a battle=une bataille
+to go into battle=livrer bataille
+the front (line)=le front
+front-line troops=les troupes de première ligne
+to kill=tuer
+to destroy=détruire
+destruction=la destruction
+to charge=charger
+a charge=une charge
+a skirmish=une escarmouche
+to fight hand-to-hand=se battre au corps à corps
+to storm a position=prendre une position d'assaut
+to come under heavy fire=essuyer un tir nourri
+a raid on=un raid sur
+to put to flight=mettre en fuite
+to repel sb/sth=repousser qqn/qqch.
+to reconnoitre=reconnaître (terrain)
+reconnaissance=la reconnaissance
+a reconnaissance mission/patrol=une mission/une patrouille de reconnaissance
+to patrol=patrouiller
+a patrol=une patrouille
+a sniper=un tireur isolé, un sniper
+a landing=un débarquement
+the D-day landings=le débarquement du 6 juin 1944
+D-day=le jour J
+to take a town/hill=prendre une ville/une colline
+to capture=capturer
+to rout=mettre en déroute
+to pursue=poursuivre
+to drive sb back=refouler qqn, repousser qqn
+to surround=entourer
+to fall back=reculer
+to retreat=battre en retraite
+a retreat=une retraite
+to give in, to give up=renoncer, s'avouer vaincu
+to surrender to=se rendre à
+the surrender to=la reddition à
+an unconditional surrender=une reddition sans conditions
+to withdraw from=se retirer de
+the vanguard=l'avant-garde
+the rearguard=l'arrière-garde
+defences=les moyens de défense
+defensive=défensif
+to defend sth against sth=défendre qqch. contre qqch.
+a battlefield=un champ de bataille
+the trenches=les tranchées
+barbed wire=du fil de fer barbelé
+the barbed wire entanglements=les barbelés
+a sandbag=un sac de sable
+a bridgehead=une tête de pont
+the flank=le flanc
+reinforcements=des renforts
+to be reported missing=être porté disparu
+to be taken prisoner=être fait prisonnier
+to suffer heavy losses=essuyer de grosses pertes
+the wounded=les blessés
+a stretcher-bearer=un brancardier
+a field hospital=un hôpital de campagne
+the dead=les morts
+killed in action=tué au combat`,
+"Armes":`a weapon=une arme
+conventional/nuclear weapons=les armes conventionnelles/nucléaires
+armaments=les armements
+ammunition=les munitions
+an ammunition dump=un dépôt de munitions
+armour=les blindés
+an explosive=un explosif
+an explosion=une explosion
+to explode=exploser, faire exploser
+gunpowder=la poudre à canon
+a sword=une épée
+a dagger=un poignard
+a spear=une lance
+a shield=un bouclier
+a bow=un arc
+an arrow=une flèche
+a firearm=une arme à feu
+a revolver=un revolver
+a pistol=un pistolet
+a gun=un fusil
+a sawn-off shotgun=un fusil à canon scié
+an automatic=une arme automatique
+a (hand) grenade=une grenade
+a shot=un coup de feu
+to fire=tirer
+to shoot at sb/sth=tirer sur qqn/qqch.
+to shoot sb=abattre qqn
+Fire!=Feu !
+a bullet=une balle
+a stray bullet=une balle perdue
+a cartridge=une cartouche
+to fire shots in the air=tirer en l'air
+to aim at sb/sth=viser qqn/qqch.
+the sight=la mire
+the target=la cible, l'objectif
+to hit the target=atteindre l'objectif
+a canon=un canon
+a machine gun=une mitrailleuse
+a submachine gun=une mitraillette
+a tank=un tank, un char
+a caterpillar=une chenille
+a mortar=un mortier
+machine-gun/mortar fire=un tir de mitrailleuse/de mortier
+a bombardment=un bombardement
+a bomb=une bombe
+the H-bomb=la bombe H
+the atom(ic) bomb=la bombe atomique
+a shell=un obus
+to bombard sth with sth=bombarder qqch. de qqch.
+to bomb=bombarder (avec des bombes)
+to shell=bombarder (avec des obus)
+a mine=une mine
+a minefield=un champ de mines
+a torpedo=une torpille
+to launch a rocket=lancer une fusée
+anti-aircraft defence=la D.C.A.
+napalm=le napalm
+a missile=un missile
+a ground-to-air missile=un missile sol-air/air-air
+an intermediate range missile=un missile de moyenne portée
+a cruise missile=un missile de croisière
+the nuclear warhead=l'ogive nucléaire
+a missile launcher=un lance-missiles
+poison gas=le gaz asphyxiant
+to be gassed=être gazé
+tear gas=le gaz lacrymogène
+nerve gas=le gaz neurotoxique
+germ/biological warfare=la guerre bactériologique/biologique
+biological/chemical weapons=les armes biologiques/chimiques`,
+"Enrôlement":`a serviceman=un militaire
+the (armed) forces=les forces armées
+to be in the Services=être militaire, être dans l'armée
+a regular soldier/officer=un militaire/officier de carrière
+a private=un simple soldat
+a recruit=une recrue
+a conscript=un appelé, un conscrit
+national service=le service militaire
+to sign on=s'engager, s'enrôler
+to join the army=s'engager dans l'armée
+to recruit sb=recruter qqn
+to be called up=être mobilisé
+to be demobilized=être démobilisé
+a civilian=un(e) civil(e)
+conscription=la conscription
+fit for service=bon pour le service
+to be declared unfit=être réformé
+army pay=la solde
+uniform=l'uniforme
+in dress uniform=en tenue de cérémonie
+in battle dress=en tenue de combat
+a forage cap=un calot
+a peaked cap=une casquette
+a helmet=un casque
+kit=le barda
+a rank=un grade
+a star=une étoile
+a stripe=un galon
+a chevron=un chevron`,
+"Vie militaire":`to serve in a regiment=servir dans un régiment
+to be on duty=être de service
+to be off duty=avoir quartier libre
+a garrison=une garnison
+headquarters=le quartier général
+HQ=le QG
+the barracks=la caserne
+the mess=la cantine, le mess
+a sentry=une sentinelle, un factionnaire
+to be on sentry duty=être de faction
+to be on fatigue duty=être de corvée
+reveille=le réveil
+confined to barracks=consigné
+to go on leave=partir en permission
+an officer=un officier
+a non-commissioned officer=un sous-officier
+the commanding officer=le commandant
+to get one's commission=être nommé officier
+to be in command=commander
+an ex-serviceman=un ancien combattant
+to salute sb=saluer qqn
+a salute=un salut
+to present arms=présenter les armes
+Present arms!=Présentez armes !
+to stand to attention=être/se mettre au garde-à-vous
+Attention!=Garde à vous !
+to stand at ease=être au repos
+(Stand) at ease!=Repos !
+to march=marcher au pas
+to mark time=marquer le pas
+Quick march!=En avant, marche !
+About turn!=Demi-tour !
+Right turn!=À droite, droite !
+Left turn!=À gauche, gauche !
+Halt! Who goes there?=Halte ! Qui va là ?
+Lights out!=Extinction des feux !
+to train for=s'entraîner pour, se préparer à
+to train sb=former qqn, instruire qqn
+training=l'instruction
+to drill=faire l'exercice
+to drill soldiers=faire faire l'exercice à des soldats
+drill=l'exercice
+to be on manoeuvres=être en manœuvres
+the assault course=le parcours du combattant
+a parade=une parade, une revue
+to review=passer en revue
+the parade ground=le terrain de manœuvres
+to parade before sb=défiler devant qqn
+to march past=défiler
+a march past=un défilé
+to inspect=inspecter
+an inspection=une inspection`,
+"Armée de terre":`the British/French army=l'armée britannique/française
+the US army=l'armée américaine
+the infantry=l'infanterie
+the artillery=l'artillerie
+the engineers=le génie
+the cavalry=la cavalerie
+the commandos=les commandos
+the Signals (corps)=les transmissions
+an army corps=un corps d'armée
+a division=une division
+a brigade=une brigade
+a regiment=un régiment
+a battalion=un bataillon
+a company=une compagnie
+a platoon=une section, un peloton
+a field marshal=un maréchal
+a general=un général
+a brigadier=un général de brigade
+a colonel=un colonel
+a lieutenant colonel=un lieutenant-colonel
+a major=un commandant
+a captain=un capitaine
+a lieutenant=un lieutenant
+a warrant officer=un adjudant
+a sergeant=un sergent
+a corporal=un caporal
+an infantryman=un fantassin
+a soldier=un soldat
+a gunner=un artilleur
+the troops=les troupes
+a detachment=un détachement
+a column=une colonne
+the reserve=la réserve
+an orderly=un planton
+khaki=kaki
+airborne=aéroporté
+a paratrooper=un parachutiste
+paratroops=les troupes aéroportées
+a parachute=un parachute
+to parachute=parachuter, sauter en parachute`,
+"Marine":`the French Navy=la marine française
+the Royal Navy=la marine de guerre britannique
+the US Navy=la marine de guerre américaine
+naval=naval
+a naval base=une base navale
+the fleet=la flotte
+a flotilla=une flottille
+a convoy=un convoi
+a port=un port
+the home port=le port d'attache
+a naval dockyard=un arsenal maritime
+to refit a ship=réarmer un navire
+a warship=un navire de guerre
+a battleship=un cuirassé
+an aircraft carrier=un porte-avions
+a cruiser=un croiseur
+a destroyer=un contre-torpilleur
+a frigate=une frégate
+a torpedo boat=une vedette lance-torpilles
+a troop carrier=un transport de troupes (navire)
+a gunboat=une canonnière
+a submarine=un sous-marin
+a launch=une vedette
+a landing craft=une péniche de débarquement
+an admiral=un amiral
+a commander=un capitaine de frégate
+the marines=les fusiliers marins
+a naval lieutenant=un enseigne de vaisseau
+a midshipman=un aspirant
+a sailor, a seaman=un marin
+a rating=un matelot
+the flagship=le vaisseau amiral
+a naval engagement=un combat naval
+to escort=escorter
+in close formation=en ordre serré
+to sink=couler, sombrer
+to sink a ship=couler un navire
+to scuttle a ship=saborder un navire
+Action stations!=À vos postes de combat !
+All hands on deck!=Tous les hommes sur le pont !
+a minesweeper=un dragueur de mines
+a minelayer=un mouilleur de mines
+to lay mines=mouiller des mines`,
+"Armée de l'air":`the French Air Force=l'armée de l'air française
+the Royal Air Force=l'armée de l'air britannique
+the US Air Force=l'armée de l'air américaine
+an aircraft=un avion
+a pilot=un pilote
+a fighter=un chasseur
+a bomber=un bombardier
+a helicopter=un hélicoptère
+a vertical take-off plane=un avion à décollage vertical
+a jet engine=un moteur à réaction
+a wing=une escadre aérienne
+a squadron=une escadrille
+a glider=un planeur
+an air chief marshal=un général (d'armée aérienne)
+an air commodore=un général de brigade aérienne
+a group captain=un colonel (de l'armée de l'air)
+a wing commander=un lieutenant-colonel (de l'armée de l'air)
+a squadron leader=un commandant (de l'armée de l'air)
+a flight lieutenant=un capitaine (de l'armée de l'air)
+a flying officer=un lieutenant (de l'armée de l'air)
+an airman=un soldat (de l'armée de l'air)
+a navigator=un navigateur
+a sortie=une sortie
+an air base=une base aérienne
+a landing field=un terrain d'atterrissage
+a mission=une mission
+an air raid=un raid aérien
+to drop a bomb on sth=lâcher une bombe sur qqch.
+to shoot sth/sb down=abattre qqch./qqn
+to crash-land=atterrir en catastrophe
+to bale out=sauter en catastrophe
+an ejector seat=un siège éjectable
+an air-raid shelter=un abri antiaérien
+a fallout shelter=un abri antinucléaire
+a fly-past=un défilé aérien`};
+const S={};for(const k in D)S[k]=D[k].split("\n").map(l=>{const i=l.indexOf("=");return[l.slice(0,i),l.slice(i+1)]});
+const ALL=Object.values(S).flat();
+const $=document.getElementById("app");
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q,i,score,miss,sel=new Set(Object.keys(S)),dir="mix",n="20",md="qcm";
+function home(){
+$.innerHTML=`<h1>🎖️ Peace and War</h1><p class="s">${ALL.length} mots et expressions · unité 19</p>
+<div class="card"><b>Thèmes</b>${Object.keys(S).map(k=>`<label><input type="checkbox" data-k="${k}" ${sel.has(k)?"checked":""}> ${k} (${S[k].length})</label>`).join("")}</div>
+<div class="card"><label>Sens : <select id="d"><option value="mix">Mixte</option><option value="ef">Anglais → Français</option><option value="fe">Français → Anglais</option></select></label>
+<label>Mode : <select id="mo"><option value="qcm">Choix multiples</option><option value="type">Saisie (je tape la réponse)</option></select></label>
+<label>Questions : <select id="nn"><option>10</option><option>20</option><option>50</option><option value="all">Toutes</option></select></label></div>
+<button class="go" id="st">Commencer</button>`;
+$.querySelectorAll("[data-k]").forEach(c=>c.onchange=()=>c.checked?sel.add(c.dataset.k):sel.delete(c.dataset.k));
+d.value=dir;nn.value=n;
+mo.value=md;mo.onchange=()=>md=mo.value;d.onchange=()=>dir=d.value;nn.onchange=()=>n=nn.value;
+st.onclick=()=>{const p=[...sel].flatMap(k=>S[k]);if(!p.length)return;start(p)}}
+function start(p){let a=sh(p);if(n!=="all")a=a.slice(0,+n);Q=a;i=0;score=0;miss=[];ask()}
+function ask(){
+if(i>=Q.length)return end();
+const it=Q[i],ef=dir==="ef"||(dir==="mix"&&Math.random()<.5),qi=ef?0:1,ai=1-qi;
+if(md==="type"){
+const nz=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/œ/g,"oe").replace(/’/g,"'").trim();
+const cl=s=>nz(s).replace(/\(.*?\)/g,"").replace(/[^a-z0-9' ]+/g," ").replace(/\s+/g," ").trim();
+const ns=s=>cl(s).replace(/^(?:(?:un|une|le|la|les|des|a|an|the|to)\s+|l')/,"");
+const good=(u,a)=>{const x=ns(u);return x&&(cl(a)===cl(u)||a.split(/,\s*/).some(p=>ns(p)===x))};
+$.innerHTML=`<div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="m">${i+1} / ${Q.length} · score ${score}</p>
+<div class="q">${it[qi]}</div><input id="ip" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${ef?"En français…":"In English…"}"><button class="go" id="vb">Valider</button><div id="nx"></div>`;
+ip.focus();let done=0;
+const next=()=>{i++;ask()};
+const chk=()=>{if(done){next();return}
+done=1;const r=good(ip.value,it[ai]);ip.disabled=true;
+if(r){score++;ip.classList.add("ok");nx.innerHTML="<p><b>✅ Correct !</b> "+it[ai]+"</p>"}
+else{miss.push(it);ip.classList.add("ko");nx.innerHTML=`<p><b>❌ Faux.</b> Réponse : <b>${it[ai]}</b></p><button class="opt" id="ov">J'avais juste (synonyme)</button>`;
+ov.onclick=()=>{score++;miss.pop();ip.className="ok";nx.innerHTML="<p><b>✅ Compté juste.</b> "+it[ai]+"</p>"}}
+vb.textContent=i+1>=Q.length?"Voir le résultat":"Suivant"};
+vb.onclick=chk;ip.onkeydown=e=>{if(e.key==="Enter")chk()};
+return}
+const bad=sh(ALL.filter(x=>x[ai]!==it[ai])).slice(0,3).map(x=>x[ai]);
+const opts=sh([it[ai],...bad]);
+$.innerHTML=`<div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="m">${i+1} / ${Q.length} · score ${score}</p>
+<div class="q">${it[qi]}</div>${opts.map(o=>`<button class="opt">${o}</button>`).join("")}<div id="nx"></div>`;
+let done=0;
+$.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(done)return;done=1;
+const right=b.textContent===it[ai];
+if(right)score++;else miss.push(it);
+$.querySelectorAll(".opt").forEach(x=>{if(x.textContent===it[ai])x.classList.add("ok");else if(x===b)x.classList.add("ko")});
+nx.innerHTML=`<button class="go">${i+1>=Q.length?"Voir le résultat":"Suivant"}</button>`;
+nx.firstChild.onclick=()=>{i++;ask()}})}
+function end(){
+$.innerHTML=`<h1>Résultat : ${score} / ${Q.length}</h1>
+${miss.length?`<div class="card"><b>À revoir</b>${miss.map(m=>`<p>${m[0]} → <b>${m[1]}</b></p>`).join("")}</div><button class="go" id="r">Refaire les erreurs</button>`:`<p>Parfait ! 🎉</p>`}
+<button class="opt" id="h">Retour au menu</button>`;
+h.onclick=home;if(window.r)r.onclick=()=>{Q=sh(miss);i=0;score=0;miss=[];ask()}}
+home();
+</script></body></html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Les cas latins et leurs fonctions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<style>
+:root{
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#1d2431; --muted:#5d6676; --rule:#d9dde6;
+  --title:#17315c; --band:#17315c; --band-ink:#f3f6fb; --h3:#0b6b73;
+  --quote:#9e2230; --quote-bg:#fbeef0; --quote-rule:#c9414f; --note-bg:#eef1f7;
+  --f-head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+    --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7;
+    --quote:#f29aa4; --quote-bg:#2a1a1f; --note-bg:#1d2431; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+  --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7;
+  --quote:#f29aa4; --quote-bg:#2a1a1f; --note-bg:#1d2431; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7}
+main{padding:1.5rem 16px 4rem}
+@media (min-width:1000px){main{padding-inline:40px}}
+.doc{max-width:52rem;margin-inline:auto}
+.cover{background:var(--band);color:var(--band-ink);padding:clamp(1.6rem,5vw,3.2rem);border-radius:6px;margin-bottom:2rem}
+.cover h1{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:clamp(2.4rem,8vw,4.2rem);line-height:.98;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+h2.h2{font-family:var(--f-head);text-wrap:balance;line-height:1.12;color:var(--title);font-weight:700;font-size:clamp(1.55rem,3.6vw,2.05rem);margin:2.6rem 0 .9rem;padding-bottom:.25em;border-bottom:3px solid var(--title)}
+p{margin:.75rem 0;max-width:68ch;text-wrap:pretty}
+.cas{color:var(--quote);font-weight:700}
+figure.cite{margin:1.5rem 0;max-width:62ch;background:var(--quote-bg);border-left:4px solid var(--quote-rule);border-radius:0 6px 6px 0;padding:.9rem 1.2rem}
+figure.cite blockquote{margin:0;font-style:italic;font-size:1.06rem}
+figure.cite figcaption{margin-top:.4rem;font-family:var(--f-head);font-size:.98rem;letter-spacing:.04em;color:var(--muted)}
+figure.cite figcaption::before{content:"— ";color:var(--quote-rule)}
+aside.note{max-width:68ch;margin:1rem 0;background:var(--note-bg);border-radius:6px;padding:.7rem 1rem;color:var(--muted);font-style:italic;font-size:.98rem}
+.tbl{overflow-x:auto;margin:1.2rem 0;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+th{font-family:var(--f-head);text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;text-align:left;background:var(--band);color:var(--band-ink);padding:.55rem .8rem;white-space:nowrap}
+td{padding:.5rem .8rem;border-top:1px solid var(--rule);vertical-align:top;min-width:9rem}
+tbody tr:nth-child(even){background:var(--note-bg)}
+td.fn{font-family:var(--f-head);font-weight:600;font-size:1.05rem;color:var(--h3);min-width:10rem}
+.ex+.ex{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--rule)}
+.ex .la{display:block;font-style:italic}
+.ex .fr{display:block;color:var(--muted);font-size:.92rem}
+</style></head>
+<body><main><div class="doc">
+<header class="cover"><h1>Les cas latins et leurs fonctions</h1></header>
+<p>Exemples limités aux 1ʳᵉ et 2ᵉ déclinaisons, tous construits sur la même histoire : Marcus (2ᵉ décl.) offre une rose (<i>rosa</i>, 1ʳᵉ décl.) à une fille (<i>puella</i>) dans la forêt (<i>silva</i>), à Rome (<i>Roma</i>). Le mot au cas étudié est en <span class="cas">rouge et en gras</span> pour comparer les phrases d’un coup d’œil.</p>
+<figure class="cite"><blockquote><span class="cas">Marcus</span> rosam puellae dat.</blockquote><figcaption>Phrase de référence : Marcus donne une rose à la fille.</figcaption></figure>
+<h2 class="h2" id="nominatif">Nominatif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Sujet</td><td><div class="ex"><span class="la"><span class="cas">Marcus</span> rosam puellae dat.</span><span class="fr">Marcus donne une rose à la fille.</span></div></td></tr><tr><td class="fn">Attribut du sujet</td><td><div class="ex"><span class="la">Marcus <span class="cas">amicus</span> puellae est.</span><span class="fr">Marcus est l’ami de la fille.</span></div></td></tr><tr><td class="fn">Apposition</td><td><div class="ex"><span class="la">Marcus, <span class="cas">amicus</span> puellae, rosam dat.</span><span class="fr">Marcus, l’ami de la fille, donne une rose.</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="vocatif">Vocatif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Apostrophe</td><td><div class="ex"><span class="la"><span class="cas">Marce</span>, rosam puellae da !</span><span class="fr">Marcus, donne une rose à la fille !</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="accusatif">Accusatif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">COD</td><td><div class="ex"><span class="la">Marcus <span class="cas">rosam</span> puellae dat.</span><span class="fr">Marcus donne une rose à la fille.</span></div></td></tr><tr><td class="fn">Sujet d’une proposition infinitive</td><td><div class="ex"><span class="la">Puella <span class="cas">Marcum</span> rosam dare videt.</span><span class="fr">La fille voit que Marcus donne une rose.</span></div></td></tr><tr><td class="fn">Attribut du COD</td><td><div class="ex"><span class="la">Puella Marcum <span class="cas">amicum</span> vocat.</span><span class="fr">La fille appelle Marcus son ami.</span></div></td></tr><tr><td class="fn">Direction (lieu où l’on va)</td><td><div class="ex"><span class="la">Marcus <span class="cas">Romam</span> ambulat.</span><span class="fr">Marcus va à Rome.</span></div><div class="ex"><span class="la">Marcus in <span class="cas">silvam</span> ambulat.</span><span class="fr">Marcus va dans la forêt.</span></div></td></tr><tr><td class="fn">Durée</td><td><div class="ex"><span class="la">Marcus <span class="cas">multas horas</span> in silva ambulat.</span><span class="fr">Marcus marche pendant de longues heures dans la forêt.</span></div></td></tr><tr><td class="fn">Exclamation</td><td><div class="ex"><span class="la">O <span class="cas">Marcum miserum</span> !</span><span class="fr">Pauvre Marcus !</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="génitif">Génitif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Complément du nom (possession)</td><td><div class="ex"><span class="la">Rosa <span class="cas">Marci</span> in silva est.</span><span class="fr">La rose de Marcus est dans la forêt.</span></div></td></tr><tr><td class="fn">Subjectif / objectif</td><td><div class="ex"><span class="la">Cura <span class="cas">puellae</span> magna est.</span><span class="fr">Le souci de la fille est grand (celui qu’elle éprouve = subjectif ; celui qu’on a pour elle = objectif).</span></div></td></tr><tr><td class="fn">Partitif</td><td><div class="ex"><span class="la">Marcus satis <span class="cas">rosarum</span> puellae dat.</span><span class="fr">Marcus donne assez de roses à la fille.</span></div></td></tr><tr><td class="fn">Qualité</td><td><div class="ex"><span class="la">Marcus vir <span class="cas">magni animi</span> est.</span><span class="fr">Marcus est un homme au grand courage.</span></div></td></tr><tr><td class="fn">Prix / valeur</td><td><div class="ex"><span class="la">Rosa <span class="cas">magni</span> est.</span><span class="fr">La rose a beaucoup de valeur.</span></div></td></tr><tr><td class="fn">Après certains verbes (souvenir, accusation…)</td><td><div class="ex"><span class="la">Puella <span class="cas">Marci</span> meminit.</span><span class="fr">La fille se souvient de Marcus.</span></div><div class="ex"><span class="la">Puella Marcum <span class="cas">furti</span> accusat.</span><span class="fr">La fille accuse Marcus de vol.</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="datif">Datif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">COS (attribution)</td><td><div class="ex"><span class="la">Marcus rosam <span class="cas">puellae</span> dat.</span><span class="fr">Marcus donne une rose à la fille.</span></div></td></tr><tr><td class="fn">Possession (avec sum)</td><td><div class="ex"><span class="la"><span class="cas">Marco</span> rosa est.</span><span class="fr">Marcus a une rose.</span></div></td></tr><tr><td class="fn">Intérêt (avantage / dommage)</td><td><div class="ex"><span class="la">Marcus <span class="cas">puellae</span> rosam parat.</span><span class="fr">Marcus prépare une rose pour la fille.</span></div></td></tr><tr><td class="fn">Agent (adjectif verbal)</td><td><div class="ex"><span class="la">Rosa puellae <span class="cas">Marco</span> danda est.</span><span class="fr">La rose doit être donnée à la fille par Marcus.</span></div></td></tr><tr><td class="fn">But (double datif)</td><td><div class="ex"><span class="la">Rosa <span class="cas">puellae gaudio</span> est.</span><span class="fr">La rose est une source de joie pour la fille.</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="ablatif">Ablatif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Moyen / instrument</td><td><div class="ex"><span class="la">Marcus rosam <span class="cas">gladio</span> secat.</span><span class="fr">Marcus coupe la rose avec une épée.</span></div></td></tr><tr><td class="fn">Manière</td><td><div class="ex"><span class="la">Marcus rosam <span class="cas">magna cum cura</span> dat.</span><span class="fr">Marcus donne la rose avec grand soin.</span></div></td></tr><tr><td class="fn">Cause</td><td><div class="ex"><span class="la">Puella <span class="cas">gaudio</span> tacet.</span><span class="fr">La fille se tait de joie.</span></div></td></tr><tr><td class="fn">Agent (avec a/ab)</td><td><div class="ex"><span class="la">Rosa <span class="cas">a Marco</span> datur.</span><span class="fr">La rose est donnée par Marcus.</span></div></td></tr><tr><td class="fn">Temps (quand)</td><td><div class="ex"><span class="la">Marcus rosam <span class="cas">proximo anno</span> dat.</span><span class="fr">Marcus donne la rose l’année suivante.</span></div></td></tr><tr><td class="fn">Lieu (où / d’où)</td><td><div class="ex"><span class="la">Marcus rosam in <span class="cas">silva</span> dat.</span><span class="fr">Marcus donne la rose dans la forêt.</span></div><div class="ex"><span class="la">Marcus ex <span class="cas">silva</span> rosam portat.</span><span class="fr">Marcus rapporte une rose de la forêt.</span></div></td></tr><tr><td class="fn">Séparation</td><td><div class="ex"><span class="la">Marcus puellam <span class="cas">cura</span> liberat.</span><span class="fr">Marcus libère la fille de son souci.</span></div></td></tr><tr><td class="fn">2ᵉ terme de comparaison</td><td><div class="ex"><span class="la">Puella <span class="cas">rosa</span> pulchrior est.</span><span class="fr">La fille est plus belle que la rose.</span></div></td></tr><tr><td class="fn">Ablatif absolu</td><td><div class="ex"><span class="la"><span class="cas">Rosa data</span>, puella gaudet.</span><span class="fr">La rose ayant été donnée, la fille se réjouit.</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="locatif">Locatif</h2>
+<div class="tbl"><table><thead><tr><th>Fonction</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Lieu où (villes, petites îles, domus, rus)</td><td><div class="ex"><span class="la">Marcus <span class="cas">Romae</span> rosam dat.</span><span class="fr">Marcus donne une rose à Rome.</span></div></td></tr></tbody></table></div>
+<h2 class="h2" id="reperes">Repère pour les noms de villes</h2>
+<div class="tbl"><table><thead><tr><th>Question</th><th>Cas</th><th>Exemple</th></tr></thead><tbody><tr><td class="fn">Où ?</td><td>Locatif</td><td><div class="ex"><span class="la">Marcus <span class="cas">Romae</span> est.</span><span class="fr">Marcus est à Rome.</span></div></td></tr><tr><td class="fn">Vers où ?</td><td>Accusatif</td><td><div class="ex"><span class="la">Marcus <span class="cas">Romam</span> it.</span><span class="fr">Marcus va à Rome.</span></div></td></tr><tr><td class="fn">D’où ?</td><td>Ablatif</td><td><div class="ex"><span class="la">Marcus <span class="cas">Roma</span> venit.</span><span class="fr">Marcus vient de Rome.</span></div></td></tr></tbody></table></div>
+
+</div></main></body></html>

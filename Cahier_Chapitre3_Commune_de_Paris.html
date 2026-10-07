@@ -1,0 +1,647 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Cahier Histoire Contemporaine — Chapitre 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<style>
+/* Mise en page : colonne de lecture + sommaire latéral fixe ; titres en bleu de travail, citations en rouge, dates surlignées en jaune. */
+:root{
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#1d2431; --muted:#5d6676; --rule:#d9dde6;
+  --title:#17315c; --band:#17315c; --band-ink:#f3f6fb; --h3:#0b6b73; --h4:#3a4a68;
+  --quote:#9e2230; --quote-bg:#fbeef0; --quote-rule:#c9414f;
+  --date-bg:#ffe28a; --date-ink:#463300;
+  --note-bg:#eef1f7;
+  --t-add:#0b6b73; --t-fix:#6a3fa0; --t-check:#b2470f; --t-ok:#2b7a3d;
+  --f-head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+    --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+    --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+    --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+    --t-add:#74d0d7; --t-fix:#c3a4f0; --t-check:#ff9d6b; --t-ok:#7fd194;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151c; --surface:#181e28; --ink:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+  --title:#a9c2ee; --band:#1f3a66; --band-ink:#f3f6fb; --h3:#74d0d7; --h4:#a8b6d2;
+  --quote:#f29aa4; --quote-bg:#2a1a1f; --quote-rule:#c9414f;
+  --date-bg:#5b4812; --date-ink:#ffe59c; --note-bg:#1d2431;
+  --t-add:#74d0d7; --t-fix:#c3a4f0; --t-check:#ff9d6b; --t-ok:#7fd194;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;padding:0;overflow:hidden}
+.app{height:100%;display:flex;flex-direction:column}
+*{box-sizing:border-box}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--h3);outline-offset:2px}
+
+.shell{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+@media (min-width:1000px){
+  .shell{grid-template-columns:20rem minmax(0,1fr);gap:0}
+}
+
+/* sommaire latéral */
+.side{display:none}
+@media (min-width:1000px){
+  .side{display:block;height:100%;overflow-y:auto;padding:1.5rem .75rem 1.5rem 24px;border-right:1px solid var(--rule);font-family:var(--f-head);font-size:1.02rem;scrollbar-width:thin}
+}
+.side .brand{font-family:var(--f-head);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--title);font-size:.95rem;margin-bottom:.6rem}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc ul ul{padding-left:.9rem;border-left:1px solid var(--rule);margin-left:.45rem;display:none}
+.toc li.open>ul{display:block}
+.toc .row{display:flex;align-items:flex-start;gap:.15rem}
+.toc a{text-decoration:none;color:var(--ink);padding:.18rem .4rem;border-radius:4px;line-height:1.3;display:block;flex:1;min-width:0}
+.toc a:hover{background:var(--note-bg)}
+.toc a.active{background:var(--band);color:var(--band-ink)}
+.toc li.l1>.row>a{font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--title);margin-top:.5rem}
+.toc li.l1>.row>a.active{color:var(--band-ink)}
+.toc li.l2>.row>a{font-weight:600}
+.toc li.l4>.row>a{font-size:.95em;color:var(--muted)}
+.tog{all:unset;cursor:pointer;width:1.3rem;height:1.5rem;flex:none;display:grid;place-items:center;color:var(--muted)}
+.tog::before{content:"";width:.42rem;height:.42rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.toc li.open>.row>.tog::before{transform:rotate(45deg)}
+.toc li:not(.hk)>.row{padding-left:1.3rem}
+
+/* barre mobile */
+.bar{flex:none;z-index:20;display:flex;gap:.7rem;align-items:center;background:var(--bg);border-bottom:1px solid var(--rule);padding:.55rem 16px;font-family:var(--f-head)}
+.bar button{all:unset;cursor:pointer;background:var(--band);color:var(--band-ink);padding:.3rem .8rem;border-radius:5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.bar .cur{color:var(--muted);font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+@media (min-width:1000px){.bar{display:none}}
+.drawer{position:fixed;inset:0;z-index:30;display:none;background:rgba(10,14,22,.55)}
+.drawer.on{display:block}
+.drawer .panel{position:absolute;inset:0 auto 0 0;width:min(88vw,24rem);background:var(--surface);overflow-y:auto;padding:1rem 1rem calc(1rem + env(safe-area-inset-bottom,0px));padding-top:calc(1rem + env(safe-area-inset-top,0px));font-family:var(--f-head);font-size:1.08rem}
+.drawer .close{all:unset;cursor:pointer;float:right;font-family:var(--f-head);font-weight:600;color:var(--muted);padding:.2rem .5rem}
+
+/* contenu */
+main{min-width:0;height:100%;overflow-y:auto;overscroll-behavior:contain;padding-block:1.5rem 5rem;padding-inline:16px}
+.doc{max-width:52rem;margin-inline:auto}
+@media (min-width:1000px){main{padding-inline:40px}}
+.cover{background:var(--band);color:var(--band-ink);padding:clamp(1.6rem,5vw,3.2rem);border-radius:6px;margin-bottom:2.2rem}
+.cover .kick{font-family:var(--f-head);letter-spacing:.14em;text-transform:uppercase;font-size:.95rem;opacity:.8}
+.cover h1{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:clamp(2.6rem,9vw,5rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin:.6rem 0 .8rem;text-wrap:balance}
+.cover .sub{font-family:var(--f-head);font-size:clamp(1.3rem,3.4vw,1.9rem);font-weight:500;line-height:1.2;text-wrap:balance}
+.cover .span{display:inline-block;margin-top:1.2rem;font-family:var(--f-head);font-weight:700;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:.04em;background:var(--date-bg);color:var(--date-ink);padding:.05em .45em;border-radius:3px}
+.cover .meta{margin-top:1.4rem;font-size:.95rem;line-height:1.5;opacity:.9;display:grid;gap:.15rem}
+
+.sommaire{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1.2rem 1.4rem 1.4rem;margin-bottom:2.2rem}
+.sommaire h2.stitle{all:unset;display:block;font-family:var(--f-head);font-weight:700;font-size:1.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--title);margin-bottom:.2rem}
+.sommaire .hint{color:var(--muted);font-size:.9rem;margin:0 0 .8rem}
+.sommaire ul{list-style:none;margin:0;padding:0}
+.sommaire ul ul{padding-left:1.1rem}
+.sommaire li{margin:0}
+.sommaire a{display:block;text-decoration:none;padding:.12rem 0;line-height:1.35;font-size:.98rem;text-wrap:pretty}
+.sommaire a:hover{color:var(--quote);text-decoration:underline}
+.sommaire li.l1>.row>a{font-family:var(--f-head);font-weight:700;font-size:1.25rem;letter-spacing:.04em;text-transform:uppercase;color:var(--title);margin-top:.9rem;border-top:1px solid var(--rule);padding-top:.5rem}
+.sommaire>ul>li:first-child>.row>a{border-top:0;margin-top:.2rem}
+.sommaire li.l2>.row>a{font-family:var(--f-head);font-weight:600;font-size:1.1rem;margin-top:.15rem}
+.sommaire li.l3>.row>a{color:var(--h3);font-size:.95rem}
+
+h1.h1,h2.h2,h3.h3,h4.h4{scroll-margin-top:4.2rem;font-family:var(--f-head);text-wrap:balance;line-height:1.12}
+@media (min-width:1000px){h1.h1,h2.h2,h3.h3,h4.h4{scroll-margin-top:1.5rem}}
+h1.h1{background:var(--band);color:var(--band-ink);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(1.7rem,4.6vw,2.5rem);padding:.55em .7em;border-radius:5px;margin:3.4rem 0 1.2rem}
+h1.h1+h1.h1{margin-top:-.6rem;background:transparent;color:var(--title);padding:0 0 .4em;border-bottom:2px solid var(--title);border-radius:0;font-size:clamp(1.4rem,3.6vw,1.9rem)}
+h2.h2{color:var(--title);font-weight:700;font-size:clamp(1.55rem,3.6vw,2.05rem);margin:2.8rem 0 .9rem;padding-bottom:.25em;border-bottom:3px solid var(--title)}
+h3.h3{color:var(--h3);font-weight:700;font-size:clamp(1.3rem,3vw,1.6rem);margin:2.1rem 0 .6rem}
+h4.h4{color:var(--h4);font-weight:600;font-size:1.2rem;letter-spacing:.03em;text-transform:uppercase;margin:1.6rem 0 .3rem}
+h4.h4::before{content:"";display:inline-block;width:.55em;height:.55em;background:var(--quote-rule);margin-right:.55em;border-radius:1px;vertical-align:.05em}
+main p,main li{max-width:68ch;text-wrap:pretty}
+main p{margin:.75rem 0}
+main ul{margin:.6rem 0 1rem;padding-left:1.25rem}
+main li{margin:.4rem 0}
+main li::marker{color:var(--quote-rule)}
+main li.grp{list-style:none;margin-left:-1.25rem;margin-top:1.1rem;font-family:var(--f-head);font-size:1.15rem}
+strong{font-weight:600}
+
+.date{background:var(--date-bg);color:var(--date-ink);padding:0 .28em;border-radius:3px;font-weight:600;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.iq{color:var(--quote)}
+
+figure.cite{margin:1.5rem 0;max-width:62ch;background:var(--quote-bg);border-left:4px solid var(--quote-rule);border-radius:0 6px 6px 0;padding:.9rem 1.2rem}
+figure.cite blockquote{margin:0;color:var(--quote);font-style:italic;font-size:1.06rem}
+figure.cite blockquote p{margin:.4rem 0;max-width:none}
+figure.cite figcaption{margin-top:.55rem;font-family:var(--f-head);font-size:.98rem;letter-spacing:.04em;color:var(--muted);text-transform:none;line-height:1.35}
+figure.cite figcaption::before{content:"— ";color:var(--quote-rule)}
+aside.note{max-width:68ch;margin:1rem 0;background:var(--note-bg);border-radius:6px;padding:.7rem 1rem;color:var(--muted);font-style:italic;font-size:.98rem}
+
+.tag{display:inline-grid;place-items:center;min-width:1.35em;height:1.35em;padding:0 .2em;border-radius:50%;font-size:.78em;font-style:normal;font-weight:700;border:1.5px solid currentColor;vertical-align:.08em;line-height:1;cursor:help}
+.tag.add{color:var(--t-add)}.tag.fix{color:var(--t-fix)}.tag.check{color:var(--t-check)}.tag.ok{color:var(--t-ok)}
+
+.tbl{overflow-x:auto;margin:1.2rem 0;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;line-height:1.45}
+th{font-family:var(--f-head);text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;text-align:left;background:var(--band);color:var(--band-ink);padding:.55rem .8rem;white-space:nowrap}
+td{padding:.5rem .8rem;border-top:1px solid var(--rule);vertical-align:top;min-width:9rem}
+tbody tr:nth-child(even){background:var(--note-bg)}
+
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;all:unset;cursor:pointer;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--band);color:var(--band-ink);font-family:var(--f-head);font-weight:700;padding:.45rem .8rem;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25);font-size:.95rem;letter-spacing:.04em}
+.totop[hidden]{display:none!important}
+</style>
+
+<style>
+/* Ajouts propres au chapitre 3 : remarques de vérification et compléments des livres */
+.vf{color:var(--muted);font-style:italic;font-size:.9em}
+.vf .tag{margin-right:.2em;font-style:normal;cursor:default}
+li.comp{list-style:none;margin-left:-1.25rem;margin-top:.9rem;padding:.6rem .95rem;max-width:68ch;background:var(--note-bg);border-left:4px solid var(--t-add);border-radius:0 6px 6px 0}
+li.comp::marker{content:""}
+.clab{font-family:var(--f-head);font-weight:700;letter-spacing:.03em;color:var(--t-add)}
+.clab .tag{cursor:default}
+td .tag{cursor:default}
+</style>
+<div class="app">
+<div class="bar">
+  <button type="button" id="openToc" aria-haspopup="dialog">☰ Sommaire</button>
+  <span class="cur" id="curSec"></span>
+</div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Sommaire">
+  <div class="panel"><button class="close" type="button" id="closeToc">Fermer ✕</button><div class="brand" style="font-family:var(--f-head);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--title);margin-bottom:.6rem">Sommaire</div><nav class="toc" id="tocDrawer"><ul><li class="l1"><div class="row"><a href="#comment-lire-ce-cahier" data-id="comment-lire-ce-cahier">Comment lire ce cahier</a></div></li><li class="l1 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#chapitre-3" data-id="chapitre-3">Chapitre 3</a></div><ul><li class="l2"><div class="row"><a href="#introduction-reperes-chronologiques-et-problematiq" data-id="introduction-reperes-chronologiques-et-problematiq">Introduction : repères chronologiques et problématique</a></div></li><li class="l2 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#i-sous-le-second-empire-du-silence-a-la-renaissanc" data-id="i-sous-le-second-empire-du-silence-a-la-renaissanc">I. SOUS LE SECOND EMPIRE, DU SILENCE À LA RENAISSANCE D’UNE PAROLE POPULAIRE, 1852-1870</a></div><ul><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#1-le-regime-autoritaire-de-napoleon-iii" data-id="1-le-regime-autoritaire-de-napoleon-iii">1. Le régime autoritaire de NAPOLÉON III</a></div><ul><li class="l4"><div class="row"><a href="#a-la-mainmise-sur-le-pays" data-id="a-la-mainmise-sur-le-pays">A) La mainmise sur le pays</a></div></li><li class="l4"><div class="row"><a href="#b-la-fete-imperiale" data-id="b-la-fete-imperiale">B) La « fête impériale »</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#2-lempire-cest-la-prosperite-s-aprile-p-393" data-id="2-lempire-cest-la-prosperite-s-aprile-p-393">2. « L’Empire c’est la prospérité » (S. APRILE, p. 393)</a></div><ul><li class="l4"><div class="row"><a href="#a-un-contexte-favorable" data-id="a-un-contexte-favorable">A) Un contexte favorable</a></div></li><li class="l4"><div class="row"><a href="#b-la-modernisation-de-la-france" data-id="b-la-modernisation-de-la-france">B) La modernisation de la France</a></div></li><li class="l4"><div class="row"><a href="#c-les-consequences-sociales-de-cette-modernisation" data-id="c-les-consequences-sociales-de-cette-modernisation">C) Les conséquences sociales de cette modernisation : une société en mouvement</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m" data-id="3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m">3. La grève légalisée en 1864 : un nouveau temps de mouvements protestataires et de luttes populaires</a></div><ul><li class="l4"><div class="row"><a href="#a-le-cadre-un-regime-qui-se-liberalise-une-parole-" data-id="a-le-cadre-un-regime-qui-se-liberalise-une-parole-">A) Le cadre : un régime qui se libéralise, une parole qui se prend</a></div></li><li class="l4"><div class="row"><a href="#b-les-greves-ouvrieres-se-multiplient-et-connaisse" data-id="b-les-greves-ouvrieres-se-multiplient-et-connaisse">B) Les grèves ouvrières se multiplient et connaissent leur apogée en 1869</a></div></li><li class="l4"><div class="row"><a href="#c-les-femmes-dans-ce-mouvement-la-premiere-vague-f" data-id="c-les-femmes-dans-ce-mouvement-la-premiere-vague-f">C) Les femmes dans ce mouvement : la première vague féministe</a></div></li><li class="l4"><div class="row"><a href="#d-le-plebiscite-de-napoleon-iii-en-1870-pour-faire" data-id="d-le-plebiscite-de-napoleon-iii-en-1870-pour-faire">D) Le plébiscite de NAPOLÉON III en 1870 pour faire taire l’agitation de la « canaille »</a></div></li></ul></li><li class="l3"><div class="row"><a href="#conclusion-du-i" data-id="conclusion-du-i">Conclusion du I</a></div></li></ul></li><li class="l2 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#ii-la-iiieme-republique-entre-guerre-et-paix-un-te" data-id="ii-la-iiieme-republique-entre-guerre-et-paix-un-te">II. LA IIIème RÉPUBLIQUE, ENTRE GUERRE ET PAIX, UN TEMPS D’INCERTITUDES : 4 septembre 1870-18 mars 1871</a></div><ul><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#1-les-reactions-face-a-la-guerre-contre-la-prusse" data-id="1-les-reactions-face-a-la-guerre-contre-la-prusse">1. Les réactions face à la guerre contre la Prusse</a></div><ul><li class="l4"><div class="row"><a href="#a-la-guerre-contre-la-prusse" data-id="a-la-guerre-contre-la-prusse">A) La guerre contre la Prusse</a></div></li><li class="l4"><div class="row"><a href="#b-les-reactions" data-id="b-les-reactions">B) Les réactions</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#2-la-defaite-entraine-une-nouvelle-donne-politique" data-id="2-la-defaite-entraine-une-nouvelle-donne-politique">2. La défaite entraîne une nouvelle donne politique : la République est proclamée</a></div><ul><li class="l4"><div class="row"><a href="#a-la-proclamation-de-la-republique-le-4-septembre-" data-id="a-la-proclamation-de-la-republique-le-4-septembre-">A) La proclamation de la République le 4 septembre 1870 par GAMBETTA</a></div></li><li class="l4"><div class="row"><a href="#b-les-reactions-en-france-a-lannonce-de-la-proclam" data-id="b-les-reactions-en-france-a-lannonce-de-la-proclam">B) Les réactions en France à l’annonce de la proclamation de la République à Paris</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#3-paris-assiege-larmistice-et-les-elections-du-8-f" data-id="3-paris-assiege-larmistice-et-les-elections-du-8-f">3. Paris assiégé, l’armistice et les élections du 8 février 1871</a></div><ul><li class="l4"><div class="row"><a href="#a-un-nouveau-gouvernement-le-gouvernement-de-la-de" data-id="a-un-nouveau-gouvernement-le-gouvernement-de-la-de">A) Un nouveau gouvernement : le gouvernement de la Défense nationale ; Paris est assiégé</a></div></li><li class="l4"><div class="row"><a href="#b-larmistice-et-les-elections-du-8-fevrier-1871" data-id="b-larmistice-et-les-elections-du-8-fevrier-1871">B) L’armistice et les élections du 8 février 1871</a></div></li></ul></li></ul></li><li class="l2"><div class="row"><a href="#annexe-verification-dans-les-trois-livres" data-id="annexe-verification-dans-les-trois-livres">Annexe : vérification dans les trois livres</a></div></li></ul></li></ul></nav></div>
+</div>
+
+<div class="shell">
+  <aside class="side" aria-label="Sommaire">
+    <div class="brand">Sommaire</div>
+    <nav class="toc" id="tocSide"><ul><li class="l1"><div class="row"><a href="#comment-lire-ce-cahier" data-id="comment-lire-ce-cahier">Comment lire ce cahier</a></div></li><li class="l1 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#chapitre-3" data-id="chapitre-3">Chapitre 3</a></div><ul><li class="l2"><div class="row"><a href="#introduction-reperes-chronologiques-et-problematiq" data-id="introduction-reperes-chronologiques-et-problematiq">Introduction : repères chronologiques et problématique</a></div></li><li class="l2 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#i-sous-le-second-empire-du-silence-a-la-renaissanc" data-id="i-sous-le-second-empire-du-silence-a-la-renaissanc">I. SOUS LE SECOND EMPIRE, DU SILENCE À LA RENAISSANCE D’UNE PAROLE POPULAIRE, 1852-1870</a></div><ul><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#1-le-regime-autoritaire-de-napoleon-iii" data-id="1-le-regime-autoritaire-de-napoleon-iii">1. Le régime autoritaire de NAPOLÉON III</a></div><ul><li class="l4"><div class="row"><a href="#a-la-mainmise-sur-le-pays" data-id="a-la-mainmise-sur-le-pays">A) La mainmise sur le pays</a></div></li><li class="l4"><div class="row"><a href="#b-la-fete-imperiale" data-id="b-la-fete-imperiale">B) La « fête impériale »</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#2-lempire-cest-la-prosperite-s-aprile-p-393" data-id="2-lempire-cest-la-prosperite-s-aprile-p-393">2. « L’Empire c’est la prospérité » (S. APRILE, p. 393)</a></div><ul><li class="l4"><div class="row"><a href="#a-un-contexte-favorable" data-id="a-un-contexte-favorable">A) Un contexte favorable</a></div></li><li class="l4"><div class="row"><a href="#b-la-modernisation-de-la-france" data-id="b-la-modernisation-de-la-france">B) La modernisation de la France</a></div></li><li class="l4"><div class="row"><a href="#c-les-consequences-sociales-de-cette-modernisation" data-id="c-les-consequences-sociales-de-cette-modernisation">C) Les conséquences sociales de cette modernisation : une société en mouvement</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m" data-id="3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m">3. La grève légalisée en 1864 : un nouveau temps de mouvements protestataires et de luttes populaires</a></div><ul><li class="l4"><div class="row"><a href="#a-le-cadre-un-regime-qui-se-liberalise-une-parole-" data-id="a-le-cadre-un-regime-qui-se-liberalise-une-parole-">A) Le cadre : un régime qui se libéralise, une parole qui se prend</a></div></li><li class="l4"><div class="row"><a href="#b-les-greves-ouvrieres-se-multiplient-et-connaisse" data-id="b-les-greves-ouvrieres-se-multiplient-et-connaisse">B) Les grèves ouvrières se multiplient et connaissent leur apogée en 1869</a></div></li><li class="l4"><div class="row"><a href="#c-les-femmes-dans-ce-mouvement-la-premiere-vague-f" data-id="c-les-femmes-dans-ce-mouvement-la-premiere-vague-f">C) Les femmes dans ce mouvement : la première vague féministe</a></div></li><li class="l4"><div class="row"><a href="#d-le-plebiscite-de-napoleon-iii-en-1870-pour-faire" data-id="d-le-plebiscite-de-napoleon-iii-en-1870-pour-faire">D) Le plébiscite de NAPOLÉON III en 1870 pour faire taire l’agitation de la « canaille »</a></div></li></ul></li><li class="l3"><div class="row"><a href="#conclusion-du-i" data-id="conclusion-du-i">Conclusion du I</a></div></li></ul></li><li class="l2 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#ii-la-iiieme-republique-entre-guerre-et-paix-un-te" data-id="ii-la-iiieme-republique-entre-guerre-et-paix-un-te">II. LA IIIème RÉPUBLIQUE, ENTRE GUERRE ET PAIX, UN TEMPS D’INCERTITUDES : 4 septembre 1870-18 mars 1871</a></div><ul><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#1-les-reactions-face-a-la-guerre-contre-la-prusse" data-id="1-les-reactions-face-a-la-guerre-contre-la-prusse">1. Les réactions face à la guerre contre la Prusse</a></div><ul><li class="l4"><div class="row"><a href="#a-la-guerre-contre-la-prusse" data-id="a-la-guerre-contre-la-prusse">A) La guerre contre la Prusse</a></div></li><li class="l4"><div class="row"><a href="#b-les-reactions" data-id="b-les-reactions">B) Les réactions</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#2-la-defaite-entraine-une-nouvelle-donne-politique" data-id="2-la-defaite-entraine-une-nouvelle-donne-politique">2. La défaite entraîne une nouvelle donne politique : la République est proclamée</a></div><ul><li class="l4"><div class="row"><a href="#a-la-proclamation-de-la-republique-le-4-septembre-" data-id="a-la-proclamation-de-la-republique-le-4-septembre-">A) La proclamation de la République le 4 septembre 1870 par GAMBETTA</a></div></li><li class="l4"><div class="row"><a href="#b-les-reactions-en-france-a-lannonce-de-la-proclam" data-id="b-les-reactions-en-france-a-lannonce-de-la-proclam">B) Les réactions en France à l’annonce de la proclamation de la République à Paris</a></div></li></ul></li><li class="l3 hk"><div class="row"><button class="tog" type="button" aria-label="Déplier" aria-expanded="false"></button><a href="#3-paris-assiege-larmistice-et-les-elections-du-8-f" data-id="3-paris-assiege-larmistice-et-les-elections-du-8-f">3. Paris assiégé, l’armistice et les élections du 8 février 1871</a></div><ul><li class="l4"><div class="row"><a href="#a-un-nouveau-gouvernement-le-gouvernement-de-la-de" data-id="a-un-nouveau-gouvernement-le-gouvernement-de-la-de">A) Un nouveau gouvernement : le gouvernement de la Défense nationale ; Paris est assiégé</a></div></li><li class="l4"><div class="row"><a href="#b-larmistice-et-les-elections-du-8-fevrier-1871" data-id="b-larmistice-et-les-elections-du-8-fevrier-1871">B) L’armistice et les élections du 8 février 1871</a></div></li></ul></li></ul></li><li class="l2"><div class="row"><a href="#annexe-verification-dans-les-trois-livres" data-id="annexe-verification-dans-les-trois-livres">Annexe : vérification dans les trois livres</a></div></li></ul></li></ul></nav>
+  </aside>
+  <main id="top"><div class="doc">
+    <header class="cover">
+      <div class="kick">Cahier de cours · édition complète</div>
+      <h1>La Commune de Paris</h1>
+      <div class="sub">Du silence au réveil des luttes populaires</div>
+      <div class="span">1852 – 1871</div>
+      <div class="meta">
+        <span>Thème 1 · Chapitre 3 · Du Second Empire à la Commune</span>
+        <span>Année universitaire 2026 – 2027</span>
+        <span>Notes de cours retranscrites, vérifiées avec trois ouvrages : Aprile, Zancarini-Fournel, Noiriel</span>
+      </div>
+    </header>
+
+    <nav class="sommaire" aria-label="Sommaire détaillé">
+      <h2 class="stitle">Sommaire détaillé</h2>
+      <p class="hint">Touche un titre pour aller directement à la section.</p>
+      <ul><li class="l1"><div class="row"><a href="#comment-lire-ce-cahier" data-id="comment-lire-ce-cahier">Comment lire ce cahier</a></div></li><li class="l1"><div class="row"><a href="#chapitre-3" data-id="chapitre-3">Chapitre 3</a></div><ul><li class="l2"><div class="row"><a href="#introduction-reperes-chronologiques-et-problematiq" data-id="introduction-reperes-chronologiques-et-problematiq">Introduction : repères chronologiques et problématique</a></div></li><li class="l2"><div class="row"><a href="#i-sous-le-second-empire-du-silence-a-la-renaissanc" data-id="i-sous-le-second-empire-du-silence-a-la-renaissanc">I. SOUS LE SECOND EMPIRE, DU SILENCE À LA RENAISSANCE D’UNE PAROLE POPULAIRE, 1852-1870</a></div><ul><li class="l3"><div class="row"><a href="#1-le-regime-autoritaire-de-napoleon-iii" data-id="1-le-regime-autoritaire-de-napoleon-iii">1. Le régime autoritaire de NAPOLÉON III</a></div></li><li class="l3"><div class="row"><a href="#2-lempire-cest-la-prosperite-s-aprile-p-393" data-id="2-lempire-cest-la-prosperite-s-aprile-p-393">2. « L’Empire c’est la prospérité » (S. APRILE, p. 393)</a></div></li><li class="l3"><div class="row"><a href="#3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m" data-id="3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m">3. La grève légalisée en 1864 : un nouveau temps de mouvements protestataires et de luttes populaires</a></div></li><li class="l3"><div class="row"><a href="#conclusion-du-i" data-id="conclusion-du-i">Conclusion du I</a></div></li></ul></li><li class="l2"><div class="row"><a href="#ii-la-iiieme-republique-entre-guerre-et-paix-un-te" data-id="ii-la-iiieme-republique-entre-guerre-et-paix-un-te">II. LA IIIème RÉPUBLIQUE, ENTRE GUERRE ET PAIX, UN TEMPS D’INCERTITUDES : 4 septembre 1870-18 mars 1871</a></div><ul><li class="l3"><div class="row"><a href="#1-les-reactions-face-a-la-guerre-contre-la-prusse" data-id="1-les-reactions-face-a-la-guerre-contre-la-prusse">1. Les réactions face à la guerre contre la Prusse</a></div></li><li class="l3"><div class="row"><a href="#2-la-defaite-entraine-une-nouvelle-donne-politique" data-id="2-la-defaite-entraine-une-nouvelle-donne-politique">2. La défaite entraîne une nouvelle donne politique : la République est proclamée</a></div></li><li class="l3"><div class="row"><a href="#3-paris-assiege-larmistice-et-les-elections-du-8-f" data-id="3-paris-assiege-larmistice-et-les-elections-du-8-f">3. Paris assiégé, l’armistice et les élections du 8 février 1871</a></div></li></ul></li><li class="l2"><div class="row"><a href="#annexe-verification-dans-les-trois-livres" data-id="annexe-verification-dans-les-trois-livres">Annexe : vérification dans les trois livres</a></div></li></ul></li></ul>
+    </nav>
+
+<h1 id="comment-lire-ce-cahier" class="h1">Comment lire ce cahier</h1>
+<ul>
+<li>Ce cahier reprend le <strong>chapitre 3</strong> du cours (notes manuscrites retranscrites et mises en plan) avec la même mise en page que le cahier principal.</li>
+<li>Il est vérifié <strong>uniquement</strong> à partir de trois ouvrages : <strong>(ZF)</strong> Michelle Zancarini-Fournel, <em>Les Luttes et les rêves</em> ; <strong>(Aprile)</strong> Sylvie Aprile, <em>La Révolution inachevée, <span class="date">1815-1870</span></em> ; <strong>(Noiriel)</strong> Gérard Noiriel, <em>Une histoire populaire de la France</em>. Les livres ayant été consultés en version texte, <strong>aucune pagination n'est donnée</strong> : seuls les auteurs sont cités.</li>
+<li>Repères : <span class="tag add">✚</span> = complément tiré des livres (encadré bleu-vert) ; <span class="tag fix">✎</span> = écart ou correction par rapport à tes notes ; <span class="tag check">⚠</span> = point non retrouvé ou à vérifier ; <span class="tag ok">✔</span> = confirmé par les livres. Les remarques en gris italique sont les vérifications faites sur tes notes.</li>
+</ul>
+
+<h1 id="chapitre-3" class="h1">Chapitre 3</h1>
+<p><strong><span class="date">1852-1871</span> : du silence au réveil des luttes populaires — la Commune de Paris</strong></p>
+<figure class="cite"><blockquote><p>« La plus puissante révolution populaire […] depuis <span class="date">1789</span>. »</p></blockquote><figcaption>Gérard NOIRIEL, Une histoire populaire de la France, <span class="date">2019</span></figcaption></figure>
+
+<aside class="note">Cours retranscrit d’après les notes manuscrites et mis en plan. Les remarques entre crochets gris signalent les points vérifiés dans les trois livres de référence (Zancarini-Fournel, Noiriel, Aprile) qui diffèrent des notes ou n’y figurent pas. Les puces « Complément des livres » (en bleu) ajoutent ce que les trois livres apportent en plus des notes, sans les contredire. Le détail est en annexe.</aside>
+<h2 id="introduction-reperes-chronologiques-et-problematiq" class="h2">Introduction : repères chronologiques et problématique</h2>
+<ul>
+<li><strong><span class="date">2 décembre 1852</span></strong> : Louis-Napoléon Bonaparte passe de prince-président à Napoléon III.</li>
+<li>Second Empire : pays mis sous surveillance ; opposition muselée ; France entière en modernité (rails, rénovations haussmanniennes).</li>
+<li><strong><span class="date">1859</span></strong> : Napoléon III décrète l’amnistie, ce qui ouvre la période de l’Empire libéral, ère [mot illisible dans les notes] par la loi sur le droit de grève de <strong><span class="date">1864</span></strong>.</li>
+<li><strong><span class="date">1832</span></strong> : mort de Napoléon II ; Napoléon III revendique donc l’héritage de Napoléon Ier.</li>
+<li><strong><span class="date">1869</span></strong> : apogée des grèves.</li>
+<li><strong><span class="date">19 juillet 1870</span></strong> : la France déclare la guerre à la Prusse.</li>
+<li><strong><span class="date">2 septembre 1870</span></strong> : déroute de l’armée française.</li>
+<li><strong><span class="date">3 septembre 1870</span></strong> : Napoléon III capitule. <span class="vf"><span class="tag fix">✎</span> Vérif. Zancarini-Fournel : Napoléon III capitule à Sedan le 2 septembre, avec 83 000 soldats ; le 3 est le jour où la nouvelle parvient à Paris, comme le disent plus loin les notes</span></li>
+<li><strong><span class="date">4 septembre 1870</span></strong> : Gambetta proclame la IIIe République.</li>
+<li><strong><span class="date">28 janvier 1871</span></strong> : armistice franco-prussien, refusé par le peuple.</li>
+<li><strong><span class="date">Mars-mai 1871</span></strong> : Commune, « la plus puissante révolution populaire […] depuis 1789 ».</li>
+</ul>
+<aside class="note"><strong>Problématique</strong> : comment les mouvements populaires vont-ils reprendre après avoir connu la chape de plomb du Second Empire ? Quel sens donner à ces mouvements ?</aside>
+<h2 id="i-sous-le-second-empire-du-silence-a-la-renaissanc" class="h2">I. SOUS LE SECOND EMPIRE, DU SILENCE À LA RENAISSANCE D’UNE PAROLE POPULAIRE, 1852-1870</h2>
+<h3 id="1-le-regime-autoritaire-de-napoleon-iii" class="h3">1. Le régime autoritaire de NAPOLÉON III</h3>
+<h4 id="a-la-mainmise-sur-le-pays" class="h4">A) La mainmise sur le pays</h4>
+<p>Napoléon III a rétabli le suffrage universel dès le <strong><span class="date">2 décembre 1851</span></strong> et annonce vouloir « fermer l’ère des révolutions ». Proche des idées saint-simoniennes, il a défendu le principe des nationalités.</p>
+<p><strong><span class="date">2 décembre 1852</span></strong> : début du Second Empire.</p>
+<ul>
+<li><strong>Maître de l’exécutif</strong> : ses ministres lui rendent des comptes et ne sont que des exécutants.</li>
+<li class="grp"><strong>Corps législatif</strong></li>
+<li>élu au suffrage universel tous les 6 ans ;</li>
+<li>270 représentants <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : 261 députés en 1852, qui ne siègent que trois mois par an</span> ;</li>
+<li>ne peut pas proposer les lois : Napoléon III a l’initiative des propositions de loi ;</li>
+<li>suffrage universel faussé par le principe des candidatures officielles, qui bénéficient de moyens pour faire campagne.</li>
+<li class="grp"><strong>Libertés fondamentales suspendues</strong></li>
+<li>presse : besoin d’une autorisation ; le créateur d’un journal doit payer une caution au gouvernement ;</li>
+<li>avertissements : 2 = journal suspendu, 3 = journal supprimé <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres</span> ;</li>
+<li>réunion.</li>
+<li>Tous les mouvements protestataires sont impossibles à mettre en place.</li>
+<li>Leaders et personnalités républicaines visés : <strong><span class="date">9 janvier 1852</span></strong>, proscription (M. Nadaud, A. Perdiguier, P. Leroux, Hugo…) <span class="vf"><span class="tag check">⚠</span> date et liste non retrouvées dans les livres</span>.</li>
+<li>Napoléon III finit par aménager les peines pour certains.</li>
+<li><strong><span class="date">1859</span></strong> : retour des républicains après l’amnistie.</li>
+</ul>
+<p><strong>Années <span class="date">1850</span></strong> : années silencieuses.</p>
+<ul>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Constitution de 1852</span> pouvoir fort « responsable devant le peuple », c’est-à-dire pouvant toujours faire appel à lui par plébiscite ; pas de conseil des ministres, ministres responsables seulement devant le chef de l’État ; pouvoir législatif divisé en trois corps (Corps législatif, Sénat, Conseil d’État). Le Conseil d’État rédige les projets de loi, le Corps législatif les vote ainsi que le budget ; son président et ses vice-présidents sont désignés par l’Empereur ; les députés prêtent serment et n’ont pas d’indemnité, alors que les sénateurs touchent 30 000 francs et les conseillers d’État 25 000 francs (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Découpage et abstention</span> la Seine passe de 28 à 9 représentants, le Nord de 24 à 8, le Rhône de 11 à 4, pour limiter l’influence des villes jugées hostiles. L’abstention atteint 37 % en <span class="date">1852</span> (un tiers en <span class="date">1849</span>), jusqu’à 75 % à Saint-Étienne, 77 % à Lille, 81 % à Vierzon : signe de protestation dans les villes industrielles (Aprile). Le candidat officiel est désigné aux électeurs par l’« affiche blanche ».</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Presse et culture</span> le décret du <span class="date">17 février 1852</span> rétablit cautionnement et autorisation ; les délits de presse relèvent des tribunaux correctionnels et non des jurys ; l’avertissement « condamne toute presse d’opposition ». En province, il ne reste que quelques journaux républicains (<em>Le Phare de la Loire</em>, <em>La Gironde</em>, <em>Le Progrès</em>). Les théâtres ne peuvent plus faire chanter la Marseillaise ; en <span class="date">1857</span>, <em>Madame Bovary</em>, <em>Les Fleurs du mal</em> et <em>Les mystères du peuple</em> sont poursuivis (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Opposition réduite à l’exil</span> les proscrits se réfugient en Belgique puis en Angleterre ; Hugo, Quinet, Louis Blanc et Ledru-Rollin dénoncent le régime ; d’autres sont transportés en Algérie et en Guyane. Le régime s’appuie aussi sur la dénonciation, l’internement et les visites domiciliaires. Amnisties partielles en <span class="date">1853</span> et <span class="date">1856</span>, puis amnistie générale après la guerre d’Italie en <span class="date">1859</span> ; Hugo : « S’il n’en reste qu’un je serai celui-là » (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Rétablissement de l’Empire</span> discours de Bordeaux le <span class="date">9 octobre 1852</span> (« L’Empire, c’est la paix »), simple modification de la Constitution le <span class="date">7 novembre</span>, plébiscite de ratification le <span class="date">21 novembre</span>, proclamation le <span class="date">2 décembre</span> ; pas de sacre, car Pie IX le souhaitait à Rome. Le régime ne fête jamais le <span class="date">2 décembre</span>, que les républicains rappellent comme une date tragique (Aprile).</li>
+</ul>
+<h4 id="b-la-fete-imperiale" class="h4">B) La « fête impériale »</h4>
+<p>L’expression « fête impériale » vient du livre d’Alain Plessis, <em>De la fête impériale au mur des Fédérés, <span class="date">1852-1871</span></em>, Points Seuil Histoire.</p>
+<ul>
+<li>Napoléon III va en province pour se rendre aimable aux yeux des gens : campagnes, villes républicaines comme Lyon et Marseille, Algérie.</li>
+<li>Volonté d’être auprès des Français pour que l’opinion publique soit favorable, avec Eugénie de Montijo (sa femme) et son fils.</li>
+<li>Présence d’un « Midi rouge » <span class="vf"><span class="tag check">⚠</span> le terme apparaît dans Zancarini-Fournel à propos de la mémoire de la Commune, pas pour le Second Empire</span> :</li>
+<li>lieu de concentration de la révolte : Massif central, sud des Alpes, couloir rhodanien ;</li>
+<li>ces régions se sont soulevées contre le coup d’État, ce qui montre la pénétration des idées républicaines.</li>
+<li>Vie privée de l’empereur mise en valeur :</li>
+<li><strong><span class="date">1853</span></strong> : mariage avec Eugénie de Montijo ;</li>
+<li><strong><span class="date">1856</span></strong> : naissance de « Loulou », le prince impérial <span class="vf"><span class="tag check">⚠</span> lecture du surnom incertaine</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Voyages et popularité</span> les voyages impériaux sont des « plébiscites continus » ; à Marseille en <span class="date">1852</span>, on prend soin d’incarcérer préventivement les opposants. L’Empereur sait résumer ses idées par des formules (« Je ne suis sorti de la légalité que pour rentrer dans le droit »). Aprile distingue un bonapartisme des élites (ordre, prospérité) et un bonapartisme populaire.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Cour et Église</span> la Saint-Napoléon du <span class="date">15 août</span> coïncide avec l’Assomption, ce qui associe « le trône et l’autel » ; la Garde nationale n’est plus qu’une troupe de parade ; la liste civile atteint 12 millions de francs ; les « séries » de Compiègne rythment la vie de cour. Mariage le <span class="date">30 janvier 1853</span> ; baptême du prince impérial le <span class="date">14 juin 1856</span>, avec Pie IX pour parrain ; l’Église est un soutien solide du régime, Te Deum à Notre-Dame le <span class="date">1er janvier 1852</span> (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Les campagnes</span> la prospérité rurale est mise au crédit de l’Empereur. En <span class="date">1851</span>, 5 000 villages sont sans école, contre 312 en <span class="date">1866</span> ; les conscrits illettrés passent de 30 à 20 % et la scolarisation des 5-14 ans de 51 à 68 % (Aprile). Pour Noiriel, les paysans soutiennent Napoléon III pour éviter la monarchie et la République qui avait imposé en <span class="date">1848</span> la taxe des 45 centimes ; la médaille de Sainte-Hélène réhabilite les anciens grognards.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Les ouvriers</span> le livret ouvrier subsiste, mais le régime tolère l’associationnisme tant qu’il n’est pas politique ; les sociétés de secours mutuel sont encadrées par le décret de <span class="date">1852</span> (Aprile, Noiriel). L’Empereur reçoit des dockers marseillais en <span class="date">1859</span> et se souvient de son <em>Extinction du paupérisme</em>.</li>
+</ul>
+<h3 id="2-lempire-cest-la-prosperite-s-aprile-p-393" class="h3">2. « L’Empire c’est la prospérité » (S. APRILE, p. 393)</h3>
+<h4 id="a-un-contexte-favorable" class="h4">A) Un contexte favorable</h4>
+<ul>
+<li>Période de phase A (cycle économique) <span class="vf"><span class="tag check">⚠</span> notion absente des livres</span> ; découverte de ressources <span class="vf"><span class="tag check">⚠</span> lecture incertaine</span>.</li>
+<li>Empereur intéressé par l’économie, entouré de saint-simoniens :</li>
+<li>l’économiste et conseiller Michel Chevalier ;</li>
+<li>les frères Pereire (banquiers) ;</li>
+<li>l’économie devient une des priorités de l’Empire.</li>
+<li>Révolution bancaire : entrée dans le capitalisme ; les banques foisonnent (Crédit lyonnais par exemple) <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile cite surtout le Crédit mobilier des Pereire, en crise en 1866-1867</span>.</li>
+<li><strong><span class="date">1860</span></strong> : traité de libre-échange avec l’Angleterre.</li>
+<li>baisse des droits de douane ;</li>
+<li>ouverture à la concurrence anglaise ;</li>
+<li>la France exporte des produits agricoles et importe des produits industriels.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Aprile nuance le rôle de l’Empereur : les grandes transformations économiques ont été amorcées dès <span class="date">1835-1836</span> et relèvent de l’initiative privée ; l’État rassure surtout les milieux d’affaires par sa stabilité, et l’Empire consacre moins aux travaux publics que la monarchie de Juillet. Le <span class="date">5 janvier 1852</span>, premier succès : la concession de la ligne Paris-Lyon.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Les sociétés anonymes sont facilitées en <span class="date">1863</span> et <span class="date">1867</span>, ce qui favorise aussi la spéculation et les faillites. Le Crédit mobilier des frères Pereire subit une grave crise en <span class="date">1866-1867</span> : la Banque de France ne le sauve qu’après la démission des Pereire (« L’Empire c’est la baisse »). Le traité de libre-échange suscite une opposition protectionniste de certains industriels (Aprile).</li>
+</ul>
+<h4 id="b-la-modernisation-de-la-france" class="h4">B) La modernisation de la France</h4>
+<ul>
+<li>Croissance industrielle (industrialisation) :</li>
+<li>développement des transports ;</li>
+<li>« la France est entrée dans l’ère du rail » (A. Plessis) : Compagnie du Nord, PLM, Paris-Orléans ;</li>
+<li>stimulation de l’industrie de l’acier et de toute l’industrie lourde ;</li>
+<li>meilleure communication entre Paris et le reste du pays ;</li>
+<li>développement de la navigation à vapeur, favorisée par la colonisation ;</li>
+<li><strong><span class="date">1860</span></strong> : Napoléon III à Alger parle d’un « Empire arabe » en Algérie <span class="vf"><span class="tag fix">✎</span> Vérif. Noiriel : projet de « royaume arabe » ; l’empereur se proclame « empereur des Français et des Arabes »</span> ;</li>
+<li>percement du canal de Suez en <strong><span class="date">1869</span></strong> <span class="vf"><span class="tag check">⚠</span> Aprile : inauguré le 16 novembre 1869</span>.</li>
+<li>L’industrie se modernise : textile, sidérurgie, métallurgie.</li>
+<li>Lorraine, Creusot ;</li>
+<li><strong><span class="date">1836</span></strong> : famille Schneider au Creusot (Sylvie Aprile).</li>
+<li>« Le Second Empire c’est l’âge d’or des campagnes françaises » (Sylvie Aprile) <span class="vf"><span class="tag check">⚠</span> citation non retrouvée telle quelle dans le livre</span>.</li>
+<li>Spécialisation des régions : Beauce, Brie = céréales ;</li>
+<li><strong><span class="date">1853</span></strong> : assèchement des Landes <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres</span> ;</li>
+<li>école rurale : puisqu’il y a moins de monde dans les campagnes, meilleures conditions de vie ;</li>
+<li>mise en valeur de la beauté des campagnes : peintres de l’école de Barbizon ;</li>
+<li>Rosa Bonheur (<span class="date">1822-1899</span>) : peintre mettant en valeur les campagnes et militant pour les droits des femmes, elle assume son homosexualité ; <strong><span class="date">1859</span></strong> : s’installe au château de By près de Fontainebleau ; <strong><span class="date">1865</span></strong> : l’impératrice vient lui donner la Légion d’honneur en déclarant « Le génie n’a pas de sexe » <span class="vf"><span class="tag check">⚠</span> Rosa Bonheur n’est pas citée dans les trois livres</span>.</li>
+<li><strong><span class="date">1850-1880</span></strong> : on passe de 24,4 % d’urbains à 34,8 % en <span class="date">1880</span> <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : 24,4 % est le chiffre de 1846 ; 34,8 % non retrouvé</span>.</li>
+<li>Urbanisation de Paris grâce au baron Haussmann (<span class="date">1809-1891</span>) :</li>
+<li>1,5 M d’habitants à Paris en <span class="date">1856</span>, 1,8 M en <span class="date">1866</span>, 2 M en <span class="date">1870</span> <span class="vf"><span class="tag check">⚠</span> Aprile : 1,5 M et 20 arrondissements ; autres chiffres non retrouvés</span> ;</li>
+<li>préfet de la Seine : grande liberté d’action, beaucoup de fonds, confiance de Napoléon III ;</li>
+<li>remplacer les petites rues par de grandes avenues pour permettre une meilleure circulation et l’assainissement de la ville :</li>
+<li>grandes rues ;</li>
+<li>isolement et mise en valeur des édifices (Hôtel de ville) ;</li>
+<li>égouts ;</li>
+<li>création de bois pour aérer la ville ;</li>
+<li><strong><span class="date">1860</span></strong> : on passe de 12 à 20 arrondissements ; Montmartre, La Villette, Belleville intègrent la capitale ;</li>
+<li>peintures des gares, d’usines [fin de ligne illisible] ;</li>
+<li>préoccupations hygiénistes (contre le choléra), prestige, lutte contre le chômage.</li>
+<li>Critiques : Zola ; Baudelaire <span class="vf"><span class="tag check">⚠</span> Zola : cible l’affairisme (Aprile) ; Baudelaire non cité à ce sujet</span> :</li>
+<li>déplorent la destruction ;</li>
+<li>critique du coût des travaux : Jules Ferry, <strong><span class="date">1866</span></strong>, pamphlet <em>Les Comptes fantastiques d’Haussmann</em> <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : 1863, et Ferry n’est probablement pas l’auteur du bon mot du titre</span> ;</li>
+<li>jeu de mots avec les <em>Contes fantastiques</em> d’Hoffmann (opéra d’Offenbach).</li>
+<li>Urbanisation à rôle policier : les grandes avenues facilitent les charges de la cavalerie et empêchent la construction de barricades.</li>
+<li>Augmentation du prix des loyers : les pauvres sont rejetés à la périphérie.</li>
+</ul>
+<p>⇒ Cela favorise une dichotomie entre le Paris populaire de l’Est (symbolisé par la colonne de Juillet, place de la Bastille) et le Paris aisé de l’Ouest (symbolisé par la colonne de la place Vendôme <span class="vf"><span class="tag check">⚠</span> lecture incertaine</span>).</p>
+<ul>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Culture de masse</span> liberté des théâtres par le décret du <span class="date">6 janvier 1864</span> ; <em>Le Petit Journal</em> de Millaud (<span class="date">1863</span>), sans politique, évite le droit de timbre ; grands magasins (Boucicaut, Bon Marché) ; expositions universelles de <span class="date">1855</span> et <span class="date">1867</span> organisées par Le Play, avec trains spéciaux ; mode de la crinoline et couturier Worth. Inauguration du canal de Suez le <span class="date">16 novembre 1869</span> par l’Impératrice, devant 80 navires (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Critiques de la prospérité</span> un texte de l’opposition cité par Aprile compare le budget de 1,5 milliard en <span class="date">1850</span> à plus de 2,3 milliards sous l’Empire, et les faillites passent de 1 418 (<span class="date">1863-1864</span>) à 2 131 (<span class="date">1868-1869</span>) ; le coût de la « gloire » est évalué à 150 000 hommes en Crimée, 60 000 en Italie, 50 000 au Mexique.</li>
+</ul>
+<h4 id="c-les-consequences-sociales-de-cette-modernisation" class="h4">C) Les conséquences sociales de cette modernisation : une société en mouvement</h4>
+<p><strong><span class="date">1852-1870</span></strong> : de 36 M à 38,5 M d’habitants <span class="vf"><span class="tag check">⚠</span> chiffres non retrouvés ; Aprile donne 35,4 M en 1846</span>.</p>
+<p>Nice et la Savoie : la France les récupère en <strong><span class="date">1860</span></strong> pour remercier Napoléon III de sa complicité dans l’unité italienne <span class="vf"><span class="tag check">⚠</span> Aprile : rattachement après plébiscite des 15 et 23 avril 1860, en échange de l’aide française à l’unité de l’Italie</span>.</p>
+<ul>
+<li><strong>Bourgeoisie</strong> : classe dominante de la société, divisée en deux :</li>
+<li>grande bourgeoisie : profite de la « fête impériale » ;</li>
+<li>petite et moyenne bourgeoisie (fonctionnaires, avocats…) : les idées républicaines y progressent ;</li>
+<li><strong><span class="date">1872</span></strong> : Gambetta fait un discours à Grenoble évoquant des « couches sociales nouvelles » pour nommer la petite et moyenne bourgeoisie, la classe moyenne <span class="vf"><span class="tag check">⚠</span> discours de Grenoble non retrouvé ; Aprile évoque les « nouvelles couches sociales montantes » à propos de Gambetta</span>.</li>
+<li><strong>Campagne</strong> : attachée à l’empereur, sauf le Midi rouge.</li>
+<li><strong>Classe ouvrière</strong> : 3 M d’ouvriers en <span class="date">1866</span> <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : le nombre d’actifs ouvriers « frôle les 3 millions en 1870 »</span> ;</li>
+<li>conditions de travail dures ;</li>
+<li>on parle d’eux car certains métiers disparaissent avec l’industrialisation.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Notables et patrons</span> la société de notables survit et fusionne anciennes et nouvelles élites ; Pouyer-Quertier, petit-fils de paysan tisserand, devient entrepreneur puis député en <span class="date">1857</span> (Aprile). Pour Le Play et son « patronage », le patron exerce sur ses ouvriers un pouvoir de père de famille ; la pluri-activité des ouvriers-paysans freine l’exode rural (Noiriel). Le Creusot, avec 9 000 ouvriers en <span class="date">1870</span>, est un modèle de paternalisme (Aprile).</li>
+</ul>
+<h3 id="3-la-greve-legalisee-en-1864-un-nouveau-temps-de-m" class="h3">3. La grève légalisée en 1864 : un nouveau temps de mouvements protestataires et de luttes populaires</h3>
+<h4 id="a-le-cadre-un-regime-qui-se-liberalise-une-parole-" class="h4">A) Le cadre : un régime qui se libéralise, une parole qui se prend</h4>
+<p><strong>Années <span class="date">1850</span></strong> : Empire autoritaire. <strong>Années <span class="date">1860</span></strong> : Empire libéral.</p>
+<p><strong>Années <span class="date">1860</span></strong> :</p>
+<ul>
+<li>difficultés économiques contrastant avec les années <span class="date">1850</span> ;</li>
+<li>opposition à Napoléon III accrue chez les catholiques ;</li>
+<li>critique de la politique extérieure : intervention au Mexique ; exécution de Maximilien (<strong><span class="date">1868-1869</span></strong>), tué dans la guerre civile au Mexique (Maximilien, dirigeant du Mexique, était un Habsbourg) <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : Maximilien est fusillé à Querétaro le 19 juin 1867</span> ;</li>
+<li>empereur vieux et malade (calculs rénaux).</li>
+</ul>
+<p><strong>Aspects de cette libéralisation</strong> :</p>
+<ul>
+<li><strong><span class="date">1859</span></strong> : décret d’amnistie des proscrits de <span class="date">décembre 1851</span>.</li>
+<li><strong><span class="date">1863</span></strong> : élections législatives plus libres, moins contrôlées : 17 républicains contre 5 en <span class="date">1857</span> ; on totalise une trentaine d’opposants, Thiers par exemple <span class="vf"><span class="tag check">⚠</span> chiffres non retrouvés ; Aprile compte cinq députés républicains ayant prêté serment</span>.</li>
+<li><strong><span class="date">1864</span></strong> : élections législatives partielles.</li>
+<li><strong>Manifeste des Soixante</strong>, rédigé par Gambetta et 60 ouvriers <span class="vf"><span class="tag fix">✎</span> Vérif. Noiriel : février 1864, « rédigé avec l’aide de l’avocat Léon Gambetta » ; Zancarini-Fournel : manifeste d’ouvriers exigeant une représentation spécifique</span> : liberté, meilleures conditions de travail.</li>
+<li><strong><span class="date">25 mai 1864</span></strong> : Napoléon III accorde le droit de grève (il essaie de détacher les ouvriers des républicains).</li>
+<li><strong><span class="date">1868</span></strong> : les réunions publiques sont autorisées (complète la loi de <span class="date">1864</span>) <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : loi du 6 juin 1868, réunions soumises à un commissaire de police</span>.</li>
+<li><strong><span class="date">28 septembre 1864</span></strong> : création à Londres de la 1re Internationale (« Association internationale des travailleurs ») <span class="vf"><span class="tag check">⚠</span> date précise non retrouvée ; Noiriel et Zancarini-Fournel confirment 1864 à Londres</span>, influencée par Marx :</li>
+<li>histoire dominée par la lutte des classes, qui devrait être détruite par la révolution pour aboutir à une dictature du prolétariat ;</li>
+<li>théorisé dans le <em>Manifeste du parti communiste</em> (<strong><span class="date">1848</span></strong>) et <em>Le Capital</em> (<strong><span class="date">1867</span></strong>).</li>
+<li><strong><span class="date">1865</span></strong> : création d’une section française de l’Internationale.</li>
+<li>animée par des ouvriers qualifiés : Eugène Varlin (relieur) et Benoît Malon (teinturier) ;</li>
+<li>Varlin, communard très populaire, fusillé le <span class="date">28 mai 1871</span> ; Malon s’échappe juste à temps <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : Varlin arrêté, lynché et fusillé (date non précisée) ; fuite de Malon non retrouvée</span>.</li>
+<li><strong><span class="date">1876</span></strong> : la Première Internationale est dissoute.</li>
+<li><strong><span class="date">1889</span></strong> : Deuxième Internationale, qui meurt en <span class="date">1914</span>.</li>
+<li><strong><span class="date">1919</span></strong> : Troisième Internationale, le Komintern (jusqu’en <span class="date">1943</span>). <span class="vf"><span class="tag check">⚠</span> dates des Internationales non vérifiables dans les trois livres</span></li>
+<li><strong><span class="date">1868</span></strong> : réunions publiques autorisées ; presse plus libre (suppression des avertissements et des autorisations) <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : loi sur la presse du 11 mai 1868</span>.</li>
+<li>Création du journal <em>Le Réveil</em> (fondé par Delescluze) <span class="vf"><span class="tag check">⚠</span> premier numéro le 2 juillet 1868</span> :</li>
+<li>il utilise son journal pour lancer une souscription pour la création d’un monument en l’honneur de Baudin ;</li>
+<li>Delescluze est traduit en justice, défendu par Gambetta ; Gambetta se fait connaître comme le chef des républicains.</li>
+<li>Création du journal <em>La Lanterne</em> (par Rochefort) :</li>
+<li>Rochefort est condamné au bagne en Nouvelle-Calédonie ;</li>
+<li><strong><span class="date">1874</span></strong> : seul évadé réussi de ce bagne <span class="vf"><span class="tag check">⚠</span> évasion et condamnation non retrouvées dans les livres ; Aprile : condamné en août 1868, Rochefort s’exile à Bruxelles</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Libéralisation</span> lettre du <span class="date">19 janvier 1867</span> ; l’Adresse est remplacée par le droit d’interpellation ; loi sur la presse du <span class="date">11 mai 1868</span> (fin de l’autorisation préalable et de l’avertissement) ; loi du <span class="date">6 juin 1868</span> sur les réunions non politiques (Aprile). Naissent <em>Le Réveil</em> de Delescluze, <em>La Lanterne</em> de Rochefort (100 000 exemplaires ; Rochefort condamné en <span class="date">août 1868</span>, exilé à Bruxelles), <em>Le Rappel</em> des Hugo ; en <span class="date">avril 1869</span>, Jules Favre compte 118 procès de presse en treize mois (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Réunions publiques</span> entre <span class="date">1868</span> et <span class="date">1870</span>, 933 réunions « non politiques », 310 réunions électorales et 94 consacrées au plébiscite à Paris, soit près de deux par jour ; salles de bal, Folies-Belleville, salle Molière ; le lundi, jour chômé ; un commissaire et son sténographe surveillent les propos. Parler de l’État, de la religion ou de l’armée est interdit (Zancarini-Fournel).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Affaire Baudin et Gambetta</span> en <span class="date">novembre 1868</span>, la souscription du <em>Réveil</em> pour la tombe du député Baudin (tué en <span class="date">décembre 1851</span>) mène Delescluze au procès ; le plaidoyer de Gambetta le rend célèbre. Programme de Belleville en <span class="date">1869</span> ; Gambetta élu à Belleville et à Marseille. En <span class="date">1869</span>, les républicains ne sont qu’une trentaine d’élus ; les candidats officiels forment encore la moitié du Corps législatif grâce aux ruraux ; antagonisme ville-campagne (Aprile).</li>
+</ul>
+<h4 id="b-les-greves-ouvrieres-se-multiplient-et-connaisse" class="h4">B) Les grèves ouvrières se multiplient et connaissent leur apogée en 1869</h4>
+<p><strong><span class="date">1868</span></strong> : véritable reprise des grèves grâce au retour des réunions publiques.</p>
+<p><strong><span class="date">1869</span></strong> : apogée des grèves.</p>
+<ul>
+<li><strong><span class="date">Juin 1869</span></strong> : grève de mineurs de la Ricamarie, près de Saint-Étienne.</li>
+<li>grève des mineurs de charbon, bien organisée : caisse de secours pour assurer le maintien de la grève ;</li>
+<li>revendications : meilleures conditions de travail ;</li>
+<li>tensions entre travailleurs et grévistes : arrestations ;</li>
+<li>leurs familles se rejoignent pour empêcher le transfert à Saint-Étienne ;</li>
+<li>les soldats tirent : 14 morts au lieu-dit Le Brûlé, le <strong><span class="date">16 juin 1869</span></strong> <span class="vf"><span class="tag fix">✎</span> Vérif. Zancarini-Fournel : 13 morts puis une 14e victime ; date de la fusillade non précisée, funérailles le 18 juin</span> ;</li>
+<li>scandale dans toute la France, beaucoup de dons et de soutien ;</li>
+<li>les meneurs sont jugés mais graciés le <span class="date">15 août</span> <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : le 2 août, 71 personnes sont jugées et condamnées à des peines de quinze jours à quinze mois de prison ; le 15 août, amnistie décrétée par Napoléon III à l’occasion du centenaire de la naissance de Napoléon Ier ; la grève avait débuté le 11 juin</span> ;</li>
+<li>événement ayant inspiré Zola pour <em>Germinal</em> : ses carnets racontent ses enquêtes à Anzin, mais il aurait été bouleversé <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : on a souvent dit que Zola s’était inspiré de la fusillade du Brûlé pour Germinal ; ses Carnets d’enquête montrent qu’il s’est en fait rendu à Anzin, la scène du ravin étant sans doute tirée des récits de la fusillade</span> ;</li>
+<li><strong><span class="date">1989</span></strong> : monument érigé en leur hommage, avec, près des 14 stèles, un enfant mort allongé <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres</span>.</li>
+<li><strong><span class="date">Octobre 1869</span></strong> : à Aubin, les ouvriers font grève, restent sur le carreau de la mine et refusent de descendre.</li>
+<li>fusillade : 17 morts dont 1 enfant <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : 6 au 8 octobre 1869, 17 morts dont un enfant de sept ans</span> ;</li>
+<li>« Les grèves de mineurs de <span class="date">1869</span> font tache d’huile » (Michelle Zancarini-Fournel) <span class="vf"><span class="tag check">⚠</span> forme exacte du livre ; la phrase concerne le Creusot en janvier 1870</span> ;</li>
+<li>des députés républicains comme Jules Ferry, Jules Simon, Victor Hugo sont très touchés : Ferry et Simon pour soutenir les mineurs ; Hugo écrit le poème « Aubin » <span class="vf"><span class="tag check">⚠</span> soutiens de Ferry, Simon et Hugo non retrouvés dans les livres</span>.</li>
+<li><strong><span class="date">Janvier-mars 1870</span></strong> : grève du Creusot.</li>
+<li>véritable usine géante dans la métallurgie, la sidérurgie, installée depuis <span class="date">1836</span> ;</li>
+<li>les ouvriers demandent la journée de 8 h et la gestion ouvrière de la caisse de secours ;</li>
+<li>Benoît Malon, représentant la section française de l’Internationale, est envoyé sur place pour organiser la grève <span class="vf"><span class="tag ok">✔</span> confirmé par Zancarini-Fournel pour la grève de mars</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Mineurs de 1869</span> la grève de La Ricamarie est préparée par La Fraternelle, société de secours mutuel créée en <span class="date">1865</span> ; elle réclame une hausse des salaires, une réduction des journées (jusqu’à 14 heures) et une caisse de secours gérée par les mineurs ; elle débute le <span class="date">11 juin</span> ; funérailles le <span class="date">18 juin</span> ; le travail reprend à dix heures par jour au fond. Les grèves de <span class="date">1869</span> rassemblent plus de 40 000 ouvriers (Zancarini-Fournel, Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Creusot, janvier 1870</span> près de 9 000 ouvriers, jusque-là préservés par le paternalisme ; Schneider rejette les revendications ; l’Internationale envoie Benoît Malon, et les femmes soutiennent le mouvement. À Carmaux, la grève se termine aux cris de « Vive l’Empereur » : les ouvriers se détournent pourtant clairement du bonapartisme populaire (Zancarini-Fournel, Aprile).</li>
+</ul>
+<h4 id="c-les-femmes-dans-ce-mouvement-la-premiere-vague-f" class="h4">C) Les femmes dans ce mouvement : la première vague féministe</h4>
+<p><strong><span class="date">Juin-juillet 1869</span></strong> : première grève des femmes, la grève des ovalistes de Lyon.</p>
+<ul>
+<li>ovalistes : après le filage, elles préparent le fil pour le rendre plus solide pour le tissage <span class="vf"><span class="tag fix">✎</span> Vérif. Zancarini-Fournel : ouvrières du textile qui placent la soie en écheveaux</span> ;</li>
+<li>grève d’un mois, soutenue par les ouvrières du pays ;</li>
+<li>elles veulent de meilleures conditions de travail ;</li>
+<li>certaines sont arrêtées mais obtiennent le soutien populaire.</li>
+</ul>
+<p><strong>Féminisme</strong> : il gagne en soutien lors de la libéralisation de l’Empire.</p>
+<ul>
+<li><strong>Léon Richer</strong> : considéré par Simone de Beauvoir comme le véritable fondateur du féminisme <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres</span> ; journaliste considérant les femmes comme son égal, il demande l’émancipation des femmes (emprise de l’Église sur les femmes) ;</li>
+<li><strong><span class="date">1869</span></strong> : fonde <em>Le Droit des femmes</em> avec Maria Deraismes, « sa femme » <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : journal lancé en 1869 (Zancarini-Fournel donne 1851) ; Maria Deraismes est présentée comme conférencière invitée par Richer, pas comme son épouse</span>.</li>
+<li><strong>Maria Deraismes</strong> : écrivaine issue de la petite bourgeoisie <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : famille de commerçants aisés, républicains voltairiens</span> ; pense que le suffrage universel masculin n’est pas universel puisque masculin ; conteste l’enfermement de la femme dans son rôle de mère.</li>
+</ul>
+<figure class="cite"><blockquote><p>« Les démocrates ont créé l’universel à leur usage, universel sans précédent, universel de poche, laissant de côté la moitié de l’humanité »</p></blockquote><figcaption>Maria Deraismes, <span class="date">1870</span>, cité par Zancarini-Fournel</figcaption></figure>
+<ul>
+<li class="grp"><strong>Révolutionnaires féministes membres de l’Internationale</strong></li>
+<li><strong>André Léo</strong>, écrivaine cultivée : lutte contre le patriarcat, contre la femme-objet ; créatrice de la Ligue des femmes (organisation militant pour les droits des femmes) en <span class="date">1868</span>, première réunion en <span class="date">janvier 1869</span> ; préfère l’égalité devant la loi mais pas devant le vote <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : Ligue en faveur des droits des femmes, août 1868, égalité devant la loi</span>.</li>
+<li><strong>Louise Michel</strong> (<span class="date">1830-1905</span>) : institutrice voulant éduquer le peuple et les femmes ; anarchiste ; a son brevet mais n’a pas prêté serment, donc ne peut pas exercer dans les écoles d’État ; crée son école à Montmartre, ouverte en <span class="date">1856</span> ; anticléricale ; correspond avec Hugo <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : institutrice, ouvre un internat à Montmartre ; serment, date et correspondance non retrouvés</span>.</li>
+</ul>
+<aside class="note"><em>Fragment en haut de la page numérotée 6 (début de page non photographié) :</em> « … de l’Église et de l’État ; élu à Marseille aussi ; choisit Marseille ». <span class="vf"><span class="tag check">⚠</span> Probablement Gambetta, élu à Belleville et à Marseille en 1869 qui choisit Marseille, et le programme de Belleville (Aprile) ; placement dans le plan à confirmer</span></aside>
+<ul>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Débat de 1868 sur le travail des femmes</span> conférencières Paule Minck, André Léo, Élisa Gagneur, entre juillet et <span class="date">novembre 1868</span> ; Tolain (AIT) y est hostile ; le <span class="date">24 août 1868</span>, à Paule Minck demandant « Est-ce donc toute la vie d’une femme d’élever des enfants ? », la salle répond « Oui ! Oui ! » (Zancarini-Fournel).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — André Léo</span> (Léonie Champseix, 44 ans en <span class="date">1868</span>), auteure de <em>La Femme et les mœurs</em> (<span class="date">1869</span>), contribue début <span class="date">août 1868</span> à la Ligue en faveur des droits des femmes ; sur 18 signataires du manifeste, 8 sont membres de la coopérative La Revendication de Benoît Malon. Eugène Varlin défend le droit au travail des femmes au congrès de <span class="date">1866</span> ; au restaurant coopératif La Marmite travaille notamment Nathalie Lemel. <em>Le Droit des femmes</em> est fondé en <span class="date">1851</span> par Léon Richer, qui s’entoure de Julie-Victoire Daubié, première bachelière (<span class="date">1861</span>) (Zancarini-Fournel).</li>
+</ul>
+<h4 id="d-le-plebiscite-de-napoleon-iii-en-1870-pour-faire" class="h4">D) Le plébiscite de NAPOLÉON III en 1870 pour faire taire l’agitation de la « canaille »</h4>
+<p><strong><span class="date">1870</span></strong> : contexte explosif ; grève de 3 mois au Creusot par exemple <span class="vf"><span class="tag fix">✎</span> Vérif. Zancarini-Fournel : grève des métallurgistes du 19 au 24 janvier, puis des mineurs à partir du 21 mars</span>.</p>
+<p><strong><span class="date">8 mai 1870</span></strong> : Napoléon III organise un plébiscite.</p>
+<ul>
+<li>« Approuvez-vous oui ou non les réformes libérales opérées depuis <span class="date">1860</span> ? »</li>
+<li>« Approuvez-vous oui ou non la transmission du pouvoir à mon fils, le prince Eugène Louis, né en <span class="date">1856</span> ? »</li>
+<li>Réponse : 70 % de oui à la double question, 15 % de non (dans les quartiers ouvriers) <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : 7 358 000 oui, 1 538 000 non, 1 900 000 abstentions, soit environ 68 % et 14 % des inscrits ; le non l’emporte dans les grandes villes</span> ;</li>
+<li>« J’ai retrouvé mon chiffre », s’exclame Napoléon III <span class="vf"><span class="tag check">⚠</span> Aprile : « aurait déclaré »</span> ;</li>
+<li>Gambetta : « L’Empire est plus fort que jamais, fondé pour [mot illisible] vingt ans » <span class="vf"><span class="tag check">⚠</span> citation non retrouvée dans les livres</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Début 1870</span> le <span class="date">7 février</span>, Rochefort est arrêté ; le <span class="date">10 janvier</span>, Victor Noir est tué par Pierre Bonaparte, son enterrement le 12 faisant craindre l’émeute (Aprile, Zancarini-Fournel). Les réunions invoquent 1793, Hébert et <em>Le Père Duchesne</em> ; la chanteuse Rosa Bordas reprend « C’est la canaille, eh bien j’en suis ».</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Plébiscite</span> Napoléon III soumet « les réformes engagées ainsi qu’un projet de nouvelle Constitution » ; le non l’emporte dans les grandes villes, et au Creusot par 3 400 voix contre 1 500 (Zancarini-Fournel). L’Empire libéral reste limité : le Corps législatif élit son bureau et interpelle les ministres, mais ne peut pas les renverser (Aprile).</li>
+</ul>
+<h3 id="conclusion-du-i" class="h3">Conclusion du I</h3>
+<p>La période du Second Empire voit le pays entier entrer en modernité, avec une classe populaire plus nombreuse qui place son espoir dans les républicains et le socialisme. L’Empire se libéralise après les années <span class="date">1850</span>. Elle se caractérise par le droit de grève et le droit de réunion. La Première Internationale (Association internationale des travailleurs) encourage et organise les grèves, qui finissent parfois en bain de sang, comme lors de la fusillade du Brûlé. En <span class="date">1870</span>, les grèves se répètent comme des tâches d’huile. Le <span class="date">8 mai 1870</span>, le plébiscite renforce la confiance de Napoléon III, mais l’opposition se renforce et s’organise dans les grandes villes et villes industrielles. Quel avenir pour les mouvements sociaux alors même que la France déclare la guerre à la Prusse ?</p>
+<h2 id="ii-la-iiieme-republique-entre-guerre-et-paix-un-te" class="h2">II. LA IIIème RÉPUBLIQUE, ENTRE GUERRE ET PAIX, UN TEMPS D’INCERTITUDES : 4 septembre 1870-18 mars 1871</h2>
+<h3 id="1-les-reactions-face-a-la-guerre-contre-la-prusse" class="h3">1. Les réactions face à la guerre contre la Prusse</h3>
+<h4 id="a-la-guerre-contre-la-prusse" class="h4">A) La guerre contre la Prusse</h4>
+<p>« Parti de la guerre » en France :</p>
+<ul>
+<li>soutenu par Eugénie ;</li>
+<li>la guerre comme moyen d’affirmer sa puissance et de retrouver son prestige.</li>
+</ul>
+<p>Prusse : Berlin, Guillaume Ier et Bismarck, le « chancelier de fer ».</p>
+<ul>
+<li>Opposition de la Bavière catholique à l’unité allemande ;</li>
+<li>Bismarck défend la guerre pour l’unité allemande.</li>
+</ul>
+<p><strong>Déclenchement de la guerre</strong> :</p>
+<ul>
+<li>trône d’Espagne vacant ;</li>
+<li>Guillaume Ier veut mettre un Allemand sur le trône <span class="vf"><span class="tag check">⚠</span> Aprile : le prince Léopold de Hohenzollern-Sigmaringen, cousin catholique du roi de Prusse</span> ;</li>
+<li>Benedetti représente le gouvernement français et est chargé de convaincre Guillaume d’abandonner le projet, ce qui est accepté ;</li>
+<li>Benedetti revient pour obtenir un engagement écrit, ce qui est refusé ;</li>
+<li>Guillaume envoie la dépêche d’Ems dans laquelle il raconte l’entrevue à Bismarck ; Bismarck la modifie et la publie <span class="vf"><span class="tag ok">✔</span> confirmé par Aprile</span> ;</li>
+<li><strong><span class="date">15 juillet 1870</span></strong> : Émile Ollivier lit la lettre et demande à partir en guerre <span class="vf"><span class="tag check">⚠</span> Aprile : devant le Corps législatif, il accepte la guerre « d’un cœur léger »</span> ;</li>
+<li>les députés dont Gambetta votent la guerre ; Jules Favre et Jules Grévy refusent ; Thiers s’oppose car la France n’est pas prête, mais finit par voter pour sa réputation politique <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : crédits de guerre votés par 245 voix contre 10 ; Gambetta et Thiers s’y opposent d’abord puis votent les crédits ; Favre et Grévy non cités</span> ;</li>
+<li><strong><span class="date">19 juillet 1870</span></strong> : la France déclare la guerre à la Prusse.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Calendrier</span> le <span class="date">15 juillet</span>, 245 voix pour les crédits de guerre, 10 contre et 7 abstentions ; le 18, suppléments de crédits votés à l’unanimité. Le <span class="date">28 juillet</span>, l’Empereur part de Saint-Cloud pour Metz avec le prince impérial, 14 ans ; le <span class="date">2 août</span>, victoire de Sarrebruck, enthousiasme dans les villes (« À Berlin ! ») ; le <span class="date">4 août</span>, Wissembourg ; le <span class="date">6 août</span>, Mac-Mahon perd l’Alsace à Woerth-Froeschwiller et Frossard est battu à Forbach (Aprile).</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Sedan</span> le commandement est confié à Bazaine à la mi-août ; Mac-Mahon est acculé dans la cuvette de Sedan le <span class="date">31 août</span> ; le drapeau blanc est hissé, Guillaume Ier exige la capitulation, Napoléon III se constitue prisonnier et est conduit à Wilhelmshöhe. La gauche républicaine s’est ralliée « non au régime, mais à la guerre » (Aprile).</li>
+</ul>
+<h4 id="b-les-reactions" class="h4">B) Les réactions</h4>
+<p><strong>Premier sentiment favorable</strong> :</p>
+<ul>
+<li>nécessité de lutter contre « la patrie en danger » (phrase de Danton en 1792, aboutissant à la victoire de Valmy) <span class="vf"><span class="tag ok">✔</span> confirmé par Noiriel</span> ;</li>
+<li>ce qui était la guerre de l’empereur devient la guerre de la nation.</li>
+</ul>
+<p><strong>Campagnes</strong> : inquiétude, la moisson approche <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres</span>.</p>
+<p><strong>Début <span class="date">août 1870</span></strong> : les défaites en Alsace-Moselle suscitent la colère contre le régime incapable de défendre son peuple <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : Wissembourg le 4 août, Forbach le 6 août ; Aprile : le 9 août, dix à trente mille manifestants devant le Palais-Bourbon réclament la déchéance de l’Empereur, le ministère Ollivier est renversé ; des incidents éclatent aussi à Toulon, Mâcon, Montpellier, au Creusot, et à Limoges on crie « Vive la République »</span> :</p>
+<ul>
+<li>Marseille, Lyon <span class="vf"><span class="tag check">⚠</span> Marseille : émeute du 8 août ; Lyon : Croix-Rousse, 13 août</span> ;</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres — Marseille, 8 août</span> après une manifestation de 40 000 personnes et l’arrestation d’un organisateur, la mairie est occupée et un comité révolutionnaire, mené par Gaston Crémieux, est acclamé ; indécis, il est vite balayé par la troupe : « première tentative de commune insurrectionnelle » (Zancarini-Fournel). <strong>Lyon, <span class="date">13 août</span></strong> : à la Croix-Rousse, un rassemblement autour du notaire Lentillon proclame la république et arbore le drapeau rouge ; les femmes aspergent de sel les sergents de ville ; un mort chez les forces de l’ordre (Zancarini-Fournel). <strong>Paris, <span class="date">14 août</span></strong> : attaque blanquiste de la caserne des pompiers de la Villette, sans écho dans le quartier (Zancarini-Fournel).</li>
+<li>campagne : douleur de la mobilisation des jeunes hommes.</li>
+</ul>
+<p>Émile Guillaumin, <em>La Vie d’un simple</em>, <span class="date">1904</span> :</p>
+<ul>
+<li>auteur : paysan, originaire de l’Allier, homme de lettres <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : écrivain-paysan devenu syndicaliste agricole (1873-1951)</span> ;</li>
+<li>narrateur : Étienne Bertin, dit Tiennon (les notes portent « Pierre [?] Tiennon »), fiction basée sur la vie de Guillaumin <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : le personnage du roman La Vie d’un simple est Étienne Bertin, dit Tiennon, placé « en condition chez les autres » dès l’âge de sept ans ; la lecture « Pierre » est donc corrigée</span> ;</li>
+<li>quand son frère part pour la guerre, Guillaumin porte [un regard] sur l’ignorance des paysans et raconte leurs réactions <span class="vf"><span class="tag check">⚠</span> passage difficile à lire</span>.</li>
+</ul>
+<p><strong><span class="date">16 août 1870</span></strong> : colère [mots illisibles] à Hautefaye (Périgord) : Alain Corbin, <em>Le Village des « cannibales »</em> <span class="vf"><span class="tag check">⚠</span> lecture du titre incertaine</span>.</p>
+<ul>
+<li>Alain de Monéys, le jeune châtelain, est pris à partie par les paysans venus pour la foire aux bestiaux et pour la fête nationale du <span class="date">15 août</span> :</li>
+<li>le châtelain est accusé par les paysans d’être de connivence avec les Prussiens <span class="vf"><span class="tag fix">✎</span> Vérif. Aprile : accusé d’avoir crié « Vive la République » ; le soir, ses bourreaux se vantent d’avoir rôti un « Prussien »</span> ;</li>
+<li>brusquement, il se fait prendre par 300 paysans qui lui donnent des coups de bâton, le torturent, brûlent l’homme qui était vraisemblablement déjà mort <span class="vf"><span class="tag check">⚠</span> Noiriel : foule de 300 à 800 paysans, jeune noble supplicié et brûlé vif le 16 août ; Aprile : sur le champ de foire</span> ;</li>
+<li>les paysans ont ainsi exprimé leur peur, leur respect pour Napoléon, leur rancune envers les seigneurs et les Prussiens : geste cathartique ;</li>
+<li><strong><span class="date">décembre 1870</span></strong> : procès des meneurs ; Gambetta refuse tout sursis pour les hommes ; [nombre illisible] condamnés à mort <span class="vf"><span class="tag check">⚠</span> procès et condamnations non retrouvés dans les livres</span> ;</li>
+<li>cela montre le bouleversement des campagnes, aggravé par l’hiver <span class="date">1870-1871</span> <span class="vf"><span class="tag check">⚠</span> Noiriel : l’affaire conforte le préjugé des « paysans incivilisés », « sauvages » et « ivres de sang »</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Alain de Moneys cristallise « toutes les craintes » du village : celle de la défaite, celle du retour des anciens temps, amalgamant les souvenirs de l’Ancien Régime et ceux de la République qui avait imposé les quarante-cinq centimes (Aprile).</li>
+</ul>
+<p><strong>Repères</strong> :</p>
+<ul>
+<li><strong><span class="date">2 septembre 1870</span></strong> : défaite de Sedan.</li>
+<li><strong><span class="date">3 septembre 1870</span></strong> : Napoléon III prisonnier <span class="vf"><span class="tag check">⚠</span> Aprile : après la reddition de Sedan, il est conduit le lendemain au château de Wilhelmshöhe, près de Cassel ; la nouvelle est placardée à Paris au soir du 3</span>.</li>
+<li><strong><span class="date">4 septembre 1870</span></strong> : proclamation de la République.</li>
+</ul>
+<h3 id="2-la-defaite-entraine-une-nouvelle-donne-politique" class="h3">2. La défaite entraîne une nouvelle donne politique : la République est proclamée</h3>
+<h4 id="a-la-proclamation-de-la-republique-le-4-septembre-" class="h4">A) La proclamation de la République le 4 septembre 1870 par GAMBETTA</h4>
+<ul>
+<li><strong><span class="date">2 septembre 1870</span></strong> : défaite de Sedan.</li>
+<li><strong><span class="date">3 septembre 1870</span></strong> : le Corps législatif apprend la capture de Napoléon III et de 80 000 à 100 000 soldats <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : 83 000 soldats prisonniers avec l’empereur</span>.</li>
+<li><strong><span class="date">4 septembre 1870</span></strong> : 100 000 personnes réunies à Paris <span class="vf"><span class="tag check">⚠</span> chiffre non retrouvé</span> :</li>
+<li>on entend « déchéance de l’Empire » et « vive la République » ;</li>
+<li>Eugène Schneider, patron du Creusot et président du Corps législatif depuis <span class="date">1847</span> [sic dans les notes], a peur ; on entend « à mort l’assassin des ouvriers » <span class="vf"><span class="tag fix">✎</span> Vérif. Zancarini-Fournel : président du Corps législatif depuis 1867 ; cris « À mort l’assassin du Creusot ! À mort l’exploiteur des ouvriers ! » ; Schneider s’exile en Angleterre</span> ;</li>
+<li>problématiques sociales, militaires, ouvrières se mélangent ;</li>
+<li>la foule pénètre au palais Bourbon ;</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Au Corps législatif, les bonapartistes tentent une alternative : le général Palikao propose un conseil de gouvernement et de défense nationale ; Thiers, une commission exécutive. La gauche réclame la déchéance, et Gambetta rédige la motion acclamée par la foule. Aucune violence : ni barricade ni coup de feu, on s’attaque seulement aux symboles du pouvoir (plaques, emblèmes, aigle impérial jeté à la Seine) (Aprile, Zancarini-Fournel).</li>
+<li>Gambetta proclame la fin de l’Empire : « Nous savons que Louis-Napoléon Bonaparte et sa dynastie ont cessé à jamais de régner sur la France » <span class="vf"><span class="tag check">⚠</span> citation non retrouvée dans les livres</span> ;</li>
+<li>Jules Favre, Ferry, Gambetta disent que la République doit être proclamée à l’Hôtel de ville ;</li>
+<li>Gambetta proclame la Troisième République : « Pour sauver la patrie en danger, le peuple a demandé la République. La République est proclamée. » (Gambetta, proclamation de la Troisième République) <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel cite le texte affiché à l’Hôtel de ville le 4 septembre : « Pour sauver la Patrie en danger, il a demandé la République » ; Aprile : Gambetta proclame la République avec Jules Favre</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> La foule conduit ensuite Jules Favre et Gambetta à l’Hôtel de ville, « selon le rite habituel » de <span class="date">1848</span>. Le gouvernement se nomme <strong>gouvernement de la Défense nationale</strong> : le mot « république » n’y apparaît pas, pour ne pas la compromettre ; sa tête est le général Trochu, gouverneur militaire de Paris, orléaniste et catholique, non républicain ; Gambetta est ministre de l’Intérieur (puis de la Guerre), Jules Favre vice-président et ministre des Affaires étrangères. L’impératrice se réfugie en Angleterre avec le prince impérial (Aprile, Zancarini-Fournel).</li>
+</ul>
+<h4 id="b-les-reactions-en-france-a-lannonce-de-la-proclam" class="h4">B) Les réactions en France à l’annonce de la proclamation de la République à Paris</h4>
+<ul>
+<li><strong>Marseille</strong> :</li>
+<li>les statues de Napoléon III sont déboulonnées ;</li>
+<li>foule en colère contre le Second Empire : manifestation de joie ;</li>
+<li>tension entre républicains et révolutionnaires <span class="vf"><span class="tag ok">✔</span> confirmé par Zancarini-Fournel : comité de salut public, Garde civique, républicains modérés</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Les insurgés du <span class="date">8 août</span> sont libérés ; la préfecture est investie le <span class="date">5 septembre</span> et ses 1 200 fusils vont à la Garde civique (ouvriers du port payés 2 francs par jour) ; Gambetta nomme préfet le modéré Labadié (démissionnaire le <span class="date">26 septembre</span>, remplacé par le plus radical Delpech) et envoie Esquiros, ancien quarante-huitard, comme administrateur du département (Zancarini-Fournel). Les révolutionnaires anticléricaux s’en prennent aux jésuites ; la fracture modérés/révolutionnaires est « très tôt sensible ».</li>
+<li><strong>Lyon</strong> : tension déjà présente dans cette ville, qui se concrétise en révolution <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : hôtel de ville occupé dès le matin du 4 septembre, drapeaux rouges place des Terreaux ; environ 2 000 personnes investissent aussi le télégraphe, l’hôtel de police et la prison ; les soldats refusent d’intervenir ; un comité de salut public provisoire est formé</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> À Lyon, deux tentatives d’insurrection suivent, le <span class="date">28 septembre</span> (Albert Richard et Bakounine) et le <span class="date">20 décembre 1870</span> (mort du commandant Arnaud, fusillé par la foule), ce qui marque la fin du bloc des Canuts (Zancarini-Fournel). Au Creusot, Jean-Baptiste Dumay, « maire provisoire » le <span class="date">24 septembre</span>, obtient la dissolution du conseil municipal inféodé aux Schneider ; il est élu le <span class="date">8 février</span> avec 77 % des voix (Zancarini-Fournel).</li>
+<li><strong>Martinique</strong> :</li>
+<li>annonce en colonie le <strong><span class="date">21 septembre 1870</span></strong> ;</li>
+<li>colons favorables à la monarchie : émeutes entre républicains et grands propriétaires ;</li>
+<li>fracture entre ouvriers agricoles et planteurs békés, et entre couches moyennes de couleur et Blancs <span class="vf"><span class="tag check">⚠</span> lecture incertaine des notes (« paysans métisses contre propriétaires non métisses ») ; Zancarini-Fournel : 67 des 98 inculpés sont des ouvriers agricoles ; les couches moyennes de couleur, républicaines, se démarquent des Blancs</span> ;</li>
+<li>création de milices blanches par les patrons ;</li>
+<li>1 patron mis à mort, comme à Hautefaye <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : le béké Codé, insurrection du 22 au 26 septembre 1870 à Rivière-Pilote</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Annonce officielle apportée par le paquebot <em>La Louisiane</em> le <span class="date">21 septembre</span>. Émeute contre Codé, planteur béké légitimiste, arrogant, qui avait hissé le drapeau blanc et siégeait au tribunal ayant condamné le mulâtre Léopold Lubin ; cris « Vive la république ! Mort aux Blancs ! » ; 25 habitations incendiées ; Codé mis à mort par la foule. Le 26, troupes et milices blanches font 17 morts et 100 prisonniers, l’état de siège est proclamé. Répression féroce : 114 inculpés, huit fusillés en <span class="date">1871-1872</span>, des peines de travaux forcés en Guyane. Les mulâtres républicains instaurent dès <span class="date">1871</span> la laïcisation et la gratuité de l’école primaire, onze ans avant la métropole (Zancarini-Fournel).</li>
+</ul>
+<h3 id="3-paris-assiege-larmistice-et-les-elections-du-8-f" class="h3">3. Paris assiégé, l’armistice et les élections du 8 février 1871</h3>
+<h4 id="a-un-nouveau-gouvernement-le-gouvernement-de-la-de" class="h4">A) Un nouveau gouvernement : le gouvernement de la Défense nationale ; Paris est assiégé</h4>
+<ul>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Le gouvernement de la Défense nationale (Trochu, Favre, Gambetta) est décrit plus haut ; ce sont les livres qui complètent ici le siège de Paris, que les notes ne détaillent pas.</li>
+<li><strong>Mi-<span class="date">septembre 1870</span></strong> : Paris assiégé <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : encerclé depuis le 19 septembre ; Noiriel : siège commencé le 18 septembre</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Paris compte 56 kilomètres de remparts et seize forts. Les exigences de Bismarck (l’Alsace, une partie de la Moselle, une forte indemnité) font de la guerre une guerre de défense nationale : Blanqui crée <em>La Patrie en danger</em>, les internationalistes et Gambetta se rallient à la défense (Zancarini-Fournel). Gambetta refuse de capituler et déclare « la patrie en danger » (Noiriel).</li>
+<li><strong><span class="date">7 octobre 1870</span></strong> : Gambetta décide de quitter Paris en montgolfière ; il fuit jusqu’à Tours, où réside une délégation du gouvernement depuis le début du siège <span class="vf"><span class="tag ok">✔</span> départ en ballon confirmé ; date non précisée</span>.</li>
+<li>20 comités de vigilance sont créés pour organiser la ville pendant le siège de Paris <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : comités de vigilance dans les vingt arrondissements</span> :</li>
+<li>appuyés par 370 000 hommes de la Garde nationale <span class="vf"><span class="tag check">⚠</span> chiffre des notes ; Zancarini-Fournel : 340 000 hommes pour seulement 280 000 fusils</span> ;</li>
+<li>Paris s’organise pour s’occuper des Parisiens pendant le siège.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Le Comité républicain de défense nationale des vingt arrondissements (Cluseret, Lefrançais, Longuet, Malon, Vaillant, Vallès) appelle à la levée en masse ; les comités de vigilance revendiquent une « Commune » autonome, l’armement du peuple et le renforcement de la Garde nationale. La solde de 1,50 franc par jour est pour beaucoup de familles le seul moyen de subsistance : sur 600 000 salariés parisiens début <span class="date">1870</span>, 114 000 ont encore un emploi un an plus tard. La Garde, locale et indisciplinée, reflète les quartiers (Belleville et Montmartre diffèrent des « bataillons de l’ordre » des VIIe et VIIIe arrondissements). Le <span class="date">31 octobre</span>, journée révolutionnaire : l’hôtel de ville est occupé, puis l’échec entraîne des arrestations ; début novembre, un plébiscite donne 460 000 oui au gouvernement contre 60 000 non, et des maires révolutionnaires sont élus dans neuf arrondissements du centre et de l’Est (Zancarini-Fournel).</li>
+<li><strong><span class="date">30 septembre 1870</span></strong> : le gouvernement décide d’un moratoire des loyers et des traites à Paris (= arrêt temporaire du paiement des dettes) <span class="vf"><span class="tag ok">✔</span> confirmé par Zancarini-Fournel</span>.</li>
+<li><strong>Hiver <span class="date">1870-1871</span></strong> : hiver très rigoureux :</li>
+<li>crise sur : faim, froid, épidémies ;</li>
+<li>à Noël, un rat coûte la moitié de la solde journalière d’un garde national <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : « un rat coûte la moitié de l’allocation journalière d’un garde national »</span> ;</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> le ravitaillement manque dès la mi-novembre, les prix flambent, la viande de cheval est rationnée, le pain l’est en janvier ; le combustible manque et la mortalité augmente terriblement. Les femmes portent le fardeau de la quête de nourriture (queues devant les boulangeries) ; les plus riches mangent sans problème, les plus pauvres et les couches moyennes inférieures souffrent (Zancarini-Fournel).</li>
+<li><strong><span class="date">27 octobre 1870</span></strong> : prise de Metz par les Prussiens <span class="vf"><span class="tag check">⚠</span> date non retrouvée dans les livres ; Aprile signale seulement la retraite de l’armée du Rhin vers Metz et le camp de Châlons en août</span> :</li>
+<li>nouvelle arrivée dans les campagnes, qui se sentent trahies par le Second Empire, ce qui les pousse à se rapprocher de la République.</li>
+<li><strong><span class="date">5 janvier 1871</span></strong> : début de 3 semaines de bombardement de Paris : Panthéon, Sorbonne, palais du Luxembourg… <span class="vf"><span class="tag ok">✔</span> confirmé par Zancarini-Fournel : surtout la rive gauche</span> :</li>
+<li>[phrase peu claire dans les notes] : malgré les bombardements, l’élan patriotique de la population ne faiblit pas <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : « il y a un consensus populaire pour poursuivre la résistance » ; les échecs sont attribués à l’inertie du gouvernement ; un obus toutes les deux ou trois minutes, la population se déplace vers la rive droite</span>.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Une sortie, réclamée par les Parisiens et la Garde nationale, est tentée contre le quartier général allemand de Versailles : échec retentissant, 4 000 tués dont 1 500 gardes nationaux ; « le désespoir est général » (Zancarini-Fournel).</li>
+</ul>
+<h4 id="b-larmistice-et-les-elections-du-8-fevrier-1871" class="h4">B) L’armistice et les élections du 8 février 1871</h4>
+<p>Jules Favre prend contact avec Bismarck par peur d’une insurrection parisienne : il avait tenté une première fois à [phrase interrompue en bas de page ; la suite n’est pas dans les photos] <span class="vf"><span class="tag check">⚠</span> Aprile : ministre des Affaires étrangères, Favre avait refusé les premières propositions de Bismarck ; le lieu de cette première tentative n’est pas nommé dans les livres</span>.</p>
+<ul>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> Le gouvernement demande alors un armistice. Les forts et les armes doivent être livrés aux Prussiens (sauf ceux de la Garde nationale) et Paris est de nouveau ravitaillé ; le gouvernement s’est replié à Bordeaux (Zancarini-Fournel).</li>
+<li><strong><span class="date">28 janvier 1871</span></strong> : signature de l’armistice <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : accordé le 28 janvier pour trois semaines, afin d’organiser des élections législatives qui décideront de la paix</span>.</li>
+<li><strong><span class="date">18 janvier 1871</span></strong> : proclamation du IIe Reich, Guillaume Ier devenant empereur <span class="vf"><span class="tag check">⚠</span> date non retrouvée dans les livres</span>.</li>
+<li>Gambetta démissionne en apprenant l’armistice du <span class="date">28 janvier 1871</span> <span class="vf"><span class="tag ok">✔</span> confirmé par Zancarini-Fournel : depuis Bordeaux, il tente en vain d’empêcher la capitulation ; le préfet de Marseille, Gent, refuse d’organiser les élections et exhorte Gambetta à refuser l’armistice ; Gambetta démissionne mais supplie Gent de les organiser, espérant un sursaut républicain</span>.</li>
+<li><strong><span class="date">8 février 1871</span></strong> : élections organisées et énoncées dans l’armistice (par Bismarck) :</li>
+<li>élections au scrutin de listes ;</li>
+<li>listes pour la paix (monarchistes, républicains modérés) ; listes pour la guerre à outrance <span class="vf"><span class="tag check">⚠</span> mentions en marge difficiles à lire ; Noiriel : les monarchistes, partisans de la paix, l’emportent largement grâce au vote rural, « le fossé entre ville et campagne n’avait jamais été aussi profond »</span> ;</li>
+<li>pas d’élection pour un régime : élection pour répondre à une question ;</li>
+<li>résultats : notables élus, grande majorité conservatrice : 400 monarchistes ; 150 républicains <span class="vf"><span class="tag check">⚠</span> les notes portent « 250 républicains ; 20 monarchistes [?] », peu lisible et incohérent ; corrigé d’après Zancarini-Fournel : 400 monarchistes (surtout des ruraux qui refusent la guerre et les impôts et craignent les ouvriers des villes) et 150 républicains (élus surtout dans les villes) ; élections organisées « à la hâte »</span> ;</li>
+<li>système électoral exclusif : Gaston Crémieux s’exclame « Majorité rurale : honte à la France ! » <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : « Vous n’êtes qu’une majorité de ruraux ! Majorité rurale : honte à la France ! Écoutez Garibaldi » ; lancé depuis les tribunes lors de la première session</span> ;</li>
+<li>Paris : élection de républicains radicaux : Hugo, Gambetta (choisit le Bas-Rhin), Vermorel, Delescluze (directeur du journal <em>Le Réveil</em>) <span class="vf"><span class="tag check">⚠</span> Zancarini-Fournel : les 43 sièges parisiens aux républicains, dont Hugo, Louis Blanc et Garibaldi, largement élus ; mais « les socialistes révolutionnaires, les internationalistes et les blanquistes ne remportent pas les suffrages populaires » ; l’élection de Gambetta dans le Bas-Rhin, de Vermorel et de Delescluze n’est pas confirmée par les livres ; Aprile : Gambetta avait déjà choisi en 1869 de représenter Marseille plutôt que Belleville</span> ;</li>
+<li>élection de Thiers, élu dans 26 départements <span class="vf"><span class="tag check">⚠</span> non retrouvé dans les livres ; Aprile : Jules Favre est lui élu par six départements</span>.</li>
+<li><strong><span class="date">26 février 1871</span></strong> : l’Assemblée, dominée par les monarchistes, vote et ratifie 5 milliards de francs or à l’Allemagne et perd l’Alsace-Moselle <span class="vf"><span class="tag ok">✔</span> confirmé par Noiriel : traité provisoire signé le 26 février, indemnité de cinq milliards de francs or ; Zancarini-Fournel : traité négocié par Thiers et Bismarck, largement approuvé par l’Assemblée, cession de l’Alsace et de la Lorraine-Moselle</span> :</li>
+<li>« honte suprême » : défilé de l’armée prussienne le <span class="date">1er mars</span> sur les Champs-Élysées (Zancarini-Fournel) ;</li>
+<li>préliminaires de paix, qui forment le traité de Francfort le <strong><span class="date">10 mai 1871</span></strong> <span class="vf"><span class="tag check">⚠</span> Aprile : Jules Favre signe le traité de Francfort le 10 mai 1871</span> ;</li>
+<li>sentiment d’humiliation à Paris <span class="vf"><span class="tag check">⚠</span> Noiriel : les Parisiens ressentent le traité comme « une intense humiliation et comme une trahison » ; Zancarini-Fournel : un « gouvernement de capitulards » est dénoncé et la paix humiliante convainc les modérés de soutenir les plus radicaux</span> : renaissance de l’esprit de 48, qui s’exprime dans la Commune.</li>
+<li class="comp"><span class="clab"><span class="tag add">✚</span> Complément des livres</span> La Garde nationale se mobilise : mi-février naît la Fédération républicaine de la Garde nationale de la Seine (d’où les « fédérés »), avec des délégués élus par bataillon et par légion ; le <span class="date">15 mars</span>, ils élisent un Comité central, qui comprend plusieurs membres de l’Internationale dont Varlin. Des fêtes patriotiques célèbrent la révolution de <span class="date">février 1848</span> et des arbres de la liberté sont plantés (Zancarini-Fournel). Noiriel ajoute que l’Assemblée se replie sur Versailles pour échapper au mécontentement.</li>
+</ul>
+<figure class="cite"><blockquote><p>« La République née le <span class="date">4 septembre</span> est une République par défaut, [bâtie] pour les républicains refusant l’Empire, une République sans les républicains »</p></blockquote><figcaption>AZÉMA, WINOCK, <strong>La IIIe République</strong></figcaption></figure><p><span class="vf"><span class="tag check">⚠</span> lecture incertaine ; citation non retrouvée dans les livres ; Aprile exprime la même idée : la Troisième République naît « sous des auspices bien différents des deux précédentes », avec un gouvernement qui évite le mot « république » et une « république limitée »</span></p>
+<h2 id="annexe-verification-dans-les-trois-livres" class="h2">Annexe : vérification dans les trois livres</h2>
+<p>Les trois livres (Zancarini-Fournel, Noiriel, Aprile) ont été consultés en version texte, sans pagination : les références renvoient donc à l’auteur et non à la page. Les points non listés ici sont cohérents avec les livres ou relèvent du commentaire du cours.</p>
+<div class="tbl"><table><thead><tr><th>Point</th><th>Dans le cours</th><th>Dans les livres</th><th>Statut</th></tr></thead><tbody><tr><td>Capitulation de Napoléon III</td><td><span class="date">3 septembre 1870</span></td><td>Capitule à Sedan le <span class="date">2 septembre</span>, 83 000 prisonniers (Zancarini-Fournel)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Corps législatif</td><td>270 représentants</td><td>261 députés en <span class="date">1852</span>, élus pour six ans, trois mois de session par an (Aprile)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Exécution de Maximilien</td><td><span class="date">1868-1869</span></td><td><span class="date">19 juin 1867</span>, Querétaro (Aprile)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Pamphlet de Ferry</td><td><span class="date">1866</span></td><td><span class="date">1863</span> (Aprile) ; Ferry probablement pas l’auteur du bon mot</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Urbains en France</td><td>24,4 % en <span class="date">1850</span>, 34,8 % en <span class="date">1880</span></td><td>24,4 % est le chiffre de <span class="date">1846</span> (Aprile) ; 34,8 % non retrouvé</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Ouvriers</td><td>3 M en <span class="date">1866</span></td><td>Près de 3 M en <span class="date">1870</span> (Aprile)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Maria Deraismes</td><td>« sa femme » (de Richer)</td><td>Conférencière invitée par Richer ; rien n’indique un mariage (Aprile, Zancarini-Fournel)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Le Droit des femmes</td><td><span class="date">1869</span></td><td><span class="date">1869</span> (Aprile) ; <span class="date">1851</span> (Zancarini-Fournel). Les deux livres divergent</td><td><span class="tag check">⚠</span> À trancher</td></tr><tr><td>Ricamarie</td><td>14 morts, <span class="date">16 juin</span></td><td>13 morts plus une 14e victime (Zancarini-Fournel), 14 morts (Noiriel) ; date non précisée</td><td><span class="tag check">⚠</span> Partiel</td></tr><tr><td>Creusot <span class="date">1870</span></td><td>grève de 3 mois</td><td>Métallurgistes 19-<span class="date">24 janvier</span> ; mineurs à partir du <span class="date">21 mars</span> (Zancarini-Fournel)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Algérie <span class="date">1860</span></td><td>« Empire arabe »</td><td>« Royaume arabe » ; « empereur des Français et des Arabes » (Noiriel)</td><td><span class="tag fix">✎</span> Nuance</td></tr><tr><td>Manifeste des Soixante</td><td>Gambetta et 60 ouvriers</td><td><span class="date">Février 1864</span>, rédigé avec l’aide de Gambetta (Noiriel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Loi sur le droit de grève</td><td><span class="date">25 mai 1864</span></td><td><span class="date">25 mai 1864</span> (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Presse et réunions</td><td><span class="date">1868</span></td><td>Loi sur la presse du <span class="date">11 mai 1868</span>, réunions le <span class="date">6 juin 1868</span> (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Aubin</td><td>17 morts dont un enfant</td><td>Confirmé, 6-<span class="date">8 octobre 1869</span> (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Plébiscite de <span class="date">1870</span></td><td>70 % oui, 15 % non</td><td>7 358 000 oui, 1 538 000 non, 1,9 M abstentions (Zancarini-Fournel) ; « mon chiffre » (Aprile)</td><td><span class="tag ok">✔</span> Cohérent</td></tr><tr><td>Sedan, Wissembourg, Forbach</td><td>défaites début août</td><td>Wissembourg <span class="date">4 août</span>, Forbach <span class="date">6 août</span> (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Patrie en danger</td><td>Danton 1792, Valmy</td><td>Confirmé (Noiriel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Hohenzollern, Ems, Benedetti</td><td>enchaînement de la crise</td><td>Confirmé (Aprile)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Crédits de guerre</td><td>voix du vote de <span class="date">juillet 1870</span></td><td>245 voix contre 10 ; Gambetta et Thiers s’y opposent d’abord puis votent les crédits (Aprile)</td><td><span class="tag check">⚠</span> Partiel</td></tr><tr><td>Schneider</td><td>président du Corps législatif depuis <span class="date">1847</span></td><td>Depuis <span class="date">1867</span> (Zancarini-Fournel) ; <span class="date">1847</span> est une erreur des notes</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Hautefaye</td><td><span class="date">16 août 1870</span></td><td>Foule de 300 à 800 paysans, jeune noble brûlé vif le <span class="date">16 août</span> (Noiriel) ; procès non retrouvé</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Guillaumin</td><td>La Vie d’un simple, <span class="date">1904</span></td><td>Écrivain-paysan, <span class="date">1873-1951</span> ; le héros est Étienne Bertin, dit Tiennon (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Proclamation du <span class="date">4 septembre</span></td><td>Gambetta proclame la République</td><td>Avec Jules Favre (Aprile) ; texte affiché à l’Hôtel de ville (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Lyon, Marseille, Martinique</td><td>réactions du <span class="date">4 septembre</span></td><td>Lyon : hôtel de ville occupé, drapeaux rouges ; Martinique : insurrection du 22 au <span class="date">26 septembre</span>, béké Codé (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Siège de Paris</td><td>encerclement, comités de vigilance</td><td>Encerclé depuis le <span class="date">19 septembre</span> ; comités de vigilance dans les vingt arrondissements (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Élections du <span class="date">8 février 1871</span></td><td>400 monarchistes, 150 républicains</td><td>Confirmé (Zancarini-Fournel) ; 43 sièges parisiens aux républicains ; « majorité rurale : honte à la France ! »</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Préliminaires de paix</td><td><span class="date">26 février 1871</span></td><td>Traité provisoire signé le <span class="date">26 février</span> (Noiriel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Garde nationale pendant le siège</td><td>370 000 hommes</td><td>340 000 hommes pour 280 000 fusils (Zancarini-Fournel)</td><td><span class="tag fix">✎</span> Écart</td></tr><tr><td>Début du siège de Paris</td><td>mi-septembre</td><td><span class="date">19 septembre</span> (Zancarini-Fournel) ; <span class="date">18 septembre</span> (Noiriel)</td><td><span class="tag check">⚠</span> Les livres divergent</td></tr><tr><td>Résultats du <span class="date">8 février</span></td><td>400 monarchistes ; 250 républicains</td><td>400 monarchistes et 150 républicains (Zancarini-Fournel) ; lecture des notes incertaine</td><td><span class="tag fix">✎</span> Corrigé</td></tr><tr><td>Rat à Noël</td><td>moitié de la solde</td><td>Moitié de l’allocation journalière d’un garde national (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Traité de Francfort</td><td><span class="date">10 mai 1871</span></td><td>Signé par Jules Favre le <span class="date">10 mai</span> (Aprile)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Amnistie de <span class="date">1869</span></td><td>grâce le <span class="date">15 août</span></td><td>Amnistie décrétée par Napoléon III le <span class="date">15 août 1869</span> (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Germinal et Zola</td><td>inspiré par le Brûlé</td><td>Zola s’est rendu à Anzin ; la scène du ravin vient sans doute de récits du Brûlé (Zancarini-Fournel)</td><td><span class="tag ok">✔</span> Confirmé</td></tr><tr><td>Non retrouvé dans les livres</td><td>Rosa Bonheur ; Landes <span class="date">1853</span> ; proscription du <span class="date">9 janvier 1852</span> ; Hugo et le poème « Aubin » ; monument de <span class="date">1989</span> ; évasion de Rochefort ; fuite de Malon ; dates des Internationales ; discours de Grenoble <span class="date">1872</span> ; citation de Gambetta de <span class="date">1870</span> ; procès de Hautefaye ; prise de Metz le <span class="date">27 octobre</span> ; proclamation du IIe Reich le <span class="date">18 janvier</span> ; Thiers élu dans 26 départements ; élection de Gambetta dans le Bas-Rhin, de Vermorel et de Delescluze ; citation d’Azéma-Winock ; Beauvoir sur Richer</td><td>Ces points viennent du cours ; ils restent tels que notés</td><td><span class="tag check">⚠</span> Non vérifié</td></tr></tbody></table></div>
+  </div></main>
+</div>
+</div>
+<button class="totop" id="totop" type="button" hidden>↑ Haut</button>
+
+<script>
+(function(){
+  var drawer=document.getElementById('drawer');
+  var main=document.getElementById('top');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(id){
+    var el=document.getElementById(id); if(!el) return;
+    var y=el.getBoundingClientRect().top-main.getBoundingClientRect().top+main.scrollTop-12;
+    main.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a){
+      e.preventDefault();
+      drawer.classList.remove('on');
+      go(a.getAttribute('href').slice(1));
+      return;
+    }
+    var t=e.target.closest&&e.target.closest('.tog');
+    if(t){
+      var li=t.closest('li'); var o=li.classList.toggle('open');
+      t.setAttribute('aria-expanded',o?'true':'false');
+    }
+  });
+  document.getElementById('openToc').addEventListener('click',function(){drawer.classList.add('on')});
+  document.getElementById('closeToc').addEventListener('click',function(){drawer.classList.remove('on')});
+  drawer.addEventListener('click',function(e){if(e.target===drawer) drawer.classList.remove('on')});
+
+  var heads=[].slice.call(document.querySelectorAll('h1.h1,h2.h2,h3.h3,h4.h4'));
+  var links={};
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){
+    var id=a.getAttribute('data-id'); (links[id]=links[id]||[]).push(a);
+  });
+  var cur=document.getElementById('curSec'), totop=document.getElementById('totop');
+  var lastId=null;
+  function clearActive(){[].forEach.call(document.querySelectorAll('.toc a.active'),function(a){a.classList.remove('active')})}
+  function setActive(id){
+    if(id===lastId) return; lastId=id;
+    clearActive();
+    (links[id]||[]).forEach(function(a){
+      a.classList.add('active');
+      var li=a.closest('li');
+      while(li){
+        if(li.classList.contains('hk')){li.classList.add('open');var b=li.querySelector(':scope>.row>.tog'); if(b) b.setAttribute('aria-expanded','true');}
+        li=li.parentElement&&li.parentElement.closest('li');
+      }
+    });
+    var h=document.getElementById(id); cur.textContent=h?h.textContent.replace(/\s+/g,' ').trim():'';
+    var box=document.querySelector('.side'), act=box&&box.querySelector('a.active');
+    if(act&&box.offsetParent!==null){
+      var r=act.getBoundingClientRect(), br=box.getBoundingClientRect();
+      if(r.top<br.top+40||r.bottom>br.bottom-40) box.scrollTop+=r.top-br.top-br.height/3;
+    }
+  }
+  function onScroll(){
+    totop.hidden = main.scrollTop<600;
+    var mt=main.getBoundingClientRect().top, best=null;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].getBoundingClientRect().top-mt<=90) best=heads[i]; else break;
+    }
+    if(best) setActive(best.id); else { lastId=null; cur.textContent=''; clearActive(); }
+  }
+  var tick=false;
+  main.addEventListener('scroll',function(){ if(!tick){tick=true;requestAnimationFrame(function(){tick=false;onScroll()})} },{passive:true});
+  totop.addEventListener('click',function(){main.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  onScroll();
+})();
+</script>
+
+</body></html>

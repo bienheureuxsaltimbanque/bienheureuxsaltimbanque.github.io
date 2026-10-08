@@ -139,8 +139,10 @@ tbody tr:nth-child(even){background:var(--note-bg)}
 
 .totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;all:unset;cursor:pointer;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--band);color:var(--band-ink);font-family:var(--f-head);font-weight:700;padding:.45rem .8rem;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25);font-size:.95rem;letter-spacing:.04em}
 .totop[hidden]{display:none!important}
-.player{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;max-width:calc(100% - 6rem);background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:.25rem .5rem}
-.player audio{display:block;height:36px;width:min(300px,100%)}
+.player{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50}
+.player button{width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);color:var(--title);font-size:1.4rem;line-height:1;cursor:pointer}
+.player button.on{background:var(--band);color:var(--band-ink)}
+
 </style>
 
 <style>
@@ -310,7 +312,8 @@ td .tag{cursor:default}
 </div>
 <button class="totop" id="totop" type="button" hidden>↑ Haut</button>
 <div class="player" id="player">
-  <audio id="bg" controls loop preload="auto" src="musiques/Linternationale_communiste.mp3">Votre navigateur ne prend pas en charge l'élément audio.</audio>
+  <button type="button" id="musicBtn" aria-pressed="false" aria-label="Lancer la musique" title="Musique">♪</button>
+  <audio id="bg" loop preload="auto" src="musiques/Linternationale_communiste.mp3"></audio>
 </div>
 
 <script>
@@ -383,16 +386,20 @@ td .tag{cursor:default}
 </script>
 <script>
 (function(){
-  var a=document.getElementById('bg'), evts=['click','keydown'];
+  var a=document.getElementById('bg'), b=document.getElementById('musicBtn');
   a.volume=0.5;
-  function unbind(){evts.forEach(function(e){document.removeEventListener(e,start)})}
-  function start(ev){
-    if(ev&&ev.target&&ev.target.closest&&ev.target.closest('#player'))return;
-    a.play().then(unbind).catch(function(){});
+  function sync(){
+    var on=!a.paused;
+    b.classList.toggle('on',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+    b.setAttribute('aria-label',on?'Mettre la musique en pause':'Lancer la musique');
   }
-  var p=a.play();
-  if(p&&p.catch)p.catch(function(){evts.forEach(function(e){document.addEventListener(e,start)})});
+  b.addEventListener('click',function(){
+    if(a.paused){a.play().catch(function(){})}else{a.pause()}
+  });
+  a.addEventListener('play',sync);
+  a.addEventListener('pause',sync);
+  sync();
 })();
 </script>
-
 </body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vocabulaire allemand – romantisme</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1b1b1a;--mut:#6a6862;--card:#fff;--bd:#d6d3ca;--ac:#27487f;--ok:#1d7a3c;--ko:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16171a;--fg:#ecebe6;--mut:#9b9a94;--card:#202226;--bd:#3a3c42;--ac:#8fb0f0;--ok:#5fcf86;--ko:#f28b82}}
+:root[data-theme="dark"]{--bg:#16171a;--fg:#ecebe6;--mut:#9b9a94;--card:#202226;--bd:#3a3c42;--ac:#8fb0f0;--ok:#5fcf86;--ko:#f28b82}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.5 Georgia,"Times New Roman",serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.25rem;margin:4px 0 12px}
+.tabs{display:flex;gap:8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:8px;padding:10px 14px}
+.tabs button{flex:1}
+.tabs .on{background:var(--ac);border-color:var(--ac);color:var(--bg);font-weight:bold}
+.meta{display:flex;justify-content:space-between;align-items:center;margin:12px 0;color:var(--mut);font-size:.9rem;gap:8px;flex-wrap:wrap}
+.meta button{padding:4px 10px;font-size:.85rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px;min-height:110px;font-size:1.25rem}
+#cd{cursor:pointer}
+.card small{display:block;color:var(--mut);font-size:.8rem;margin-bottom:8px}
+.de{color:var(--ac);font-weight:bold}
+.row{display:flex;gap:8px;margin-top:12px}
+.row button{flex:1}
+.ko{border-color:var(--ko);color:var(--ko)}.ok{border-color:var(--ok);color:var(--ok)}
+input[type=text]{width:100%;box-sizing:border-box;margin-top:12px;padding:12px;font:inherit;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg)}
+.res{margin-top:12px;padding:12px;border-radius:8px;border:1px solid}
+.res.ok{border-color:var(--ok)}.res.ko{border-color:var(--ko)}
+.go{width:100%;margin-top:12px;background:var(--ac);border-color:var(--ac);color:var(--bg);font-weight:bold}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+</style></head><body><main>
+<h1>Vocabulaire allemand : romantisme et méthode</h1>
+<div class="tabs"><button id="t1" class="on">Flashcardes</button><button id="t2">Test</button></div>
+<div class="meta"><span id="st"></span><label id="opt" hidden><input type="checkbox" id="strict" checked> Casse et ponctuation strictes</label><button id="rs">Réinitialiser</button></div>
+<div id="app"></div></main>
+<script>
+// format : français~allemand~info (pluriel pour les noms, formes verbales sinon) ; {a|b} = variantes acceptées
+const raw=`l'œuvre~das Werk~-e
+le conte~das Märchen~-
+le conte populaire~das Volksmärchen~-
+le conte d'auteur~das Kunstmärchen~-
+l'œuvre de jeunesse~das Jugendwerk~-e
+l'œuvre complète~das Gesamtwerk~-e
+le critique~der Kritiker~f. Kritikerin, -nen
+l'exemple~das Beispiel~-e
+la fille (par rapport aux parents)~die Tochter~¨
+l'ami~der Freund~-e
+l'écrivain~der Schriftsteller~-
+le poète~der Dichter~-
+le Moyen Âge~das Mittelalter
+le romantisme~die Romantik
+le romantique (personne)~der Romantiker~f. Romantikerin, -nen
+le cercle~der Kreis~-e
+la Thuringe~Thüringen
+la Souabe~Schwaben
+les années 1820~die 1820er Jahre
+les frères (Grimm)~die Gebrüder
+le frère~der Bruder~¨
+la ville~die Stadt~¨e
+l'importance, la signification~die Bedeutung~-en
+la langue~die Sprache~-n
+le bibliothécaire~der Bibliothekar~-e
+l'auteur (d'un ouvrage), le rédacteur~der Verfasser~-
+la grammaire~die Grammatik~-en
+le dictionnaire~das Wörterbuch~¨er
+l'époque~die Zeit~-en
+le classicisme~die Klassik
+la tragédie~die Tragödie~-n
+la prose~die Prosa
+la nouvelle (genre)~die Novelle~-n
+le romantisme tardif~die Spätromantik
+le peintre~der Maler~-
+le tableau (peinture)~das Gemälde~-
+la figure de dos~die Rückenfigur~-en
+le spectateur, l'observateur~der Betrachter~-
+le paysage de montagne~die Berglandschaft~-en
+le paysage marin~die Meereslandschaft~-en
+le souvenir~die Erinnerung~-en
+la randonnée~die Wanderung~-en
+la mer Baltique~die Ostsee
+la Suisse saxonne~die Sächsische Schweiz
+le niveau, le plan (musical)~die Ebene~-n
+le compositeur~der Komponist~-en, -en
+l'Autrichien~der Österreicher~-
+la musique~die Musik
+le texte~der Text~-e
+le champ lexical~das Wortfeld~-er
+la construction de la phrase~die Satzkonstruktion~-en
+la structure de la phrase~der Satzaufbau
+la phrase~der Satz~¨e
+le style~der Stil~-e
+l'extrait~der Auszug~¨e
+le passage~die Passage~-n
+l'harmonie~die Harmonie~-n
+la forme~die Form~-en
+le contenu, le fond~der Inhalt~-e
+le procédé stylistique~das Stilmittel~-
+le phénomène~das Phänomen~-e
+la répétition~die Wiederholung~-en
+le commentaire~der Kommentar~-e
+le fil conducteur~der rote Faden~¨
+l'introduction~die Einleitung~-en
+l'auteur (écrivain)~der Autor~-en
+la structure~die Struktur~-en
+le plan d'interprétation~der Auslegungsplan~¨e
+le lecteur~der Leser~f. Leserin, -nen
+le héros~der Held~-en, -en
+la détresse, la situation critique~die Notlage~-n
+l'épreuve, l'examen~die Prüfung~-en
+la fin~das Ende~-n
+le savoir (nom)~das Wissen
+le plus important~das Wichtigste
+publier~veröffentlichen~veröffentlichte, veröffentlicht
+écrire~schreiben~schrieb, geschrieben
+penser~denken~dachte, gedacht
+suivre (+ datif)~folgen~folgte, ist gefolgt
+traduire~übersetzen~übersetzte, übersetzt
+paraître (publication)~erscheinen~erschien, ist erschienen
+nommer, citer~nennen~nannte, genannt
+mourir~sterben~starb, ist gestorben
+s'intéresser à~sich interessieren für{ + A|}
+exister~existieren~existierte, hat existiert
+marquer, façonner~prägen~prägte, geprägt
+rester, demeurer~bleiben~blieb, ist geblieben
+se souvenir de~sich erinnern an{ + A|}
+rappeler, évoquer~erinnern an{ + A|}
+penser à~denken an{ + A|}
+croire en~glauben an{ + A|}
+associer, relier~verbinden~verband, verbunden
+associer (à)~assoziieren~assoziierte, assoziiert
+inviter~einladen~lud ein, hat eingeladen
+contempler, considérer~betrachten~betrachtete, betrachtet
+peindre~malen~malte, gemalt
+étudier (un texte)~studieren~studierte, studiert
+lire~lesen~las, gelesen
+analyser~analysieren~analysierte, analysiert
+utiliser~verwenden~verwendete, verwendet
+interpréter~{interpretieren|deuten}~syn. deuten, deutete, gedeutet
+exposer (une idée)~darlegen~legte dar, hat dargelegt
+présenter, soumettre~vorlegen~legte vor, hat vorgelegt
+présenter (un sujet)~präsentieren~präsentierte, präsentiert
+surmonter~überwinden~überwand, überwunden
+réussir (une épreuve)~bestehen~bestand, bestanden
+savoir~wissen~wusste, gewusst
+connaître~kennen~kannte, gekannt
+vivre, connaître (une expérience)~erleben~erlebte, erlebt
+pouvoir, savoir faire~können~konnte, gekonnt
+devoir (obligation)~sollen~sollte, gesollt
+blond~blond
+proche, étroit~eng
+jeune~jung
+très~sehr
+différent~verschieden
+romantique~romantisch
+célèbre~berühmt
+moderne~modern
+glorieux~glorreich
+généralement~{generell|allgemein}
+sûrement~sicher
+intensif~intensiv
+extraordinaire~außergewöhnlich
+musical~musikalisch
+inoubliable~unvergesslich
+autrichien~österreichisch
+intéressant~interessant
+hypotactique~hypotaktisch
+paratactique~parataktisch
+simple, sobre~{schlicht|einfach}
+soutenu (style)~gehoben
+typique~typisch
+initial~anfänglich
+heureux~glücklich
+riche en~reich an{ + D|}
+pauvre en~arm an{ + D|}
+connu~bekannt
+peu~wenig
+beau~schön
+tous les deux~beide
+entre-temps~inzwischen
+pour la première fois~zum ersten Mal
+d'abord~zuerst
+ensuite, puis~dann
+vers (date), environ~circa
+en même temps~zugleich
+autrefois~{früher|vorher|davor}
+avant que~bevor
+en (+ participe présent)~indem
+mais (après une négation)~sondern
+grâce à~dank
+parmi~unter
+quand, si (condition)~wenn
+plus ... que~mehr ... als
+en tant que~als
+par exemple~zum Beispiel
+que ... ou que (concessif)~ob ... oder
+même si, quand bien même~wenn ... auch
+à la suite, d'affilée~hintereinander
+trois fois~dreimal
+souvent~oft
+plutôt~eher
+ne ... plus~nicht mehr
+tant de~so viele
+aujourd'hui~heute
+plus tard~später
+ce faisant, ainsi~dabei
+avant (préposition + datif)~vor
+on (pronom)~man
+en allemand~auf Deutsch`;
+function ex(s){const m=s.match(/\{([^{}]*)\}/);if(!m)return[s];const o=[];for(const v of m[1].split("|"))o.push(...ex(s.replace(m[0],()=>v)));return o}
+const C=raw.split("\n").map((l,n)=>{const[f,d,i]=l.split("~"),k=ex(d);return{id:n,f,d:k[0],i:i||"",k}});
+let W={};try{W=JSON.parse(localStorage.getItem("dqv")||"{}")}catch(e){}
+const sv=()=>{try{localStorage.setItem("dqv",JSON.stringify(W))}catch(e){}};
+const w=c=>W[c.id]??1,$=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const show=c=>c.d+(c.i?(/^(der|die|das) /.test(c.d)?", "+c.i:" ("+c.i+")"):"");
+let mode="fc",cur,last=-1,flip=false,res=null;
+function pick(){const p=C.filter(c=>c.id!==last);let r=Math.random()*p.reduce((s,c)=>s+w(c),0);for(const c of p){r-=w(c);if(r<=0)return c}return p[p.length-1]}
+function rate(c,known){W[c.id]=known?Math.max(.1,w(c)*.4):Math.min(8,w(c)*2+1);sv()}
+function next(){cur=pick();last=cur.id;flip=false;res=null;draw()}
+function norm(s){s=s.normalize("NFC").replace(/[’‘]/g,"'").replace(/…/g,"...").replace(/\s*\.\.\.\s*/g," ... ").replace(/\s+/g," ").trim();if(!$("strict").checked)s=s.toLowerCase().replace(/ß/g,"ss").replace(/[.,;:!?'"«»()\/-]/g,"").replace(/\s+/g," ").trim();return s}
+function check(){const v=$("in").value,ok=cur.k.some(a=>norm(a)===norm(v));rate(cur,ok);res={ok,v};draw()}
+function draw(){
+ $("st").textContent=C.filter(c=>w(c)<=.4).length+" / "+C.length+" maîtrisés";
+ $("opt").hidden=mode!=="t";
+ $("t1").className=mode==="fc"?"on":"";$("t2").className=mode==="t"?"on":"";
+ let h="";
+ if(mode==="fc"){
+  h='<div class="card" id="cd" tabindex="0">'+(flip?'<small>Allemand</small><div class="de">'+esc(show(cur))+'</div>':'<small>Français</small><div>'+esc(cur.f)+'</div><small style="margin:12px 0 0">Touchez pour retourner</small>')+'</div>';
+  if(flip)h+='<div class="row"><button class="ko" id="no">Je ne connais pas</button><button class="ok" id="yes">Je connais</button></div>';
+ }else{
+  h='<div class="card"><small>Français</small><div>'+esc(cur.f)+'</div></div><input type="text" id="in" placeholder="Le mot en allemand (article pour les noms)" autocapitalize="off" autocorrect="off" spellcheck="false"'+(res?" disabled":"")+' value="'+(res?esc(res.v).replace(/"/g,"&quot;"):"")+'">';
+  if(!res)h+='<button class="go" id="go">Valider</button>';
+  else h+='<div class="res '+(res.ok?"ok":"ko")+'"><b>'+(res.ok?"Correct.":"Faux.")+'</b><div>'+(res.ok?"":"Réponse : ")+'<span class="de">'+esc(show(cur))+'</span></div></div><button class="go" id="nx">Suivant</button>';
+ }
+ $("app").innerHTML=h;
+ if($("cd"))$("cd").onclick=()=>{if(!flip){flip=true;draw()}};
+ if($("yes"))$("yes").onclick=()=>{rate(cur,true);next()};
+ if($("no"))$("no").onclick=()=>{rate(cur,false);next()};
+ if($("go"))$("go").onclick=check;
+ if($("nx"))$("nx").onclick=next;
+ if($("in")&&!res){$("in").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();check()}};$("in").focus()}
+}
+document.addEventListener("keydown",e=>{if(mode==="t"&&res&&e.key==="Enter")next()});
+$("t1").onclick=()=>{mode="fc";next()};
+$("t2").onclick=()=>{mode="t";next()};
+$("rs").onclick=()=>{W={};sv();next()};
+next();
+</script></body></html>

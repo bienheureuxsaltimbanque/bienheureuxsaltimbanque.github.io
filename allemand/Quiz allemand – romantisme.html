@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz allemand – romantisme</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1b1b1a;--mut:#6a6862;--card:#fff;--bd:#d6d3ca;--ac:#27487f;--ok:#1d7a3c;--ko:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16171a;--fg:#ecebe6;--mut:#9b9a94;--card:#202226;--bd:#3a3c42;--ac:#8fb0f0;--ok:#5fcf86;--ko:#f28b82}}
+:root[data-theme="dark"]{--bg:#16171a;--fg:#ecebe6;--mut:#9b9a94;--card:#202226;--bd:#3a3c42;--ac:#8fb0f0;--ok:#5fcf86;--ko:#f28b82}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.25rem;margin:4px 0 12px}
+.tabs{display:flex;gap:8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:8px;padding:10px 14px}
+.tabs button{flex:1}
+.tabs .on{background:var(--ac);border-color:var(--ac);color:var(--bg);font-weight:bold}
+.meta{display:flex;justify-content:space-between;align-items:center;margin:12px 0;color:var(--mut);font-size:.9rem;gap:8px;flex-wrap:wrap}
+.meta button{padding:4px 10px;font-size:.85rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px;min-height:140px;cursor:default}
+#cd{cursor:pointer}
+.card small{display:block;color:var(--mut);font-size:.8rem;margin-bottom:8px}
+.de{color:var(--ac);font-weight:bold}
+.row{display:flex;gap:8px;margin-top:12px}
+.row button{flex:1}
+.ko{border-color:var(--ko);color:var(--ko)}.ok{border-color:var(--ok);color:var(--ok)}
+textarea{width:100%;box-sizing:border-box;margin-top:12px;padding:12px;font:inherit;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg)}
+.res{margin-top:12px;padding:12px;border-radius:8px;border:1px solid}
+.res.ok{border-color:var(--ok)}.res.ko{border-color:var(--ko)}
+.go{width:100%;margin-top:12px;background:var(--ac);border-color:var(--ac);color:var(--bg);font-weight:bold}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+</style></head><body><main>
+<h1>Allemand : romantisme et méthode</h1>
+<div class="tabs"><button id="t1" class="on">Flashcardes</button><button id="t2">Test</button></div>
+<div class="meta"><span id="st"></span><label id="opt" hidden><input type="checkbox" id="strict" checked> Casse et ponctuation strictes</label><button id="rs">Réinitialiser</button></div>
+<div id="app"></div></main>
+<script>
+// {a|b} = variantes acceptées ; la première s'affiche comme corrigé
+const R=[
+["L'œuvre « Der blonde Eckbert » fut publiée pour la première fois en 1798 comme conte populaire.","Das Werk Der blonde Eckbert wurde 1798 zum ersten Mal als Volksmärchen veröffentlicht."],
+["Tieck écrivit ce conte en 1797. C'est une œuvre de jeunesse.","1797 schrieb Tieck dieses Märchen. Es ist ein Jugendwerk."],
+["Entre-temps, beaucoup de critiques pensent qu'il ne s'agit pas d'un conte populaire, mais d'un conte d'art.","Inzwischen denken viele Kritikerinnen und Kritiker, dass es kein Volksmärchen, sondern ein Kunstmärchen ist."],
+["Tieck suivit l'exemple de Schlegel à Iéna en traduisant Shakespeare en allemand (comme, plus tard, sa fille Dorothea).","Tieck folgte Schlegels Beispiel in Jena, indem er (und später seine Tochter Dorothea) Shakespeare ins Deutsche übersetzte."],
+["En 1833 parut pour la première fois l'œuvre complète de Shakespeare en allemand.","1833 erschien zum ersten Mal Shakespeares Gesamtwerk auf Deutsch."],
+["Parmi les amis proches de Tieck, nous pouvons citer l'exemple des écrivains Wackenroder et Novalis.","Unter Tiecks engen Freunden mögen wir das Beispiel der Schriftsteller Wackenroder und Novalis nennen."],
+["Les poètes Wackenroder comme Novalis sont morts tous deux très jeunes.","Die Dichter Wackenroder wie Novalis waren beide sehr jung gestorben."],
+["Le romantisme s'intéressait beaucoup au Moyen Âge.","Die Romantik interessierte sich sehr für das Mittelalter."],
+["Différents cercles romantiques ont existé : d'abord à Iéna vers 1800 (en Thuringe), puis à Heidelberg vers 1806, à Berlin dans les années 1820, ou encore en Souabe.","Verschiedene romantische Kreise existierten, zuerst in Jena circa 1800 (in Thüringen), dann in Heidelberg circa 1806, in Berlin in den 1820er Jahren oder auch in Schwaben."],
+["Les frères Grimm, comme les poètes Eichendorff, Arnim et Brentano, ont marqué la ville du Neckar.","Die Gebrüder Grimm wie die Dichter Eichendorff, Arnim & Brentano prägten die Stadt am Neckar."],
+["Si les frères Grimm sont restés célèbres grâce à leurs contes, il faut rappeler leur importance pour la langue allemande moderne.","Wenn die Gebrüder Grimm dank ihrer Märchen berühmt geblieben sind, sollen wir an ihre Bedeutung für die moderne deutsche Sprache erinnern."],
+["Jacob et Wilhelm Grimm furent longtemps bibliothécaires à Cassel, puis à Heidelberg. Ils sont ainsi les auteurs de la première grammaire allemande comme du premier dictionnaire allemand.","Jacob und Wilhelm Grimm waren lange Jahre Bibliothekare in Kassel, dann Heidelberg. Dabei sind sie die Verfasser der ersten deutschen Grammatik wie des ersten deutschen Wörterbuchs."],
+["En même temps, c'était l'époque glorieuse du classicisme de Weimar, avec Goethe et Schiller.","Zugleich war es die glorreiche Zeit der Klassik in Weimar mit Goethe und Schiller."],
+["Le classicisme s'intéressait en général davantage à la tragédie qu'à la prose / la nouvelle.","Die Klassik interessierte sich generell mehr für die Tragödie als für die Prosa / Novelle."],
+["On associe généralement le romantisme tardif à ETA Hoffmann et à Eichendorff.","Man {verbindet|assoziiert} {generell|allgemein} die Spätromantik mit ETA Hoffmann und Eichendorff.",["Die Spätromantik wird {generell|allgemein} mit ETA Hoffmann und Eichendorff {verbunden|assoziiert}."]],
+["Le plus célèbre peintre romantique est sûrement CD Friedrich.","Der berühmteste romantische Maler ist sicher CD Friedrich."],
+["Dans ses tableaux, ses figures de dos invitent le spectateur à contempler intensément ses paysages de montagne et de mer.","In seinen Gemälden laden seine Rückenfiguren den Betrachter dazu ein, seine Berg- und Meereslandschaften intensiv zu betrachten."],
+["À Dresde, en souvenir de ses randonnées au bord de la Baltique ou en Suisse saxonne, il a beaucoup peint.","In Dresden hat er in Erinnerung an die Wanderungen an der Ostsee oder in der sächsischen Schweiz viel gemalt.",["In Dresden hat er viel gemalt, dabei erinnerte er sich an die Wanderungen an der Ostsee oder in der sächsischen Schweiz."]],
+["Sur le plan musical, le romantisme a été très riche en œuvres extraordinaires.","Auf der musikalischen Ebene war die Romantik an außergewöhnlichen Werken sehr reich.",["Musikalisch war die Romantik an außergewöhnlichen Werken sehr reich.","Auf der musikalischen Ebene ist die Romantik an außergewöhnlichen Werken sehr reich gewesen.","Musikalisch ist die Romantik an außergewöhnlichen Werken sehr reich gewesen."]],
+["Qu'il s'agisse des compositeurs romantiques allemands comme Beethoven, Brahms, Schumann et Wagner ou des Autrichiens comme Schubert et Mahler, leur musique reste inoubliable.","Ob es die deutschen romantischen Komponisten wie Beethoven, Brahms, Schumann und Wagner oder die österreichischen wie Schubert und Mahler waren, bleibt ihre Musik unvergesslich."],
+["Quand on étudie un texte, on doit d'abord le lire trois fois de suite.","Wenn man einen Text studiert, soll man ihn zuerst dreimal hintereinander lesen."],
+["Ensuite, on doit s'intéresser aux champs lexicaux.","Dann soll man sich für die Wortfelder interessieren."],
+["La construction des phrases est souvent aussi intéressante à analyser.","{Die Satzkonstruktion|Die Konstruktion der Sätze|Der Satzaufbau} ist oft auch interessant zu analysieren."],
+["Le style est-il plutôt hypotactique ou paratactique ?","Ist der Stil eher hypotaktisch oder parataktisch?"],
+["Y a-t-il, dans cet extrait, une harmonie entre la forme et le fond ?","Gibt es in {diesem Auszug|dieser Passage} eine Harmonie zwischen Form und Inhalt?"],
+["Le style est-il plutôt simple ou soutenu ? Quels procédés stylistiques sont utilisés ?","Ist der Stil eher {schlicht|einfach} oder gehoben? Welche Stilmittel werden verwendet?"],
+["Comment faut-il interpréter ce phénomène de répétition ?","Wie soll man dieses Phänomen der Wiederholung {interpretieren|deuten}?"],
+["Le plus important dans un commentaire, c'est le fil conducteur !","Das Wichtigste {an|in} einem Kommentar ist der rote Faden!"],
+["Dans l'introduction, on doit pouvoir présenter l'œuvre et l'auteur, le passage et sa structure, avant d'exposer son fil conducteur et son plan d'interprétation.","In der Einleitung soll man das Werk und den Autor, die Passage und ihre Struktur {darlegen|vorlegen|präsentieren} können, bevor man {seinen|den} roten Faden und {seinen|den} Auslegungsplan vorlegt."],
+["Avant les romantiques, les lecteurs en Allemagne ne lisaient plus autant de contes.","Vor den Romantikerinnen und Romantikern lasen {die LeserInnen|die Leserinnen und Leser} in Deutschland nicht mehr so viele Märchen."],
+["Autrefois, on lisait plus de contes qu'aujourd'hui.","{Früher|Vorher|Davor} las man mehr Märchen als heute."],
+["Le héros du conte typique doit surmonter la détresse initiale avant de réussir des épreuves et de connaître une fin heureuse.","Der Held des typischen Märchens soll die anfängliche Notlage überwinden, bevor er Prüfungen besteht und ein glückliches Ende erlebt."]
+];
+function ex(s){const m=s.match(/\{([^{}]*)\}/);if(!m)return[s];const o=[];for(const v of m[1].split("|"))o.push(...ex(s.replace(m[0],()=>v)));return o}
+const C=R.map(([f,d,a],i)=>{const k=[...ex(d),...(a||[]).flatMap(ex)];return{id:i,f,d:k[0],k}});
+let W={};try{W=JSON.parse(localStorage.getItem("dqw")||"{}")}catch(e){}
+const sv=()=>{try{localStorage.setItem("dqw",JSON.stringify(W))}catch(e){}};
+const w=c=>W[c.id]??1,$=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+let mode="fc",cur,last=-1,flip=false,res=null;
+function pick(){const p=C.filter(c=>c.id!==last);let r=Math.random()*p.reduce((s,c)=>s+w(c),0);for(const c of p){r-=w(c);if(r<=0)return c}return p[p.length-1]}
+function rate(c,known){W[c.id]=known?Math.max(.1,w(c)*.4):Math.min(8,w(c)*2+1);sv()}
+function next(){cur=pick();last=cur.id;flip=false;res=null;draw()}
+function norm(s){s=s.normalize("NFC").replace(/[’‘]/g,"'").replace(/\s+/g," ").trim();if(!$("strict").checked)s=s.toLowerCase().replace(/ß/g,"ss").replace(/[.,;:!?'"«»()\/…-]/g,"").replace(/\s+/g," ").trim();return s}
+function check(){const v=$("in").value,ok=cur.k.some(a=>norm(a)===norm(v));rate(cur,ok);res={ok,v};draw()}
+function draw(){
+ $("st").textContent=C.filter(c=>w(c)<=.4).length+" / "+C.length+" maîtrisées";
+ $("opt").hidden=mode!=="t";
+ $("t1").className=mode==="fc"?"on":"";$("t2").className=mode==="t"?"on":"";
+ let h="";
+ if(mode==="fc"){
+  h='<div class="card" id="cd" tabindex="0">'+(flip?'<small>Allemand</small><div class="de">'+esc(cur.d)+'</div>':'<small>Français</small><div>'+esc(cur.f)+'</div><small style="margin:12px 0 0">Touchez pour retourner</small>')+'</div>';
+  if(flip)h+='<div class="row"><button class="ko" id="no">Je ne connais pas</button><button class="ok" id="yes">Je connais</button></div>';
+ }else{
+  h='<div class="card"><small>Français</small><div>'+esc(cur.f)+'</div></div><textarea id="in" rows="4" placeholder="La phrase en allemand" autocapitalize="off" autocorrect="off" spellcheck="false"'+(res?" disabled":"")+'>'+(res?esc(res.v):"")+'</textarea>';
+  if(!res)h+='<button class="go" id="go">Valider</button>';
+  else h+='<div class="res '+(res.ok?"ok":"ko")+'"><b>'+(res.ok?"Correct.":"Faux.")+'</b>'+(res.ok?"":'<div>Réponse : <span class="de">'+esc(cur.d)+'</span></div>')+'</div><button class="go" id="nx">Suivant</button>';
+ }
+ $("app").innerHTML=h;
+ if($("cd"))$("cd").onclick=()=>{if(!flip){flip=true;draw()}};
+ if($("yes"))$("yes").onclick=()=>{rate(cur,true);next()};
+ if($("no"))$("no").onclick=()=>{rate(cur,false);next()};
+ if($("go"))$("go").onclick=check;
+ if($("nx"))$("nx").onclick=next;
+ if($("in")&&!res)$("in").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();check()}};
+}
+document.addEventListener("keydown",e=>{if(mode==="t"&&res&&e.key==="Enter")next()});
+$("t1").onclick=()=>{mode="fc";next()};
+$("t2").onclick=()=>{mode="t";next()};
+$("rs").onclick=()=>{W={};sv();next()};
+next();
+</script></body></html>

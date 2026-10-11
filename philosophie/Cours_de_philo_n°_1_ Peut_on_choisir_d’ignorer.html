@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peut-on choisir d’ignorer ? — Cours de philo n° 1</title>
+<style>
+  :root {
+    --vert: #AFD095;
+    --mauve: #BF819E;
+    --rouge: #FF0000;
+    --bg: #f4f5f8; --surface: #ffffff; --ink: #000000;
+    --bordure: #BBBBBB; --entete: #E8E8E8;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11151c; --surface: #181e28; --ink: #e3e7ee;
+      --bordure: #3a4456; --entete: #1d2431;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11151c; --surface: #181e28; --ink: #e3e7ee;
+    --bordure: #3a4456; --entete: #1d2431;
+    color-scheme: dark;
+  }
+  html { background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Liberation Serif", "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  h1 { font-size: 18pt; font-weight: normal; font-style: italic; margin: 0 0 1.2rem; line-height: 1.4; }
+  h1 .titre { text-decoration: underline; background: var(--mauve); color: #000; padding: 0 .15em; }
+  h1 .sous-titre { color: var(--mauve); }
+
+  p { margin: 0 0 .9rem; }
+  p.retrait { text-indent: 2.2em; }
+  p.attention .alerte { color: var(--rouge); text-decoration: underline; font-size: 14pt; }
+  p.sujet .gros { font-size: 14pt; }
+
+  .vert  { color: var(--vert); }
+  .mauve { color: var(--mauve); }
+  u { text-decoration: underline; }
+
+  /* ---------- Tableau ---------- */
+  .tableau-wrap { overflow-x: auto; margin: 1.4rem 0 1.6rem; }
+  table.analyse {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    min-width: 640px;
+  }
+  table.analyse th, table.analyse td {
+    border: 1px solid var(--bordure);
+    padding: .55rem .8rem;
+    vertical-align: top;
+    text-align: left;
+  }
+  table.analyse thead th {
+    background: var(--entete);
+    color: var(--ink);
+    font-size: 18pt;
+    font-weight: normal;
+    text-align: center;
+    padding: .6rem .8rem;
+  }
+  table.analyse td { background: var(--surface); }
+  table.analyse td p { margin: 0 0 .45rem; }
+  table.analyse td p:last-child { margin-bottom: 0; }
+  td .question { font-size: 14pt; }
+  td .notion { font-size: 10pt; }
+  td .badge {
+    background: var(--vert);
+    color: #000;
+    padding: .05em .45em;
+    border-radius: 2px;
+    font-size: 10pt;
+  }
+  td .conclusion { margin-top: .6rem; }
+
+  @media (max-width: 700px) {
+    body { font-size: 11.5pt; padding: 1.25rem .9rem 3rem; }
+    h1 { font-size: 16pt; }
+    table.analyse thead th { font-size: 15pt; }
+  }
+  @media print {
+    body { max-width: none; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tableau-wrap { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<h1><span class="titre">Peut-on choisir d’ignorer ?</span> <span class="sous-titre">(Résolution + méthode de dissertation en s’appuyant sur cet exemple)</span></h1>
+
+<p>Définir les termes, c’est <strong>NÉCESSAIRE</strong>.</p>
+
+<p>→ <strong><u>Définir</u></strong>, d’une certaine manière, c’est <strong>LE</strong> travail de la dissertation.</p>
+
+<p class="attention"><span class="alerte">⚠ Mais attention</span> : l’introduction <strong>ne sert pas</strong> à tout définir. Cela, on le fait au brouillon, et on ne prend au propre que la pensée aboutie dont on expliquera le <strong>cheminement</strong>.</p>
+
+<p class="retrait"><strong class="vert">L’introduction</strong> sert à <strong><u>CONSTRUIRE</u></strong> le problème dont la résolution permettra de répondre à la question initiale. Il faut donc réussir à <strong class="mauve">exposer le sens, extraire ce qui est pertinent</strong> de cette question. Pour cela, on doit d’abord faire apparaître la raison de<strong class="mauve"> pourquoi la question posée constitue un problème philosophique </strong>et<strong class="mauve"> en quoi sa résolution exige un examen raisonné.</strong></p>
+
+<p class="retrait"><strong class="vert">Le développement</strong> <strong><u>MOBILISE</u></strong> les matériaux nécessaire à <strong class="mauve">la résolution du problème.</strong> Il <strong>ne s’agit pas</strong> d’accumuler des connaissances philosophiques, mais bien d’<strong class="mauve">organiser</strong> et de <strong class="mauve">mettre à l’épreuve</strong> les ressources <span class="mauve">conceptuelles, argumentatives et théoriques</span> dont on a besoin pour résoudre le problème. C’est une <strong class="mauve">démarche de pensée qui progresse</strong> en ce sens précis. Sa fonction est d’<strong class="mauve">instruire</strong> le problème, en <strong class="mauve">examiner</strong> les différentes possibilités, <strong class="mauve">éprouver</strong> les réponses envisageables et <strong class="mauve">construire</strong> progressivement une solution.</p>
+
+<p><strong class="vert">La conclusion</strong> <strong><u>FORMULE</u></strong> <strong class="mauve">la solution</strong> du problème et en tire <strong>LA</strong> <strong>réponse</strong> à la question. Elle <strong class="mauve">expose</strong> le résultat auquel le raisonnement a conduit en <span class="mauve">tenant compte des difficultés examinées</span> au cours du développement, donne <strong class="mauve">une réponse déterminée</strong> au sujet, et peut <strong class="mauve">ouvrir sur une implication de la réponse</strong>, à condition que cette ouverture soit <strong class="mauve">pertinente.</strong></p>
+
+<p class="sujet" style="margin-top:1.8rem">Le <em class="gros">sujet</em> ici porte sur <strong><u>CHOISIR</u></strong>. <em>Comment le savoir ?</em></p>
+
+<p>Dans ce genre de question, il faut d’abord <u>observer</u> <strong>les mots interrogatifs</strong> : Ils indiquent souvent beaucoup. Ici, « <span class="mauve">Peut-on</span> » suppose des choses.</p>
+
+<p>Ensuite, il faut se <u>concentrer</u> sur <strong>le verbe</strong>. Ici, le verbe c’est « <span class="mauve">choisir</span> ».</p>
+
+<p>Enfin, on <u>interroge</u> <strong>le(s) dernier(s) terme(s)</strong>. Ici, c’est « <span class="mauve">ignorer</span> ».</p>
+
+<p>Au <em>brouillon</em>, il faut tenter de <strong class="mauve">définir</strong> pour vous-même les termes de la question :</p>
+
+<div class="tableau-wrap">
+<table class="analyse">
+  <colgroup>
+    <col style="width:30%"><col style="width:38%"><col style="width:32%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th scope="col">PEUT-ON</th>
+      <th scope="col">CHOISIR</th>
+      <th scope="col">D’IGNORER ?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p class="question">- Est-il possible ?</p>
+        <p>Suppose : Y a-t-il une <span class="vert">contradiction</span> ?</p>
+        <p class="notion">Saisir la notion → <span class="badge">Logique</span></p>
+      </td>
+      <td>
+        <p>Choisir d’ignorer implique de <strong>savoir</strong> ce entre quoi choisir.</p>
+        <p>Il y a ici un <span class="mauve">PARADOXE</span>,</p>
+        <p>car</p>
+      </td>
+      <td>
+        <p>Choisir <strong>de ne pas</strong></p>
+        <p>= <strong>refuser</strong></p>
+        <p>DONC</p>
+        <p>Peut-on <u>refuser</u> de savoir ?</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="question">- Est-on capable ?</p>
+        <p>Suppose : Y a-t-il un <span class="vert">obstacle</span> ?</p>
+        <p class="notion">Saisir la notion → <span class="badge">Physique/Matériel</span></p>
+      </td>
+      <td>
+        <p>Ignorer = ne pas savoir</p>
+        <p>Choisir = il faut un <u>OBJET</u> à choisir.</p>
+      </td>
+      <td>
+        <p>Ignorance = <span class="mauve">état</span> que l’on subit</p>
+        <p>Ignorer = <span class="mauve">action</span> du sujet, qui manifeste la <u>LIBERTÉ</u> du sujet</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="question">- A-t-on le droit ?</p>
+        <p>Suppose : Y a-t-il une <span class="vert">interdiction</span> ?</p>
+        <p class="notion">Saisir la notion → <span class="badge">Morale</span></p>
+      </td>
+      <td>
+        <p>Il faut donc <strong>distinguer</strong></p>
+        <p>Ignorance coupable/condamnable</p>
+        <p>= choix répréhensible ?</p>
+      </td>
+      <td>
+        <p>donc <strong class="vert">incompatible.</strong></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Dès lors, <strong>refuser</strong> constitue forcément <strong class="vert">un choix</strong>, cela suppose d’être <span class="vert">conscient</span> pour pouvoir faire ce choix. Si c’est <span class="vert">inconscient</span>, alors on ne peut par définition <strong>pas refuser</strong>, et la question du choix ne se pose pas car <strong class="vert">ce n’en est</strong>, de fait, <strong class="vert">pas un</strong>.</p>
+
+<p>Or, dans la mesure où c’est conscient, c’est <strong class="mauve">la volonté</strong> de ne pas savoir qui est de mise, donc le <span class="mauve">deuxième sens d’ignorer</span> : ignorer au sens de <span class="mauve">détourner <u>volontairement</u> son attention de quelque chose dont on connaît l’existence.</span></p>
+
+</body>
+</html>

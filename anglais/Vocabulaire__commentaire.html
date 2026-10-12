@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiche de vocabulaire – Commentaire de texte (FR → EN britannique)</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#222;--mute:#6b6b6b;--acc:#8a2b2b;--line:#e4ddd0;--chip:#f1ebe0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17161a;--card:#201f24;--ink:#ece8e1;--mute:#a09c94;--acc:#e08a7a;--line:#34323a;--chip:#2a2830}}
+:root[data-theme="dark"]{--bg:#17161a;--card:#201f24;--ink:#ece8e1;--mute:#a09c94;--acc:#e08a7a;--line:#34323a;--chip:#2a2830}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif}
+header{padding:28px 18px 8px;max-width:960px;margin:auto}
+h1{margin:0 0 4px;font-size:1.7rem;color:var(--acc)}
+header p{margin:0;color:var(--mute);font-family:system-ui,sans-serif;font-size:.92rem}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding:10px 18px;max-width:960px;margin:auto;font-family:system-ui,sans-serif}
+.bar input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:1rem}
+.nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px}
+.nav a{white-space:nowrap;font-size:.8rem;padding:4px 10px;border-radius:999px;background:var(--chip);color:var(--ink);text-decoration:none}
+main{max-width:960px;margin:auto;padding:6px 18px 40px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:16px 0;padding:6px 16px 12px}
+h2{font-size:1.15rem;color:var(--acc);margin:12px 0 2px}
+.sub{font-family:system-ui,sans-serif;font-size:.82rem;color:var(--mute);margin:0 0 8px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--line);vertical-align:top}
+th{font-family:system-ui,sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);border-top:0}
+td:first-child{width:36%}
+td.en{font-weight:600}
+td em{color:var(--mute);font-size:.88rem}
+.hide{display:none}
+.tip{background:var(--chip);border-radius:8px;padding:10px 12px;font-family:system-ui,sans-serif;font-size:.88rem;margin:8px 0}
+@media print{.bar{display:none}section{break-inside:avoid;border:0}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<header>
+<h1>Vocabulaire du commentaire de texte</h1>
+<p>🇬🇧 Français → anglais britannique · figures de style, verbes d'analyse, connecteurs, orthographe et lexique UK</p>
+</header>
+<div class="bar">
+<input id="q" type="search" placeholder="Rechercher (ex. métaphore, to convey, ironie…)" aria-label="Rechercher">
+<div class="nav" id="nav"></div>
+</div>
+<main id="app"></main>
+<script>
+const S=[
+["Méthode & structure","Les mots du cadre général",[
+["commentaire de texte","(literary) commentary / close reading / textual analysis"],
+["extrait, passage","extract, passage"],
+["l'auteur / l'autrice","the author, the writer"],
+["introduction / développement / conclusion","introduction / main body / conclusion"],
+["problématique","central question, line of enquiry"],
+["thèse, idée directrice","argument, central claim"],
+["annonce du plan","outline of the structure (roadmap)"],
+["Cet extrait est tiré de…","This extract is taken from…"],
+["Le texte porte sur / traite de…","The text deals with / explores…"],
+["Il s'agit de…","The passage is concerned with…"],
+["Dans un premier temps…","Firstly / To begin with…"],
+["Dans un second temps…","Secondly / Next…"],
+["Enfin","Finally / Lastly"],
+["Pour conclure","To conclude / In conclusion"],
+["En somme, en définitive","In sum / Ultimately"],
+["citer (une citation)","to quote (a quotation)"],
+["ligne(s), vers, strophe","line(s), verse, stanza"],
+["se référer à (l. 3)","to refer to (l. 3)"],
+["le contexte, l'enjeu","the context, the stakes"],
+["l'interprétation","the interpretation, the reading"],
+["la portée du texte","the significance / scope of the text"]
+]],
+["Figures de style","Rhetorical & literary devices",[
+["métaphore","metaphor"],
+["comparaison","simile"],
+["métaphore filée","extended metaphor / conceit"],
+["personnification","personification"],
+["métonymie","metonymy"],
+["synecdoque","synecdoche"],
+["hyperbole","hyperbole, overstatement"],
+["litote","understatement / litotes"],
+["euphémisme","euphemism"],
+["ironie","irony (verbal, dramatic, situational)"],
+["sarcasme","sarcasm"],
+["oxymore","oxymoron"],
+["paradoxe","paradox"],
+["antithèse","antithesis, contrast"],
+["parallélisme","parallelism"],
+["chiasme","chiasmus"],
+["anaphore","anaphora"],
+["épiphore","epiphora"],
+["répétition","repetition"],
+["gradation","climax / gradation"],
+["chute, bathos","anticlimax, bathos"],
+["allitération","alliteration"],
+["assonance","assonance"],
+["onomatopée","onomatopoeia"],
+["asyndète","asyndeton"],
+["polysyndète","polysyndeton"],
+["énumération, accumulation","list, accumulation, enumeration"],
+["ellipse","ellipsis"],
+["inversion","inversion"],
+["question rhétorique","rhetorical question"],
+["apostrophe","apostrophe, direct address"],
+["allusion","allusion"],
+["périphrase","periphrasis, circumlocution"],
+["pléonasme / tautologie","pleonasm / tautology"],
+["jeu de mots, calembour","pun, wordplay"],
+["zeugme","zeugma"],
+["symbole","symbol"],
+["motif (récurrent)","motif, recurring image"],
+["champ lexical","semantic field, lexical field"],
+["images, imagerie","imagery"],
+["pathétique (fallacie)","pathetic fallacy"],
+["anticipation, présage","foreshadowing"],
+["retour en arrière","flashback / analepsis"],
+["juxtaposition","juxtaposition"]
+]],
+["Narration & point de vue","Narrative technique",[
+["narrateur","narrator"],
+["narrateur peu fiable","unreliable narrator"],
+["narration à la première personne","first-person narration"],
+["narrateur omniscient","omniscient narrator"],
+["focalisation","focalisation / point of view"],
+["discours direct / indirect","direct / indirect speech"],
+["discours indirect libre","free indirect speech"],
+["monologue intérieur","interior monologue"],
+["flux de conscience","stream of consciousness"],
+["intrigue","plot"],
+["cadre (spatio-temporel)","setting"],
+["personnage (principal, secondaire)","character (main, minor)"],
+["protagoniste / antagoniste","protagonist / antagonist"],
+["dénouement","resolution, denouement"],
+["rythme narratif","pacing"],
+["pause descriptive, description","descriptive passage, description"],
+["dialogue, réplique","dialogue, line (of dialogue)"],
+["registre (familier, soutenu)","register (colloquial, formal)"],
+["ton","tone"],
+["atmosphère","mood, atmosphere"],
+["le lecteur / la lectrice","the reader"],
+["le narrataire","the narratee"]
+]],
+["Poésie & versification","Poetry terms",[
+["vers","line (of verse)"],
+["strophe","stanza"],
+["quatrain / tercet","quatrain / tercet"],
+["distique","couplet"],
+["sonnet","sonnet"],
+["rime (croisée, plate, embrassée)","rhyme (alternate, couplet, enclosed)"],
+["rime riche / pauvre","full rhyme / half-rhyme (pararhyme)"],
+["mètre, mesure","metre"],
+["pentamètre iambique","iambic pentameter"],
+["vers libre","free verse"],
+["vers blanc","blank verse"],
+["enjambement","enjambment"],
+["césure","caesura"],
+["refrain","refrain"],
+["rythme, cadence","rhythm, cadence"],
+["la voix poétique / le locuteur","the speaker, the poetic voice"]
+]],
+["Verbes d'analyse","Verbs to describe what the text does",[
+["évoquer","to evoke"],
+["suggérer / sous-entendre","to suggest / to imply"],
+["souligner, mettre en relief","to underline, to highlight, to emphasise"],
+["renforcer","to reinforce, to strengthen"],
+["traduire, exprimer","to convey, to express"],
+["révéler, dévoiler","to reveal, to unveil"],
+["illustrer","to illustrate"],
+["dépeindre, représenter","to depict, to portray"],
+["mettre en scène","to stage, to dramatise"],
+["faire écho à","to echo"],
+["refléter","to mirror, to reflect"],
+["opposer, mettre en contraste","to contrast, to set against"],
+["faire allusion à","to allude to, to hint at"],
+["préfigurer","to foreshadow, to prefigure"],
+["miner, saper","to undermine"],
+["remettre en cause","to challenge, to call into question"],
+["subvertir, détourner","to subvert"],
+["brouiller (les frontières)","to blur (the boundaries)"],
+["tourner en dérision","to mock, to ridicule"],
+["dénoncer","to denounce, to condemn"],
+["critiquer, satiriser","to criticise, to satirise"],
+["glorifier, idéaliser","to glorify, to idealise"],
+["susciter (une émotion)","to elicit, to arouse, to stir up"],
+["plonger le lecteur dans","to immerse the reader in"],
+["captiver / dérouter","to captivate / to disorient"],
+["mettre à distance","to distance, to create detachment"],
+["instaurer, établir","to establish, to set up"],
+["contribuer à","to contribute to"],
+["découler de","to stem from, to result from"],
+["dépendre de / reposer sur","to hinge on / to rest on"],
+["s'inscrire dans","to be part of / to fit into"],
+["rendre compte de","to account for"],
+["mettre en évidence","to bring out, to show"],
+["tisser un lien entre","to draw a link between"]
+]],
+["Tons, effets & atmosphères","Adjectives to qualify the text",[
+["mélancolique","melancholic, wistful"],
+["nostalgique","nostalgic"],
+["lyrique","lyrical"],
+["ironique / sarcastique","ironic / sardonic"],
+["satirique","satirical"],
+["pathétique","poignant, moving"],
+["tragique","tragic"],
+["comique, burlesque","comic, burlesque"],
+["inquiétant, sinistre","ominous, sinister, eerie"],
+["angoissant","distressing, anxiety-inducing"],
+["oppressant, étouffant","oppressive, stifling"],
+["détaché, neutre","detached, impartial"],
+["solennel","solemn"],
+["enthousiaste, exalté","enthusiastic, exalted"],
+["désabusé","disillusioned, jaded"],
+["tendu, haletant","tense, breathless"],
+["pessimiste / optimiste","pessimistic / optimistic"],
+["ambigu, équivoque","ambiguous, equivocal"],
+["intimiste","intimate"],
+["didactique","didactic"],
+["polémique","polemical"],
+["vivant, saisissant","vivid, striking"]
+]],
+["Connecteurs & articulations","Linking your argument",[
+["de plus, en outre","moreover, furthermore, in addition"],
+["par ailleurs","besides, in addition"],
+["cependant, toutefois","however, nevertheless, yet"],
+["pourtant","and yet, still"],
+["tandis que, alors que","whereas, whilst"],
+["en revanche","on the other hand, by contrast"],
+["d'une part… d'autre part…","on the one hand… on the other hand…"],
+["ainsi, par conséquent","thus, hence, consequently"],
+["c'est pourquoi","this is why / for this reason"],
+["en effet","indeed, in fact"],
+["autrement dit","in other words"],
+["c'est-à-dire","that is to say, i.e."],
+["notamment, en particulier","notably, in particular"],
+["par exemple","for instance, for example"],
+["malgré, en dépit de","despite, in spite of"],
+["bien que","although, though"],
+["à cause de / grâce à","because of / thanks to"],
+["dès lors","from then on, hence"],
+["au fil du texte","as the text unfolds"],
+["en définitive","ultimately, all in all"]
+]],
+["Formules clés prêtes à l'emploi","Ready-to-use sentences",[
+["L'auteur emploie X pour créer un effet de Y.","The author uses X to create an effect of Y."],
+["Cette image renforce l'idée que…","This image reinforces the idea that…"],
+["On peut y voir une critique de…","This can be read as a critique of…"],
+["Cela fait écho au début du texte.","This echoes the opening of the text."],
+["Il convient de noter que…","It is worth noting that…"],
+["On pourrait soutenir que…","One could argue that…"],
+["Le choix de ce mot n'est pas anodin.","The choice of this word is far from innocent."],
+["Le rythme ternaire donne de l'ampleur.","The triple rhythm lends the line a sense of momentum."],
+["Le texte repose sur une tension entre…","The text hinges on a tension between…"],
+["Le lecteur est invité à…","The reader is invited to…"],
+["Cette rupture de ton surprend.","This shift in tone is jarring."],
+["Le champ lexical de X domine.","The lexical field of X pervades the passage."],
+["Le passage s'ouvre sur / se clôt sur…","The passage opens with / closes on…"],
+["Le texte s'achève sur une note ambiguë.","The text ends on an ambiguous note."]
+]],
+["Anglais britannique : orthographe & ponctuation","UK conventions vs US",[
+["-ise (et non -ize)","realise, analyse, criticise, emphasise (US: realize, analyze…)"],
+["-our (et non -or)","colour, honour, favour, behaviour (US: color…)"],
+["-re (et non -er)","centre, theatre, metre, fibre (US: center, theater, meter)"],
+["-ence (et non -ense)","defence, offence, pretence (US: defense…)"],
+["consonne doublée","travelled, labelled, modelling (US: traveled, modeling)"],
+["-ogue","dialogue, catalogue, analogue (US: dialog…)"],
+["programme, grey","programme, grey (US: program, gray)"],
+["whilst, amongst, towards","whilst, amongst, towards (US: while, among, toward)"],
+["participes en -t","learnt, spelt, dreamt (US: learned, spelled…)"],
+["practice / practise","practice (n.) / practise (v.) ; licence (n.) / license (v.)"],
+["guillemets","single inverted commas: ‘like this’ ; double for a quotation within: ‘He said “no”’"],
+["point final (ponctuation)","full stop (US: period)"],
+["parenthèses / crochets","brackets / square brackets (US: parentheses / brackets)"],
+["omission dans une citation","ellipsis in square brackets […]"],
+["M., Mme, Dr (sans point)","Mr, Mrs, Dr, St (no full stop)"],
+["date","12 October 2026 (US: October 12, 2026)"],
+["vers / pages (renvois)","l. 4 / ll. 4–7 ; p. 12 / pp. 12–14"],
+["jugement","judgement (also: judgment, esp. legal)"]
+]],
+["Lexique universitaire britannique","Oxbridge & UK university vocabulary",[
+["commentaire d'un court extrait","gobbet (Oxbridge) / close reading / practical criticism"],
+["commentaire sur texte inconnu","unseen commentary / unseen analysis"],
+["œuvre au programme","set text"],
+["dissertation","essay"],
+["épreuve écrite sur table","written paper, exam script"],
+["texte étudié / sources critiques","primary text / secondary criticism"],
+["notes de bas de page","footnotes (endnotes: en fin d'ouvrage)"],
+["bibliographie","bibliography, reference list"],
+["le canon littéraire","the (literary) canon"],
+["poètes métaphysiques","Metaphysical poets (Donne, Marvell)"],
+["romantiques / victoriens","the Romantics / the Victorians"],
+["modernisme","Modernism"],
+["roman gothique","Gothic novel"],
+["roman d'apprentissage","Bildungsroman, coming-of-age novel"],
+["comédie de mœurs","comedy of manners"],
+["théâtre élisabéthain / jacobéen","Elizabethan / Jacobean drama"],
+["pièce de théâtre","play"],
+["acte, scène","Act, scene (Act 2, scene 3)"],
+["monologue (théâtral) / aparté","soliloquy / aside"],
+["didascalie","stage direction"],
+["ironie dramatique","dramatic irony"]
+]],
+["Nuance & prudence (style britannique)","Hedging and understated argument",[
+["Il semblerait que…","It would seem that…"],
+["On pourrait y lire…","One might read this as…"],
+["sans doute, vraisemblablement","arguably, presumably"],
+["en quelque sorte","in a sense, to some extent"],
+["certes, il est vrai que","admittedly, it is true that"],
+["force est de constater que","it is hard to ignore the fact that…"],
+["il n'en demeure pas moins que","nonetheless, it remains the case that…"],
+["tout se passe comme si","it is as if…"],
+["à première vue / de plus près","at first glance / on closer inspection"],
+["à cet égard","in this respect"],
+["en ce qui concerne, quant à","with regard to, as for"],
+["compte tenu de","given, in light of"],
+["à l'inverse","conversely"],
+["sans pour autant","without, however, …"],
+["dans cette optique","in this light"],
+["de manière frappante","strikingly, notably"]
+]],
+["Faux amis & pièges fréquents","À éviter dans un commentaire en anglais",[
+["actuellement ≠ actually","currently / at present (actually = en réalité)"],
+["éventuellement ≠ eventually","possibly (eventually = finalement)"],
+["assister à ≠ to assist","to attend / witness (to assist = aider)"],
+["réaliser (se rendre compte)","to realise (to carry out = to carry out / to achieve)"],
+["évidemment, évident ≠ evidently","obviously (evident = apparent)"],
+["la critique (littéraire)","criticism / review (critique = analysis)"],
+["l'histoire (intrigue)","the story / the plot (≠ history)"],
+["important (quantité)","significant, considerable"],
+["une lecture","a reading (≠ a lecture = un cours)"],
+["la fiction ≠ fiction (pas de 's')","fiction (uncountable)"],
+["Le texte « dit » ✗","The text states / suggests / conveys ✔"],
+["On voit que… ✗","This shows / suggests that… ✔"],
+["Il y a… ✗ (répétitif)","The passage features / contains / relies on…"]
+]]
+];
+const app=document.getElementById('app'),nav=document.getElementById('nav');
+S.forEach(([t,sub,rows],i)=>{
+const id='s'+i,sec=document.createElement('section');sec.id=id;
+sec.innerHTML='<h2>'+t+'</h2><p class="sub">'+sub+'</p><div class="tw"><table><thead><tr><th>Français</th><th>English</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+r[0]+'</td><td class="en">'+r[1]+'</td></tr>').join('')+'</tbody></table></div>';
+app.appendChild(sec);
+const a=document.createElement('a');a.href='#'+id;a.textContent=t.split(' ')[0]+(t.split(' ')[1]&&t.split(' ')[0].length<5?' '+t.split(' ')[1]:'');nav.appendChild(a);
+});
+const tip=document.createElement('div');tip.className='tip';
+tip.innerHTML='<b>Rappel méthode :</b> citer → identifier le procédé → expliquer l\'effet → relier à l\'idée directrice. Ex. : <i>The repetition of ‘dark’ (l. 4) evokes a sense of dread and reinforces the oppressive atmosphere.</i>';
+app.insertBefore(tip,app.firstChild);
+document.getElementById('q').addEventListener('input',e=>{
+const v=e.target.value.toLowerCase().trim();
+document.querySelectorAll('section').forEach(s=>{
+let any=false;
+s.querySelectorAll('tbody tr').forEach(r=>{const m=!v||r.textContent.toLowerCase().includes(v);r.classList.toggle('hide',!m);if(m)any=true});
+s.classList.toggle('hide',!any);
+});
+});
+</script>
+</body>
+</html>

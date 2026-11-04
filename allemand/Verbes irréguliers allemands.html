@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verbes irréguliers allemands</title>
+<style>
+:root{--bg:#faf8f4;--fg:#1f1d1a;--mut:#6b665e;--card:#fff;--bd:#ddd6c8;--ac:#1d4e89;--ok:#1b7a43;--ko:#b3261e;--okb:#e3f4ea;--kob:#fbe6e4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181b;--fg:#ecebe8;--mut:#9a978f;--card:#212329;--bd:#34363d;--ac:#7db3f0;--ok:#6fd49a;--ko:#ff8a80;--okb:#1d3a2b;--kob:#432522}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:12px;max-width:760px;margin:auto}
+h1{font-size:1.25rem;margin:4px 0 10px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+button,select,input{font:inherit;color:inherit}
+.tabs button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--card);border-radius:10px;cursor:pointer}
+.tabs button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+label{display:block;font-size:.85rem;color:var(--mut);margin:8px 0 3px}
+select,input[type=text],input[type=search]{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg)}
+.btn{padding:11px 16px;border:0;border-radius:10px;background:var(--ac);color:var(--bg);cursor:pointer;font-weight:600;margin-top:12px}
+.btn.sec{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+.row{display:flex;gap:8px;align-items:end}.row>*{flex:1}
+.q{font-size:1.5rem;font-weight:700;margin:2px 0}.fr{color:var(--mut)}
+.f.ok{background:var(--okb);border-color:var(--ok)}.f.ko{background:var(--kob);border-color:var(--ko)}
+.sol{font-size:.85rem;color:var(--ko);margin-top:2px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:10px}.bar i{display:block;height:100%;background:var(--ac)}
+.aux{display:flex;gap:6px}.aux button{flex:1;padding:9px;border:1px solid var(--bd);background:var(--bg);border-radius:8px;cursor:pointer}.aux button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}.aux button.ok{background:var(--ok);border-color:var(--ok)}.aux button.ko{background:var(--ko);border-color:var(--ko)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
+th,td{border:1px solid var(--bd);padding:5px 7px;text-align:left}th{background:var(--card);position:sticky;top:0}
+h2{font-size:1rem;margin:18px 0 6px;color:var(--ac)}.hide{display:none}.small{font-size:.8rem;color:var(--mut)}
+</style></head><body>
+<h1>Verbes irréguliers allemands <span class="small">(3ᵉ pers. sg)</span></h1>
+<div class="tabs"><button id="t1" class="on">Quiz</button><button id="t2">Tous les verbes (<span id="cnt"></span>)</button></div>
+
+<div id="quiz">
+ <div id="setup" class="card">
+  <label>Groupe</label><select id="grp"></select>
+  <div class="row"><div><label>Nombre de questions</label><select id="nq"><option>10</option><option>20</option><option>40</option><option value="999">Tous</option></select></div>
+  <div><label>Formes à saisir</label><select id="mode"><option value="3">Présent + prétérit + parfait</option><option value="1">Parfait seul</option></select></div></div>
+  <button class="btn" id="go">Commencer</button>
+ </div>
+ <div id="play" class="card hide">
+  <div class="bar"><i id="pb"></i></div>
+  <div class="small" id="pn"></div><div class="q" id="qv"></div><div class="fr" id="qf"></div>
+  <div id="fields"></div>
+  <div id="auxw"><label>Auxiliaire</label><div class="aux"><button data-a="h">hat</button><button data-a="s">ist</button></div><div class="sol" id="auxsol"></div></div>
+  <button class="btn" id="ok">Valider</button>
+ </div>
+ <div id="end" class="card hide"></div>
+</div>
+
+<div id="list" class="hide">
+ <input type="search" id="q" placeholder="Rechercher (allemand ou français)…">
+ <div id="tbl"></div>
+</div>
+
+<script>
+const G={I:"I – Verbes de modalité",II:"II – Verbes en [ei, i, i]",III:"III – Verbes en [e, o, o]",IV:"IV – Verbes en [e, a, e]",V:"V – Verbes en [e, a, o]",VI:"VI – Verbes en [ie, o, o]",VII:"VII – Verbes en [i, a, u]",VIII:"VIII – Verbes en [i, a, o]",IX:"IX – Verbes en [a, u, a]",X:"X – Verbes en [a, i, a]",XI:"XI – Divers verbes",XII:"XII – Réguliers irréguliers"};
+// groupe|infinitif|présent|prétérit|aux (h=hat, s=ist, hs=les deux)|participe II|français
+const RAW=`I|können|kann|konnte|h|gekonnt|Avoir la capacité de
+I|dürfen|darf|durfte|h|gedurft|Avoir l’autorisation de
+I|müssen|muss|musste|h|gemusst|Avoir l’obligation matérielle de
+I|sollen|soll|sollte|h|gesollt|Avoir l’obligation morale de
+I|wollen|will|wollte|h|gewollt|Vouloir
+I|mögen|mag|mochte|h|gemocht|Apprécier
+I|wissen|weiß|wusste|h|gewusst|Savoir
+II|beißen|beißt|biss|h|gebissen|Mordre
+II|bleiben|bleibt|blieb|s|geblieben|Rester
+II|gedeihen|gedeiht|gedieh|s|gediehen|Prospérer
+II|gleichen|gleicht|glich|h|geglichen|Ressembler
+II|gleiten|gleitet|glitt|s|geglitten|Glisser
+II|greifen|greift|griff|h|gegriffen|Saisir
+II|leiden|leidet|litt|h|gelitten|Souffrir
+II|leihen|leiht|lieh|h|geliehen|Prêter
+II|meiden|meidet|mied|h|gemieden|Éviter
+II|pfeifen|pfeift|pfiff|h|gepfiffen|Siffler
+II|preisen|preist|pries|h|gepriesen|Faire des éloges
+II|reiben|reibt|rieb|h|gerieben|Frotter
+II|reißen|reißt|riss|h|gerissen|Arracher
+II|reiten|reitet|ritt|s|geritten|Monter (à cheval)
+II|scheißen|scheißt|schiss|h|geschissen|Chier
+II|scheiden|scheidet|schied|hs|geschieden|Séparer, quitter
+II|scheinen|scheint|schien|h|geschienen|Sembler, briller (soleil)
+II|schleichen|schleicht|schlich|s|geschlichen|Se glisser
+II|schmeißen|schmeißt|schmiss|h|geschmissen|Jeter
+II|schneiden|schneidet|schnitt|h|geschnitten|Couper
+II|schreiben|schreibt|schrieb|h|geschrieben|Écrire
+II|schreien|schreit|schrie|h|geschrien|Crier
+II|schreiten|schreitet|schritt|s|geschritten|Marcher
+II|schweigen|schweigt|schwieg|h|geschwiegen|Se taire
+II|speien|speit|spie|h|gespien|Cracher
+II|steigen|steigt|stieg|s|gestiegen|Monter
+II|streichen|streicht|strich|hs|gestrichen|Tartiner, étaler ; rôder, errer
+II|streiten|streitet|stritt|h|gestritten|Se disputer
+II|treiben|treibt|trieb|h|getrieben|Pousser, mouvoir
+II|weichen|weicht|wich|s|gewichen|Éviter, s’écarter
+II|weisen|weist|wies|h|gewiesen|Indiquer, désigner
+III|bewegen|bewegt|bewog|h|bewogen|Bouger, inciter
+III|fechten|ficht|focht|h|gefochten|Combattre pour qc
+III|heben|hebt|hob|h|gehoben|Lever
+III|quellen|quillt|quoll|s|gequollen|Couler de, gonfler
+III|scheren|schert|schor|h|geschoren|Tondre
+III|schmelzen|schmilzt|schmolz|s|geschmolzen|Fondre
+III|schwellen|schwillt|schwoll|s|geschwollen|Enfler
+III|weben|webt|wob|h|gewoben|Tisser
+IV|essen|isst|aß|h|gegessen|Manger
+IV|fressen|frisst|fraß|h|gefressen|Manger (animaux)
+IV|geben|gibt|gab|h|gegeben|Donner
+IV|genesen|genest|genas|s|genesen|Se rétablir de qqch
+IV|geschehen|geschieht|geschah|s|geschehen|Se passer
+IV|lesen|liest|las|h|gelesen|Lire
+IV|messen|misst|maß|h|gemessen|Mesurer
+IV|sehen|sieht|sah|h|gesehen|Voir
+IV|treten|tritt|trat|hs|getreten|Marcher ; entrer
+IV|vergessen|vergisst|vergaß|h|vergessen|Oublier
+V|bergen|birgt|barg|h|geborgen|Sauver, receler
+V|bersten|birst|barst|s|geborsten|Éclater
+V|gelten|gilt|galt|h|gegolten|Être en vigueur, valoir
+V|helfen|hilft|half|h|geholfen|Aider (+ datif)
+V|schelten|schilt|schalt|h|gescholten|Réprimander
+V|sterben|stirbt|starb|s|gestorben|Mourir
+V|verderben|verdirbt|verdarb|s|verdorben|S’avarier, pervertir
+V|werben|wirbt|warb|h|geworben|Parrainer, recruter, promouvoir
+V|werfen|wirft|warf|h|geworfen|Jeter
+VI|biegen|biegt|bog|hs|gebogen|Courber, tourner
+VI|bieten|bietet|bot|h|geboten|Offrir, proposer
+VI|fliegen|fliegt|flog|s|geflogen|Voler (avion)
+VI|fließen|fließt|floss|s|geflossen|Couler
+VI|frieren|friert|fror|h|gefroren|Geler
+VI|genießen|genießt|genoss|h|genossen|Profiter de
+VI|gießen|gießt|goss|h|gegossen|Verser
+VI|kriechen|kriecht|kroch|s|gekrochen|Ramper
+VI|riechen|riecht|roch|h|gerochen|Sentir
+VI|schieben|schiebt|schob|h|geschoben|Pousser
+VI|schießen|schießt|schoss|h|geschossen|Tirer (à l’arme)
+VI|schließen|schließt|schloss|h|geschlossen|Fermer
+VI|verdrießen|verdrießt|verdross|h|verdrossen|Pourrir, gâter
+VI|verlieren|verliert|verlor|h|verloren|Perdre
+VI|wiegen|wiegt|wog|h|gewogen|Peser
+VI|ziehen|zieht|zog|hs|gezogen|Tirer (un objet) ; s’installer, errer
+VII|binden|bindet|band|h|gebunden|Nouer, lier
+VII|dringen|dringt|drang|hs|gedrungen|Insister, exiger ; pénétrer, traverser
+VII|finden|findet|fand|h|gefunden|Trouver
+VII|gelingen|gelingt|gelang|s|gelungen|Réussir
+VII|klingen|klingt|klang|h|geklungen|Sonner
+VII|ringen|ringt|rang|h|gerungen|Lutter
+VII|schlingen|schlingt|schlang|h|geschlungen|Prendre dans ses bras
+VII|schwinden|schwindet|schwand|s|geschwunden|S’amenuiser
+VII|schwingen|schwingt|schwang|h|geschwungen|Brandir
+VII|singen|singt|sang|h|gesungen|Chanter
+VII|sinken|sinkt|sank|s|gesunken|Couler, sombrer, baisser
+VII|stinken|stinkt|stank|h|gestunken|Puer
+VII|trinken|trinkt|trank|h|getrunken|Boire
+VII|winden|windet|wand|h|gewunden|Tordre
+VII|zwingen|zwingt|zwang|h|gezwungen|Obliger
+VIII|beginnen|beginnt|begann|h|begonnen|Commencer
+VIII|gewinnen|gewinnt|gewann|h|gewonnen|Gagner
+VIII|rinnen|rinnt|rann|s|geronnen|S’écouler, couler
+VIII|sinnen|sinnt|sann|h|gesonnen|Méditer, réfléchir
+VIII|schwimmen|schwimmt|schwamm|s|geschwommen|Nager
+VIII|spinnen|spinnt|spann|h|gesponnen|Filer, débloquer (fam.)
+IX|fahren|fährt|fuhr|hs|gefahren|Conduire qqn ; aller (en voiture)
+IX|graben|gräbt|grub|h|gegraben|Creuser
+IX|laden|lädt|lud|h|geladen|Charger
+IX|schaffen|schafft|schuf|h|geschaffen|Créer
+IX|schlagen|schlägt|schlug|h|geschlagen|Frapper
+IX|tragen|trägt|trug|h|getragen|Porter
+IX|wachsen|wächst|wuchs|s|gewachsen|Pousser, grandir, croître
+IX|waschen|wäscht|wusch|h|gewaschen|Laver
+X|blasen|bläst|blies|h|geblasen|Souffler
+X|fallen|fällt|fiel|s|gefallen|Tomber
+X|halten|hält|hielt|h|gehalten|Tenir
+X|lassen|lässt|ließ|h|gelassen|Laisser
+X|raten|rät|riet|h|geraten|Conseiller
+X|schlafen|schläft|schlief|h|geschlafen|Dormir
+XI|bitten|bittet|bat|h|gebeten|Demander, prier
+XI|erlöschen|erlischt|erlosch|s|erloschen|S’éteindre
+XI|erwägen|erwägt|erwog|h|erwogen|Étudier (une offre)
+XI|klimmen|klimmt|klomm|s|geklommen|Grimper
+XI|laufen|läuft|lief|s|gelaufen|Courir
+XI|liegen|liegt|lag|hs|gelegen|Être couché
+XI|lügen|lügt|log|h|gelogen|Mentir
+XI|saufen|säuft|soff|h|gesoffen|Boire, picoler
+XI|saugen|saugt|sog|h|gesogen|Aspirer, téter
+XI|schinden|schindet|schindete|h|geschunden|Éreinter
+XI|schwören|schwört|schwor|h|geschworen|Jurer
+XI|sitzen|sitzt|saß|hs|gesessen|Être assis
+XI|stoßen|stößt|stieß|h|gestoßen|Pousser, lancer
+XI|rufen|ruft|rief|h|gerufen|Appeler
+XI|trügen|trügt|trog|h|getrogen|Tromper
+XII|bringen|bringt|brachte|h|gebracht|Apporter
+XII|denken|denkt|dachte|h|gedacht|Penser
+XII|kennen|kennt|kannte|h|gekannt|Connaître
+XII|nennen|nennt|nannte|h|genannt|Dénommer
+XII|rennen|rennt|rannte|s|gerannt|Courir vite
+XII|brennen|brennt|brannte|h|gebrannt|Brûler`;
+const V=RAW.split("\n").map(l=>{const [g,i,p,t,a,pp,fr]=l.split("|");return{g,i,p,t,a,pp,fr}});
+const $=id=>document.getElementById(id);
+const AUXL={h:"hat",s:"ist",hs:"hat / ist"};
+$("cnt").textContent=V.length;
+$("grp").innerHTML='<option value="">Tous les groupes</option>'+Object.entries(G).map(([k,v])=>`<option value="${k}">${v} (${V.filter(x=>x.g==k).length})</option>`).join("");
+// Onglets
+function tab(n){$("quiz").classList.toggle("hide",n!=1);$("list").classList.toggle("hide",n!=2);$("t1").classList.toggle("on",n==1);$("t2").classList.toggle("on",n==2)}
+$("t1").onclick=()=>tab(1);$("t2").onclick=()=>tab(2);
+// Tableau complet
+function render(){const s=norm($("q").value);let h="";
+ for(const k in G){const r=V.filter(x=>x.g==k&&(!s||norm(x.i+x.fr+x.pp+x.t).includes(s)));if(!r.length)continue;
+  h+=`<h2>${G[k]}</h2><div class="tw"><table><tr><th>Infinitif</th><th>Présent</th><th>Prétérit</th><th>Parfait</th><th>Traduction</th></tr>`+r.map(x=>`<tr><td><b>${x.i}</b></td><td>${x.p}</td><td>${x.t}</td><td>${AUXL[x.a]} ${x.pp}</td><td>${x.fr}</td></tr>`).join("")+"</table></div>"}
+ $("tbl").innerHTML=h||'<p class="small">Aucun résultat.</p>'}
+function norm(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+$("q").oninput=render;render();
+// Quiz
+let Q=[],idx=0,aux="",res=[],mode=3,done=false;
+const cmp=s=>s.trim().toLowerCase().replace(/ß/g,"ss").replace(/\s+/g,"");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function start(list){Q=list;idx=0;res=[];$("setup").classList.add("hide");$("end").classList.add("hide");$("play").classList.remove("hide");show()}
+$("go").onclick=()=>{mode=+$("mode").value;const g=$("grp").value;let p=V.filter(x=>!g||x.g==g);start(shuffle(p).slice(0,+$("nq").value))};
+function show(){done=false;aux="";const v=Q[idx];
+ $("pb").style.width=(idx/Q.length*100)+"%";$("pn").textContent=`Question ${idx+1} / ${Q.length} · ${G[v.g]}`;
+ $("qv").textContent=v.i;$("qf").textContent=v.fr;
+ $("fields").innerHTML=(mode==3?[["p","Présent (3ᵉ pers. sg)"],["t","Prétérit"]]:[]).concat([["pp","Participe II"]]).map(([k,l])=>`<label>${l}</label><input type="text" class="f" id="f_${k}" autocomplete="off" autocapitalize="none" spellcheck="false">`).join("");
+ document.querySelectorAll(".aux button").forEach(b=>{b.classList.remove("on","ok","ko")});$("auxsol").textContent="";
+ $("ok").textContent="Valider";const f=$("fields").querySelector("input");f.focus()}
+document.querySelectorAll(".aux button").forEach(b=>b.onclick=()=>{if(done)return;aux=b.dataset.a;document.querySelectorAll(".aux button").forEach(x=>x.classList.toggle("on",x==b))});
+$("ok").onclick=()=>{const v=Q[idx];
+ if(done){idx++;idx<Q.length?show():finish();return}
+ const ks=mode==3?["p","t","pp"]:["pp"];const ok={};
+ ks.forEach(k=>{const el=$("f_"+k);ok[k]=cmp(el.value)==cmp(v[k]);el.classList.add(ok[k]?"ok":"ko");el.readOnly=true;
+  if(!ok[k])el.insertAdjacentHTML("afterend",`<div class="sol">Réponse : ${v[k]}</div>`)});
+ ok.a=v.a=="hs"?!!aux:aux==v.a;
+ document.querySelectorAll(".aux button").forEach(b=>{if(b.classList.contains("on"))b.classList.add(ok.a?"ok":"ko")});
+ if(!ok.a)$("auxsol").textContent="Réponse : "+AUXL[v.a];
+ res.push({v,ok:Object.values(ok).every(Boolean)});
+ done=true;$("ok").textContent=idx+1<Q.length?"Suivant":"Voir le résultat"};
+document.addEventListener("keydown",e=>{if(e.key=="Enter"&&!$("play").classList.contains("hide"))$("ok").click()});
+function finish(){$("play").classList.add("hide");const n=res.filter(r=>r.ok).length,bad=res.filter(r=>!r.ok);
+ $("end").classList.remove("hide");
+ $("end").innerHTML=`<div class="q">${n} / ${res.length}</div><div class="fr">${Math.round(n/res.length*100)} % de réussite (un verbe est juste si toutes les formes et l’auxiliaire le sont)</div>`+
+ (bad.length?`<h2>À revoir</h2><div class="tw"><table><tr><th>Verbe</th><th>Formes</th></tr>${bad.map(r=>`<tr><td><b>${r.v.i}</b><br><span class="small">${r.v.fr}</span></td><td>${r.v.p} – ${r.v.t} – ${AUXL[r.v.a]} ${r.v.pp}</td></tr>`).join("")}</table></div><button class="btn" id="rb">Refaire les erreurs</button> `:"")+
+ `<button class="btn sec" id="rs">Nouveau quiz</button>`;
+ if(bad.length)$("rb").onclick=()=>start(shuffle(bad.map(r=>r.v)));
+ $("rs").onclick=()=>{$("end").classList.add("hide");$("setup").classList.remove("hide")}}
+</script></body></html>

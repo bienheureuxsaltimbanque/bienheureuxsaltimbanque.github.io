@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Histoire de l'art</title>
+<style>
+  :root {
+    --bg: #0f1624;
+    --panel: #172033;
+    --ink: #e8ecf3;
+    --muted: #9aa7bd;
+    --line: #2a3650;
+    --c: #a8741a; /* couleur « histoire » du site */
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    line-height: 1.65;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100lvh;
+    z-index: -1;
+    background:
+      linear-gradient(rgba(15,22,36,.6), rgba(15,22,36,.6)),
+      url("../../David.webp") center / cover no-repeat;
+    transform: translateZ(0);
+  }
+  @media (max-width: 700px) {
+    body::before { background-position: center top; }
+  }
+  main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  .back { margin: 0 0 1.5rem; font-size: 0.9rem; color: var(--muted); }
+  h1 {
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+  }
+  .intro { color: var(--muted); margin: 0 0 2.5rem; max-width: 34rem; }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--muted);
+    margin: 2.5rem 0 0.75rem;
+  }
+  a { color: var(--ink); text-decoration-color: var(--c); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 4px; }
+  a:focus-visible { outline: 3px solid var(--c); outline-offset: 2px; }
+  a.card {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 8px solid var(--c);
+    border-radius: 3px;
+    padding: 0.85rem 1rem;
+    margin: 0 0 0.6rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  a.card:hover b { text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a.card em { display: block; font-size: 0.85rem; font-style: italic; color: var(--muted); margin-bottom: 0.2rem; }
+  a.card b { display: block; font-size: 1.2rem; font-weight: 600; line-height: 1.3; }
+  a.card span { display: block; font-size: 0.95rem; color: var(--muted); margin-top: 0.3rem; }
+  .vide { color: var(--muted); font-style: italic; }
+  .note { margin-top: 3rem; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+<p class="back"><a href="../../index.html">Cours de prépa</a> › Histoire</p>
+<h1>Histoire de l'art</h1>
+<p class="intro">Analyses détaillées d'œuvres : l'œuvre, l'artiste, le contexte historique, la méthode (Panofsky, iconologie) et les sources. Classées par siècle.</p>
+<div id="liste"><p class="vide">Chargement des analyses…</p></div>
+<p class="note">Chaque affirmation est étiquetée selon son origine : livres de cours, web, connaissance générale, interprétation ou observation sur l'image.</p>
+</main>
+<script>
+/* Ce sommaire se construit tout seul : il liste les fichiers .html du dossier (via l'API publique de GitHub),
+   lit les balises <meta name="fiche:..."> de chaque fiche et classe par siècle. Rien à modifier ici pour ajouter une fiche.
+   Les fichiers dont le nom commence par "_" ou "index" sont ignorés. */
+var OWNER="bienheureuxsaltimbanque", REPO="bienheureuxsaltimbanque.github.io", DOSSIER="histoire/histoire_de_l_art";
+var SECOURS=[
+  {
+    "file": "Rigaud_Louis_XIV_1701.html",
+    "titre": "Louis XIV en grand costume royal",
+    "artiste": "Hyacinthe Rigaud",
+    "annee": "1701",
+    "lieu": "musée du Louvre",
+    "type": "Peinture",
+    "description": "Image annotée avec 13 repères, description zone par zone, insignes, deux corps du roi, succession d'Espagne. Vérifié dans la notice du Louvre."
+  },
+  {
+    "file": "Rigaud_Louis_XV_1730.html",
+    "titre": "Louis XV en costume de sacre",
+    "artiste": "Hyacinthe Rigaud",
+    "annee": "1730",
+    "lieu": "château de Versailles",
+    "type": "Peinture",
+    "description": "Genèse de la commande (1727-1730), regalia, comparaison avec 1701 et 1715, diffusion diplomatique des copies. Description visuelle à compléter avec l'image."
+  }
+];
+var ROMAINS=["","Ier","IIe","IIIe","IVe","Ve","VIe","VIIe","VIIIe","IXe","Xe","XIe","XIIe","XIIIe","XIVe","XVe","XVIe","XVIIe","XVIIIe","XIXe","XXe","XXIe"];
+function siecle(annee){var m=String(annee||"").match(/\d{3,4}/);if(!m)return null;var n=parseInt(m[0],10);return {n:Math.floor((n-1)/100)+1,an:n};}
+function meta(doc,k){var e=doc.querySelector('meta[name="fiche:'+k+'"]');return e?e.getAttribute("content"):"";}
+function lireFiche(nom){
+  return fetch(encodeURIComponent(nom)).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(t){
+    var d=new DOMParser().parseFromString(t,"text/html");
+    return {file:nom,titre:meta(d,"titre")||d.title||nom,artiste:meta(d,"artiste"),annee:meta(d,"annee"),lieu:meta(d,"lieu"),type:meta(d,"type"),description:meta(d,"description")};
+  }).catch(function(){return null;});
+}
+function listerFichiers(){
+  var url="https://api.github.com/repos/"+OWNER+"/"+REPO+"/contents/"+DOSSIER;
+  return fetch(url,{headers:{Accept:"application/vnd.github+json"}}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(l){
+    return l.filter(function(x){return x.type==="file"&&/\.html$/i.test(x.name)&&x.name.charAt(0)!=="_"&&!/^index\.html$/i.test(x.name);}).map(function(x){return x.name;});
+  });
+}
+function afficher(fiches){
+  var box=document.getElementById("liste");box.textContent="";
+  var groupes={},sans=[];
+  fiches.forEach(function(f){var s=siecle(f.annee);if(!s){sans.push(f);return;}f._an=s.an;(groupes[s.n]=groupes[s.n]||[]).push(f);});
+  var cles=Object.keys(groupes).map(Number).sort(function(a,b){return a-b;});
+  function carte(f){
+    var a=document.createElement("a");a.className="card";a.href=encodeURIComponent(f.file);
+    var em=document.createElement("em");em.textContent=[f.type,f.artiste,f.annee,f.lieu].filter(Boolean).join(" · ");
+    var b=document.createElement("b");b.textContent=f.titre;
+    var sp=document.createElement("span");sp.textContent=f.description||"";
+    a.appendChild(em);a.appendChild(b);if(f.description)a.appendChild(sp);return a;
+  }
+  cles.forEach(function(n){
+    var h=document.createElement("h2");h.textContent=(ROMAINS[n]||n+"e")+" siècle";box.appendChild(h);
+    groupes[n].sort(function(a,b){return a._an-b._an;}).forEach(function(f){box.appendChild(carte(f));});
+  });
+  if(sans.length){var h=document.createElement("h2");h.textContent="Sans date";box.appendChild(h);sans.forEach(function(f){box.appendChild(carte(f));});}
+  if(!fiches.length){var p=document.createElement("p");p.className="vide";p.textContent="Aucune analyse pour l'instant.";box.appendChild(p);}
+}
+listerFichiers().then(function(noms){return Promise.all(noms.map(lireFiche));}).then(function(r){
+  var ok=r.filter(Boolean);if(!ok.length)throw 0;afficher(ok);
+}).catch(function(){afficher(SECOURS);});
+</script>
+</body>
+</html>

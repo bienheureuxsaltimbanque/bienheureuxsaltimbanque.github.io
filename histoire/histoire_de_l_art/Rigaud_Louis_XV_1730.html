@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="fiche:titre" content="Louis XV en costume de sacre">
+<meta name="fiche:artiste" content="Hyacinthe Rigaud">
+<meta name="fiche:annee" content="1730">
+<meta name="fiche:lieu" content="château de Versailles">
+<meta name="fiche:type" content="Peinture">
+<meta name="fiche:description" content="Genèse de la commande (1727-1730), regalia, comparaison avec 1701 et 1715, diffusion diplomatique des copies. Description visuelle à compléter avec l'image.">
+<title>Louis XV en costume de sacre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : colonne de lecture avec sommaire latéral fixe sur grand écran, sommaire replié en tête sur mobile.
+   Palette tirée du tableau : bleu du manteau de sacre, or des fleurs de lys, blanc d'hermine, rouge du dais. */
+:root{
+  --bg:#f4f5f8; --surface:#FFFFFF; --fg:#1d2431; --muted:#5d6676; --rule:#d9dde6;
+  --blue:#17315c; --blue-soft:#e6ebf5; --gold:#946414; --gold-soft:#F4EAD0; --red:#9B2C2C; --red-soft:#F7E3E1;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Spectral",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151c; --surface:#181e28; --fg:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+    --blue:#a9c2ee; --blue-soft:#1f3a66; --gold:#D8B35C; --gold-soft:#2B2514; --red:#F0A19A; --red-soft:#35191B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151c; --surface:#181e28; --fg:#e3e7ee; --muted:#9aa5b6; --rule:#2b3341;
+  --blue:#a9c2ee; --blue-soft:#1f3a66; --gold:#D8B35C; --gold-soft:#2B2514; --red:#F0A19A; --red-soft:#35191B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 72px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:20px}}
+
+/* Sommaire */
+.toc{position:sticky;top:24px;align-self:start;font-family:var(--f-mono);font-size:12.5px;line-height:1.4;max-height:calc(100vh - 48px);overflow:auto}
+.toc h2{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:block;padding:6px 10px;border-left:2px solid var(--rule);color:var(--muted);text-decoration:none}
+.toc a:hover{color:var(--fg);border-left-color:var(--gold)}
+@media (max-width:900px){
+  .toc{position:static;max-height:none;border:1px solid var(--rule);background:var(--surface);padding:12px 14px}
+  .toc ol{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+}
+
+/* En-tête */
+.head{border-bottom:3px double var(--gold);padding-bottom:28px;margin-bottom:34px}
+.kicker{font:500 12px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+h1{font:600 clamp(40px,7vw,72px)/.98 var(--f-display);letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance;color:var(--blue)}
+.sub{font:italic 400 clamp(19px,3vw,25px)/1.3 var(--f-body);color:var(--muted);margin:0}
+.fiche{margin:26px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border-top:1px solid var(--rule);border-left:1px solid var(--rule);background:var(--surface)}
+.fiche div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-width:0}
+.fiche dt{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.fiche dd{margin:0;font-size:15.5px;line-height:1.45}
+
+/* Typographie */
+h2.s{font:600 clamp(30px,4vw,42px)/1.08 var(--f-display);color:var(--blue);margin:64px 0 8px;text-wrap:balance}
+h2.s .n{font:500 12px/1 var(--f-mono);letter-spacing:.14em;color:var(--gold);display:block;margin-bottom:10px;text-transform:uppercase}
+h3{font:700 23px/1.2 var(--f-display);margin:36px 0 6px;text-wrap:balance}
+h4{font:500 12px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:26px 0 4px}
+p{margin:0 0 1em;max-width:68ch}
+ul,ol.l{max-width:68ch;padding-left:1.2em;margin:0 0 1em}
+li{margin-bottom:.4em}
+strong{font-weight:600}
+.lead{font-size:19.5px;line-height:1.6;max-width:66ch}
+.pull{font:italic 400 22px/1.4 var(--f-body);color:var(--blue);border-left:3px solid var(--gold);padding:2px 0 2px 18px;margin:28px 0;max-width:62ch}
+
+/* Étiquettes de fiabilité */
+.t{display:inline-block;font:500 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px 2px;margin-right:6px;vertical-align:.12em;border:1px solid currentColor;white-space:nowrap}
+.t-l{color:var(--blue)} .t-w{color:var(--gold)} .t-g{color:var(--muted)} .t-i{color:var(--red)}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 22px;background:var(--surface);border:1px solid var(--rule);padding:16px 18px;margin:0 0 8px;font-size:15px}
+.legend p{margin:0;max-width:none}
+
+/* Encadrés */
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;margin:24px 0;max-width:74ch}
+.box.warn{border-color:var(--red);background:var(--red-soft)}
+.box.note{background:var(--gold-soft);border-color:var(--gold)}
+.box > :last-child{margin-bottom:0}
+.box .bt{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;color:var(--muted)}
+.box.warn .bt{color:var(--red)} .box.note .bt{color:var(--gold)}
+
+/* Tableaux */
+.tw{overflow-x:auto;margin:20px 0 28px;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px;line-height:1.5}
+th{font:500 11px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-align:left;color:var(--muted);padding:11px 14px;border-bottom:1px solid var(--rule);background:var(--bg);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{font-family:var(--f-mono);font-size:13px;white-space:nowrap;color:var(--blue)}
+.tw.wide table{min-width:820px}
+
+/* Frise */
+.frise{list-style:none;margin:20px 0 28px;padding:0;max-width:78ch;border-left:2px solid var(--gold)}
+.frise li{position:relative;padding:0 0 18px 24px;margin:0}
+.frise li::before{content:"";position:absolute;left:-7px;top:.55em;width:12px;height:12px;background:var(--bg);border:2px solid var(--gold);transform:rotate(45deg)}
+.frise b{font:500 13px/1 var(--f-mono);color:var(--blue);display:block;margin-bottom:3px;letter-spacing:.03em}
+.frise.key li::before{background:var(--gold)}
+
+dl.lex{max-width:74ch;margin:20px 0}
+dl.lex dt{font:700 20px/1.2 var(--f-display);margin-top:20px;color:var(--blue)}
+dl.lex dd{margin:4px 0 0}
+.src li{font-size:15.5px}
+.foot{margin-top:72px;padding-top:20px;border-top:3px double var(--gold);font-size:14.5px;color:var(--muted);max-width:74ch}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<style>.back{max-width:1120px;margin:0 auto;padding-top:18px;font:500 13px/1.4 var(--f-mono);color:var(--muted)}.back a{color:var(--blue)}.back a:hover{text-decoration-thickness:3px}</style>
+</head>
+<body>
+<nav class="back" aria-label="Fil d'Ariane"><a href="../../index.html">Cours de prépa</a> › <a href="index.html">Histoire de l'art</a> › Louis XV, 1730</nav>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#lecture">Lecture rapide</a></li>
+    <li><a href="#identifier">1. Quel tableau ?</a></li>
+    <li><a href="#contexte">2. Contexte historique</a></li>
+    <li><a href="#peintre">3. Le peintre</a></li>
+    <li><a href="#commande">4. Genèse de la commande</a></li>
+    <li><a href="#analyse">5. Analyse du tableau</a></li>
+    <li><a href="#iconologie">6. Iconologie</a></li>
+    <li><a href="#comparaisons">7. Comparaisons</a></li>
+    <li><a href="#diffusion">8. Diffusion et diplomatie</a></li>
+    <li><a href="#commentaire">9. Plan de commentaire</a></li>
+    <li><a href="#chrono">10. Chronologie</a></li>
+    <li><a href="#lexique">11. Lexique</a></li>
+    <li><a href="#sources">12. Sources et limites</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="head">
+  <p class="kicker">Analyse d'œuvre · portrait d'apparat · XVIIIe siècle</p>
+  <h1>Louis XV en costume de sacre</h1>
+  <p class="sub">Hyacinthe Rigaud, 1730 · château de Versailles</p>
+  <dl class="fiche">
+    <div><dt>Peintre</dt><dd>Hyacinthe Rigaud (Perpignan 1659 – Paris 1743)</dd></div>
+    <div><dt>Date</dt><dd>Signé « Fait par Hyacinthe Rigaud 1730 ». Paiement inscrit en 1729, tête peinte dès 1727.</dd></div>
+    <div><dt>Technique</dt><dd>Huile sur toile, portrait en pied</dd></div>
+    <div><dt>Dimensions</dt><dd>271 × 174 cm (catalogue raisonné) ; 271 × 186 cm (autre fiche). À vérifier.</dd></div>
+    <div><dt>Conservation</dt><dd>Versailles, musée national du château, inv. MV 3750</dd></div>
+    <div><dt>Commande</dt><dd>Couronne. Rigaud est payé 15 000 livres en 1729.</dd></div>
+    <div><dt>Modèle</dt><dd>Louis XV (1710-1774), roi depuis 1715, sacré le 25 octobre 1722</dd></div>
+    <div><dt>Genre</dt><dd>Portrait royal d'apparat, grand costume de sacre</dd></div>
+  </dl>
+</header>
+
+<section id="lecture">
+  <h2 class="s"><span class="n">En bref</span>Lecture rapide</h2>
+  <p class="lead">Ce portrait est le troisième et dernier portrait royal de Rigaud. Il reprend le modèle qu'il avait fixé pour Louis XIV en 1701 et le met au service d'un roi de vingt ans, sacré depuis huit ans, dont la dynastie vient de se rassurer.</p>
+  <ul>
+    <li><strong>Ce que le tableau fait.</strong> Il montre le roi revêtu du manteau bleu fleurdelisé du sacre, entouré des insignes réels de la monarchie, prêtés par l'abbaye de Saint-Denis pour que le peintre les copie.</li>
+    <li><strong>Ce qui change depuis 1701.</strong> Le visage est moins sévère, la pose plus ostentatoire, les draperies semblent s'envoler. Les historiens y voient l'entrée du portrait royal dans le style rococo.</li>
+    <li><strong>Pourquoi c'est important.</strong> Le tableau est copié une dizaine de fois, gravé, offert à des puissances étrangères. C'est un instrument de légitimité et de diplomatie, autant qu'une œuvre d'art.</li>
+  </ul>
+
+  <h3>Comment lire ce document</h3>
+  <p>Chaque affirmation est marquée par son origine, pour que tu saches ce que tu peux citer et ce que tu dois vérifier.</p>
+  <div class="legend">
+    <p><span class="t t-l">Livres</span>Tiré des trois ouvrages que tu m'as fournis.</p>
+    <p><span class="t t-w">Web</span>Tiré d'une source en ligne consultée pour cette analyse (liste au chapitre 12).</p>
+    <p><span class="t t-g">Général</span>Connaissance historique générale, non vérifiée ici. À contrôler avant de citer.</p>
+    <p><span class="t t-i">Analyse</span>Interprétation proposée. C'est un raisonnement, pas un fait.</p>
+  </div>
+
+  <div class="box warn">
+    <p class="bt">Deux limites à connaître</p>
+    <p><strong>Je n'ai pas pu regarder l'image.</strong> La description visuelle repose sur les notices de catalogue, les analyses publiées et les comparaisons avec les autres portraits. Chaque point visuel à confirmer est signalé et rassemblé dans une grille de vérification (chapitre 5). Si tu m'envoies l'image, je referai cette partie d'après ce qu'on y voit.</p>
+    <p><strong>Tes livres couvrent très peu ce sujet.</strong> Faure (tome 3) traite la Renaissance et ne dit rien de Rigaud ni de Louis XV. <em>Histoire de l'art pour les Nuls</em> donne un paragraphe sur Rigaud et le cadre rocaille. Huys et Vernant donnent la méthode (Panofsky, anthropologie du portrait royal) et une note sur le portrait de Louis XIV. Le contenu factuel vient donc surtout du web.</p>
+  </div>
+</section>
+
+<section id="identifier">
+  <h2 class="s"><span class="n">Chapitre 1</span>Quel tableau ?</h2>
+  <p>« Louis XV en costume de sacre » désigne plusieurs peintures. La première précaution d'un commentaire est de dire laquelle on analyse. Ici, c'est la grande toile de 1730 conservée à Versailles (MV 3750).</p>
+  <div class="tw wide"><table>
+    <thead><tr><th>Date</th><th>Auteur</th><th>Lieu</th><th>Ce qu'il faut retenir</th></tr></thead>
+    <tbody>
+    <tr><td>1715-1717</td><td>Rigaud</td><td>Versailles ; version aux États-Unis (Metropolitan Museum)</td><td>Louis XV a cinq ans. Il est assis. Commandé par le Régent en 1715, installé dans le cabinet du roi en 1717. Il n'est pas encore sacré. <span class="t t-w">Web</span></td></tr>
+    <tr><td>1720</td><td>Atelier de Rigaud</td><td>Reims, musée Saint-Remi (non exposé)</td><td>Huile de 228,5 × 163 cm. Fait partie d'une série de toiles identiques. Une inscription au dos indique un don du roi à un certain M. Le Cousturier. <span class="t t-w">Web</span></td></tr>
+    <tr><td>1721</td><td>Rigaud</td><td>Madrid, Palais royal</td><td>Louis XV à onze ans, debout. Commandé par Philippe V d'Espagne dans le cadre du projet de mariage avec l'infante. Rigaud reçoit 8 000 livres. <span class="t t-w">Web</span></td></tr>
+    <tr><td>1723</td><td>Alexis-Simon Belle</td><td>Versailles</td><td>Portrait en costume de sacre un an après la cérémonie. Il aide à identifier les vêtements portés au sacre. <span class="t t-w">Web</span></td></tr>
+    <tr><td>1729-1730</td><td><strong>Rigaud</strong></td><td><strong>Versailles, MV 3750</strong></td><td><strong>Notre tableau.</strong> Troisième et dernier portrait royal de Rigaud. <span class="t t-w">Web</span></td></tr>
+    <tr><td>vers 1761-1764</td><td>Louis-Michel Van Loo</td><td>Versailles (dépôt du Louvre)</td><td>Portrait en pied présenté comme une allégorie du royaume. Le roi a plus de cinquante ans. Le costume de cour passe au premier plan. <span class="t t-w">Web</span></td></tr>
+    </tbody></table></div>
+
+  <div class="box note">
+    <p class="bt">Pour citer correctement</p>
+    <p>La fiche d'identité de la 1730 a deux tailles différentes selon les sources : 271 × 174 cm dans le catalogue raisonné de Rigaud, 271 × 186 cm dans une autre fiche. Cite la hauteur (271 cm), qui ne varie pas, et indique que la largeur est donnée différemment selon les notices. Le numéro d'inventaire est MV 3750. Une liste en ligne ajoute INV 7502, probablement un ancien numéro du Louvre.</p>
+  </div>
+</section>
+
+<section id="contexte">
+  <h2 class="s"><span class="n">Chapitre 2</span>Le contexte historique</h2>
+  <p class="lead">Pour comprendre ce portrait, il faut suivre le roi de l'enfant orphelin de 1715 au jeune souverain marié de 1730. Chaque étape explique un détail du tableau.</p>
+
+  <h3>2.1 · Une succession fragile (1715)</h3>
+  <p><span class="t t-g">Général</span>Louis XIV meurt le 1er septembre 1715, après soixante-douze ans de règne. Son fils, son petit-fils aîné et son premier arrière-petit-fils sont morts entre 1711 et 1714. Le nouveau roi est un enfant de cinq ans, le dernier héritier direct.</p>
+  <p><span class="t t-w">Web</span>Le Régent, Philippe d'Orléans, gouverne à sa place. Dès 1715, il commande à Rigaud le premier portrait officiel du jeune roi. L'enfant y est représenté en costume de sacre alors qu'il n'est pas sacré. Le tableau est achevé en 1717.</p>
+  <p><span class="t t-i">Analyse</span>Habiller un enfant de cinq ans en roi sacré avant la cérémonie, c'est affirmer que le pouvoir est passé sans rupture. Rigaud reprend d'ailleurs la composition du portrait de Louis XIV de 1701 : le message est celui de la continuité.</p>
+
+  <h3>2.2 · La Régence (1715-1723)</h3>
+  <p><span class="t t-g">Général</span>La Régence est une période de détente après la fin du règne précédent. La cour quitte Versailles pour Paris, le gouvernement est réorganisé, le « système » financier de Law s'effondre en 1720. En politique étrangère, la France s'allie à l'Angleterre, ce qui la conduit à une brève guerre contre l'Espagne de Philippe V, petit-fils de Louis XIV, en 1718-1720.</p>
+  <p><span class="t t-w">Web</span>La réconciliation avec l'Espagne passe par des projets de mariage. En 1721, Philippe V commande à Rigaud un portrait de Louis XV pour accompagner l'accord de mariage avec l'infante Marie-Anne-Victoire, signé le 1er avril 1721. Le traité de Paris suit le 22 novembre 1722.</p>
+  <p><span class="t t-i">Analyse</span>Le portrait du roi de France est ici un document diplomatique. Il circule entre les cours comme un gage d'alliance. C'est un premier indice que les portraits de Rigaud servent la politique extérieure autant que le prestige.</p>
+
+  <h3>2.3 · Le sacre de Reims (25 octobre 1722)</h3>
+  <p><span class="t t-w">Web</span>Louis XV est sacré le 25 octobre 1722 dans la cathédrale de Reims. Le château de Versailles conserve plusieurs tableaux qui commémorent la cérémonie.</p>
+  <p><span class="t t-g">Général</span>Le sacre est la cérémonie qui, dans la tradition française, fait le roi avec l'onction d'huile de la Sainte Ampoule, rattachée à la légende du baptême de Clovis. Les insignes sont conservés à l'abbaye de Saint-Denis et apportés à Reims pour l'occasion. Le roi, qui a douze ans, reçoit l'épée, le sceptre, la main de justice et la couronne. Il est ensuite reçu dans l'ordre du Saint-Esprit, dont le roi est grand maître. La cour revient à Versailles en juin 1722, quelques mois avant le sacre.</p>
+  <p><span class="t t-i">Analyse</span>Pour Rigaud, le sacre donne le vocabulaire du tableau : le manteau bleu doublé d'hermine, les fleurs de lys, les regalia. Le sacre est aussi le moment où l'enfant devient pleinement roi dans l'ordre symbolique, ce qui explique que le « costume de sacre » serve de tenue officielle d'un portrait pendant des décennies.</p>
+
+  <h3>2.4 · Majorité, ministres et mariage (1723-1729)</h3>
+  <ul>
+    <li><span class="t t-g">Général</span>Février 1723 : Louis XV atteint sa majorité à treize ans. Le Régent et son ministre Dubois meurent en 1723.</li>
+    <li><span class="t t-g">Général</span>1723-1726 : le duc de Bourbon est principal ministre. En 1725, le projet de mariage espagnol est rompu et l'infante est renvoyée. Le roi épouse Marie Leszczyńska le 5 septembre 1725.</li>
+    <li><span class="t t-g">Général</span>1726 : le cardinal de Fleury, ancien précepteur du roi, devient le principal ministre. Il le restera jusqu'à sa mort en 1743, et il pratique une politique de paix.</li>
+    <li><span class="t t-g">Général</span>1727 : naissance de jumelles. 4 septembre 1729 : naissance du dauphin Louis-Ferdinand, qui assure enfin la succession masculine.</li>
+    <li><span class="t t-w">Web</span>1727 : Rigaud fixe les traits du roi, qui a dix-sept ans. 1729 : le roi accorde du temps au peintre.</li>
+  </ul>
+
+  <h3>2.5 · 1729-1730, l'année de la signature</h3>
+  <ul>
+    <li><span class="t t-g">Général</span>Novembre 1729 : traité de Séville, qui termine le conflit entre l'Espagne et l'Angleterre-France-Provinces-Unies. Fleury veut la paix.</li>
+    <li><span class="t t-g">Général</span>Avril 1730 : lors d'un lit de justice, Louis XV impose l'enregistrement de la bulle <em>Unigenitus</em> comme loi du royaume. Le roi agit alors comme garant de l'ordre religieux, dans un conflit qui oppose le Parlement, les jansénistes et l'épiscopat.</li>
+    <li><span class="t t-w">Web</span>25 juin 1729 : une lettre de cachet ordonne au prieur de Saint-Denis de prêter les insignes royaux au peintre.</li>
+  </ul>
+  <p class="pull">Un roi marié, père d'un dauphin, soutenu par un ministre qui veut la paix : le tableau de 1730 montre un règne qui s'installe.</p>
+  <p><span class="t t-i">Analyse</span>Le contraste avec 1717 est net. Le portrait de l'enfant est celui d'une monarchie qui se protège (la couronne et la main de justice sont dans la pénombre, ce qui rappelle que le roi ne règne pas encore, selon l'analyse de <em>L'Histoire par l'image</em>). Celui de 1730 est celui d'une monarchie qui s'affiche : les insignes sont en pleine lumière. <span class="t t-w">Web</span></p>
+  <p><span class="t t-g">Général</span>Un détail de calendrier mérite d'être noté : la lettre de cachet de juin 1729 est antérieure de quelques mois à la naissance du dauphin. La commande n'a donc pas été passée pour célébrer cette naissance, mais le tableau est livré dans un contexte où la dynastie est consolidée.</p>
+</section>
+
+<section id="peintre">
+  <h2 class="s"><span class="n">Chapitre 3</span>Le peintre : Hyacinthe Rigaud</h2>
+  <p class="lead">Rigaud est l'inventeur de la formule du portrait d'apparat à la française, qui reste en usage pendant plus d'un siècle. Quand il peint Louis XV en 1730, il a soixante et onze ans et trois décennies de pratique du portrait royal derrière lui.</p>
+
+  <h3>3.1 · Origines et formation</h3>
+  <ul>
+    <li><span class="t t-w">Web</span>Né à Perpignan le 18 juillet 1659, quelques mois avant le traité des Pyrénées qui rattache le Roussillon à la France. Baptisé sous le nom catalan de Jacint Rigau i Ros.</li>
+    <li><span class="t t-w">Web</span>Fils d'un tailleur qui était aussi peintre et petit-fils de peintres-doreurs du Roussillon. Il se forme d'abord au métier de tailleur dans l'atelier de son père.</li>
+    <li><span class="t t-w">Web</span>Élève d'Antoine Ranc, à Montpellier à partir de 1671 selon l'une des notices. Une autre notice situe cette formation à Perpignan : les sources divergent.</li>
+    <li><span class="t t-w">Web</span>Vers 1675, il s'installe à Lyon où il découvre la peinture flamande, hollandaise et italienne (Rubens, Van Dyck, Rembrandt, Titien). Il collectionnera plus tard des Titien.</li>
+  </ul>
+  <p><span class="t t-i">Analyse</span>Cette double origine explique une partie de son style. L'atelier de tailleur lui donne un rapport concret aux étoffes. Une notice du château de Versailles le dit explicitement : il a grandi près des drapiers de Perpignan, et on lui reconnaît un don pour les larges draperies lourdes. Les maîtres flamands lui donnent le goût de la présence physique et de la couleur.</p>
+
+  <h3>3.2 · Paris, Le Brun et le choix du portrait</h3>
+  <ul>
+    <li><span class="t t-w">Web</span>1681 : il arrive à Paris. 1682 : il remporte le prix de Rome, mais n'y va pas, sur le conseil de Charles Le Brun, qui l'oriente vers le portrait.</li>
+    <li><span class="t t-w">Web</span>1688 : portrait de Monsieur, frère du roi, qui attire l'attention de Louis XIV et de la cour. 1689 : portrait de Philippe d'Orléans, le futur Régent.</li>
+    <li><span class="t t-w">Web</span>1694 : portrait de Louis XIV en armure, livré au roi.</li>
+  </ul>
+  <p><span class="t t-i">Analyse</span>Dans la hiérarchie des genres de l'Académie (Le Brun en est la figure dominante), le portrait est inférieur à la peinture d'histoire. Choisir le portrait, c'est renoncer au sommet de la hiérarchie en échange d'un marché plus large et plus sûr. Rigaud transforme ce choix en réussite : il élève le portrait au niveau de la grande peinture par l'ampleur du format et la richesse de l'apparat.</p>
+
+  <h3>3.3 · Le portrait de Louis XIV de 1701, acte fondateur</h3>
+  <p><span class="t t-w">Web</span>En décembre 1700, le petit-fils de Louis XIV devient roi d'Espagne sous le nom de Philippe V. Avant son départ, il demande un portrait de son grand-père. Louis XIV est si satisfait du résultat qu'il garde l'original et envoie une réplique à Madrid. L'original est aujourd'hui au Louvre. Une autre version est à Versailles.</p>
+  <p><span class="t t-l">Livres</span>Huys et Vernant citent cette œuvre en note : « le célèbre portrait de Louis XIV peint par Hyacinthe Rigaud en 1701, 2,77 × 1,94 mètres, Paris, musée du Louvre, INV. 7492 ». Ils notent que le roi y est vêtu du costume de sacre, montre l'épée sur son côté et s'appuie sur le sceptre, la couronne posée à l'arrière-plan sur un tabouret. Le tableau est exposé au Salon de 1704. D'après eux, il figure « l'ensemble de l'apparat nécessaire au processus de matérialisation d'une puissance à la fois effective et indicible ».</p>
+  <p><span class="t t-l">Livres</span><em>Histoire de l'art pour les Nuls</em> résume l'enjeu : Rigaud « incarne le portrait officiel à lui tout seul ». Il met au point « la formule de la draperie et du décor d'architecture à l'arrière-plan du personnage, élément qui perdurera jusqu'au XIXe siècle ».</p>
+
+  <h3>3.4 · Un atelier organisé comme une entreprise</h3>
+  <ul>
+    <li><span class="t t-w">Web</span>Son atelier compte plus de trente collaborateurs jusqu'en 1716. Parmi les noms cités : La Penaye, Prieur, Bayeul, Huillot, Parrocel. Joseph Parrocel peint, par exemple, le fond de bataille du portrait du duc de Bourgogne.</li>
+    <li><span class="t t-w">Web</span>Rigaud réutilise des cartons pour les poses et les costumes. Parfois, seule la tête est peinte sur une petite toile, puis cousue dans la grande composition. Certaines copies montrent la couture.</li>
+    <li><span class="t t-w">Web</span>Il tient un livre de comptes, le <em>Livre de raison</em>, publié en 1919. Il ne recense pas plusieurs centaines de toiles découvertes depuis. Il aurait peint plus de mille modèles différents.</li>
+    <li><span class="t t-w">Web</span>La notice de Versailles observe qu'il est difficile de distinguer un original d'une copie d'atelier, car celles-ci peuvent être aussi parfaites que les œuvres autographes.</li>
+  </ul>
+  <p><span class="t t-i">Analyse</span>Pour le tableau de 1730, cette organisation compte. Le catalogue dit que la tête a été faite en 1727, donc d'après nature, et que le reste a été achevé plus tard. La séparation entre le visage (portrait vrai du roi) et le corps (apparat, étoffes, insignes) est au cœur de la méthode.</p>
+
+  <h3>3.5 · Style et influences</h3>
+  <ul>
+    <li><span class="t t-w">Web</span>Ses portraits donnent un visage très exact, avec un grand soin pour le costume et le décor : ce sont, dit une notice, des documents précis de la mode contemporaine.</li>
+    <li><span class="t t-w">Web</span>Influences relevées : Van Dyck et Philippe de Champaigne. Pour le portrait de 1701, une analyse y reconnaît aussi l'écho du portrait de Charles Ier par Van Dyck (Louvre).</li>
+    <li><span class="t t-w">Web</span>Diderot, plus tard, qualifie ses visages de « lettres de recommandation écrites dans une langue connue de tous les hommes » (citation rapportée par une notice).</li>
+    <li><span class="t t-l">Livres</span>Les <em>Nuls</em> notent la couleur vive de la peinture de Rigaud et de Largillière, son rival, qui se distingue par son réalisme.</li>
+  </ul>
+
+  <h3>3.6 · Carrière, honneurs et fin</h3>
+  <ul>
+    <li><span class="t t-w">Web</span>Noble par lettres de la ville de Perpignan en 1709, chevalier de l'ordre de Saint-Michel en 1727.</li>
+    <li><span class="t t-w">Web</span>Académie royale de peinture et de sculpture : il en gravit tous les échelons, dirige l'institution de 1733 à 1735 et démissionne en 1735. La date d'admission varie selon la notice (1700 ou 1710).</li>
+    <li><span class="t t-w">Web</span>Il a servi quatre générations de Bourbons. Il meurt à Paris le 29 décembre 1743, à quatre-vingt-quatre ans.</li>
+    <li><span class="t t-w">Web</span>Ses portraits de Louis XV : le roi enfant (1715-1717), le roi de onze ans pour l'Espagne (1721) et le roi de 1730.</li>
+  </ul>
+</section>
+
+<section id="commande">
+  <h2 class="s"><span class="n">Chapitre 4</span>Genèse de la commande (1727-1730)</h2>
+  <p class="lead">Le catalogue raisonné de Rigaud permet de suivre la fabrication du tableau presque pas à pas. Ces détails sont les plus solides de toute l'analyse.</p>
+  <ul class="frise key">
+    <li><b>1727</b>La tête est peinte. Selon l'historien Hulst, Rigaud avait fixé les traits du roi dès cette date. Louis XV a dix-sept ans. <span class="t t-w">Web</span></li>
+    <li><b>7 avril 1729</b>Nicolas Wleughels écrit au duc d'Antin (surintendant des Bâtiments du roi) que le roi accorde du temps à Rigaud pour ce portrait. <span class="t t-w">Web</span></li>
+    <li><b>25 juin 1729</b>Une lettre de cachet ordonne au prieur de Saint-Denis de prêter les insignes royaux au peintre pour qu'il les reproduise. <span class="t t-w">Web</span></li>
+    <li><b>1729</b>Paiement inscrit dans le livre de comptes : 15 000 livres. Le tableau appartient à la collection de la Couronne. <span class="t t-w">Web</span></li>
+    <li><b>1729</b>Gravure de François Chéreau, à mi-corps. <span class="t t-w">Web</span></li>
+    <li><b>1730</b>Date portée sur la toile : « Fait par Hyacinthe Rigaud 1730 ». <span class="t t-w">Web</span></li>
+  </ul>
+
+  <h3>Ce que ces faits permettent d'affirmer</h3>
+  <ul>
+    <li><strong>Les insignes sont peints d'après les objets réels.</strong> Le prêt de Saint-Denis, ordonné par lettre de cachet, est exceptionnel. Le peintre a eu sous les yeux le sceptre, la main de justice, la couronne et l'épée. <span class="t t-i">Analyse</span> L'exactitude sert la légitimité : on ne représente pas une idée de la royauté, mais ses objets sacrés.</li>
+    <li><strong>Le prix a presque doublé.</strong> Rigaud avait demandé 8 000 livres pour le portrait de 1715 et pour celui de 1721. Il reçoit 15 000 livres pour celui de 1729. <span class="t t-w">Web</span> <span class="t t-i">Analyse</span> L'écart reflète la taille du travail, le prestige du peintre à la fin de sa carrière et la valeur du portrait de commande royale.</li>
+    <li><strong>Le portrait se fait en plusieurs temps.</strong> Tête en 1727, accord et prêt des insignes en 1729, signature en 1730. Cette durée est typique de la méthode de Rigaud et de la difficulté d'obtenir des séances d'un roi.</li>
+    <li><strong>Une date double.</strong> Le paiement est inscrit en 1729 mais la toile porte 1730. Dans un commentaire, écris « 1730 (payé en 1729) ».</li>
+  </ul>
+</section>
+
+<section id="analyse">
+  <h2 class="s"><span class="n">Chapitre 5</span>Analyse du tableau</h2>
+  <p class="lead">Cette partie décrit le tableau selon ce que les sources documentent, puis propose une lecture. Elle se termine par une grille à confronter à l'image.</p>
+
+  <div class="box warn">
+    <p class="bt">Statut de cette description</p>
+    <p>Je n'ai pas vu l'image. Ce qui suit combine : (a) les notices publiées sur ce tableau, (b) les analyses du portrait de Louis XIV de 1701, dont celui de 1730 reprend le dispositif, (c) les analyses des autres portraits de Louis XV. Là où une description visuelle précise vient d'une analyse du portrait de 1701, je le dis.</p>
+  </div>
+
+  <h3>5.1 · Le format et la mise en scène</h3>
+  <p><span class="t t-w">Web</span>Le tableau fait 271 cm de haut. C'est presque la hauteur de celui de Louis XIV (277 cm selon Huys et Vernant <span class="t t-l">Livres</span>). Le roi est montré en pied, en grand costume royal, dans un décor palatial.</p>
+  <p><span class="t t-i">Analyse</span>Un format de plus de deux mètres soixante-dix place le modèle à l'échelle humaine ou plus. Le spectateur regarde vers le haut, ce qui est voulu. Le tableau est fait pour des lieux officiels : salles de réception, résidences, hôtels de ville (celui de Perpignan reçoit une copie en 1735, voir chapitre 8).</p>
+
+  <h3>5.2 · Le dispositif du portrait d'apparat</h3>
+  <p><span class="t t-w">Web</span>Une analyse décrit les portraits royaux de Rigaud comme des portraits d'apparat aux décors chargés : rideaux de velours rouge, colonnes, estrades, tapis et tissus soigneusement rendus. <span class="t t-l">Livres</span> Les <em>Nuls</em> parlent de « la formule de la draperie et du décor d'architecture à l'arrière-plan ».</p>
+  <p><span class="t t-w">Web</span>Pour la toile de 1730, le catalogue précise que le tableau reprend « la magnificence voulue par Louis XIV, mais avec une pose plus ostentatoire et un style rococo ». Il ajoute que les draperies du fond, qui entourent les colonnes, « semblent s'envoler ».</p>
+  <p><span class="t t-i">Analyse</span>Les trois éléments du dispositif ont chacun une fonction. La colonne dit la stabilité et la solidité de l'État. Le rideau, qui rappelle le dais, signale le lieu du pouvoir. La draperie en mouvement donne de l'énergie à la scène, un effet hérité du baroque que le rococo assouplit. Dans la logique du portrait de Louis XIV, le décor n'est pas un lieu réel mais une architecture symbolique.</p>
+
+  <h3>5.3 · Les insignes (regalia)</h3>
+  <p>Le portrait de 1730 montre les insignes réels de la monarchie. Pour le détail de chaque objet, voir le lexique (chapitre 11). Les analyses du portrait de 1701 et de la série Rigaud permettent de décrire leur sens.</p>
+  <div class="tw wide"><table>
+    <thead><tr><th>Insigne</th><th>Ce qu'il signifie</th><th>Ce que disent les sources</th></tr></thead>
+    <tbody>
+    <tr><td>Épée Joyeuse</td><td>Protection de l'Église et du royaume</td><td>L'épée du sacre, dite « Joyeuse » ou, à tort, « épée de Charlemagne ». Le roi ne la tient que brièvement. <span class="t t-w">Web</span></td></tr>
+    <tr><td>Sceptre</td><td>Pouvoir politique</td><td>Le sceptre de Charles V, associé à Charlemagne, est mis en valeur dans la série Rigaud. <span class="t t-w">Web</span></td></tr>
+    <tr><td>Main de justice</td><td>Pouvoir judiciaire</td><td>Sceptre d'ivoire. Au sacre, le roi la tient dans la main gauche et le sceptre dans la droite. <span class="t t-w">Web</span></td></tr>
+    <tr><td>Couronne</td><td>Souveraineté reçue de Dieu</td><td>Posée sur un coussin dans le portrait de 1701, pas sur la tête. La couronne représentée peut différer de la couronne de sacre, perdue. <span class="t t-w">Web</span></td></tr>
+    <tr><td>Manteau bleu fleurdelisé</td><td>Dignité royale, lien dynastique et marial</td><td>Porté une seule fois par chaque roi, au sacre. Le bleu vient de l'écu capétien d'azur semé de fleurs de lys d'or. Doublure d'hermine. <span class="t t-w">Web</span></td></tr>
+    <tr><td>Ordre du Saint-Esprit</td><td>Rang, légitimité, lien avec la chevalerie</td><td>Les ordres de chevalerie (Saint-Esprit, Toison d'or) affirment légitimité et rang. <span class="t t-w">Web</span></td></tr>
+    </tbody></table></div>
+  <p><span class="t t-w">Web</span>Une analyse en ligne fait remarquer une différence entre les portraits de 1717 et de 1730 : en 1717, la couronne et la main de justice sont dans la pénombre ; en 1730, elles sont en pleine lumière.</p>
+  <p><span class="t t-i">Analyse</span>Le changement d'éclairage se lit comme un changement de statut. En 1717, le roi est mineur et les insignes de la justice et de la souveraineté attendent dans l'ombre. En 1730, le roi gouverne en personne, et la lumière tombe sur les attributs qu'il exerce.</p>
+
+  <h3>5.4 · Le costume et la couleur</h3>
+  <p><span class="t t-w">Web</span>Les vêtements du sacre de Louis XV, d'après le portrait de Belle (1723), sont une soutane de toile d'argent, une tunique et une dalmatique de satin bleu brodées de lys d'or, et le manteau royal de velours bleu. Les bottes bleues fleurdelisées du sacre sont visibles dans le portrait de Belle.</p>
+  <p><span class="t t-w">Web</span>Pour le portrait de Louis XIV de 1701, l'analyse de Versailles décrit un dispositif de couleurs construit sur le contraste : bleu intense du manteau, de la tenture et du coussin, rouge-orangé de la draperie, pourpre du dais, blanc de l'hermine, or des broderies et des franges.</p>
+  <p><span class="t t-i">Analyse</span>La palette de 1730, qui reprend le dispositif de 1701, suit probablement le même principe : une dominante bleue et or, dynamisée par le rouge de la draperie et la blancheur de l'hermine. À vérifier devant l'image : la teinte exacte, la façon dont l'hermine est traitée, la manière dont le manteau est drapé (épaule, chute, traîne).</p>
+
+  <h3>5.5 · Le visage et le jeune roi</h3>
+  <p><span class="t t-w">Web</span>Le catalogue note que le visage de 1730 est « moins sévère que celui de Louis XIV ». La tête, faite en 1727, montre un jeune homme de dix-sept ans.</p>
+  <p><span class="t t-i">Analyse</span>Le contraste est voulu entre les deux rois. Louis XIV a soixante-trois ans en 1701. Il a la goutte, il pose plusieurs fois, il refuse qu'on idéalise son visage (la notice de Versailles le dit). Louis XV est un adolescent. Le visage doit exprimer la jeunesse, la douceur et la promesse du règne, et non l'autorité d'un souverain âgé. Cet écart est un thème de comparaison central entre les deux portraits (chapitre 7).</p>
+
+  <h3>5.6 · Rococo et baroque</h3>
+  <p><span class="t t-l">Livres</span>Les <em>Nuls</em> expliquent que le baroque, né en Italie vers 1600, aime le mouvement, les courbes, le trompe-l'œil et l'agitation des draperies. Au XVIIIe siècle, l'exagération de ces traits donne le rococo, nom ironique inventé par des historiens de l'art allemands du XIXe siècle. Le « rocaille » est la version française : un art de courbes, d'asymétrie et d'ornements profus, né dans les salons de Versailles et de Paris.</p>
+  <p><span class="t t-w">Web</span>Le catalogue de Rigaud relie explicitement le portrait de 1730 à cette évolution : il est considéré comme l'un des plus harmonieux de Rigaud et annonce l'évolution du style royal vers le rococo.</p>
+  <p><span class="t t-i">Analyse</span>Dans un commentaire, présente ce tableau comme un point de bascule : la structure reste celle du portrait louis-quatorzien (colonne, rideau, regalia), mais le traitement devient plus mobile, plus souple, plus décoratif.</p>
+
+  <h3>5.7 · Grille d'observation à confronter à l'image</h3>
+  <p>Cette grille indique ce qu'il faut regarder, ce que les sources permettent d'attendre, et ce qu'il reste à confirmer. Elle sert aussi de plan pour une description orale.</p>
+  <div class="tw wide"><table>
+    <thead><tr><th>Zone</th><th>À regarder</th><th>Ce qu'on peut attendre</th></tr></thead>
+    <tbody>
+    <tr><td>Pose</td><td>Position des jambes, des bras, des mains. Direction du regard.</td><td>« Pose plus ostentatoire » (catalogue). Un dessin de Besançon contient des études de mains, ce qui suggère que les mains sont un morceau de bravoure. À confirmer.</td></tr>
+    <tr><td>Visage</td><td>Âge apparent, expression, perruque, carnation.</td><td>Visage jeune et moins sévère, peint d'après nature en 1727.</td></tr>
+    <tr><td>Manteau</td><td>Bleu, fleurs de lys, hermine, drapé.</td><td>Manteau de sacre doublé d'hermine, dominante bleue.</td></tr>
+    <tr><td>Regalia</td><td>Qui tient quoi, qui est posé où, quels objets sont éclairés.</td><td>Insignes en pleine lumière, contre la pénombre de 1717.</td></tr>
+    <tr><td>Fond</td><td>Colonnes, draperies, dais, estrade, tapis.</td><td>Décor palatial, draperies enroulées autour des colonnes comme soulevées par le vent.</td></tr>
+    <tr><td>Lumière</td><td>D'où elle vient, ce qu'elle isole.</td><td>Contrastes marqués entre les étoffes, rendu des textures.</td></tr>
+    <tr><td>Signature</td><td>Inscription visible sur la toile.</td><td>« Fait par Hyacinthe Rigaud 1730 ».</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="iconologie">
+  <h2 class="s"><span class="n">Chapitre 6</span>Lecture iconologique</h2>
+  <p class="lead">Huys et Vernant présentent la méthode de Panofsky, qui sépare trois niveaux d'analyse. Elle permet d'organiser tout le raisonnement sans mélanger description et interprétation.</p>
+
+  <h3>La méthode dans ton livre</h3>
+  <p><span class="t t-l">Livres</span>Panofsky distingue trois niveaux : le niveau <strong>pré-iconographique</strong> (la « signification de fait » : ce qu'on voit), le niveau <strong>iconographique</strong> (la « signification secondaire ou conventionnelle » : ce que les motifs désignent) et le niveau <strong>iconologique</strong> (la « signification intrinsèque ou contenu » : ce que l'œuvre révèle de son époque et de son commanditaire). Huys et Vernant rappellent que ces niveaux ne se succèdent pas mais sont, selon Panofsky, « simultanés » : ils sont les aspects d'un phénomène unique, l'œuvre comme totalité.</p>
+  <p><span class="t t-l">Livres</span>Leur exemple est l'<em>Adoration des mages</em> de Botticelli : au niveau iconologique, on se demande pourquoi les Médicis se font représenter comme les mages, et on y lit un message politique sur leur statut.</p>
+
+  <h3>Application à Louis XV en costume de sacre</h3>
+  <div class="tw wide"><table>
+    <thead><tr><th>Niveau</th><th>Question</th><th>Réponse pour ce tableau</th></tr></thead>
+    <tbody>
+    <tr><td>1. Pré-iconographique</td><td>Que voit-on ?</td><td>Un jeune homme debout, en pied, vêtu d'un grand manteau bleu doublé de blanc, entouré d'objets précieux (sceptre, couronne, épée) et d'étoffes, dans un décor de colonnes et de draperies. <span class="t t-i">Analyse</span> À préciser avec l'image.</td></tr>
+    <tr><td>2. Iconographique</td><td>Que désignent ces motifs ?</td><td>Le roi de France au sacre. Fleurs de lys, hermine, regalia, ordre du Saint-Esprit. La composition renvoie au portrait de Louis XIV de 1701.</td></tr>
+    <tr><td>3. Iconologique</td><td>Pourquoi, pour qui, avec quel effet ?</td><td>Affirmer la légitimité sacrée de la dynastie, la continuité avec Louis XIV et la maturité d'un roi qui gouverne en personne. Servir de modèle officiel pour les institutions, les cours étrangères et les copies.</td></tr>
+    </tbody></table></div>
+
+  <h3>Le portrait royal n'est pas qu'une propagande</h3>
+  <p><span class="t t-l">Livres</span>Huys et Vernant mettent en garde contre une lecture trop simple : « il serait réducteur de ne voir dans le portrait royal qu'un simple outil de propagande ». Ils expliquent qu'il faut tenir compte des conditions dans lesquelles ce portrait est vu : il « rappelle dans des espaces stratégiques de la demeure royale les devoirs des sujets à l'égard du souverain ». Le portrait seul est, disent-ils, « un pâle reflet du cérémoniel ou du protocole qui accompagnait sa vision ».</p>
+  <p><span class="t t-l">Livres</span>Ils posent aussi une question qui est celle de Kantorowicz : « l'homme et le souverain sont-ils la même personne ? ». Le roi a un corps mortel et un corps politique et sacré, que le portrait doit tenir ensemble. Ils renvoient à <em>Les deux corps du roi</em> (Kantorowicz, 1957) et à <em>Le Portrait du roi</em> (Louis Marin, 1981).</p>
+  <p><span class="t t-i">Analyse</span>Appliquée à Louis XV, cette idée donne un angle précis. Le tableau doit montrer un adolescent réel (le visage peint d'après nature en 1727) et le roi sacré (le manteau, les insignes prêtés par Saint-Denis). C'est le même principe que pour le portrait de Louis XIV : une face humaine, un corps symbolique. À Louis XV de vingt ans, ce dispositif sert à compenser le risque d'un roi qui est jeune et dont la longue minorité vient de se terminer.</p>
+  <p><span class="t t-i">Analyse</span>L'analyse de L'Histoire par l'image sur le Van Loo des années 1760 va dans le même sens, mais en sens inverse : la distance entre les symboles royaux et la personne du roi y est abolie, au profit du roi en chair et en os, ce que l'auteur relie à l'idéal d'un monarque plus simple et à l'impopularité du roi après l'attentat de Damiens (1757). <span class="t t-w">Web</span> Rigaud en 1730 est du côté opposé : il maintient la majesté sacrée.</p>
+</section>
+
+<section id="comparaisons">
+  <h2 class="s"><span class="n">Chapitre 7</span>Comparaisons utiles</h2>
+  <p class="lead">Comparer est la méthode la plus rentable pour un commentaire. Le portrait de 1730 prend son sens face à trois autres tableaux.</p>
+  <div class="tw wide"><table>
+    <thead><tr><th>Critère</th><th>Louis XIV (1701)</th><th>Louis XV enfant (1715-17)</th><th>Louis XV (1730)</th></tr></thead>
+    <tbody>
+    <tr><td>Âge du modèle</td><td>63 ans</td><td>5 ans</td><td>17 ans (tête), 20 ans (signature)</td></tr>
+    <tr><td>Contexte</td><td>Cadeau à Philippe V, roi d'Espagne ; portrait personnel</td><td>Commande du Régent ; continuité</td><td>Commande de la Couronne ; règne personnel</td></tr>
+    <tr><td>Pose</td><td>Debout, main sur la hanche, appui sur le sceptre</td><td>Assis sur un trône (plus adapté à un enfant)</td><td>Debout, « plus ostentatoire »</td></tr>
+    <tr><td>Insignes</td><td>Au premier plan, couronne sur un tabouret</td><td>Couronne et main de justice dans la pénombre</td><td>En pleine lumière</td></tr>
+    <tr><td>Visage</td><td>Vieilli, non idéalisé (goutte)</td><td>Enfant, tableau pensé pour le faire paraître plus âgé</td><td>Jeune, moins sévère</td></tr>
+    <tr><td>Style</td><td>Baroque classique</td><td>Baroque, couleurs intenses</td><td>Rococo naissant, draperies mobiles</td></tr>
+    <tr><td>Message</td><td>Majesté et humanité du vieux roi</td><td>Continuité de la monarchie sous la Régence</td><td>Légitimité d'un roi qui règne</td></tr>
+    </tbody></table></div>
+  <p><span class="t t-w">Web</span>Sources de ce tableau : analyse de Versailles sur le Louis XIV de 1701, notices de L'Histoire par l'image et du Musée de Caroline du Nord sur le portrait de 1715. L'analyse de l'enfant assis précise que cette posture lui évite de porter seul le poids des insignes.</p>
+
+  <h3>Deux dialogues à exploiter</h3>
+  <ul>
+    <li><strong>Rigaud 1701 et Rigaud 1730 : transmission et inflexion.</strong> Même architecture, mais on passe d'un roi âgé à un roi jeune, d'une lumière plus retenue à des insignes éclairés, d'un équilibre classique à des draperies qui bougent.</li>
+    <li><strong>Rigaud 1730 et Van Loo vers 1761-1764 : deux manières de montrer le roi.</strong> Rigaud montre le roi sacré. Van Loo montre le roi en habit de cour, plus proche de l'homme. Ce contraste suit l'évolution de l'image de Louis XV, du « Bien-Aimé » du début du règne à un roi contesté. <span class="t t-w">Web</span></li>
+  </ul>
+</section>
+
+<section id="diffusion">
+  <h2 class="s"><span class="n">Chapitre 8</span>Diffusion, copies et diplomatie</h2>
+  <p class="lead">Ce chapitre est probablement celui qui est le plus proche de ta spécialité : le portrait royal circule comme un instrument de relations entre puissances.</p>
+  <p><span class="t t-w">Web</span>Les portraits de Rigaud ont eu un succès considérable : une trentaine de répliques du portrait de Philippe V, des dizaines de copies et gravures de Louis XV enfant, notamment par Drevet et Larmessin, et une dizaine de répliques du portrait de 1730.</p>
+  <div class="tw wide"><table>
+    <thead><tr><th>Date</th><th>Où</th><th>Détail</th></tr></thead>
+    <tbody>
+    <tr><td>1729</td><td>Gravure de Chéreau</td><td>À mi-corps.</td></tr>
+    <tr><td>1735</td><td>Perpignan, hôtel de ville</td><td>Copie envoyée par Rigaud à sa ville natale, sans prix. Annoncée le 24 août 1735, les consuls répondent le 19 octobre. Détruite à la Révolution.</td></tr>
+    <tr><td>1737</td><td>Gravure de Daullé</td><td>En buste, en armure, avec le cordon bleu de l'ordre du Saint-Esprit : une attitude inédite chez Rigaud.</td></tr>
+    <tr><td>1739</td><td>Suède</td><td>Version offerte par Louis XV à Carl Gyllenborg, premier ministre de Suède. Payée 900 livres au peintre Stiémart, le cadre 850 livres à André Tramblin.</td></tr>
+    <tr><td>XVIIIe</td><td>Chantilly</td><td>Copie de Prévost pour le prince de Condé.</td></tr>
+    <tr><td>XVIIIe</td><td>Fontainebleau, Amiens, Pitti (Florence), Paulhac, collection Osuna en Espagne</td><td>Copies d'après Rigaud, dont une dans le cabinet du roi à Fontainebleau.</td></tr>
+    <tr><td>après 1730</td><td>Vienne</td><td>Le prince Wenzel de Liechtenstein, en grand costume de la Toison d'or, reprend certains effets de ce portrait.</td></tr>
+    </tbody></table></div>
+  <p><span class="t t-w">Web</span>Cette posture royale a servi de référence bien au-delà de la monarchie, jusqu'au portrait officiel de Louis XVI par Callet après 1774.</p>
+
+  <h3>Lecture géopolitique</h3>
+  <ul>
+    <li><span class="t t-i">Analyse</span><strong>Le portrait comme monnaie diplomatique.</strong> En 1721, il accompagne un projet d'alliance matrimoniale avec l'Espagne. En 1739, il est un présent du roi à un dignitaire d'une puissance alliée. Dans les deux cas, l'image du roi remplace sa présence.</li>
+    <li><span class="t t-i">Analyse</span><strong>Le cas de 1721 montre la fragilité du système.</strong> Quand le mariage espagnol est annulé en 1725, les portraits commandés par Philippe V perdent leur utilité et ceux qui avaient été peints à Paris reviennent à Madrid (d'après le catalogue). <span class="t t-w">Web</span> L'image suit la politique.</li>
+    <li><span class="t t-i">Analyse</span><strong>Un territoire disputé.</strong> Rigaud est né dans un Roussillon rattaché à la France quelques mois avant sa naissance. La copie envoyée en 1735 à l'hôtel de ville de Perpignan rappelle la présence du roi dans une province récemment intégrée. C'est une hypothèse de lecture, que le catalogue ne formule pas.</li>
+    <li><span class="t t-i">Analyse</span><strong>L'image d'un roi pacifique.</strong> Fleury cherche la paix. Un portrait qui insiste sur le sacre, la justice et la religion, plutôt que sur l'armure et la bataille (comme le Louis XIV en armure de 1694), s'accorde avec cette politique. Pour la gravure de 1737 en armure, en revanche, Louis XV est représenté en roi guerrier.</li>
+  </ul>
+</section>
+
+<section id="commentaire">
+  <h2 class="s"><span class="n">Chapitre 9</span>Plan de commentaire proposé</h2>
+  <p class="lead">Si ce tableau doit être commenté à l'écrit ou à l'oral, voici une structure qui réutilise les chapitres précédents.</p>
+  <h3>Problématique</h3>
+  <p class="pull">Comment le portrait de 1730 reprend-il le modèle du portrait de Louis XIV pour affirmer la légitimité d'un roi jeune, tout en l'infléchissant vers le rococo ?</p>
+  <h3>Plan en trois parties</h3>
+  <ol class="l">
+    <li><strong>Un portrait d'apparat hérité.</strong> Format, mise en scène, décor (colonne, draperie, estrade), régalia empruntés au sacre. Références : portrait de 1701, formule de Rigaud (<em>Nuls</em>).</li>
+    <li><strong>Un roi jeune, sacré et en pleine lumière.</strong> Visage, jeunesse, insignes éclairés, lien avec le contexte de 1729-1730 : mariage, dauphin, Fleury, <em>Unigenitus</em>. Comparaison avec 1717.</li>
+    <li><strong>Un instrument de légitimité et un moment du style.</strong> Rococo, diffusion, copies, gravures, cadeaux diplomatiques. Lecture à la Panofsky : le corps du roi, entre homme et souverain (Huys et Vernant).</li>
+  </ol>
+  <h3>Questions ouvertes pour approfondir</h3>
+  <ul>
+    <li>Qui a décidé de la présentation du roi : le roi, son entourage, l'administration des Bâtiments, ou Rigaud lui-même ?</li>
+    <li>Pourquoi un portrait de sacre huit ans après la cérémonie ? Qu'est-ce que le costume de sacre dit à un roi qui ne le porte plus ?</li>
+    <li>Quelle part de la composition est de la main de Rigaud et quelle part de son atelier, à soixante-dix ans ?</li>
+    <li>Comment les copies différentes (Perpignan, Chantilly, Suède) modifient-elles le message selon leur destinataire ?</li>
+  </ul>
+  <h3>Pièges à éviter</h3>
+  <ul>
+    <li>Confondre les versions (1715, 1721, 1730) et leurs lieux de conservation.</li>
+    <li>Attribuer à Rigaud seul tout le tableau. Dire « Rigaud et son atelier » lorsqu'on évoque l'exécution.</li>
+    <li>Appeler « sceptre de Charlemagne » ce qui est, selon les sources, un sceptre de Charles V associé à Charlemagne, et « épée de Charlemagne » ce qui est Joyeuse.</li>
+    <li>Écrire que le tableau célèbre le dauphin : la commande de 1729 précède sa naissance.</li>
+  </ul>
+</section>
+
+<section id="chrono">
+  <h2 class="s"><span class="n">Chapitre 10</span>Chronologie</h2>
+  <ul class="frise">
+    <li><b>1659</b>Naissance de Rigaud à Perpignan. <span class="t t-w">Web</span></li>
+    <li><b>1681-1682</b>Rigaud à Paris ; prix de Rome non utilisé. <span class="t t-w">Web</span></li>
+    <li><b>1694</b>Louis XIV en armure. <span class="t t-w">Web</span></li>
+    <li><b>1701</b>Louis XIV en costume de sacre. <span class="t t-w">Web</span> <span class="t t-l">Livres</span></li>
+    <li><b>1710</b>Naissance de Louis XV (15 février). <span class="t t-g">Général</span></li>
+    <li><b>1715</b>Mort de Louis XIV ; Régence ; commande d'un portrait de l'enfant-roi. <span class="t t-w">Web</span></li>
+    <li><b>1717</b>Portrait de l'enfant-roi installé dans le cabinet du roi. <span class="t t-w">Web</span></li>
+    <li><b>1721</b>Portrait de Louis XV pour Philippe V ; accord de mariage espagnol. <span class="t t-w">Web</span></li>
+    <li><b>25 oct. 1722</b>Sacre de Louis XV à Reims. <span class="t t-w">Web</span></li>
+    <li><b>1723</b>Majorité du roi ; portrait de Belle. <span class="t t-g">Général</span> <span class="t t-w">Web</span></li>
+    <li><b>1725</b>Rupture du projet espagnol ; mariage avec Marie Leszczyńska. <span class="t t-g">Général</span></li>
+    <li><b>1726</b>Fleury principal ministre. <span class="t t-g">Général</span></li>
+    <li><b>1727</b>Tête du roi peinte par Rigaud ; Rigaud chevalier de Saint-Michel. <span class="t t-w">Web</span></li>
+    <li><b>1729</b>Prêt des insignes de Saint-Denis ; naissance du dauphin ; paiement de 15 000 livres. <span class="t t-w">Web</span> <span class="t t-g">Général</span></li>
+    <li class="key-end"><b>1730</b>Tableau signé « Fait par Hyacinthe Rigaud 1730 ». <span class="t t-w">Web</span></li>
+    <li><b>1733-1735</b>Rigaud directeur de l'Académie. <span class="t t-w">Web</span></li>
+    <li><b>1735</b>Copie envoyée à Perpignan. <span class="t t-w">Web</span></li>
+    <li><b>1737</b>Gravure de Daullé. <span class="t t-w">Web</span></li>
+    <li><b>1743</b>Mort de Rigaud à Paris. <span class="t t-w">Web</span></li>
+    <li><b>vers 1761-1764</b>Portrait de Louis XV par Van Loo. <span class="t t-w">Web</span></li>
+  </ul>
+</section>
+
+<section id="lexique">
+  <h2 class="s"><span class="n">Chapitre 11</span>Lexique</h2>
+  <dl class="lex">
+    <dt>Portrait d'apparat</dt>
+    <dd>Portrait officiel, en pied, qui montre le rang et le pouvoir du modèle par le costume, les insignes et le décor, plus que sa psychologie. Rigaud en fixe la formule (draperie, colonne, architecture).</dd>
+    <dt>Regalia</dt>
+    <dd>Ensemble des insignes du sacre : couronne, sceptre, main de justice, épée Joyeuse, éperons, manteau. Conservés à Saint-Denis, ils sont apportés à Reims pour le sacre.</dd>
+    <dt>Joyeuse</dt>
+    <dd>Épée du sacre. Elle porte le nom de l'épée légendaire de Charlemagne, mais ne lui appartient pas, selon la notice de Versailles. Elle symbolise la protection de l'Église et du royaume.</dd>
+    <dt>Sceptre de Charlemagne</dt>
+    <dd>Long sceptre de 1,84 m, surmonté d'une statuette de Charlemagne portant le globe. Donné par Charles V à l'abbaye de Saint-Denis en 1380. Il sert aux sacres après 1380 (sauf deux exceptions citées).</dd>
+    <dt>Main de justice</dt>
+    <dd>Sceptre d'ivoire qui symbolise le pouvoir de rendre la justice. Tenue dans la main gauche au sacre.</dd>
+    <dt>Sainte Ampoule</dt>
+    <dd>Flacon d'huile utilisé pour l'onction du roi à Reims, lié par la tradition au baptême de Clovis.</dd>
+    <dt>Ordre du Saint-Esprit</dt>
+    <dd>Ordre de chevalerie fondé par Henri III en 1578, limité à cent membres. Le roi en est le grand maître. Il est reçu dans l'ordre le lendemain du sacre.</dd>
+    <dt>Hermine</dt>
+    <dd>Fourrure blanche de la doublure du manteau royal. Elle accentue les contrastes de couleurs.</dd>
+    <dt>Lit de justice</dt>
+    <dd>Séance solennelle où le roi impose au Parlement l'enregistrement d'un texte.</dd>
+    <dt>Rococo / rocaille</dt>
+    <dd>Style du XVIIIe siècle caractérisé par les courbes, l'asymétrie et l'ornement. « Rocaille » est le terme français ; « rococo » vient d'historiens allemands du XIXe siècle (<em>Nuls</em>).</dd>
+    <dt>Livre de raison</dt>
+    <dd>Registre de comptes tenu par Rigaud. Publié en 1919, il permet de dater et de chiffrer ses commandes.</dd>
+  </dl>
+</section>
+
+<section id="sources">
+  <h2 class="s"><span class="n">Chapitre 12</span>Sources, limites et suites</h2>
+
+  <h3>Tes livres</h3>
+  <ul class="src">
+    <li><strong>Breton et Cachau, <em>Histoire de l'art pour les Nuls</em> (2012).</strong> Rigaud et la « formule » du portrait officiel ; baroque, rococo et rocaille ; Louis XIV et le goût de Versailles.</li>
+    <li><strong>Huys et Vernant, <em>Histoire de l'art : théories, méthodes et outils</em> (Armand Colin, 2014).</strong> Panofsky et les trois niveaux ; le portrait royal comme objet anthropologique ; note sur le portrait de Louis XIV de 1701 ; renvois à Kantorowicz et Marin.</li>
+    <li><strong>Faure, <em>Histoire de l'art, tome 3 : l'art renaissant</em> (Gallimard, 1990).</strong> Aucune utilisation : il porte sur la Renaissance et ne traite ni de Rigaud ni de Louis XV.</li>
+  </ul>
+
+  <h3>Sources web</h3>
+  <ul class="src">
+    <li><a href="https://www.hyacinthe-rigaud.com/catalogue-raisonne-hyacinthe-rigaud/portraits/820-louis-xv">Catalogue raisonné de Hyacinthe Rigaud, notice P.1356 « Louis XV »</a> : historique, paiement, prêt des insignes, copies. Source principale pour les faits du chapitre 4.</li>
+    <li><a href="https://hyacinthe-rigaud.com/catalogue-raisonne-hyacinthe-rigaud/portraits/915-louis-xv-2">Catalogue raisonné, notice P.1287 « Louis XV » (1721)</a> : portrait de Madrid, mariage espagnol.</li>
+    <li><a href="https://histoire-image.org/etudes/rigaud-portraits-royaux">L'Histoire par l'image, « Rigaud et les portraits royaux »</a> : commandes, composition, symbolisme, diffusion.</li>
+    <li><a href="https://histoire-image.org/etudes/portrait-pied-louis-xv">L'Histoire par l'image, « Portrait en pied de Louis XV »</a> (Van Loo) : comparaison.</li>
+    <li><a href="https://utpictura18.univ-amu.fr/en/notice/18866-portrait-of-king-louis-xv-hyacinthe-rigaud">Utpictura18, « Portrait du roi Louis XV »</a> : portrait de 1715-1717.</li>
+    <li><a href="https://www.chateauversailles.fr/sites/default/files/presse/documents/ressource-pedagogique_commentaire-louis_xiv_par_hyacinthe_rigaud.pdf">Château de Versailles, commentaire du portrait de Louis XIV par Rigaud</a> : insignes, couleurs, atelier, vêtements du sacre.</li>
+    <li><a href="https://en.chateauversailles.fr/discover/history/great-characters/hyacinthe-rigaud">Château de Versailles, notice Hyacinthe Rigaud</a> ; <a href="https://en.wikipedia.org/wiki/Hyacinthe_Rigaud">Wikipédia, Hyacinthe Rigaud</a> : biographie.</li>
+    <li><a href="https://www.chateauversailles.fr/ressources-pedagogiques/rois-reines-versailles/louis-xv/louis-xv-sacre">Château de Versailles, « Louis XV, le sacre »</a> : date et lieu du sacre.</li>
+    <li><a href="https://musees-reims.fr/oeuvre/louis-xv-roi-de-france-et-de-navarre">Musées de Reims, « Louis XV, roi de France et de Navarre »</a> : version de 1720.</li>
+    <li><a href="https://learn.ncartmuseum.org/?p=548">North Carolina Museum of Art, « Louis XV »</a> : portrait de 1715.</li>
+    <li><a href="https://smartify.org/artworks/louis-xv-in-coronation-robes">Smartify, « Louis XV in Coronation Robes »</a> : dimensions alternatives.</li>
+  </ul>
+
+  <h3>Points non résolus</h3>
+  <ul>
+    <li>Largeur de la toile : 174 ou 186 cm selon les notices.</li>
+    <li>Description visuelle précise (pose des bras, objet tenu dans chaque main, couleurs exactes) : non vérifiée sur l'image.</li>
+    <li>Contexte politique de 1722-1730 : tiré de connaissances générales, à confirmer par un manuel de la Régence et du ministère Fleury avant citation.</li>
+    <li>Date d'admission de Rigaud à l'Académie : 1700 ou 1710 selon la notice.</li>
+  </ul>
+
+  <h3>Pour aller plus loin</h3>
+  <ul>
+    <li>Catalogue raisonné de Rigaud (Ariane James-Sarazin) et travaux de Perreau, cités par le catalogue en ligne.</li>
+    <li>Louis Marin, <em>Le Portrait du roi</em> (1981). Ernst Kantorowicz, <em>Les deux corps du roi</em> (1957). Panofsky, <em>Essais d'iconologie</em>.</li>
+    <li>Pour la comparaison avec le Louis XIV de 1701 : la notice du Louvre (inv. 7492) et le catalogue de l'exposition de Versailles consacrée à Rigaud.</li>
+  </ul>
+</section>
+
+<p class="foot">Document préparé pour l'étude de ce tableau. Les étiquettes de fiabilité indiquent l'origine de chaque affirmation. Envoie-moi l'image de la toile et je reprendrai les chapitres 5 et 6 d'après ce qu'on y voit, puis je passerai au tableau suivant.</p>
+</main>
+</div>
+</body>
+</html>

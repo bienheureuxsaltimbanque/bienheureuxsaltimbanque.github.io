@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lexique latin 3 — Connaître &amp; transmettre</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f3f1ec;--fg:#1f2430;--card:#fff;--ac:#2f4a7a;--acfg:#fff;--ok:#1f7a4d;--okbg:#e2f3ea;--ko:#b3261e;--kobg:#fbe5e3;--mu:#6b7080;--bd:#d8d5cc}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161a24;--fg:#e8e6df;--card:#212736;--ac:#8fb0ee;--acfg:#101522;--ok:#6fd3a0;--okbg:#17352a;--ko:#ff8f86;--kobg:#401e1c;--mu:#9aa0b3;--bd:#343c52}}
+:root[data-theme="dark"]{--bg:#161a24;--fg:#e8e6df;--card:#212736;--ac:#8fb0ee;--acfg:#101522;--ok:#6fd3a0;--okbg:#17352a;--ko:#ff8f86;--kobg:#401e1c;--mu:#9aa0b3;--bd:#343c52}
+*{box-sizing:border-box}html,body{height:auto}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 Georgia,"Times New Roman",serif}
+#app{max-width:560px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:26px;margin:6px 0 2px;font-weight:700}h2{font-size:16px;margin:22px 0 8px;font-weight:700}
+.sub{color:var(--mu);margin:0;font-style:italic}
+button,input{font:inherit;color:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--bd);background:var(--card);border-radius:10px;padding:8px 12px;cursor:pointer}
+.chip.on{border-color:var(--ac);background:var(--ac);color:var(--acfg)}
+.chip small{display:block;opacity:.75;font-size:12px}
+.btn{width:100%;border:0;background:var(--ac);color:var(--acfg);border-radius:10px;padding:14px;font-weight:700;margin-top:16px;cursor:pointer}
+.btn.alt{background:var(--card);color:var(--fg);border:1.5px solid var(--bd)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-top:12px}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac)}
+.top{display:flex;justify-content:space-between;color:var(--mu);font-size:14px}
+.lat{font-size:30px;font-weight:700;margin:4px 0}.tag{color:var(--mu);font-size:14px;font-style:italic}
+.opt{display:block;width:100%;text-align:left;border:1.5px solid var(--bd);background:var(--card);border-radius:10px;padding:11px 12px;margin-top:8px;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ko{border-color:var(--ko);background:var(--kobg)}
+.f{display:flex;align-items:center;gap:10px;margin-top:10px}.f label{width:42%;font-size:14px;color:var(--mu)}
+.f input{flex:1;min-width:0;border:1.5px solid var(--bd);background:var(--bg);border-radius:8px;padding:9px 10px}
+.f input.ok{border-color:var(--ok);background:var(--okbg)}.f input.ko{border-color:var(--ko);background:var(--kobg)}
+.fb{margin-top:14px;padding:12px;border-radius:10px;font-size:15px}.fb.ok{background:var(--okbg)}.fb.ko{background:var(--kobg)}
+.fb b{display:block;margin-bottom:2px}.note{color:var(--mu);font-size:14px;margin-top:6px}
+.row{padding:8px 0;border-bottom:1px solid var(--bd)}.row b{font-size:17px}
+.big{font-size:44px;font-weight:700;text-align:center;margin:10px 0}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+</style></head><body><div id="app"></div>
+<script>
+// cat|étoile|mot|formes (; = séparateur, / = variante acceptée)|sens (¶ = précision)
+const CL={N:"Noms",A:"Adjectifs",V:"Verbes",I:"Invariables",E:"Expressions"};
+const D=`N|*|Italia|ae;f|l'Italie
+N|*|fama|ae;f|rumeur, renommée, réputation, tradition orale
+N||terra|ae;f|terre, pays
+N||natura|ae;f|nature
+N||fortuna|ae;f|fortune, chance, malheur
+N||injuria|ae;f|injustice, tort, illégalité, injure
+N|*|poena|ae;f|compensation, rançon, amende, expiation, punition, châtiment, chagrin, peine
+N||populus|i;m|peuple
+N|*|filius|ii;m|fils
+N|*|signum|i;n|signe, signal, enseigne, statue
+N|*|exemplum|i;n|modèle, exemple ¶ fondement de la transmission par l'imitation chez les Romains
+N|*|monumentum|i;n|monument, souvenir ¶ ce qui fixe la mémoire pour la transmettre
+N||arma|orum;n pl/n|armes (neutre pluriel)
+N|*|beneficium|ii;n|bienfait
+N|*|vitium|ii;n|défaut, faute, vice
+A|*|antiquus|antiqua;antiquum|ancien, antique
+A|*|peritus|perita;peritum|habile, expérimenté, qui connaît (+ génitif)
+A|*|fidus|fida;fidum|fiable, fidèle, sûr
+A|*|clarus|clara;clarum|clair, illustre
+A||miser|misera;miserum|malheureux, qui rend malheureux, excessif
+A||malus|mala;malum|mauvais, méchant
+A||altus|alta;altum|haut, profond
+A||alienus|aliena;alienum|étranger, qui appartient à un autre
+A||alius|alia;aliud|autre ¶ alius… alius : l'un… un autre ; alii… alii : les uns… les autres. Répétés à des cas différents dans la même proposition : (a) réciprocité, alii alio diligite : aimez-vous les uns les autres ; (b) diversité, alii alia putant : les uns pensent une chose, les autres une autre (opinions différentes)
+A||noster|nostra;nostrum|notre, nôtre
+A||vester|vestra;vestrum|votre, vôtre, vos
+V|*|scribo|scribis;scribere;scripsi;scriptum|tracer, composer, écrire
+V|*|colo|colis;colere;colui;cultum|cultiver, habiter, protéger, chérir, honorer, respecter, entourer d'égards
+V|*|trado|tradis;tradere;tradidi;traditum|transmettre, livrer, enseigner
+V|*|cognosco|cognoscis;cognoscere;cognovi;cognitum|apprendre à connaître, étudier, chercher à savoir
+V|*|memini|meministi;meminisse|se souvenir, faire mention de ¶ verbe défectif
+V||jubeo|jubes;jubere;jussi;jussum|ordonner, décider, autoriser, inviter à
+V|*|accipio|accipis;accipere;accepi;acceptum|recevoir
+V||mitto|mittis;mittere;misi;missum|laisser partir, relâcher, cesser de, envoyer, émettre
+V|*|quaero|quaeris;quaerere;quaesivi/quaesii;quaesitum|rechercher, enquêter, chercher à, demander
+V||debeo|debes;debere;debui;debitum|devoir, être redevable de, tenir de quelqu'un
+I||prope||adv. presque ¶ prép. + acc. : près de
+I||ne||pour que ne pas, de peur que, pour éviter que
+I||nam||en vérité, à ce propos, car
+I||sic||ainsi
+I||tam||autant
+I||quidem||certes, assurément, en vérité, mais du moins
+I||ergo||donc, ainsi donc, par conséquent ¶ prép. postposée + génitif : à cause de
+I||autem||mais, tandis que ¶ légère opposition : mais, tandis que ; balancement : d'autre part, quant à, du moins ; reprise d'un mot ou d'une idée : or ; addition : et puis, mais aussi, mais en outre
+I||nisi||si ne pas, à moins que, excepté
+I||at||d'autre part, quant à, du moins
+I||et||(adv.) aussi, même
+I||itaque||et ainsi, c'est pourquoi, aussi
+I||bene||bien
+I||tum||alors
+I||apud||[+ acc.] auprès de, chez
+I||sub||[+ abl.] sous, au pied de
+E||memoriae tradere||transmettre à la postérité, rapporter pour l'Histoire
+E||do poenas temeritatis meae||je suis puni de (pour) mon imprudence`.split("\n").map(l=>{const[c,s,w,f,m]=l.split("|");return{c,s:!!s,w,f:f?f.split(";"):[],m}});
+
+const $=s=>document.querySelector(s),app=$("#app");
+const short=w=>w.m.split("¶")[0].trim(),more=w=>w.m.includes("¶")?w.m.split("¶")[1].trim():"";
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/æ/g,"ae").replace(/œ/g,"oe").replace(/j/g,"i").replace(/v/g,"u").replace(/[^a-z ]/g,"").replace(/\s+/g," ").trim();
+const good=(v,e)=>e.split("/").some(x=>norm(x)==norm(v));
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const labs=w=>w.c=="N"?["génitif","genre (m / f / n)"]:w.c=="A"?["féminin","neutre"]:w.f.length==2?["2e pers. sg du parfait","infinitif"]:["2e pers. sg","infinitif","parfait","supin"];
+const full=w=>w.c=="N"?`${w.w}, ${w.f[0]}, ${w.f[1].split("/")[0].replace(" pl",". pl")}.`.replace("..",".") :[w.w,...w.f.map(x=>x.split("/").join(" ou "))].join(", ");
+let cfg={mode:"sens",cat:"all",star:false},S;
+
+const pool=()=>D.filter(w=>(cfg.cat=="all"||w.c==cfg.cat)&&(!cfg.star||w.s)&&(cfg.mode!="formes"||w.f.length));
+
+function home(){
+ const M=[["sens","Sens","Latin → français (QCM)"],["formes","Formes","Latin → toutes les formes"],["latin","Version inverse","Français → latin + formes"]];
+ const C=[["all","Tout"],...Object.entries(CL)];
+ app.innerHTML=`<h1>Lexique latin 3</h1><p class="sub">Connaître &amp; transmettre · ${D.length} mots</p>
+ <h2>Exercice</h2><div class="chips">${M.map(m=>`<button class="chip ${cfg.mode==m[0]?"on":""}" data-m="${m[0]}">${m[1]}<small>${m[2]}</small></button>`).join("")}</div>
+ <h2>Catégorie</h2><div class="chips">${C.map(c=>`<button class="chip ${cfg.cat==c[0]?"on":""}" data-c="${c[0]}">${c[1]}</button>`).join("")}</div>
+ <h2>Filtre</h2><div class="chips"><button class="chip ${cfg.star?"on":""}" data-s="1">Seulement les mots * (${D.filter(w=>w.s).length})</button></div>
+ <p class="note">${pool().length} mot(s) dans cette sélection. Les macrons, j/i, u/v et æ/ae sont tolérés à la saisie.</p>
+ <button class="btn" id="go">Commencer</button><button class="btn alt" id="fiche">Fiche de révision</button>`;
+ app.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{cfg.mode=b.dataset.m;home()});
+ app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{cfg.cat=b.dataset.c;home()});
+ app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{cfg.star=!cfg.star;home()});
+ $("#go").onclick=()=>start(pool());$("#fiche").onclick=fiche;
+}
+function fiche(){
+ app.innerHTML=`<button class="btn alt" id="back" style="margin-top:0">← Retour</button><h1>Fiche de révision</h1>`+
+ Object.entries(CL).map(([k,n])=>`<h2>${n}</h2>`+D.filter(w=>w.c==k).map(w=>`<div class="row"><b>${w.s?"* ":""}${full(w)}</b><br>${short(w)}${more(w)?`<div class="note">${more(w)}</div>`:""}</div>`).join("")).join("");
+ $("#back").onclick=home;
+}
+function start(list){
+ if(!list.length){alert("Aucun mot dans cette sélection.");return}
+ S={q:shuf(list),i:0,ok:0,bad:[]};ask();
+}
+function head(){const w=S.q[S.i];return `<div class="top"><span>${S.i+1} / ${S.q.length}</span><span>${S.ok} juste(s)</span></div><div class="bar"><i style="width:${S.i/S.q.length*100}%"></i></div>`}
+function ask(){
+ if(S.i>=S.q.length)return end();
+ const w=S.q[S.i];
+ if(cfg.mode=="sens"){
+  let o=shuf(D.filter(x=>x!==w&&x.c==w.c&&short(x)!=short(w))).slice(0,3);
+  if(o.length<3)o=o.concat(shuf(D.filter(x=>x!==w&&!o.includes(x)&&short(x)!=short(w))).slice(0,3-o.length));
+  o=shuf([w,...o]);
+  app.innerHTML=head()+`<div class="card"><div class="tag">${CL[w.c]}</div><div class="lat">${w.w}</div>${o.map((x,k)=>`<button class="opt" data-k="${k}">${short(x)}</button>`).join("")}<div id="fb"></div></div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+   const x=o[b.dataset.k],r=x===w;app.querySelectorAll(".opt").forEach((e,k)=>{e.disabled=true;if(o[k]===w)e.classList.add("ok")});
+   if(!r)b.classList.add("ko");r?S.ok++:S.bad.push(w);
+   $("#fb").innerHTML=`<div class="fb ${r?"ok":"ko"}"><b>${r?"Juste":"Faux"}</b>${full(w)} : ${short(w)}${more(w)?`<div class="note">${more(w)}</div>`:""}</div><button class="btn" id="go">Suivant</button>`;
+   $("#go").onclick=()=>{S.i++;ask()};$("#go").focus();
+  });return;
+ }
+ const inv=cfg.mode=="latin",ex=inv?[w.w,...w.f]:w.f,lb=inv?["mot latin",...(w.f.length?labs(w):[])]:labs(w);
+ app.innerHTML=head()+`<div class="card"><div class="tag">${CL[w.c]}</div>${inv?`<div class="lat" style="font-size:22px">${short(w)}</div>`:`<div class="lat">${w.w}</div><div class="tag">${short(w)}</div>`}
+ ${ex.map((e,k)=>`<div class="f"><label for="i${k}">${lb[k]}</label><input id="i${k}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>`).join("")}
+ <div id="fb"></div><button class="btn" id="go">Valider</button></div>`;
+ const ins=[...app.querySelectorAll("input")];ins[0].focus();let done=false;
+ $("#go").onclick=()=>{
+  if(done){S.i++;ask();return}
+  done=true;const r=ex.map((e,k)=>good(ins[k].value,e));
+  ins.forEach((el,k)=>{el.disabled=true;el.classList.add(r[k]?"ok":"ko")});
+  const all=r.every(Boolean);all?S.ok++:S.bad.push(w);
+  const wrong=r.map((v,k)=>v?"":`${lb[k]} : <b style="display:inline">${ex[k].split("/").join(" ou ")}</b>`).filter(Boolean);
+  $("#fb").innerHTML=`<div class="fb ${all?"ok":"ko"}"><b>${all?"Juste":"À corriger"}</b>${full(w)} : ${short(w)}${all?"":`<div class="note">${wrong.join("<br>")}</div>`}${more(w)?`<div class="note">${more(w)}</div>`:""}</div>`;
+  $("#go").textContent="Suivant";$("#go").focus();
+ };
+ ins.forEach((el,k)=>el.addEventListener("keydown",e=>{if(e.key=="Enter"){e.preventDefault();k<ins.length-1&&!done?ins[k+1].focus():$("#go").click()}}));
+}
+function end(){
+ const n=S.q.length,p=Math.round(S.ok/n*100);
+ app.innerHTML=`<h1>Résultat</h1><div class="big">${S.ok} / ${n}</div><p class="sub" style="text-align:center">${p} % de réussite${p==100?" : lexique maîtrisé":""}</p>
+ ${S.bad.length?`<h2>À revoir (${S.bad.length})</h2>`+S.bad.map(w=>`<div class="row"><b>${full(w)}</b><br>${short(w)}</div>`).join("")+`<button class="btn" id="re">Refaire les erreurs</button>`:""}
+ <button class="btn alt" id="again">Recommencer</button><button class="btn alt" id="menu">Menu</button>`;
+ if(S.bad.length)$("#re").onclick=()=>start(S.bad);
+ $("#again").onclick=()=>start(pool());$("#menu").onclick=home;
+}
+home();
+</script></body></html>

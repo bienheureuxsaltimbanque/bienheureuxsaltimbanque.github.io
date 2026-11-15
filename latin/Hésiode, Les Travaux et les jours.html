@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
 <style>
-/* Layout: sticky sommaire on the left, one reading column on the right. The five-race ribbon (or, argent, bronze, héros, fer) is the one recurring motif. */
+/* Layout: sticky sommaire on the left, one reading column on the right. */
 :root{
   --bg:#ECEFEA; --surface:#F6F8F4; --fg:#1C2523; --muted:#566360; --rule:#C8D0C9;
   --accent:#2C6B64; --accent-soft:#DCE9E4; --link:#1F5A53;
@@ -41,13 +41,6 @@ body{background:var(--bg);color:var(--fg);font-family:var(--text);font-size:1.06
 .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.5vw,4.4rem);line-height:1.04;letter-spacing:-.02em;margin:0;text-wrap:balance;max-width:16ch}
 .greek{font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--muted);margin:1rem 0 0}
 .sub{font-family:var(--label);font-size:1rem;color:var(--muted);margin:.6rem 0 0;max-width:46ch;line-height:1.5}
-.ribbon{display:flex;height:.5rem;margin-top:2.2rem;border-radius:1px;overflow:hidden}
-.ribbon i{flex:1;display:block}
-.ribbon i:nth-child(1){background:var(--or)}.ribbon i:nth-child(2){background:var(--argent)}
-.ribbon i:nth-child(3){background:var(--bronze)}.ribbon i:nth-child(4){background:var(--heros)}.ribbon i:nth-child(5){background:var(--fer)}
-.ribbon-l{display:flex;font-family:var(--label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.45rem}
-.ribbon-l span{flex:1}
-
 /* Grid */
 .grid{display:grid;grid-template-columns:15rem minmax(0,1fr);gap:3.5rem;padding-top:2.5rem}
 nav.toc{position:sticky;top:1.5rem;align-self:start;max-height:calc(100vh - 3rem);overflow:auto}
@@ -89,8 +82,7 @@ footer{border-top:1px solid var(--rule);margin-top:1rem;padding-top:1.2rem;font-
   nav.toc a{border:1px solid var(--rule);border-radius:999px;padding:.25rem .75rem;font-size:.88rem}
   nav.toc a.on{border-color:var(--accent)}
   .hero{padding-block:2.2rem 1.6rem}
-  .ribbon-l{font-size:.62rem;letter-spacing:.06em}
-}
+  }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 
@@ -100,8 +92,6 @@ footer{border-top:1px solid var(--rule);margin-top:1rem;padding-top:1.2rem;font-
     <h1>Les Travaux et les jours</h1>
     <p class="greek" lang="grc">Ἔργα καὶ Ἡμέραι</p>
     <p class="sub">Un poème didactique de 828 vers, de la fin du VIIIe siècle av. J.-C., adressé à Persès. Analyse, liens avec la Théogonie et le Bouclier, lectures critiques.</p>
-    <div class="ribbon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="ribbon-l" aria-hidden="true"><span>Or</span><span>Argent</span><span>Bronze</span><span>Héros</span><span>Fer</span></div>
   </header>
   <div class="grid">
     <nav class="toc" aria-label="Sommaire">
